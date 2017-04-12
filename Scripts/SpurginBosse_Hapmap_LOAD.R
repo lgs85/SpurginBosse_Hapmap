@@ -1,0 +1,11 @@
+library(ggplot2)
+library(ggmap)
+library(rworldmap)
+library(magrittr)
+library(reshape)
+
+latlong <- read.table("Data/LatLongAllPops.txt",header = F)
+admix <- read.table("Data/HapMapMajorPruned.6.Q")
+pops <- read.table("Data/HapMapMajorPruned.fam",stringsAsFactors = F)
+fst_pop <- read.table("Data/PairwiseFST.txt",stringsAsFactors = F)
+pd <- read.table("Data/PairwiseDistanceMatrix.txt",row.names = 1,stringsAsFactors = F)

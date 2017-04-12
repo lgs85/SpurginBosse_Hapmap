@@ -1,0 +1,128 @@
+---
+output:
+  pdf_document:
+bibliography: MyBib.bib
+csl: JAE.csl
+header-includes: \usepackage{graphicx}
+    \usepackage{setspace}
+    \doublespacing
+    \usepackage{lineno}
+    \linenumbers
+---
+```{r setup, include = F}
+
+rm(list=ls())
+
+#Load knitr
+library(knitr)
+
+#Set some options
+options(na.action='na.fail')
+opts_knit$set(root.dir = '..')
+opts_chunk$set(echo=FALSE,
+               warning=FALSE,
+               message=FALSE,
+               fig.width=8,
+               fig.height=8)
+
+```
+
+```{r load and clean, include = F}
+
+#Load and clean data
+source("Scripts/SpurginBosse_Hapmap_LOAD.r")
+source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
+source("Scripts/SpurginBosse_Hapmap_FUNCTIONS.r")
+
+```
+
+
+#A continental-scale analysis of the genomic and ecological basis of local adaptation in a songbird
+
+Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4^\*, Veronika N. Laine^3^, The Great Tit HapMap Consortium, Martien A.M. Groenen^4^, Kees van Oers^3^, Ben C. Sheldon^1^, Marcel E.  Visser^3^ and Jon Slate^5^\**
+
+
+1 School of Biological Sciences, University of East Anglia, Norwich Research Park, United Kingdom
+2 Edward Grey Institute, University of Oxford, United Kingdom
+3 Department of Animal Ecology, Netherlands Institute of Ecology (NIOO-KNAW), Wageningen, the Netherlands
+4 Animal Breeding and Genomics Centre, Wageningen University, the Netherlands
+5 Department of Animal and Plant Sciences, University of Sheffield, United Kingdom
+
+\* These authors contributed equally to this manuscript
+
+\** **Correspondence**: j.slate@sheffield.ac.uk
+
+\pagebreak
+
+##Abstract
+
+##Introduction
+The vast majority of organisms inhabit spatially heterogeneous ecological environments. This environmental variation exerts variable selection pressures, and as a result many species exhibit ecologically induced phenotypic and genetic differentiation, or ‘local adaptation’. If reproductive barriers arise between populations facing divergent ecological selection, local adaptation can be a precursor to speciation. Furthermore, understanding local adaptation is necessary for predicting how populations will respond to environmental change. Thus, there is great interest in identifying the extent to which local adaptation occurs in natural populations, the forces that drive it, and the phenotypic and genetic changes involved.
+
+Over the past decade, genomic data have become an invaluable tool for studying local adaptation in wild populations. Studies using genomic data have tended to take one of three approaches. The most commonly employed approach has been to examine patterns of genomic differentiation among populations and identify highly differentiated regions, which are assumed to be subject to divergent selection. If the function of genes in regions involved in local adaptation can be identified, it is sometimes possible to make inferences about the traits involved in local adaptation. Alternatively, if a specific phenotypic trait is thought to be subject to natural selection, genomic approaches can be used to identify the genetic basis of this trait, and patterns of variation at candidate regions can be compared across populations in order to identify whether local adaptation is operating. Finally, patterns of genomic variation can be correlated with one or a range of environmental variables that are candidates for drivers of local adaptation. The advantage of this approach is that it makes it possible to link genotype, phenotype and the driver of selection.
+
+The great tit (*Parus major*) is a widespread passerine found throughout Europe, as well as parts of the Middle East, Asia and North Africa. In Europe, the great tit is thought to have colonised from a single glacial refugium in the Balkans during the last glacial period.  The recent colonisation of this species across Europe, combined with very large population sizes and high levels of gene flow, have resulted in high levels of genetic variation and low levels of structure at neutral markers, even at the continental scale.
+
+The great tit genome has recently been sequenced [@Laine2016], and a high density SNP chip developed. 
+
+Excellent ecological data available for this species, making it a highly tractable model species for studying local adaptation.
+
+In this study we analyse genomic variation across XX great tit populations in Europe. We first quantify levels of genetic variation within and across populations and use this to make inferences about population demography and colonisation history. We then analyse genomic divergence among populations in order to identify regions of the genome involved in recent adaptation to different environments. Finally, we perform genotype-environment association analyses to identify regions of the genome involved with adaptation to specific environmental gradients, and to identify regions of the genome associated with contental-wide variation in life-history traits.
+
+##Methods
+
+####Sampling and molecular methods
+
+
+####Analysis
+Summary stats
+
+Admixture
+
+Treemix
+
+Marker-based FST
+
+Bayenv
+
+##Results
+
+##Discussion
+
+##References
+
+<div id="refs"></div>
+
+\pagebreak
+
+```{r Figure 1,fig.width = 4, fig.height = 4}
+Fig1 <- get_map(location = 'Europe', zoom = 4,maptype="roadmap", color="bw") %>%
+ggmap()+ 
+geom_point(aes(x = V3,y = V2),data = latlong,size = 2,col = "red")+
+  xlab("Longitude")+
+  ylab("Latitude")
+
+Fig1
+```
+
+**Figure 1** Map of sampling locations in Europe
+
+\pagebreak
+
+```{r Figure 2,fig.width = 9,fig.height = 6}
+
+
+layout(matrix(c(1,2,3,3),nrow = 2,byrow = T))
+
+plot(fst~dkm,data=ibd)
+plot(1)
+
+
+structureplot(admix,pops,6,xaxis = T)
+```
+**Figure 2** Admixture and treemix
+
+**Figure 3** Manhattan plots
+
+**Figure 4** Bayenv analyses
+
