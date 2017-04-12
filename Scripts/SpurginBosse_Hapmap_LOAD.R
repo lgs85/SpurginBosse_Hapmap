@@ -3,6 +3,7 @@ library(ggmap)
 library(rworldmap)
 library(magrittr)
 library(reshape)
+library(Rmisc)
 
 latlong <- read.table("Data/LatLongAllPops.txt",header = F)
 admix <- read.table("Data/HapMapMajorPruned.6.Q")
