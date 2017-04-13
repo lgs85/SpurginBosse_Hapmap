@@ -58,5 +58,14 @@ ibd <- melt(m)[melt(lower.tri(m))$value,]
 colnames(ibd) <- c("pop1","pop2","dist")
 ibd$fst <- fst_pop$V3
 ibd$dkm <- ibd$dist/1000
+ibd$island <- ifelse(ibd$pop1 %in% c("Pirio_Muro_Corsica","Crete") | ibd$pop2 %in% c("Pirio_Muro_Corsica","Crete"),"Island","Mainland")
+
 rm(pd,m,fst_pop)
 
+
+
+# Heterozygosity ----------------------------------------------------------
+
+hetlong <- melt(het) %>%
+  reshape::rename(c(variable = "pop", value = "he")) %>% #plyr also has a rename function
+  mutate(chr = rep(p_markers$V1,length(unique(pop))))

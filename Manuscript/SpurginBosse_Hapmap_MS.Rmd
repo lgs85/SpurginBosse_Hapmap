@@ -1,13 +1,12 @@
 ---
 output:
-  pdf_document
+  pdf_document:
 csl: JAE.csl
 header-includes: \usepackage{graphicx}
     \usepackage{setspace}
     \doublespacing
     \usepackage{lineno}
     \linenumbers
-
 ---
 ```{r setup, include = F}
 
@@ -87,42 +86,69 @@ Bayenv
 
 ##Results
 
+Levels of genetic diversity, heterozygosity
+
+
+```{r Figure 1,fig.width = 8, fig.height = 8}
+Fig1A <- get_map(location = 'Europe', zoom = 4,maptype="roadmap", color="bw") %>%
+ggmap()+ 
+geom_point(aes(x = V3,y = V2),data = latlong,size = 2,col = "red")+
+  xlab("Longitude")+
+  ylab("Latitude")
+
+Fig1B <- subset(hetlong,pop != "Bulgaria") %>%
+  ggplot(aes(x = pop,y = he))+
+  geom_boxplot(notch = T)+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90,hjust = 1))
+
+multiplot(Fig1A,Fig1B)
+```
+
+**Figure 1** Map of sampling locations in Europe
+
+Levels of structure
+
+```{r Figure 2,fig.width = 7,fig.height = 6}
+
+Fig1A <- ggplot(ibd,
+                aes(x = dkm,y = fst,col = island))+
+                geom_point()+
+                theme_bw()+
+                theme(legend.position = "none")+
+                ylab(expression(F[ST]))+
+                xlab("Distance (km)")+
+                scale_colour_manual(values = c("darkblue","grey"))
+
+Fig1B <- subset(ibd,pop1 == "Turkey" | pop2 == "Turkey") %>%
+          ggplot(aes(x = dkm,y = fst,col = island))+
+            geom_point()+
+            theme_bw()+
+            theme(legend.position = "none")+
+            ylab(expression(F[ST]))+
+            xlab("Distance from Turkey (km)")+
+            scale_colour_manual(values = c("darkblue","grey"))
+
+Fig1C <- structureplot(admix,pops,6)
+
+
+
+multiplot(Fig1A,Fig1B,Fig1C,layout = matrix(c(1,2,3,3),nrow = 2,byrow = T))
+
+```
+
+**Figure 2** Admixture and FST
+
 ##Discussion
 
 ##References
 
 <div id="refs"></div>
 
-\pagebreak
-
-```{r Figure 1,fig.width = 4, fig.height = 4}
-Fig1 <- get_map(location = 'Europe', zoom = 4,maptype="roadmap", color="bw") %>%
-ggmap()+ 
-geom_point(aes(x = V3,y = V2),data = latlong,size = 2,col = "red")+
-  xlab("Longitude")+
-  ylab("Latitude")
-
-Fig1
-```
-
-**Figure 1** Map of sampling locations in Europe
 
 \pagebreak
 
-```{r Figure 2,fig.width = 8,fig.height = 6}
 
-Fig1A <- ggplot(ibd,
-                aes(x = dkm,y = fst))+
-  geom_point()+
-  theme_bw()
-
-Fig1C <- structureplot(admix,pops,6)
-
-
-multiplot(Fig1A,Fig1A,Fig1C,layout = matrix(c(1,2,3,3),nrow = 2,byrow = T))
-
-```
-**Figure 2** Admixture and treemix
 
 **Figure 3** Manhattan plots
 
