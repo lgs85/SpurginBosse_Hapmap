@@ -21,7 +21,7 @@ countries[countries %in% c("Vienna_Austria")] <- "Austria"
 countries[countries %in% c("Zurich_Switzerland" )] <- "Switzerland"                                                               
 countries[countries %in% c("Zvenigorod_Russia")] <- "Russia"                                                               
 countries[grep("Benetutti|Cabras",pops$V2)] <- "Sardinia"
-countries[countries %in% c("Romania", "Bulgaria","Turkey")] <- "Balkans"      
+countries[countries %in% c("Romania", "Bulgaria")] <- "Balkans"      
 
 
 pops$V1 <- factor(countries,
@@ -45,6 +45,7 @@ pops$V1 <- factor(countries,
                     "Estonia",
                     "Crete",
                     "Balkans",
+                    "Turkey",
                     "Russia"))
 
 rm(countries)
@@ -66,6 +67,6 @@ rm(pd,m,fst_pop)
 
 # Heterozygosity ----------------------------------------------------------
 
-hetlong <- melt(het) %>%
-  reshape::rename(c(variable = "pop", value = "he")) %>% #plyr also has a rename function
-  mutate(chr = rep(p_markers$V1,length(unique(pop))))
+# hetlong <- melt(het) %>%
+#   reshape::rename(c(variable = "pop", value = "he")) %>% #plyr also has a rename function
+#   mutate(chr = rep(p_markers$V1,length(unique(pop))))

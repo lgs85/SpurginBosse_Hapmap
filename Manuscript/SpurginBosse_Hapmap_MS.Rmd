@@ -90,19 +90,19 @@ Levels of genetic diversity, heterozygosity
 
 
 ```{r Figure 1,fig.width = 8, fig.height = 8}
-Fig1A <- get_map(location = 'Europe', zoom = 4,maptype="roadmap", color="bw") %>%
-ggmap()+ 
-geom_point(aes(x = V3,y = V2),data = latlong,size = 2,col = "red")+
-  xlab("Longitude")+
-  ylab("Latitude")
-
-Fig1B <- subset(hetlong,pop != "Bulgaria") %>%
-  ggplot(aes(x = pop,y = he))+
-  geom_boxplot(notch = T)+
-  theme_bw()+
-  theme(axis.text.x = element_text(angle = 90,hjust = 1))
-
-#multiplot(Fig1A,Fig1B)
+# Fig1A <- get_map(location = 'Europe', zoom = 4) %>%
+# ggmap()+ 
+# geom_point(aes(x = V3,y = V2),data = latlong,size = 2,col = "red")+
+#   xlab("Longitude")+
+#   ylab("Latitude")
+# 
+# Fig1B <- subset(hetlong,pop != "Bulgaria") %>%
+#   ggplot(aes(x = pop,y = he))+
+#   geom_boxplot(notch = T)+
+#   theme_bw()+
+#   theme(axis.text.x = element_text(angle = 90,hjust = 1))
+# 
+# #multiplot(Fig1A,Fig1B)
 ```
 
 **Figure 1** Map of sampling locations in Europe
