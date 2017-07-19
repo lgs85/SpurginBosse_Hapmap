@@ -87,21 +87,6 @@ Marker-based FST
 Levels of genetic diversity, heterozygosity
 
 
-```{r Figure 1,fig.width = 8, fig.height = 8}
-Fig1A <- get_map(location = 'Europe', zoom = 4) %>%
-ggmap()+
-geom_point(aes(x = Lat,y = Long),data = ll,size = 2,col = "red")+
-  xlab("Longitude")+
-  ylab("Latitude")
-
-Fig1B <- subset(hetlong,pop != "Bulgaria") %>%
-  ggplot(aes(x = pop,y = he))+
-  geom_boxplot(notch = T)+
-  theme_bw()+
-  theme(axis.text.x = element_text(angle = 90,hjust = 1))
-
-multiplot(Fig1A,Fig1B)
-```
 
 **Figure 1** Map of sampling locations in Europe
 
@@ -137,7 +122,7 @@ multiplot(Fig1A,Fig1B,Fig1C,layout = matrix(c(1,2,3,3),nrow = 2,byrow = T))
 
 ```
 
-**Figure XX** Population structure in European Great tit populations. **A** Pairwise \(F_{ST}\) between all European populations in relation to pairwise geographic distance; **B** pairwise \(F_{ST}\) between a proposed refugial population in Turkey and all other populations, in relation to geographic distance from the refugia. Blue points in **A** and **B** are comparisons involving the island populations of Corsica and Crete (NOTE - SARDINIA NOT SEPARATED FROM ITALY IN THESE PLOTS YET), while grey points represent all other comparisons. **C** Output from admixture analysis at *K* = 6.
+**Figure XX** Population structure in European Great tit populations. **A** Pairwise \(F_{ST}\) between all European populations in relation to pairwise geographic distance; **B** pairwise \(F_{ST}\) between a proposed refugial population in Turkey and all other populations, in relation to geographic distance from the refugia. Blue points in **A** and **B** are comparisons involving the island populations of Corsica, Sardinia and Crete, while grey points represent all other comparisons. **C** Output from admixture analysis at *K* = 6.
 
 ##Discussion
 
