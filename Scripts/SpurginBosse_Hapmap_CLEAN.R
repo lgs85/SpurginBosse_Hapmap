@@ -54,16 +54,17 @@ rm(countries)
 
 # IBD ---------------------------------------------------------------------
 
-m <- as.matrix(pd)
-ibd <- melt(m)[melt(lower.tri(m))$value,]
-colnames(ibd) <- c("pop1","pop2","dist")
-ibd$fst <- fst_pop$V3
-ibd$dkm <- ibd$dist/1000
-ibd$island <- ifelse(ibd$pop1 %in% c("Pirio_Muro_Corsica","Crete") | ibd$pop2 %in% c("Pirio_Muro_Corsica","Crete"),"Island","Mainland")
+colnames(pd) <- c("p1","p2","FST")
+colnames(ll) <- c("Pop","Lat","Long")
+for(i in 1:nrow(pd))
+{
+  d1 <- subset(ll,Pop == pd$p1[i])
+  d2 <- subset(ll,Pop == pd$p2[i])
+  pd$dist[i] <- distGeo(c(d1$Long,d1$Lat),c(d2$Long,d2$Lat))
+}
 
-rm(pd,m,fst_pop)
-
-
+islands <- c("Pirio_Muro_Corsica","Crete","Sardinia")
+pd$Island <- ifelse(pd$p1 %in% islands | pd$p2 %in% islands, "Island","Not Island")
 
 # Heterozygosity ----------------------------------------------------------
 

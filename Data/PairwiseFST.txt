@@ -4,7 +4,7 @@ Antwerp_Belgium	Crete	0.0443234
 Antwerp_Belgium	Font_Roja_Spain	0.0154073
 Antwerp_Belgium	Gotland_Sweden	0.00347363
 Antwerp_Belgium	Harjavalta_Finland	0.00352877
-Antwerp_Belgium	Italy	0.0127489
+Antwerp_Belgium	Italy	0.00559138
 Antwerp_Belgium	La_Rouviere_France	0.00513757
 Antwerp_Belgium	Loch_Lomond_Scotland	0.0172536
 Antwerp_Belgium	Mariola_Spain	0.015205
@@ -14,6 +14,7 @@ Antwerp_Belgium	Pilis_Mountains_Hungary	0.0017851
 Antwerp_Belgium	Pirio_Muro_Corsica	0.0315563
 Antwerp_Belgium	Radolfzell_Germany	0.00742648
 Antwerp_Belgium	Romania	0.000909401
+Antwerp_Belgium	Sardinia	0.0523312
 Antwerp_Belgium	Seewisen_Germany	0.00428082
 Antwerp_Belgium	Tartu_Estonia	0.00192763
 Antwerp_Belgium	Turkey	0.0025967
@@ -29,7 +30,7 @@ Bulgaria	Crete	0.0487062
 Bulgaria	Font_Roja_Spain	0.00659001
 Bulgaria	Gotland_Sweden	-0.00662643
 Bulgaria	Harjavalta_Finland	-0.00688604
-Bulgaria	Italy	-0.00224875
+Bulgaria	Italy	-0.00797
 Bulgaria	La_Rouviere_France	-0.005203
 Bulgaria	Loch_Lomond_Scotland	0.00897905
 Bulgaria	Mariola_Spain	0.00644163
@@ -39,6 +40,7 @@ Bulgaria	Pilis_Mountains_Hungary	-0.0086972
 Bulgaria	Pirio_Muro_Corsica	0.0264993
 Bulgaria	Radolfzell_Germany	-0.00221347
 Bulgaria	Romania	-0.0126746
+Bulgaria	Sardinia	0.0558655
 Bulgaria	Seewisen_Germany	-0.00529688
 Bulgaria	Tartu_Estonia	-0.00868389
 Bulgaria	Turkey	-0.0118129
@@ -53,7 +55,7 @@ Cambridge_UK	Crete	0.0465728
 Cambridge_UK	Font_Roja_Spain	0.0176159
 Cambridge_UK	Gotland_Sweden	0.00745071
 Cambridge_UK	Harjavalta_Finland	0.00736823
-Cambridge_UK	Italy	0.0166293
+Cambridge_UK	Italy	0.00948702
 Cambridge_UK	La_Rouviere_France	0.0089083
 Cambridge_UK	Loch_Lomond_Scotland	0.0165593
 Cambridge_UK	Mariola_Spain	0.0173559
@@ -63,6 +65,7 @@ Cambridge_UK	Pilis_Mountains_Hungary	0.00587701
 Cambridge_UK	Pirio_Muro_Corsica	0.033762
 Cambridge_UK	Radolfzell_Germany	0.0110351
 Cambridge_UK	Romania	0.00464152
+Cambridge_UK	Sardinia	0.0535003
 Cambridge_UK	Seewisen_Germany	0.00821753
 Cambridge_UK	Tartu_Estonia	0.00610295
 Cambridge_UK	Turkey	0.00660094
@@ -76,7 +79,7 @@ Cambridge_UK	Zvenigorod_Russia	0.00585916
 Crete	Font_Roja_Spain	0.0535466
 Crete	Gotland_Sweden	0.0438073
 Crete	Harjavalta_Finland	0.043632
-Crete	Italy	0.0459579
+Crete	Italy	0.0436882
 Crete	La_Rouviere_France	0.0458723
 Crete	Loch_Lomond_Scotland	0.0566626
 Crete	Mariola_Spain	0.0536697
@@ -86,6 +89,7 @@ Crete	Pilis_Mountains_Hungary	0.042435
 Crete	Pirio_Muro_Corsica	0.0682022
 Crete	Radolfzell_Germany	0.0480362
 Crete	Romania	0.0426615
+Crete	Sardinia	0.0936071
 Crete	Seewisen_Germany	0.0446801
 Crete	Tartu_Estonia	0.0420332
 Crete	Turkey	0.0410124
@@ -98,7 +102,7 @@ Crete	Zurich_Switzerland	0.0467961
 Crete	Zvenigorod_Russia	0.0431139
 Font_Roja_Spain	Gotland_Sweden	0.0154286
 Font_Roja_Spain	Harjavalta_Finland	0.0153486
-Font_Roja_Spain	Italy	0.0236283
+Font_Roja_Spain	Italy	0.0176319
 Font_Roja_Spain	La_Rouviere_France	0.0170688
 Font_Roja_Spain	Loch_Lomond_Scotland	0.0267704
 Font_Roja_Spain	Mariola_Spain	0.00365322
@@ -108,6 +112,7 @@ Font_Roja_Spain	Pilis_Mountains_Hungary	0.0139534
 Font_Roja_Spain	Pirio_Muro_Corsica	0.0403049
 Font_Roja_Spain	Radolfzell_Germany	0.0192299
 Font_Roja_Spain	Romania	0.0137061
+Font_Roja_Spain	Sardinia	0.0605266
 Font_Roja_Spain	Seewisen_Germany	0.0161036
 Font_Roja_Spain	Tartu_Estonia	0.0139551
 Font_Roja_Spain	Turkey	0.0148305
@@ -119,7 +124,7 @@ Font_Roja_Spain	Wytham_UK	0.015791
 Font_Roja_Spain	Zurich_Switzerland	0.0180976
 Font_Roja_Spain	Zvenigorod_Russia	0.014294
 Gotland_Sweden	Harjavalta_Finland	0.00375844
-Gotland_Sweden	Italy	0.0135727
+Gotland_Sweden	Italy	0.00623746
 Gotland_Sweden	La_Rouviere_France	0.00555898
 Gotland_Sweden	Loch_Lomond_Scotland	0.0173797
 Gotland_Sweden	Mariola_Spain	0.0150788
@@ -129,6 +134,7 @@ Gotland_Sweden	Pilis_Mountains_Hungary	0.00228948
 Gotland_Sweden	Pirio_Muro_Corsica	0.0306851
 Gotland_Sweden	Radolfzell_Germany	0.00762219
 Gotland_Sweden	Romania	0.00123793
+Gotland_Sweden	Sardinia	0.0508642
 Gotland_Sweden	Seewisen_Germany	0.00466473
 Gotland_Sweden	Tartu_Estonia	0.00250444
 Gotland_Sweden	Turkey	0.00310031
@@ -139,7 +145,7 @@ Gotland_Sweden	Westerheide	0.002869
 Gotland_Sweden	Wytham_UK	0.0056284
 Gotland_Sweden	Zurich_Switzerland	0.00680659
 Gotland_Sweden	Zvenigorod_Russia	0.00228569
-Harjavalta_Finland	Italy	0.0136709
+Harjavalta_Finland	Italy	0.00630321
 Harjavalta_Finland	La_Rouviere_France	0.00549935
 Harjavalta_Finland	Loch_Lomond_Scotland	0.0170403
 Harjavalta_Finland	Mariola_Spain	0.0149639
@@ -149,6 +155,7 @@ Harjavalta_Finland	Pilis_Mountains_Hungary	0.00225729
 Harjavalta_Finland	Pirio_Muro_Corsica	0.0303162
 Harjavalta_Finland	Radolfzell_Germany	0.0076859
 Harjavalta_Finland	Romania	0.00108075
+Harjavalta_Finland	Sardinia	0.0504656
 Harjavalta_Finland	Seewisen_Germany	0.00468488
 Harjavalta_Finland	Tartu_Estonia	0.00227749
 Harjavalta_Finland	Turkey	0.00331541
@@ -159,25 +166,26 @@ Harjavalta_Finland	Westerheide	0.00288524
 Harjavalta_Finland	Wytham_UK	0.00556094
 Harjavalta_Finland	Zurich_Switzerland	0.0066528
 Harjavalta_Finland	Zvenigorod_Russia	0.00228342
-Italy	La_Rouviere_France	0.014834
-Italy	Loch_Lomond_Scotland	0.0262299
-Italy	Mariola_Spain	0.0234818
-Italy	Montpellier_France	0.0173256
-Italy	Oulu_Finland	0.0162081
-Italy	Pilis_Mountains_Hungary	0.0118196
-Italy	Pirio_Muro_Corsica	0.0271113
-Italy	Radolfzell_Germany	0.0169939
-Italy	Romania	0.00756933
-Italy	Seewisen_Germany	0.0141961
-Italy	Tartu_Estonia	0.0122209
-Italy	Turkey	0.00944078
-Italy	Velky_Kosir_Czech_Republic	0.0137722
-Italy	Vienna_Austria	0.0115656
-Italy	Vlieland_NL	0.0197723
-Italy	Westerheide	0.0124092
-Italy	Wytham_UK	0.0150569
-Italy	Zurich_Switzerland	0.0160895
-Italy	Zvenigorod_Russia	0.0119277
+Italy	La_Rouviere_France	0.00758541
+Italy	Loch_Lomond_Scotland	0.019782
+Italy	Mariola_Spain	0.0174915
+Italy	Montpellier_France	0.0101136
+Italy	Oulu_Finland	0.00885611
+Italy	Pilis_Mountains_Hungary	0.00436213
+Italy	Pirio_Muro_Corsica	0.0343836
+Italy	Radolfzell_Germany	0.0100179
+Italy	Romania	0.000300337
+Italy	Sardinia	0.0523016
+Italy	Seewisen_Germany	0.00697852
+Italy	Tartu_Estonia	0.00474232
+Italy	Turkey	0.00231154
+Italy	Velky_Kosir_Czech_Republic	0.00676347
+Italy	Vienna_Austria	0.0040938
+Italy	Vlieland_NL	0.0131203
+Italy	Westerheide	0.00486693
+Italy	Wytham_UK	0.00751923
+Italy	Zurich_Switzerland	0.00895791
+Italy	Zvenigorod_Russia	0.00464771
 La_Rouviere_France	Loch_Lomond_Scotland	0.0189542
 La_Rouviere_France	Mariola_Spain	0.0167948
 La_Rouviere_France	Montpellier_France	0.00515265
@@ -186,6 +194,7 @@ La_Rouviere_France	Pilis_Mountains_Hungary	0.00393065
 La_Rouviere_France	Pirio_Muro_Corsica	0.0329924
 La_Rouviere_France	Radolfzell_Germany	0.00921497
 La_Rouviere_France	Romania	0.0026005
+La_Rouviere_France	Sardinia	0.0531662
 La_Rouviere_France	Seewisen_Germany	0.00630071
 La_Rouviere_France	Tartu_Estonia	0.00404683
 La_Rouviere_France	Turkey	0.00464989
@@ -203,6 +212,7 @@ Loch_Lomond_Scotland	Pilis_Mountains_Hungary	0.0157749
 Loch_Lomond_Scotland	Pirio_Muro_Corsica	0.0431938
 Loch_Lomond_Scotland	Radolfzell_Germany	0.0210565
 Loch_Lomond_Scotland	Romania	0.0158396
+Loch_Lomond_Scotland	Sardinia	0.0632316
 Loch_Lomond_Scotland	Seewisen_Germany	0.0181554
 Loch_Lomond_Scotland	Tartu_Estonia	0.0157744
 Loch_Lomond_Scotland	Turkey	0.0173214
@@ -219,6 +229,7 @@ Mariola_Spain	Pilis_Mountains_Hungary	0.0135946
 Mariola_Spain	Pirio_Muro_Corsica	0.0400072
 Mariola_Spain	Radolfzell_Germany	0.0188319
 Mariola_Spain	Romania	0.0136396
+Mariola_Spain	Sardinia	0.0602344
 Mariola_Spain	Seewisen_Germany	0.015643
 Mariola_Spain	Tartu_Estonia	0.0136565
 Mariola_Spain	Turkey	0.014425
@@ -234,6 +245,7 @@ Montpellier_France	Pilis_Mountains_Hungary	0.00625984
 Montpellier_France	Pirio_Muro_Corsica	0.0338196
 Montpellier_France	Radolfzell_Germany	0.0115134
 Montpellier_France	Romania	0.00483424
+Montpellier_France	Sardinia	0.0536943
 Montpellier_France	Seewisen_Germany	0.00878541
 Montpellier_France	Tartu_Estonia	0.00660714
 Montpellier_France	Turkey	0.00726823
@@ -248,6 +260,7 @@ Oulu_Finland	Pilis_Mountains_Hungary	0.00493938
 Oulu_Finland	Pirio_Muro_Corsica	0.0332775
 Oulu_Finland	Radolfzell_Germany	0.0106092
 Oulu_Finland	Romania	0.00387077
+Oulu_Finland	Sardinia	0.053572
 Oulu_Finland	Seewisen_Germany	0.00759129
 Oulu_Finland	Tartu_Estonia	0.00528012
 Oulu_Finland	Turkey	0.00625972
@@ -261,6 +274,7 @@ Oulu_Finland	Zvenigorod_Russia	0.00509357
 Pilis_Mountains_Hungary	Pirio_Muro_Corsica	0.0293941
 Pilis_Mountains_Hungary	Radolfzell_Germany	0.00611992
 Pilis_Mountains_Hungary	Romania	-0.000536613
+Pilis_Mountains_Hungary	Sardinia	0.0495722
 Pilis_Mountains_Hungary	Seewisen_Germany	0.00313468
 Pilis_Mountains_Hungary	Tartu_Estonia	0.000922981
 Pilis_Mountains_Hungary	Turkey	0.00137535
@@ -273,6 +287,7 @@ Pilis_Mountains_Hungary	Zurich_Switzerland	0.00509842
 Pilis_Mountains_Hungary	Zvenigorod_Russia	0.000660433
 Pirio_Muro_Corsica	Radolfzell_Germany	0.0349742
 Pirio_Muro_Corsica	Romania	0.032471
+Pirio_Muro_Corsica	Sardinia	0.0489079
 Pirio_Muro_Corsica	Seewisen_Germany	0.0313509
 Pirio_Muro_Corsica	Tartu_Estonia	0.0293597
 Pirio_Muro_Corsica	Turkey	0.0321916
@@ -284,6 +299,7 @@ Pirio_Muro_Corsica	Wytham_UK	0.031464
 Pirio_Muro_Corsica	Zurich_Switzerland	0.0338202
 Pirio_Muro_Corsica	Zvenigorod_Russia	0.0306294
 Radolfzell_Germany	Romania	0.00532222
+Radolfzell_Germany	Sardinia	0.0553772
 Radolfzell_Germany	Seewisen_Germany	0.00848076
 Radolfzell_Germany	Tartu_Estonia	0.00629672
 Radolfzell_Germany	Turkey	0.00697336
@@ -294,6 +310,7 @@ Radolfzell_Germany	Westerheide	0.00662938
 Radolfzell_Germany	Wytham_UK	0.00908041
 Radolfzell_Germany	Zurich_Switzerland	0.0102976
 Radolfzell_Germany	Zvenigorod_Russia	0.00624554
+Romania	Sardinia	0.0530194
 Romania	Seewisen_Germany	0.00210764
 Romania	Tartu_Estonia	-0.00053305
 Romania	Turkey	-0.00285211
@@ -304,6 +321,16 @@ Romania	Westerheide	-0.000255801
 Romania	Wytham_UK	0.00255343
 Romania	Zurich_Switzerland	0.00426363
 Romania	Zvenigorod_Russia	-0.000275105
+Sardinia	Seewisen_Germany	0.0515346
+Sardinia	Tartu_Estonia	0.0494528
+Sardinia	Turkey	0.0503412
+Sardinia	Velky_Kosir_Czech_Republic	0.0516027
+Sardinia	Vienna_Austria	0.0493541
+Sardinia	Vlieland_NL	0.0587942
+Sardinia	Westerheide	0.0490049
+Sardinia	Wytham_UK	0.051431
+Sardinia	Zurich_Switzerland	0.053927
+Sardinia	Zvenigorod_Russia	0.0511268
 Seewisen_Germany	Tartu_Estonia	0.00332034
 Seewisen_Germany	Turkey	0.00398431
 Seewisen_Germany	Velky_Kosir_Czech_Republic	0.00502981
