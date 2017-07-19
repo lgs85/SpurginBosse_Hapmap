@@ -68,6 +68,5 @@ pd$Island <- ifelse(pd$p1 %in% islands | pd$p2 %in% islands, "Island","Not Islan
 
 # Heterozygosity ----------------------------------------------------------
 
-# hetlong <- melt(het) %>%
-#   reshape::rename(c(variable = "pop", value = "he")) %>% #plyr also has a rename function
-#   mutate(chr = rep(p_markers$V1,length(unique(pop))))
+het <- het[complete.cases(het),]
+hetmeans <- data.frame(pop = colnames(het),het = apply(het,2,mean),se = apply(het,2,se)*1.96,row.names = NULL)

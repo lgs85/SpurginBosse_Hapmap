@@ -63,3 +63,4 @@ structureplot <- function(str_out,pops,k)
   return(output)
 }
 
+se <- function(x) sd(x)/sqrt(length(x))

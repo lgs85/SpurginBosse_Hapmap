@@ -30,9 +30,8 @@ opts_chunk$set(echo=FALSE,
 
 #Load and clean data
 source("Scripts/SpurginBosse_Hapmap_LOAD.r")
-source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 source("Scripts/SpurginBosse_Hapmap_FUNCTIONS.r")
-
+source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 ```
 
 
@@ -86,13 +85,21 @@ Marker-based FST
 
 Levels of genetic diversity, heterozygosity
 
+```{R Figure 1}
+Fig1 <- ggplot(hetmeans,aes(x = pop,y = het))+
+  geom_point()+
+  theme_bw()+
+  geom_errorbar(aes(ymin = het-se,ymax = het+se))+
+  theme(axis.text.x = element_text(angle = 90))
 
+Fig1
+```
 
 **Figure 1** Map of sampling locations in Europe
 
 Levels of structure
 
-```{r Figure 2,fig.width = 7,fig.height = 6}
+```{r Figure 2,fig.width = 7,fig.height = 5}
 
 pd$FST2 <- pd$FST/(1-pd$FST)
 
