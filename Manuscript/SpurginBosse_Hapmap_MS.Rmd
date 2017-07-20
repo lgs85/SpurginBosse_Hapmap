@@ -1,6 +1,7 @@
 ---
 output:
   pdf_document:
+bibliography: MyBib.bib
 csl: JAE.csl
 header-includes: \usepackage{graphicx}
     \usepackage{setspace}
@@ -70,10 +71,11 @@ In this study we analyse genomic variation across XX great tit populations in Eu
 ##Methods
 
 ####Sampling and molecular methods
+Samples were collected from `r nrow(ll)` populations from `r length(unique(pops$V1))` countries across Europe (Fig. 1A; Table 1). Birds were trapped from nest boxes, or using mist nets, and ringed with a uniquely numbered aliminium ring. Blood was taken via brachial venipuncture, and stored in either 1 ml Cell Lysis Solution (Gentra Puregene Kit, Qiagen, USA) or Queen’s buffer. All samples were genotyped using a custom-made Affymetrix® great tit 650K SNP chip at Edinburgh Genomics (Edinburgh, United Kingdom). After filtering, a total of `r nrow(pops)` samples typed at XX SNPs were retained for analysis.
 
 
 ####Analysis
-Summary stats
+Unless stated otherwise, all analyses were carried out in R version 3.3 [@RDevelopmentCoreTeam2011]. For population genetic analyses (i.e. all tests not involving single-marker or windowed statistics), we used a pruned and thinned dataset, created in PLINK version 1.9 [@Purcell2007]. The data were pruned based on linkage disequilibrium to remove all markers with R^2 > 0.1, then thinned with a probability of retaining each variant of 0.25. We  calculated observed and expected heterozygosity for each SNP and population in the pruned dataset, and calculated F[ST] between each pair of populations, using PLINK (and custom python scripts to loop over populations).
 
 Admixture
 
@@ -85,19 +87,64 @@ Marker-based FST
 
 Levels of genetic diversity, heterozygosity
 
-```{R Figure 1}
-Fig1 <- ggplot(hetmeans,aes(x = pop,y = het))+
-  geom_point()+
-  theme_bw()+
-  geom_errorbar(aes(ymin = het-se,ymax = het+se))+
-  theme(axis.text.x = element_text(angle = 90))
-
-Fig1
-```
-
 **Figure 1** Map of sampling locations in Europe
 
 Levels of structure
+
+
+##Discussion
+
+##References
+
+<div id="refs"></div>
+
+
+\pagebreak
+
+**Figure legends**
+
+**Figure 1** Sampling locations, heterozygosity
+
+**Figure 2** Population structure in European Great tit populations. **A** Pairwise \(F_{ST}\) between all European populations in relation to pairwise geographic distance; **B** pairwise \(F_{ST}\) between a proposed refugial population in Turkey and all other populations, in relation to geographic distance from the refugia. Blue points in **A** and **B** are comparisons involving the island populations of Corsica, Sardinia and Crete, while grey points represent all other comparisons. **C** Output from admixture analysis at *K* = 6.
+
+**Figure 3** Manhattan plots
+
+**Figure 4** Bayenv analyses
+
+
+\pagebreak
+
+**Figure 1**
+
+```{R Figure 1,fig.width = 8,fig.height = 4}
+Fig1A <- get_map(location = c(-11,31,40,66),zoom = 4,maptype = "watercolor",color = "bw") %>%
+  ggmap()+
+  geom_point(data = ll,aes(x = Long,y = Lat),size = 2,col = "red")+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  annotate("text",x = -10,y = 65,label = "A")
+
+Fig1B <- ggplot(hetlong,aes(x = pop,y = het))+
+  geom_boxplot(notch = T,outlier.shape = NA,coef = 0)+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90))+
+  coord_cartesian(ylim = c(0, 0.6))+
+  ylab("Observed heterozygosity")+
+  xlab("")+
+  annotate("text",x = 1,y = 0.6,label = "B")
+
+multiplot(Fig1A,Fig1B,layout = matrix(c(1:2),nrow = 1))
+```
+
+
+
+
+
+
+
+\pagebreak
+
+**Figure 2**
 
 ```{r Figure 2,fig.width = 7,fig.height = 5}
 
@@ -129,20 +176,5 @@ multiplot(Fig1A,Fig1B,Fig1C,layout = matrix(c(1,2,3,3),nrow = 2,byrow = T))
 
 ```
 
-**Figure XX** Population structure in European Great tit populations. **A** Pairwise \(F_{ST}\) between all European populations in relation to pairwise geographic distance; **B** pairwise \(F_{ST}\) between a proposed refugial population in Turkey and all other populations, in relation to geographic distance from the refugia. Blue points in **A** and **B** are comparisons involving the island populations of Corsica, Sardinia and Crete, while grey points represent all other comparisons. **C** Output from admixture analysis at *K* = 6.
 
-##Discussion
-
-##References
-
-<div id="refs"></div>
-
-
-\pagebreak
-
-
-
-**Figure 3** Manhattan plots
-
-**Figure 4** Bayenv analyses
 
