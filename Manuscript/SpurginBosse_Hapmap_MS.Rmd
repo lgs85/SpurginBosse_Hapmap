@@ -71,25 +71,22 @@ In this study we analyse genomic variation across XX great tit populations in Eu
 ##Methods
 
 ####Sampling and molecular methods
-Samples were collected from `r nrow(ll)` populations from `r length(unique(pops$V1))` countries across Europe (Fig. 1A; Table 1). Birds were trapped from nest boxes, or using mist nets, and ringed with a uniquely numbered aliminium ring. Blood was taken via brachial venipuncture, and stored in either 1 ml Cell Lysis Solution (Gentra Puregene Kit, Qiagen, USA) or Queen’s buffer. All samples were genotyped using a custom-made Affymetrix® great tit 650K SNP chip at Edinburgh Genomics (Edinburgh, United Kingdom). After filtering, a total of `r nrow(pops)` samples typed at XX SNPs were retained for analysis.
+Samples were collected from `r nrow(ll)` populations from `r length(unique(pops$V1))` countries across Europe (Fig. 1A; Table 1). Birds were trapped from nest boxes, or using mist nets, and ringed with a uniquely numbered aliminium ring. Blood was taken via brachial venipuncture, and stored in either 1 ml Cell Lysis Solution (Gentra Puregene Kit, Qiagen, USA) or Queen’s buffer. All samples were genotyped using a custom-made Affymetrix® great tit 650K SNP chip at Edinburgh Genomics (Edinburgh, United Kingdom). After filtering, a total of `r nrow(pops)` samples typed at `r nrow(markers)` SNPs were retained for analysis.
 
 
 ####Analysis
-Unless stated otherwise, all analyses were carried out in R version 3.3 [@RDevelopmentCoreTeam2011]. For population genetic analyses (i.e. all tests not involving single-marker or windowed statistics), we used a pruned and thinned dataset, created in PLINK version 1.9 [@Purcell2007]. The data were pruned based on linkage disequilibrium to remove all markers with R^2 > 0.1, then thinned with a probability of retaining each variant of 0.25. We  calculated observed and expected heterozygosity for each SNP and population in the pruned dataset, and calculated F[ST] between each pair of populations, using PLINK (and custom python scripts to loop over populations).
-
-Admixture
-
-Treemix
+Unless stated otherwise, all analyses were carried out in R version 3.3 [@RDevelopmentCoreTeam2011]. For population genetic analyses (i.e. all tests not involving single-marker or windowed statistics), we used a pruned and thinned dataset, created in PLINK version 1.9 [@Purcell2007]. The data were pruned based on linkage disequilibrium to remove all markers with $R^2$ > 0.1, then thinned with a probability of retaining each variant of 0.25. We  calculated observed and expected heterozygosity for each SNP and population in the pruned dataset, and calculated $F_{ST}$ between each pair of populations, using PLINK (and custom python scripts to loop over populations). Pairwise $F_{ST}$ was compared to geographic distance between populations using Mantel tests, implemented in the Ecodist package in R [@Goslee2007]. We also estimated population structure using Admixture version 1.3, with default settings [@Alexander2009]. We varied values of $K$ from two to ten; by which time increasing values of $K$ provided no informative information about population structure (see results). Model support for each value of $K$ was estimated by calculating 5-fold cross-validation error. Finally, we visualised the evolutionary history among European great populations by generating a maximum likelihood tree in TreeMix version 1.13 [@Pickrell2012]. We fitted models allowing for range of migration events (XX-YY), and used a jackknife approach to determine whether migration events significantly improved model fit [@Pickrell2012].
 
 Marker-based FST
+
+Recombination
 
 ##Results
 
 Levels of genetic diversity, heterozygosity
 
-**Figure 1** Map of sampling locations in Europe
-
 Levels of structure
+
 
 
 ##Discussion
@@ -146,7 +143,7 @@ multiplot(Fig1A,Fig1B,layout = matrix(c(1:2),nrow = 1))
 
 **Figure 2**
 
-```{r Figure 2,fig.width = 7,fig.height = 5}
+```{r Figure 2,fig.width = 7,fig.height = 7}
 
 pd$FST2 <- pd$FST/(1-pd$FST)
 
@@ -155,7 +152,7 @@ Fig1A <- ggplot(pd,
                 geom_point()+
                 theme_bw()+
                 theme(legend.position = "none")+
-                ylab(expression(F[ST]))+
+                ylab(expression(italic(F)[ST]))+
                 xlab("Distance (km)")+
                 scale_colour_manual(values = c("darkblue","grey"))
 
@@ -164,15 +161,15 @@ Fig1B <- subset(pd,p1 == "Turkey" | p2 == "Turkey") %>%
             geom_point()+
             theme_bw()+
             theme(legend.position = "none")+
-            ylab(expression(F[ST]))+
+            ylab(expression(italic(F)[ST]))+
             xlab("Distance from Turkey (km)")+
             scale_colour_manual(values = c("darkblue","grey"))
+Fig1C <- structureplot(admix3,pops,3,xlab = F)
+Fig1D <- structureplot(admix6,pops,6)
 
-Fig1C <- structureplot(admix,pops,6)
 
 
-
-multiplot(Fig1A,Fig1B,Fig1C,layout = matrix(c(1,2,3,3),nrow = 2,byrow = T))
+multiplot(Fig1A,Fig1B,Fig1C,Fig1D,layout = matrix(c(rep(c(1,2),3),rep(3,4),rep(4,6)),nrow = 8,byrow = T))
 
 ```
 

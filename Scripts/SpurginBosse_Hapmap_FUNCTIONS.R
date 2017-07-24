@@ -2,7 +2,7 @@
 
 # Structure bar plot------------------------------------------------------
 
-structureplot <- function(str_out,pops,k)
+structureplot <- function(str_out,pops,k,xlab = T)
 {
   #Sort columns by prevalence
   str_out <- str_out[,order(apply(str_out,2,sum),decreasing = T)]
@@ -46,19 +46,39 @@ structureplot <- function(str_out,pops,k)
               "#cab2d6",
               "#6a3d9a")[1:k]
   
-  output <- ggplot(x,
-         aes(x = as.numeric(X3),y = value, fill = X2))+
-    geom_bar(stat = "identity",width = 1)+
-    theme_bw()+
-    scale_x_continuous(breaks = labpos,labels = names(pop_pos),expand = c(0,0))+
-    scale_y_continuous(expand = c(0,0))+
-    geom_vline(xintercept = pop_pos)+
-    xlab("")+
-    ylab("")+
-    theme(axis.text.x = element_text(vjust = 0.1,hjust = 1,angle = 90),
-          axis.ticks = element_blank(),
-          legend.position = "none")+
-    scale_fill_manual(values = mycols)
+  if(xlab ==T)
+  {
+    output <- ggplot(x,
+                     aes(x = as.numeric(X3),y = value, fill = X2))+
+      geom_bar(stat = "identity",width = 1)+
+      theme_bw()+
+      scale_x_continuous(breaks = labpos,labels = names(pop_pos),expand = c(0,0))+
+      scale_y_continuous(expand = c(0,0))+
+      geom_vline(xintercept = pop_pos)+
+      xlab("")+
+      ylab("")+
+      theme(axis.text.x = element_text(vjust = 0.1,hjust = 1,angle = 90),
+            axis.ticks = element_blank(),
+            legend.position = "none")+
+      scale_fill_manual(values = mycols)
+  } else
+  {
+    output <- ggplot(x,
+                     aes(x = as.numeric(X3),y = value, fill = X2))+
+      geom_bar(stat = "identity",width = 1)+
+      theme_bw()+
+      scale_x_continuous(breaks = labpos,labels = rep("",length(pop_pos)),expand = c(0,0))+
+      scale_y_continuous(expand = c(0,0))+
+      geom_vline(xintercept = pop_pos)+
+      xlab("")+
+      ylab("")+
+      theme(axis.text.x = element_text(vjust = 0.1,hjust = 1,angle = 90),
+            axis.ticks = element_blank(),
+            legend.position = "none")+
+      scale_fill_manual(values = mycols)
+  }
+  
+
   
   return(output)
 }
