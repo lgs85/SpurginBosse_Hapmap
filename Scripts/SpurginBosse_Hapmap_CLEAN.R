@@ -66,6 +66,9 @@ for(i in 1:nrow(pd))
 islands <- c("Pirio_Muro_Corsica","Crete","Sardinia")
 pd$Island <- ifelse(pd$p1 %in% islands | pd$p2 %in% islands, "Island","Not Island")
 
+# LD ----------------------------------------------------------------------
+ll$LD <- ld$V2
+
 # Heterozygosity ----------------------------------------------------------
 
 het <- het[complete.cases(het),]
