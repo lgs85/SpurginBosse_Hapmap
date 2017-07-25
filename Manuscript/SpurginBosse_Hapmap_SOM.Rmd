@@ -1,0 +1,90 @@
+---
+output:
+  word_document:
+bibliography: MyBib.bib
+csl: JAE.csl
+header-includes: \usepackage{graphicx}
+    \usepackage{setspace}
+    \doublespacing
+    \usepackage{lineno}
+    \linenumbers
+---
+```{r setup, include = F}
+
+rm(list=ls())
+
+#Load knitr
+library(knitr)
+
+#Set some options
+options(na.action='na.fail')
+opts_knit$set(root.dir = '..')
+opts_chunk$set(echo=FALSE,
+               warning=FALSE,
+               message=FALSE,
+               fig.width=8,
+               fig.height=8)
+
+```
+
+```{r load and clean, include = F}
+
+#Load and clean data
+source("Scripts/SpurginBosse_Hapmap_LOAD.r")
+source("Scripts/SpurginBosse_Hapmap_FUNCTIONS.r")
+source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
+```
+
+
+
+#Supplementary material for "A continental-scale analysis of genomic variation in a songbird"
+
+
+```{r FigS1}
+FigS1 <- ggplot(ld2,aes(x = dist/1000,y = meanR2))+
+  geom_line()+
+  theme_bw()+
+  facet_wrap(~pop)+
+  xlab("Distance (kb)")+
+  ylab(expression("R"^2))
+FigS1
+```
+
+**Figure S1** Linkage disequilibrium in European great tit populations. Lines are means of $R^2$ values for all pairs of markers within 100bp distance bins.
+
+
+```{r FigS2,fig.width = 7,fig.height = 12}
+
+for(i in 2:9)
+{
+  assign(
+    paste0("FigS2",LETTERS[i-1]),
+    structureplot(get(paste0("admix",i)),pops,i,xlab = F)+
+      ylab(paste("K =", i))
+        )
+}
+
+FigS2I <- structureplot(admix10,pops,10,xlab = T)+
+  ylab("K = 10")
+
+multiplot(FigS2A,FigS2B,FigS2C,FigS2D,FigS2E,FigS2F,FigS2G,FigS2H,FigS2I,layout = matrix(c(1:8,9,9),nrow = 10))
+```
+**Figure S2** Admixture analyses at $K$ = 2 to 10 in European Great tit populations.
+
+
+
+
+
+
+
+```{r FigS3,fig.width = 5,fig.height = 5}
+FigS3 <- ggplot(cv,aes(x = K,y = CV))+
+  geom_line()+
+  theme_bw()+
+  xlab(expression(italic("K")))+
+  ylab("Cross-validation error")+
+  scale_x_continuous(breaks = c(1:10))
+FigS3
+```
+
+**Figure S3** Cross-validation error from admixture analyses at $K$ = 1 to 10.
