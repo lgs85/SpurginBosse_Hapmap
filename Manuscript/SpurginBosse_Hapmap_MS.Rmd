@@ -67,10 +67,10 @@ Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4^\*, Veronika N. Laine^3^, The Great Tit
 Samples were collected from `r nrow(ll)` populations from `r length(unique(pops$V1))` countries across Europe (Fig. 1A; Table 1). Birds were trapped from nest boxes, or using mist nets, and ringed with a uniquely numbered aliminium ring. Blood was taken via brachial venipuncture, and stored in either 1 ml Cell Lysis Solution (Gentra Puregene Kit, Qiagen, USA) or Queen’s buffer. All samples were genotyped using a custom-made Affymetrix® great tit 650K SNP chip at Edinburgh Genomics (Edinburgh, United Kingdom). After filtering, a total of `r nrow(pops)` samples typed at `r nrow(markers)` SNPs were retained for analysis (Table 1).
 
 
-####Analysis
+####Analyses
 Unless stated otherwise, all population genetic statistics were calculated in PLINK version 1.9 [@Purcell2007], and downstream analysis and plotting was carried out in R version 3.3 [@RDevelopmentCoreTeam2011]. In each population, we estimated linkge disequilibrium ($R^2$) for each pair of markers within 50kb on the same chromosome, and compared this to physical distance between marker pairs. For a simple comparison of short-range LD among populationas, we also calculated, for each population, mean LD between all pairs of markers within 1kb. We then calculated observed heterozygosity for each SNP and population using a reduced SNP dataset, which was pruned based on linkage disequilibrium to remove all markers with $R^2$ > 0.1, then thinned with a probability of retaining each variant of 0.25.
 
-We calculated mean $F_{ST}$ for all loci between each pair of populations using the pruned and thinned dataset described above. Pairwise $F_{ST}$ was compared to geographic distance between populations using Mantel tests, implemented in the Ecodist package in R [@Goslee2007]. We also estimated population structure using Admixture version 1.3, with default settings [@Alexander2009]. We varied values of $K$ from one to ten; by which time increasing values of $K$ provided no informative information about population structure (see results). Model support for each value of $K$ was estimated by calculating 5-fold cross-validation error. Finally, we visualised the evolutionary history among European great populations by generating a maximum likelihood tree in TreeMix version 1.13 [@Pickrell2012]. We fitted models allowing for range of migration events (1-10), and used a jackknife approach to determine whether migration events significantly improved model fit [@Pickrell2012].
+We calculated mean $F_{ST}$ for all loci between each pair of populations using the pruned and thinned dataset described above. Pairwise $F_{ST}$ was compared to geographic distance between populations using Mantel tests, implemented in the Ecodist package in R [@Goslee2007]. We also estimated population structure using Admixture version 1.3, with default settings [@Alexander2009]. We varied values of $K$ from one to ten; by which time increasing values of $K$ provided no informative information about population structure (see results). Model support for each value of $K$ was estimated by calculating 5-fold cross-validation error. Finally, we visualised the evolutionary history among European great populations by generating a maximum likelihood tree in TreeMix version 1.13 [@Pickrell2012]. We rooted the tree using a sample of *P. minor* individuals (n = ) sampled from Amur, Russia. We fitted models allowing for range of migration events (0-10), and used a window size of 500 SNPs [@Pickrell2012]. To assess model fit, we calculated the proportion of variance relatedness betweened populations explained by each model, using the equation 30 in Pickrell *et al.* [-@Pickrell2012].
 
 Marker-based FST
 
@@ -79,13 +79,19 @@ Recombination
 
 
 ##Results
+
+
+#### Genetic diversity and population history
+
 Sampling locations and sample sizes for each population are given in Table 1. For ease of presentation, we grouped populations into "regions" for plots and anlalyses (see Table 1 for details). Levels of genetic diversity were generally high and LD declined rapidly in all populations, but we observed substantial differences in genetic diversity among populations. Highest levels of LD were observed in the island populations of Crete (Greece), Sardinia (Italy), Corsica (France) and Vlieland (Netherlands) with lowest levels of LD in central Europe, Turkey and Spain (Fig. 1A; Fig. S1). Similarly, heterozygosity was highest in central Europe, and lowest in Crete, Sardinia and the Balkans (Fig. 1B).
 
 Considering all European great tit populations, there was no significant pattern of isolation-by-distance (Mantel test; r = `r round2(mantel(FST~dist,data = pd)["mantelr"])`, p = `r round2(mantel(FST~dist,data = pd)["pval1"])`). Instead, the highest levels of $F_{ST}$ were found in comparisons involving island the populations of Corsica, Sardinia and Crete (Fig. 2A). Considering only comparisons involving mainland populations, pairwise $F_{ST}$ was still not related to related to geographic distance (r = `r round2(mantel(FST~dist,data = subset(pd,Island == "Not Island"))["mantelr"])`, p = `r round2(mantel(FST~dist,data = subset(pd,Island == "Not Island"))["pval1"])`). We then examined genetic structure in relation to distance from potential refugial populations (only including mainland populations), and found that $F_{ST}$ was significantly related to distance from Turkey (r = `r round2(with(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),Island == "Not Island"),cor.test(FST,dist))$estimate)`, p `r round3(with(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),Island == "Not Island"),cor.test(FST,dist))$p.value)`; Fig. 2B), but not to distance from Spain (r = `r round2(with(subset(subset(pd,p1 == "Mariola_Spain" | p2 == "Mariola_Spain"),Island == "Not Island"),cor.test(FST,dist))$estimate)`, p = `r round2(with(subset(subset(pd,p1 == "Mariola_Spain" | p2 == "Mariola_Spain"),Island == "Not Island"),cor.test(FST,dist))$p.value)`), or from Italy (r = `r round2(with(subset(subset(pd,p1 == "Italy" | p2 == "Italy"),Island == "Not Island"),cor.test(FST,dist))$estimate)`, p = `r round2(with(subset(subset(pd,p1 == "Italy" | p2 == "Italy"),Island == "Not Island"),cor.test(FST,dist))$p.value)`).
 
 Admixture analysis revealed patterns of genetic structure corresponding to geographical variation in European great tits (Fig. S2). The $K$ = 2 analysis assigned individuals in Sardinia and Corsica to one genetic cluster, and the reamining populations to the second. At $K$ = 3 (the model that best fitted the great tit data; Fig. S3), Spain was separated from the rest of mainland Europe (Fig. 2C). Increasing values of $K$ resulted of the separation of populations in Scotland ($K$ = 4), Sardinia (from Corsica; $K$ = 5), France ($K$ = 6), Crete ($K$ = 7) and England ($K$ = 8). The admixture output at $K$ = 8 is dsplayed in Fig. 2D; further increases in $K$ did not generate patterns of structure that corresponded to geographical variation (Fig. S2), and were increasingly less well supported (Fig. S3).
 
-Maximum likelihood analyses implemented in Treemix showed that...
+Maximum likelihood analyses implemented in Treemix showed that a model with no migration explained 97.8% of variance in relatedness between populations; increasing the number of migration events substantially improved the percentage of relatedness explained, up to 99.7% when 10 migration events were fitted (Fig. S4). The maximum likelihood tree with 10 migration events (Fig. 3) is generally characterised by short branch lengths, with the exception of the island populations of Sardinia and Crete. Populations in Vlieland, Spain, Corsica and the UK were also placed on longer terminal branches. Branches were generally too shallow be able to identify discrete population groupings, with the exepction of one grouping of populations in the Balkans, Turkey, Sardinia and Crete, and a second group consisting of England and Scotland (Fig. 3). Migration events were widespread across the population tree, with little evidence that individual populations have acted as notable sources or sinks for migration events.
+
+#### Genomic landscapes of differentiation
 
 
 ##Discussion
@@ -168,9 +174,7 @@ kable(Table1,digits = 3,row.names = F)
 
 **Figure 2** Population structure in European Great tit populations. **A** Pairwise $F_{ST}$ between all European populations in relation to pairwise geographic distance; **B** pairwise \(F_{ST}\) between a proposed refugial population in Turkey and all other populations, in relation to geographic distance from the refugia. Blue points in **A** and **B** are comparisons involving the island populations of Corsica, Sardinia and Crete, while grey points represent all other comparisons. **C,D** Output from admixture analysis at $K$ = 3, (**C**) and $K$ = 8 (**D**).
 
-**Figure 3** Manhattan plots
-
-**Figure 4** Bayenv analyses
+**Figure 3** Maximum likelihood tree inferred by Treemix, allowing ten migration events. Migrations events (arrows) are coloured according to their weight (red = higher migration), and horizontal branch lengths are proportional to the amount of genetic drift that has occurred along the branch.  
 
 
 \pagebreak
@@ -238,4 +242,8 @@ multiplot(Fig2A,Fig2B,Fig2C,Fig2D,layout = matrix(c(rep(c(1,2),3),rep(3,4),rep(4
 ```
 
 
+**Figure 3**
 
+```{r Figure 3,fig.width = 6,fig.height = 6}
+plot_tree("Data/TreeMix/HapMap_10",mbar = F,cex = 0.8)
+```
