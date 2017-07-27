@@ -88,3 +88,26 @@ FigS3
 ```
 
 **Figure S3** Cross-validation error from admixture analyses at $K$ = 1 to 10.
+
+
+
+```{r Fig S4,fig.width = 5,fig.height = 5}
+m = 10
+vars <- rep(NA,m+1)
+vars[1] <- calcVarExplain("Data/Treemix/HapMap")$VarExplain
+for(i in c(2:(m+1)))
+{
+  vars[i] <- calcVarExplain(paste0("Data/Treemix/HapMap_",i-1))$VarExplain
+}
+
+ddS4 <- data.frame(M = c(0:10),vars = vars)
+FigS4 <- ggplot(ddS4,aes(x = M,y = vars))+
+  geom_line()+
+  theme_bw()+
+  xlab("Number of migration events")+
+  ylab("Proportion relatedness explained")+
+  scale_x_continuous(breaks = c(0:10))
+FigS4
+```
+
+**Figure S4** Proportion of relatedness explained among populations in relation to the number of migration events allowed in Treemix analyses.
