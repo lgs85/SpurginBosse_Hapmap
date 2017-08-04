@@ -56,7 +56,7 @@ rm(countries)
 
 # IBD ---------------------------------------------------------------------
 
-colnames(pd) <- c("p1","p2","FST")
+colnames(pd) <- c("p1","p2","FST","recomb_r")
 colnames(ll) <- c("Pop","Lat","Long")
 for(i in 1:nrow(pd))
 {
@@ -65,7 +65,7 @@ for(i in 1:nrow(pd))
   pd$dist[i] <- distGeo(c(d1$Long,d1$Lat),c(d2$Long,d2$Lat))
 }
 
-islands <- c("Pirio_Muro_Corsica","Crete","Sardinia")
+islands <- c("Pirio_Muro_Corsica","Crete","Sardinia","Vlieland_NL","Gotland_Sweden")
 pd$Island <- ifelse(pd$p1 %in% islands | pd$p2 %in% islands, "Island","Not Island")
 
 # LD ----------------------------------------------------------------------
@@ -180,3 +180,5 @@ hetlong$pop <- factor(countries,
                         "Turkey",
                         "Russia"))
 rm(countries)
+
+

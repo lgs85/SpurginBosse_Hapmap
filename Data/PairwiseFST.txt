@@ -1,378 +1,757 @@
-Antwerp_Belgium	Bulgaria	-0.00664199
-Antwerp_Belgium	Cambridge_UK	0.0070696
-Antwerp_Belgium	Crete	0.0443234
-Antwerp_Belgium	Font_Roja_Spain	0.0154073
-Antwerp_Belgium	Gotland_Sweden	0.00347363
-Antwerp_Belgium	Harjavalta_Finland	0.00352877
-Antwerp_Belgium	Italy	0.00559138
-Antwerp_Belgium	La_Rouviere_France	0.00513757
-Antwerp_Belgium	Loch_Lomond_Scotland	0.0172536
-Antwerp_Belgium	Mariola_Spain	0.015205
-Antwerp_Belgium	Montpellier_France	0.00739827
-Antwerp_Belgium	Oulu_Finland	0.006383
-Antwerp_Belgium	Pilis_Mountains_Hungary	0.0017851
-Antwerp_Belgium	Pirio_Muro_Corsica	0.0315563
-Antwerp_Belgium	Radolfzell_Germany	0.00742648
-Antwerp_Belgium	Romania	0.000909401
-Antwerp_Belgium	Sardinia	0.0523312
-Antwerp_Belgium	Seewisen_Germany	0.00428082
-Antwerp_Belgium	Tartu_Estonia	0.00192763
-Antwerp_Belgium	Turkey	0.0025967
-Antwerp_Belgium	Velky_Kosir_Czech_Republic	0.00385153
-Antwerp_Belgium	Vienna_Austria	0.00152483
-Antwerp_Belgium	Vlieland_NL	0.0104601
-Antwerp_Belgium	Westerheide	0.00228162
-Antwerp_Belgium	Wytham_UK	0.00499422
-Antwerp_Belgium	Zurich_Switzerland	0.00630323
-Antwerp_Belgium	Zvenigorod_Russia	0.00196942
-Bulgaria	Cambridge_UK	-0.00360333
-Bulgaria	Crete	0.0487062
-Bulgaria	Font_Roja_Spain	0.00659001
-Bulgaria	Gotland_Sweden	-0.00662643
-Bulgaria	Harjavalta_Finland	-0.00688604
-Bulgaria	Italy	-0.00797
-Bulgaria	La_Rouviere_France	-0.005203
-Bulgaria	Loch_Lomond_Scotland	0.00897905
-Bulgaria	Mariola_Spain	0.00644163
-Bulgaria	Montpellier_France	-0.00408813
-Bulgaria	Oulu_Finland	-0.004463
-Bulgaria	Pilis_Mountains_Hungary	-0.0086972
-Bulgaria	Pirio_Muro_Corsica	0.0264993
-Bulgaria	Radolfzell_Germany	-0.00221347
-Bulgaria	Romania	-0.0126746
-Bulgaria	Sardinia	0.0558655
-Bulgaria	Seewisen_Germany	-0.00529688
-Bulgaria	Tartu_Estonia	-0.00868389
-Bulgaria	Turkey	-0.0118129
-Bulgaria	Velky_Kosir_Czech_Republic	-0.00575798
-Bulgaria	Vienna_Austria	-0.00908696
-Bulgaria	Vlieland_NL	0.00272536
-Bulgaria	Westerheide	-0.0086049
-Bulgaria	Wytham_UK	-0.00587544
-Bulgaria	Zurich_Switzerland	-0.00375803
-Bulgaria	Zvenigorod_Russia	-0.00811204
-Cambridge_UK	Crete	0.0465728
-Cambridge_UK	Font_Roja_Spain	0.0176159
-Cambridge_UK	Gotland_Sweden	0.00745071
-Cambridge_UK	Harjavalta_Finland	0.00736823
-Cambridge_UK	Italy	0.00948702
-Cambridge_UK	La_Rouviere_France	0.0089083
-Cambridge_UK	Loch_Lomond_Scotland	0.0165593
-Cambridge_UK	Mariola_Spain	0.0173559
-Cambridge_UK	Montpellier_France	0.0114321
-Cambridge_UK	Oulu_Finland	0.0101938
-Cambridge_UK	Pilis_Mountains_Hungary	0.00587701
-Cambridge_UK	Pirio_Muro_Corsica	0.033762
-Cambridge_UK	Radolfzell_Germany	0.0110351
-Cambridge_UK	Romania	0.00464152
-Cambridge_UK	Sardinia	0.0535003
-Cambridge_UK	Seewisen_Germany	0.00821753
-Cambridge_UK	Tartu_Estonia	0.00610295
-Cambridge_UK	Turkey	0.00660094
-Cambridge_UK	Velky_Kosir_Czech_Republic	0.00775047
-Cambridge_UK	Vienna_Austria	0.00549892
-Cambridge_UK	Vlieland_NL	0.0137322
-Cambridge_UK	Westerheide	0.00641664
-Cambridge_UK	Wytham_UK	0.00508858
-Cambridge_UK	Zurich_Switzerland	0.0102146
-Cambridge_UK	Zvenigorod_Russia	0.00585916
-Crete	Font_Roja_Spain	0.0535466
-Crete	Gotland_Sweden	0.0438073
-Crete	Harjavalta_Finland	0.043632
-Crete	Italy	0.0436882
-Crete	La_Rouviere_France	0.0458723
-Crete	Loch_Lomond_Scotland	0.0566626
-Crete	Mariola_Spain	0.0536697
-Crete	Montpellier_France	0.046577
-Crete	Oulu_Finland	0.0464169
-Crete	Pilis_Mountains_Hungary	0.042435
-Crete	Pirio_Muro_Corsica	0.0682022
-Crete	Radolfzell_Germany	0.0480362
-Crete	Romania	0.0426615
-Crete	Sardinia	0.0936071
-Crete	Seewisen_Germany	0.0446801
-Crete	Tartu_Estonia	0.0420332
-Crete	Turkey	0.0410124
-Crete	Velky_Kosir_Czech_Republic	0.0447053
-Crete	Vienna_Austria	0.0423452
-Crete	Vlieland_NL	0.051646
-Crete	Westerheide	0.0421279
-Crete	Wytham_UK	0.0447375
-Crete	Zurich_Switzerland	0.0467961
-Crete	Zvenigorod_Russia	0.0431139
-Font_Roja_Spain	Gotland_Sweden	0.0154286
-Font_Roja_Spain	Harjavalta_Finland	0.0153486
-Font_Roja_Spain	Italy	0.0176319
-Font_Roja_Spain	La_Rouviere_France	0.0170688
-Font_Roja_Spain	Loch_Lomond_Scotland	0.0267704
-Font_Roja_Spain	Mariola_Spain	0.00365322
-Font_Roja_Spain	Montpellier_France	0.0191249
-Font_Roja_Spain	Oulu_Finland	0.0181862
-Font_Roja_Spain	Pilis_Mountains_Hungary	0.0139534
-Font_Roja_Spain	Pirio_Muro_Corsica	0.0403049
-Font_Roja_Spain	Radolfzell_Germany	0.0192299
-Font_Roja_Spain	Romania	0.0137061
-Font_Roja_Spain	Sardinia	0.0605266
-Font_Roja_Spain	Seewisen_Germany	0.0161036
-Font_Roja_Spain	Tartu_Estonia	0.0139551
-Font_Roja_Spain	Turkey	0.0148305
-Font_Roja_Spain	Velky_Kosir_Czech_Republic	0.0158287
-Font_Roja_Spain	Vienna_Austria	0.0136508
-Font_Roja_Spain	Vlieland_NL	0.0220846
-Font_Roja_Spain	Westerheide	0.0141384
-Font_Roja_Spain	Wytham_UK	0.015791
-Font_Roja_Spain	Zurich_Switzerland	0.0180976
-Font_Roja_Spain	Zvenigorod_Russia	0.014294
-Gotland_Sweden	Harjavalta_Finland	0.00375844
-Gotland_Sweden	Italy	0.00623746
-Gotland_Sweden	La_Rouviere_France	0.00555898
-Gotland_Sweden	Loch_Lomond_Scotland	0.0173797
-Gotland_Sweden	Mariola_Spain	0.0150788
-Gotland_Sweden	Montpellier_France	0.00795312
-Gotland_Sweden	Oulu_Finland	0.00662632
-Gotland_Sweden	Pilis_Mountains_Hungary	0.00228948
-Gotland_Sweden	Pirio_Muro_Corsica	0.0306851
-Gotland_Sweden	Radolfzell_Germany	0.00762219
-Gotland_Sweden	Romania	0.00123793
-Gotland_Sweden	Sardinia	0.0508642
-Gotland_Sweden	Seewisen_Germany	0.00466473
-Gotland_Sweden	Tartu_Estonia	0.00250444
-Gotland_Sweden	Turkey	0.00310031
-Gotland_Sweden	Velky_Kosir_Czech_Republic	0.0041871
-Gotland_Sweden	Vienna_Austria	0.00211087
-Gotland_Sweden	Vlieland_NL	0.0106341
-Gotland_Sweden	Westerheide	0.002869
-Gotland_Sweden	Wytham_UK	0.0056284
-Gotland_Sweden	Zurich_Switzerland	0.00680659
-Gotland_Sweden	Zvenigorod_Russia	0.00228569
-Harjavalta_Finland	Italy	0.00630321
-Harjavalta_Finland	La_Rouviere_France	0.00549935
-Harjavalta_Finland	Loch_Lomond_Scotland	0.0170403
-Harjavalta_Finland	Mariola_Spain	0.0149639
-Harjavalta_Finland	Montpellier_France	0.00786487
-Harjavalta_Finland	Oulu_Finland	0.00489254
-Harjavalta_Finland	Pilis_Mountains_Hungary	0.00225729
-Harjavalta_Finland	Pirio_Muro_Corsica	0.0303162
-Harjavalta_Finland	Radolfzell_Germany	0.0076859
-Harjavalta_Finland	Romania	0.00108075
-Harjavalta_Finland	Sardinia	0.0504656
-Harjavalta_Finland	Seewisen_Germany	0.00468488
-Harjavalta_Finland	Tartu_Estonia	0.00227749
-Harjavalta_Finland	Turkey	0.00331541
-Harjavalta_Finland	Velky_Kosir_Czech_Republic	0.00434847
-Harjavalta_Finland	Vienna_Austria	0.00205067
-Harjavalta_Finland	Vlieland_NL	0.0105966
-Harjavalta_Finland	Westerheide	0.00288524
-Harjavalta_Finland	Wytham_UK	0.00556094
-Harjavalta_Finland	Zurich_Switzerland	0.0066528
-Harjavalta_Finland	Zvenigorod_Russia	0.00228342
-Italy	La_Rouviere_France	0.00758541
-Italy	Loch_Lomond_Scotland	0.019782
-Italy	Mariola_Spain	0.0174915
-Italy	Montpellier_France	0.0101136
-Italy	Oulu_Finland	0.00885611
-Italy	Pilis_Mountains_Hungary	0.00436213
-Italy	Pirio_Muro_Corsica	0.0343836
-Italy	Radolfzell_Germany	0.0100179
-Italy	Romania	0.000300337
-Italy	Sardinia	0.0523016
-Italy	Seewisen_Germany	0.00697852
-Italy	Tartu_Estonia	0.00474232
-Italy	Turkey	0.00231154
-Italy	Velky_Kosir_Czech_Republic	0.00676347
-Italy	Vienna_Austria	0.0040938
-Italy	Vlieland_NL	0.0131203
-Italy	Westerheide	0.00486693
-Italy	Wytham_UK	0.00751923
-Italy	Zurich_Switzerland	0.00895791
-Italy	Zvenigorod_Russia	0.00464771
-La_Rouviere_France	Loch_Lomond_Scotland	0.0189542
-La_Rouviere_France	Mariola_Spain	0.0167948
-La_Rouviere_France	Montpellier_France	0.00515265
-La_Rouviere_France	Oulu_Finland	0.00844049
-La_Rouviere_France	Pilis_Mountains_Hungary	0.00393065
-La_Rouviere_France	Pirio_Muro_Corsica	0.0329924
-La_Rouviere_France	Radolfzell_Germany	0.00921497
-La_Rouviere_France	Romania	0.0026005
-La_Rouviere_France	Sardinia	0.0531662
-La_Rouviere_France	Seewisen_Germany	0.00630071
-La_Rouviere_France	Tartu_Estonia	0.00404683
-La_Rouviere_France	Turkey	0.00464989
-La_Rouviere_France	Velky_Kosir_Czech_Republic	0.00582121
-La_Rouviere_France	Vienna_Austria	0.00366014
-La_Rouviere_France	Vlieland_NL	0.0124366
-La_Rouviere_France	Westerheide	0.0043137
-La_Rouviere_France	Wytham_UK	0.00692668
-La_Rouviere_France	Zurich_Switzerland	0.00828605
-La_Rouviere_France	Zvenigorod_Russia	0.00404525
-Loch_Lomond_Scotland	Mariola_Spain	0.0264831
-Loch_Lomond_Scotland	Montpellier_France	0.0210241
-Loch_Lomond_Scotland	Oulu_Finland	0.0200482
-Loch_Lomond_Scotland	Pilis_Mountains_Hungary	0.0157749
-Loch_Lomond_Scotland	Pirio_Muro_Corsica	0.0431938
-Loch_Lomond_Scotland	Radolfzell_Germany	0.0210565
-Loch_Lomond_Scotland	Romania	0.0158396
-Loch_Lomond_Scotland	Sardinia	0.0632316
-Loch_Lomond_Scotland	Seewisen_Germany	0.0181554
-Loch_Lomond_Scotland	Tartu_Estonia	0.0157744
-Loch_Lomond_Scotland	Turkey	0.0173214
-Loch_Lomond_Scotland	Velky_Kosir_Czech_Republic	0.0175137
-Loch_Lomond_Scotland	Vienna_Austria	0.0153435
-Loch_Lomond_Scotland	Vlieland_NL	0.0238561
-Loch_Lomond_Scotland	Westerheide	0.0160809
-Loch_Lomond_Scotland	Wytham_UK	0.0144008
-Loch_Lomond_Scotland	Zurich_Switzerland	0.0198644
-Loch_Lomond_Scotland	Zvenigorod_Russia	0.016058
-Mariola_Spain	Montpellier_France	0.0187668
-Mariola_Spain	Oulu_Finland	0.0178144
-Mariola_Spain	Pilis_Mountains_Hungary	0.0135946
-Mariola_Spain	Pirio_Muro_Corsica	0.0400072
-Mariola_Spain	Radolfzell_Germany	0.0188319
-Mariola_Spain	Romania	0.0136396
-Mariola_Spain	Sardinia	0.0602344
-Mariola_Spain	Seewisen_Germany	0.015643
-Mariola_Spain	Tartu_Estonia	0.0136565
-Mariola_Spain	Turkey	0.014425
-Mariola_Spain	Velky_Kosir_Czech_Republic	0.015443
-Mariola_Spain	Vienna_Austria	0.0132247
-Mariola_Spain	Vlieland_NL	0.0216601
-Mariola_Spain	Westerheide	0.0137531
-Mariola_Spain	Wytham_UK	0.0153665
-Mariola_Spain	Zurich_Switzerland	0.017841
-Mariola_Spain	Zvenigorod_Russia	0.0139349
-Montpellier_France	Oulu_Finland	0.010544
-Montpellier_France	Pilis_Mountains_Hungary	0.00625984
-Montpellier_France	Pirio_Muro_Corsica	0.0338196
-Montpellier_France	Radolfzell_Germany	0.0115134
-Montpellier_France	Romania	0.00483424
-Montpellier_France	Sardinia	0.0536943
-Montpellier_France	Seewisen_Germany	0.00878541
-Montpellier_France	Tartu_Estonia	0.00660714
-Montpellier_France	Turkey	0.00726823
-Montpellier_France	Velky_Kosir_Czech_Republic	0.00833266
-Montpellier_France	Vienna_Austria	0.00604558
-Montpellier_France	Vlieland_NL	0.0144996
-Montpellier_France	Westerheide	0.00687121
-Montpellier_France	Wytham_UK	0.0095985
-Montpellier_France	Zurich_Switzerland	0.010623
-Montpellier_France	Zvenigorod_Russia	0.00634823
-Oulu_Finland	Pilis_Mountains_Hungary	0.00493938
-Oulu_Finland	Pirio_Muro_Corsica	0.0332775
-Oulu_Finland	Radolfzell_Germany	0.0106092
-Oulu_Finland	Romania	0.00387077
-Oulu_Finland	Sardinia	0.053572
-Oulu_Finland	Seewisen_Germany	0.00759129
-Oulu_Finland	Tartu_Estonia	0.00528012
-Oulu_Finland	Turkey	0.00625972
-Oulu_Finland	Velky_Kosir_Czech_Republic	0.00726144
-Oulu_Finland	Vienna_Austria	0.00478058
-Oulu_Finland	Vlieland_NL	0.0135997
-Oulu_Finland	Westerheide	0.00567999
-Oulu_Finland	Wytham_UK	0.00835883
-Oulu_Finland	Zurich_Switzerland	0.00949567
-Oulu_Finland	Zvenigorod_Russia	0.00509357
-Pilis_Mountains_Hungary	Pirio_Muro_Corsica	0.0293941
-Pilis_Mountains_Hungary	Radolfzell_Germany	0.00611992
-Pilis_Mountains_Hungary	Romania	-0.000536613
-Pilis_Mountains_Hungary	Sardinia	0.0495722
-Pilis_Mountains_Hungary	Seewisen_Germany	0.00313468
-Pilis_Mountains_Hungary	Tartu_Estonia	0.000922981
-Pilis_Mountains_Hungary	Turkey	0.00137535
-Pilis_Mountains_Hungary	Velky_Kosir_Czech_Republic	0.00271703
-Pilis_Mountains_Hungary	Vienna_Austria	0.000416287
-Pilis_Mountains_Hungary	Vlieland_NL	0.00922641
-Pilis_Mountains_Hungary	Westerheide	0.001225
-Pilis_Mountains_Hungary	Wytham_UK	0.00396003
-Pilis_Mountains_Hungary	Zurich_Switzerland	0.00509842
-Pilis_Mountains_Hungary	Zvenigorod_Russia	0.000660433
-Pirio_Muro_Corsica	Radolfzell_Germany	0.0349742
-Pirio_Muro_Corsica	Romania	0.032471
-Pirio_Muro_Corsica	Sardinia	0.0489079
-Pirio_Muro_Corsica	Seewisen_Germany	0.0313509
-Pirio_Muro_Corsica	Tartu_Estonia	0.0293597
-Pirio_Muro_Corsica	Turkey	0.0321916
-Pirio_Muro_Corsica	Velky_Kosir_Czech_Republic	0.031439
-Pirio_Muro_Corsica	Vienna_Austria	0.029255
-Pirio_Muro_Corsica	Vlieland_NL	0.0380812
-Pirio_Muro_Corsica	Westerheide	0.0290759
-Pirio_Muro_Corsica	Wytham_UK	0.031464
-Pirio_Muro_Corsica	Zurich_Switzerland	0.0338202
-Pirio_Muro_Corsica	Zvenigorod_Russia	0.0306294
-Radolfzell_Germany	Romania	0.00532222
-Radolfzell_Germany	Sardinia	0.0553772
-Radolfzell_Germany	Seewisen_Germany	0.00848076
-Radolfzell_Germany	Tartu_Estonia	0.00629672
-Radolfzell_Germany	Turkey	0.00697336
-Radolfzell_Germany	Velky_Kosir_Czech_Republic	0.00803154
-Radolfzell_Germany	Vienna_Austria	0.00579725
-Radolfzell_Germany	Vlieland_NL	0.0145619
-Radolfzell_Germany	Westerheide	0.00662938
-Radolfzell_Germany	Wytham_UK	0.00908041
-Radolfzell_Germany	Zurich_Switzerland	0.0102976
-Radolfzell_Germany	Zvenigorod_Russia	0.00624554
-Romania	Sardinia	0.0530194
-Romania	Seewisen_Germany	0.00210764
-Romania	Tartu_Estonia	-0.00053305
-Romania	Turkey	-0.00285211
-Romania	Velky_Kosir_Czech_Republic	0.00168857
-Romania	Vienna_Austria	-0.000935119
-Romania	Vlieland_NL	0.00887196
-Romania	Westerheide	-0.000255801
-Romania	Wytham_UK	0.00255343
-Romania	Zurich_Switzerland	0.00426363
-Romania	Zvenigorod_Russia	-0.000275105
-Sardinia	Seewisen_Germany	0.0515346
-Sardinia	Tartu_Estonia	0.0494528
-Sardinia	Turkey	0.0503412
-Sardinia	Velky_Kosir_Czech_Republic	0.0516027
-Sardinia	Vienna_Austria	0.0493541
-Sardinia	Vlieland_NL	0.0587942
-Sardinia	Westerheide	0.0490049
-Sardinia	Wytham_UK	0.051431
-Sardinia	Zurich_Switzerland	0.053927
-Sardinia	Zvenigorod_Russia	0.0511268
-Seewisen_Germany	Tartu_Estonia	0.00332034
-Seewisen_Germany	Turkey	0.00398431
-Seewisen_Germany	Velky_Kosir_Czech_Republic	0.00502981
-Seewisen_Germany	Vienna_Austria	0.00283148
-Seewisen_Germany	Vlieland_NL	0.0115449
-Seewisen_Germany	Westerheide	0.00361458
-Seewisen_Germany	Wytham_UK	0.00634654
-Seewisen_Germany	Zurich_Switzerland	0.00747126
-Seewisen_Germany	Zvenigorod_Russia	0.00322205
-Tartu_Estonia	Turkey	0.00149288
-Tartu_Estonia	Velky_Kosir_Czech_Republic	0.00275078
-Tartu_Estonia	Vienna_Austria	0.000608507
-Tartu_Estonia	Vlieland_NL	0.00921251
-Tartu_Estonia	Westerheide	0.00146886
-Tartu_Estonia	Wytham_UK	0.00421255
-Tartu_Estonia	Zurich_Switzerland	0.00536438
-Tartu_Estonia	Zvenigorod_Russia	0.000905214
-Turkey	Velky_Kosir_Czech_Republic	0.00343002
-Turkey	Vienna_Austria	0.00129644
-Turkey	Vlieland_NL	0.0100837
-Turkey	Westerheide	0.0020265
-Turkey	Wytham_UK	0.00473733
-Turkey	Zurich_Switzerland	0.00596436
-Turkey	Zvenigorod_Russia	0.00161542
-Velky_Kosir_Czech_Republic	Vienna_Austria	0.00245606
-Velky_Kosir_Czech_Republic	Vlieland_NL	0.011282
-Velky_Kosir_Czech_Republic	Westerheide	0.00320582
-Velky_Kosir_Czech_Republic	Wytham_UK	0.00588216
-Velky_Kosir_Czech_Republic	Zurich_Switzerland	0.00709623
-Velky_Kosir_Czech_Republic	Zvenigorod_Russia	0.00279383
-Vienna_Austria	Vlieland_NL	0.00877699
-Vienna_Austria	Westerheide	0.000968262
-Vienna_Austria	Wytham_UK	0.00359087
-Vienna_Austria	Zurich_Switzerland	0.00487413
-Vienna_Austria	Zvenigorod_Russia	0.000400703
-Vlieland_NL	Westerheide	0.00935187
-Vlieland_NL	Wytham_UK	0.0118565
-Vlieland_NL	Zurich_Switzerland	0.0135401
-Vlieland_NL	Zvenigorod_Russia	0.00946888
-Westerheide	Wytham_UK	0.00451117
-Westerheide	Zurich_Switzerland	0.00561285
-Westerheide	Zvenigorod_Russia	0.00117077
-Wytham_UK	Zurich_Switzerland	0.00821896
-Wytham_UK	Zvenigorod_Russia	0.00390902
-Zurich_Switzerland	Zvenigorod_Russia	0.0052645
+pop1	pop2	FST	recomb_slope
+Antwerp_Belgium	Bulgaria	-0.00664199	0.0117013015779821
+
+Antwerp_Belgium	Cambridge_UK	0.0070696	-0.00754467168526479
+
+Antwerp_Belgium	Crete	0.0443234	0.138301935564133
+
+Antwerp_Belgium	Font_Roja_Spain	0.0154073	-0.00345622726308235
+
+Antwerp_Belgium	Gotland_Sweden	0.00347363	0.0772699341199267
+
+Antwerp_Belgium	Harjavalta_Finland	0.00352877	0.0304957882185223
+
+Antwerp_Belgium	Italy	0.00559138	0.0546214290747266
+
+Antwerp_Belgium	La_Rouviere_France	0.00513757	0.0977670656772432
+
+Antwerp_Belgium	Loch_Lomond_Scotland	0.0172536	-0.00445817472429141
+
+Antwerp_Belgium	Mariola_Spain	0.015205	-0.0439993503937241
+
+Antwerp_Belgium	Montpellier_France	0.00739827	0.0178117900423861
+
+Antwerp_Belgium	Oulu_Finland	0.006383	0.0836099822805897
+
+Antwerp_Belgium	Pilis_Mountains_Hungary	0.0017851	0.0688146495637843
+
+Antwerp_Belgium	Pirio_Muro_Corsica	0.0315563	-0.0254343487766049
+
+Antwerp_Belgium	Radolfzell_Germany	0.00742648	0.00854226814170474
+
+Antwerp_Belgium	Romania	0.000909401	0.0404549994918819
+
+Antwerp_Belgium	Sardinia	0.0523312	0.0336618673326777
+
+Antwerp_Belgium	Seewisen_Germany	0.00428082	0.0743019718298892
+
+Antwerp_Belgium	Tartu_Estonia	0.00192763	0.0853270794728035
+
+Antwerp_Belgium	Turkey	0.0025967	0.031544543123826
+
+Antwerp_Belgium	Velky_Kosir_Czech_Republic	0.00385153	0.0134842574128464
+
+Antwerp_Belgium	Vienna_Austria	0.00152483	0.0686727875490049
+
+Antwerp_Belgium	Vlieland_NL	0.0104601	0.181257712706962
+
+Antwerp_Belgium	Westerheide	0.00228162	0.0593822586629974
+
+Antwerp_Belgium	Wytham_UK	0.00499422	0.0166254719552576
+
+Antwerp_Belgium	Zurich_Switzerland	0.00630323	0.0929822441109672
+
+Antwerp_Belgium	Zvenigorod_Russia	0.00196942	0.130622395170725
+
+Bulgaria	Cambridge_UK	-0.00360333	-0.0206264608675251
+
+Bulgaria	Crete	0.0487062	0.333635473391192
+
+Bulgaria	Font_Roja_Spain	0.00659001	0.0631111290379825
+
+Bulgaria	Gotland_Sweden	-0.00662643	-0.00214266234281652
+
+Bulgaria	Harjavalta_Finland	-0.00688604	0.00361809436342324
+
+Bulgaria	Italy	-0.00797	-0.0442391022872124
+
+Bulgaria	La_Rouviere_France	-0.005203	0.0470213444041271
+
+Bulgaria	Loch_Lomond_Scotland	0.00897905	0.0108350918147621
+
+Bulgaria	Mariola_Spain	0.00644163	0.0668713553375433
+
+Bulgaria	Montpellier_France	-0.00408813	0.00620597967005742
+
+Bulgaria	Oulu_Finland	-0.004463	0.00702016026844724
+
+Bulgaria	Pilis_Mountains_Hungary	-0.0086972	0.0160625319817642
+
+Bulgaria	Pirio_Muro_Corsica	0.0264993	0.079416386570033
+
+Bulgaria	Radolfzell_Germany	-0.00221347	0.0619256753754958
+
+Bulgaria	Romania	-0.0126746	-0.121874466928723
+
+Bulgaria	Sardinia	0.0558655	0.271024676948514
+
+Bulgaria	Seewisen_Germany	-0.00529688	0.00932568488115517
+
+Bulgaria	Tartu_Estonia	-0.00868389	-0.0671694798449729
+
+Bulgaria	Turkey	-0.0118129	-0.0144470660953968
+
+Bulgaria	Velky_Kosir_Czech_Republic	-0.00575798	0.0227372083082438
+
+Bulgaria	Vienna_Austria	-0.00908696	-0.00622797307151115
+
+Bulgaria	Vlieland_NL	0.00272536	0.0148792072729696
+
+Bulgaria	Westerheide	-0.0086049	0.00442389755342528
+
+Bulgaria	Wytham_UK	-0.00587544	-0.133822940916821
+
+Bulgaria	Zurich_Switzerland	-0.00375803	0.0359645097662807
+
+Bulgaria	Zvenigorod_Russia	-0.00811204	-0.0341280485006087
+
+Cambridge_UK	Crete	0.0465728	0.0522451192613078
+
+Cambridge_UK	Font_Roja_Spain	0.0176159	-0.000183168624656531
+
+Cambridge_UK	Gotland_Sweden	0.00745071	0.012999342316717
+
+Cambridge_UK	Harjavalta_Finland	0.00736823	-0.0728496916440052
+
+Cambridge_UK	Italy	0.00948702	-0.0853173746224109
+
+Cambridge_UK	La_Rouviere_France	0.0089083	-0.0245415490271431
+
+Cambridge_UK	Loch_Lomond_Scotland	0.0165593	0.0344298420264624
+
+Cambridge_UK	Mariola_Spain	0.0173559	-0.0723525678199414
+
+Cambridge_UK	Montpellier_France	0.0114321	-0.0966656038462994
+
+Cambridge_UK	Oulu_Finland	0.0101938	-0.121034765533631
+
+Cambridge_UK	Pilis_Mountains_Hungary	0.00587701	-0.0656344869912428
+
+Cambridge_UK	Pirio_Muro_Corsica	0.033762	-0.0784930122996591
+
+Cambridge_UK	Radolfzell_Germany	0.0110351	-0.0448549750947653
+
+Cambridge_UK	Romania	0.00464152	-1.03462097336496e-05
+
+Cambridge_UK	Sardinia	0.0535003	0.0244449967452414
+
+Cambridge_UK	Seewisen_Germany	0.00821753	-0.101642880171815
+
+Cambridge_UK	Tartu_Estonia	0.00610295	-0.0245540281988429
+
+Cambridge_UK	Turkey	0.00660094	-0.0468521432878093
+
+Cambridge_UK	Velky_Kosir_Czech_Republic	0.00775047	-0.00438603731727648
+
+Cambridge_UK	Vienna_Austria	0.00549892	-0.105113633372629
+
+Cambridge_UK	Vlieland_NL	0.0137322	0.0495850448095425
+
+Cambridge_UK	Westerheide	0.00641664	-0.129033772683189
+
+Cambridge_UK	Wytham_UK	0.00508858	-0.0194966635532291
+
+Cambridge_UK	Zurich_Switzerland	0.0102146	0.0433419933708977
+
+Cambridge_UK	Zvenigorod_Russia	0.00585916	-0.0828874600148191
+
+Crete	Font_Roja_Spain	0.0535466	-0.00523995646546291
+
+Crete	Gotland_Sweden	0.0438073	-0.00530712863694973
+
+Crete	Harjavalta_Finland	0.043632	0.0124604331212196
+
+Crete	Italy	0.0436882	-0.0189836230520707
+
+Crete	La_Rouviere_France	0.0458723	0.0109808141951773
+
+Crete	Loch_Lomond_Scotland	0.0566626	-0.000767220079154359
+
+Crete	Mariola_Spain	0.0536697	0.0735963735971239
+
+Crete	Montpellier_France	0.046577	-0.0127020434640344
+
+Crete	Oulu_Finland	0.0464169	-0.056090985900393
+
+Crete	Pilis_Mountains_Hungary	0.042435	-0.0209888124641267
+
+Crete	Pirio_Muro_Corsica	0.0682022	0.0480345058239715
+
+Crete	Radolfzell_Germany	0.0480362	0.0106648377700258
+
+Crete	Romania	0.0426615	0.0325842720529205
+
+Crete	Sardinia	0.0936071	0.499048172946401
+
+Crete	Seewisen_Germany	0.0446801	-0.0043329215552312
+
+Crete	Tartu_Estonia	0.0420332	0.0229714167403045
+
+Crete	Turkey	0.0410124	0.141294113354805
+
+Crete	Velky_Kosir_Czech_Republic	0.0447053	-0.0172445557631374
+
+Crete	Vienna_Austria	0.0423452	0.0318812356418883
+
+Crete	Vlieland_NL	0.051646	0.117497537066115
+
+Crete	Westerheide	0.0421279	-0.0125920182768027
+
+Crete	Wytham_UK	0.0447375	0.00136215735278095
+
+Crete	Zurich_Switzerland	0.0467961	-0.0147533692283331
+
+Crete	Zvenigorod_Russia	0.0431139	0.00742074270969395
+
+Font_Roja_Spain	Gotland_Sweden	0.0154286	-0.000374457321569944
+
+Font_Roja_Spain	Harjavalta_Finland	0.0153486	-0.0428034244273888
+
+Font_Roja_Spain	Italy	0.0176319	0.010012725982408
+
+Font_Roja_Spain	La_Rouviere_France	0.0170688	-0.0122994419063445
+
+Font_Roja_Spain	Loch_Lomond_Scotland	0.0267704	-0.0516852215832991
+
+Font_Roja_Spain	Mariola_Spain	0.00365322	0.0258235739137671
+
+Font_Roja_Spain	Montpellier_France	0.0191249	-0.0096592536325973
+
+Font_Roja_Spain	Oulu_Finland	0.0181862	-0.0483905153435458
+
+Font_Roja_Spain	Pilis_Mountains_Hungary	0.0139534	-0.0523580219393355
+
+Font_Roja_Spain	Pirio_Muro_Corsica	0.0403049	0.000948620274864754
+
+Font_Roja_Spain	Radolfzell_Germany	0.0192299	-0.0285547511257411
+
+Font_Roja_Spain	Romania	0.0137061	-0.00866544205147674
+
+Font_Roja_Spain	Sardinia	0.0605266	0.0676213789609594
+
+Font_Roja_Spain	Seewisen_Germany	0.0161036	-0.0629906256308627
+
+Font_Roja_Spain	Tartu_Estonia	0.0139551	-0.00635322351178257
+
+Font_Roja_Spain	Turkey	0.0148305	0.00711981559075981
+
+Font_Roja_Spain	Velky_Kosir_Czech_Republic	0.0158287	-0.0081962758907418
+
+Font_Roja_Spain	Vienna_Austria	0.0136508	0.0322168356195966
+
+Font_Roja_Spain	Vlieland_NL	0.0220846	0.058424406419699
+
+Font_Roja_Spain	Westerheide	0.0141384	-0.0560112033881663
+
+Font_Roja_Spain	Wytham_UK	0.015791	-0.0604472944153208
+
+Font_Roja_Spain	Zurich_Switzerland	0.0180976	-0.000787623598959483
+
+Font_Roja_Spain	Zvenigorod_Russia	0.014294	-0.038196873305061
+
+Gotland_Sweden	Harjavalta_Finland	0.00375844	0.0438369248006203
+
+Gotland_Sweden	Italy	0.00623746	0.00682631340182989
+
+Gotland_Sweden	La_Rouviere_France	0.00555898	0.0792369258610842
+
+Gotland_Sweden	Loch_Lomond_Scotland	0.0173797	0.0379451039537913
+
+Gotland_Sweden	Mariola_Spain	0.0150788	-0.0716788382375384
+
+Gotland_Sweden	Montpellier_France	0.00795312	-0.0857200467968273
+
+Gotland_Sweden	Oulu_Finland	0.00662632	-0.0024332210126703
+
+Gotland_Sweden	Pilis_Mountains_Hungary	0.00228948	0.0373231379928919
+
+Gotland_Sweden	Pirio_Muro_Corsica	0.0306851	-0.122741351466133
+
+Gotland_Sweden	Radolfzell_Germany	0.00762219	0.0539884756114641
+
+Gotland_Sweden	Romania	0.00123793	0.08551992611837
+
+Gotland_Sweden	Sardinia	0.0508642	0.0241153372760244
+
+Gotland_Sweden	Seewisen_Germany	0.00466473	0.0333165540707437
+
+Gotland_Sweden	Tartu_Estonia	0.00250444	0.0709669102317683
+
+Gotland_Sweden	Turkey	0.00310031	0.0756154175746052
+
+Gotland_Sweden	Velky_Kosir_Czech_Republic	0.0041871	0.0448962550074765
+
+Gotland_Sweden	Vienna_Austria	0.00211087	0.120810398246553
+
+Gotland_Sweden	Vlieland_NL	0.0106341	0.14067045117963
+
+Gotland_Sweden	Westerheide	0.002869	0.0173274224585115
+
+Gotland_Sweden	Wytham_UK	0.0056284	-0.0665123621238393
+
+Gotland_Sweden	Zurich_Switzerland	0.00680659	0.0634946413621683
+
+Gotland_Sweden	Zvenigorod_Russia	0.00228569	0.0264862514253941
+
+Harjavalta_Finland	Italy	0.00630321	0.051508329411997
+
+Harjavalta_Finland	La_Rouviere_France	0.00549935	0.054872473824969
+
+Harjavalta_Finland	Loch_Lomond_Scotland	0.0170403	-0.025062536363203
+
+Harjavalta_Finland	Mariola_Spain	0.0149639	-0.0566354039583496
+
+Harjavalta_Finland	Montpellier_France	0.00786487	0.0141547105820018
+
+Harjavalta_Finland	Oulu_Finland	0.00489254	0.00652769775340743
+
+Harjavalta_Finland	Pilis_Mountains_Hungary	0.00225729	0.0195690246101928
+
+Harjavalta_Finland	Pirio_Muro_Corsica	0.0303162	-0.0507018385005843
+
+Harjavalta_Finland	Radolfzell_Germany	0.0076859	0.0804785263591539
+
+Harjavalta_Finland	Romania	0.00108075	0.0895211433195519
+
+Harjavalta_Finland	Sardinia	0.0504656	-0.0103918655029595
+
+Harjavalta_Finland	Seewisen_Germany	0.00468488	0.0165413788479059
+
+Harjavalta_Finland	Tartu_Estonia	0.00227749	0.0286614359101458
+
+Harjavalta_Finland	Turkey	0.00331541	0.0328222813666496
+
+Harjavalta_Finland	Velky_Kosir_Czech_Republic	0.00434847	0.0194022900502374
+
+Harjavalta_Finland	Vienna_Austria	0.00205067	0.0625214353616263
+
+Harjavalta_Finland	Vlieland_NL	0.0105966	0.152388190310936
+
+Harjavalta_Finland	Westerheide	0.00288524	-0.00949128273150825
+
+Harjavalta_Finland	Wytham_UK	0.00556094	-0.141409797243583
+
+Harjavalta_Finland	Zurich_Switzerland	0.0066528	0.0672105252180367
+
+Harjavalta_Finland	Zvenigorod_Russia	0.00228342	0.0773837595921439
+
+Italy	La_Rouviere_France	0.00758541	0.0849226584152538
+
+Italy	Loch_Lomond_Scotland	0.019782	0.0136786468759202
+
+Italy	Mariola_Spain	0.0174915	-0.0377389698581342
+
+Italy	Montpellier_France	0.0101136	-0.0258837089211782
+
+Italy	Oulu_Finland	0.00885611	-0.0136528892092882
+
+Italy	Pilis_Mountains_Hungary	0.00436213	-0.00542323742320499
+
+Italy	Pirio_Muro_Corsica	0.0343836	-0.020422230724387
+
+Italy	Radolfzell_Germany	0.0100179	-0.0329496519732205
+
+Italy	Romania	0.000300337	0.0612210011839072
+
+Italy	Sardinia	0.0523016	0.0855729831252438
+
+Italy	Seewisen_Germany	0.00697852	-0.0105011374206112
+
+Italy	Tartu_Estonia	0.00474232	0.0114057119909788
+
+Italy	Turkey	0.00231154	-0.0193696456873164
+
+Italy	Velky_Kosir_Czech_Republic	0.00676347	0.0456852944504883
+
+Italy	Vienna_Austria	0.0040938	0.0477445468986716
+
+Italy	Vlieland_NL	0.0131203	0.166770699301354
+
+Italy	Westerheide	0.00486693	0.0253861799163489
+
+Italy	Wytham_UK	0.00751923	-0.0580201915032364
+
+Italy	Zurich_Switzerland	0.00895791	0.0848587229862392
+
+Italy	Zvenigorod_Russia	0.00464771	0.0810307749518438
+
+La_Rouviere_France	Loch_Lomond_Scotland	0.0189542	0.0438905485501588
+
+La_Rouviere_France	Mariola_Spain	0.0167948	-0.00156935580344049
+
+La_Rouviere_France	Montpellier_France	0.00515265	0.0703383236274066
+
+La_Rouviere_France	Oulu_Finland	0.00844049	0.0022762373284831
+
+La_Rouviere_France	Pilis_Mountains_Hungary	0.00393065	0.0959889839996452
+
+La_Rouviere_France	Pirio_Muro_Corsica	0.0329924	-0.151604393320174
+
+La_Rouviere_France	Radolfzell_Germany	0.00921497	0.0481062043480006
+
+La_Rouviere_France	Romania	0.0026005	0.128252642364268
+
+La_Rouviere_France	Sardinia	0.0531662	0.0172922768214359
+
+La_Rouviere_France	Seewisen_Germany	0.00630071	0.113367265762982
+
+La_Rouviere_France	Tartu_Estonia	0.00404683	0.0756384513536205
+
+La_Rouviere_France	Turkey	0.00464989	0.0821267443285024
+
+La_Rouviere_France	Velky_Kosir_Czech_Republic	0.00582121	0.00774940893422166
+
+La_Rouviere_France	Vienna_Austria	0.00366014	0.147507603400287
+
+La_Rouviere_France	Vlieland_NL	0.0124366	0.208644101583672
+
+La_Rouviere_France	Westerheide	0.0043137	0.0881283794183021
+
+La_Rouviere_France	Wytham_UK	0.00692668	-0.00364536357530668
+
+La_Rouviere_France	Zurich_Switzerland	0.00828605	0.0949780078200188
+
+La_Rouviere_France	Zvenigorod_Russia	0.00404525	0.0660061178617289
+
+Loch_Lomond_Scotland	Mariola_Spain	0.0264831	-0.0327505555567499
+
+Loch_Lomond_Scotland	Montpellier_France	0.0210241	-0.0509681921408939
+
+Loch_Lomond_Scotland	Oulu_Finland	0.0200482	-0.0327274619502803
+
+Loch_Lomond_Scotland	Pilis_Mountains_Hungary	0.0157749	-0.0292312755348139
+
+Loch_Lomond_Scotland	Pirio_Muro_Corsica	0.0431938	-0.0442917584214818
+
+Loch_Lomond_Scotland	Radolfzell_Germany	0.0210565	0.0124818467030201
+
+Loch_Lomond_Scotland	Romania	0.0158396	0.000664503539207259
+
+Loch_Lomond_Scotland	Sardinia	0.0632316	-0.0147115131584072
+
+Loch_Lomond_Scotland	Seewisen_Germany	0.0181554	-0.0162299363614749
+
+Loch_Lomond_Scotland	Tartu_Estonia	0.0157744	-0.0479981919881147
+
+Loch_Lomond_Scotland	Turkey	0.0173214	-0.00645162315633819
+
+Loch_Lomond_Scotland	Velky_Kosir_Czech_Republic	0.0175137	-0.0556892275673145
+
+Loch_Lomond_Scotland	Vienna_Austria	0.0153435	-0.0499657553554139
+
+Loch_Lomond_Scotland	Vlieland_NL	0.0238561	0.067978158735876
+
+Loch_Lomond_Scotland	Westerheide	0.0160809	-0.0620225121316082
+
+Loch_Lomond_Scotland	Wytham_UK	0.0144008	0.0289909255256773
+
+Loch_Lomond_Scotland	Zurich_Switzerland	0.0198644	0.0113811505571378
+
+Loch_Lomond_Scotland	Zvenigorod_Russia	0.016058	-0.0597360459137397
+
+Mariola_Spain	Montpellier_France	0.0187668	-0.122525564388171
+
+Mariola_Spain	Oulu_Finland	0.0178144	-0.106832650285286
+
+Mariola_Spain	Pilis_Mountains_Hungary	0.0135946	-0.0923243300472358
+
+Mariola_Spain	Pirio_Muro_Corsica	0.0400072	0.00115448094497056
+
+Mariola_Spain	Radolfzell_Germany	0.0188319	-0.0240163683092887
+
+Mariola_Spain	Romania	0.0136396	0.0108515364114122
+
+Mariola_Spain	Sardinia	0.0602344	0.151760624002222
+
+Mariola_Spain	Seewisen_Germany	0.015643	-0.0524113464538439
+
+Mariola_Spain	Tartu_Estonia	0.0136565	-0.0911592397401763
+
+Mariola_Spain	Turkey	0.014425	-0.0214442394702922
+
+Mariola_Spain	Velky_Kosir_Czech_Republic	0.015443	-0.063407599678696
+
+Mariola_Spain	Vienna_Austria	0.0132247	-0.0352496648131142
+
+Mariola_Spain	Vlieland_NL	0.0216601	0.0300744870915951
+
+Mariola_Spain	Westerheide	0.0137531	-0.0734407496204928
+
+Mariola_Spain	Wytham_UK	0.0153665	-0.144583689742728
+
+Mariola_Spain	Zurich_Switzerland	0.017841	-0.0546968660328646
+
+Mariola_Spain	Zvenigorod_Russia	0.0139349	-0.0118099777201205
+
+Montpellier_France	Oulu_Finland	0.010544	-0.0853898684834974
+
+Montpellier_France	Pilis_Mountains_Hungary	0.00625984	0.00283064168527298
+
+Montpellier_France	Pirio_Muro_Corsica	0.0338196	-0.0816036023101863
+
+Montpellier_France	Radolfzell_Germany	0.0115134	0.0647362772725847
+
+Montpellier_France	Romania	0.00483424	0.0120284515138892
+
+Montpellier_France	Sardinia	0.0536943	0.00572845973945187
+
+Montpellier_France	Seewisen_Germany	0.00878541	-0.0322170574165662
+
+Montpellier_France	Tartu_Estonia	0.00660714	0.0212717290336735
+
+Montpellier_France	Turkey	0.00726823	2.63304318198745e-05
+
+Montpellier_France	Velky_Kosir_Czech_Republic	0.00833266	0.0261519336865319
+
+Montpellier_France	Vienna_Austria	0.00604558	0.0272991629403411
+
+Montpellier_France	Vlieland_NL	0.0144996	0.0722222888707346
+
+Montpellier_France	Westerheide	0.00687121	-0.00721016902837992
+
+Montpellier_France	Wytham_UK	0.0095985	-0.1604941488283
+
+Montpellier_France	Zurich_Switzerland	0.010623	0.0508467393254554
+
+Montpellier_France	Zvenigorod_Russia	0.00634823	0.0427341960032323
+
+Oulu_Finland	Pilis_Mountains_Hungary	0.00493938	-0.0450334790872796
+
+Oulu_Finland	Pirio_Muro_Corsica	0.0332775	-0.07856515895116
+
+Oulu_Finland	Radolfzell_Germany	0.0106092	0.101240117968471
+
+Oulu_Finland	Romania	0.00387077	0.0766631124781834
+
+Oulu_Finland	Sardinia	0.053572	0.0384946796454315
+
+Oulu_Finland	Seewisen_Germany	0.00759129	-0.027837299083984
+
+Oulu_Finland	Tartu_Estonia	0.00528012	-0.00484850715867136
+
+Oulu_Finland	Turkey	0.00625972	-0.057650913211325
+
+Oulu_Finland	Velky_Kosir_Czech_Republic	0.00726144	-0.00147101232192424
+
+Oulu_Finland	Vienna_Austria	0.00478058	0.00117726452527452
+
+Oulu_Finland	Vlieland_NL	0.0135997	0.0909026299122103
+
+Oulu_Finland	Westerheide	0.00567999	-0.170024387637683
+
+Oulu_Finland	Wytham_UK	0.00835883	-0.17402294767666
+
+Oulu_Finland	Zurich_Switzerland	0.00949567	0.0105727475934655
+
+Oulu_Finland	Zvenigorod_Russia	0.00509357	0.0090133782946075
+
+Pilis_Mountains_Hungary	Pirio_Muro_Corsica	0.0293941	-0.0678877820726579
+
+Pilis_Mountains_Hungary	Radolfzell_Germany	0.00611992	-0.00175615622600375
+
+Pilis_Mountains_Hungary	Romania	-0.000536613	0.0229342089339356
+
+Pilis_Mountains_Hungary	Sardinia	0.0495722	0.0152806153856216
+
+Pilis_Mountains_Hungary	Seewisen_Germany	0.00313468	-0.00527871490457042
+
+Pilis_Mountains_Hungary	Tartu_Estonia	0.000922981	-0.006212149761591
+
+Pilis_Mountains_Hungary	Turkey	0.00137535	0.0282347182025027
+
+Pilis_Mountains_Hungary	Velky_Kosir_Czech_Republic	0.00271703	0.03211748322281
+
+Pilis_Mountains_Hungary	Vienna_Austria	0.000416287	0.0619377811488134
+
+Pilis_Mountains_Hungary	Vlieland_NL	0.00922641	0.135736414525551
+
+Pilis_Mountains_Hungary	Westerheide	0.001225	-0.0317333954941198
+
+Pilis_Mountains_Hungary	Wytham_UK	0.00396003	-0.0707237066399896
+
+Pilis_Mountains_Hungary	Zurich_Switzerland	0.00509842	0.0317408574732908
+
+Pilis_Mountains_Hungary	Zvenigorod_Russia	0.000660433	0.0490783552939783
+
+Pirio_Muro_Corsica	Radolfzell_Germany	0.0349742	-0.0411504472796466
+
+Pirio_Muro_Corsica	Romania	0.032471	0.00543197183598838
+
+Pirio_Muro_Corsica	Sardinia	0.0489079	0.204755340779858
+
+Pirio_Muro_Corsica	Seewisen_Germany	0.0313509	-0.0783065104573107
+
+Pirio_Muro_Corsica	Tartu_Estonia	0.0293597	-0.0469130907480729
+
+Pirio_Muro_Corsica	Turkey	0.0321916	0.0626606329694199
+
+Pirio_Muro_Corsica	Velky_Kosir_Czech_Republic	0.031439	-0.10370368627084
+
+Pirio_Muro_Corsica	Vienna_Austria	0.029255	-0.0559773300777432
+
+Pirio_Muro_Corsica	Vlieland_NL	0.0380812	0.0568199393375078
+
+Pirio_Muro_Corsica	Westerheide	0.0290759	-0.0772826539614807
+
+Pirio_Muro_Corsica	Wytham_UK	0.031464	-0.111912965760533
+
+Pirio_Muro_Corsica	Zurich_Switzerland	0.0338202	0.00787001494576544
+
+Pirio_Muro_Corsica	Zvenigorod_Russia	0.0306294	-0.0166191055649645
+
+Radolfzell_Germany	Romania	0.00532222	0.0958873622330994
+
+Radolfzell_Germany	Sardinia	0.0553772	0.0124235072284155
+
+Radolfzell_Germany	Seewisen_Germany	0.00848076	-0.0124694675756592
+
+Radolfzell_Germany	Tartu_Estonia	0.00629672	0.00646390943866228
+
+Radolfzell_Germany	Turkey	0.00697336	-0.0296620766101265
+
+Radolfzell_Germany	Velky_Kosir_Czech_Republic	0.00803154	0.0626359841336112
+
+Radolfzell_Germany	Vienna_Austria	0.00579725	0.043343643284918
+
+Radolfzell_Germany	Vlieland_NL	0.0145619	0.127666779906673
+
+Radolfzell_Germany	Westerheide	0.00662938	-0.00322656317835882
+
+Radolfzell_Germany	Wytham_UK	0.00908041	-0.0875198338204146
+
+Radolfzell_Germany	Zurich_Switzerland	0.0102976	0.108465983396856
+
+Radolfzell_Germany	Zvenigorod_Russia	0.00624554	0.041554769372302
+
+Romania	Sardinia	0.0530194	0.0507500887605683
+
+Romania	Seewisen_Germany	0.00210764	0.117716577700239
+
+Romania	Tartu_Estonia	-0.00053305	0.0507530271507473
+
+Romania	Turkey	-0.00285211	0.0287828845820578
+
+Romania	Velky_Kosir_Czech_Republic	0.00168857	0.130870983988329
+
+Romania	Vienna_Austria	-0.000935119	0.111773928666626
+
+Romania	Vlieland_NL	0.00887196	0.101104738320318
+
+Romania	Westerheide	-0.000255801	0.10480967958199
+
+Romania	Wytham_UK	0.00255343	-0.0197465015527259
+
+Romania	Zurich_Switzerland	0.00426363	0.112135883027543
+
+Romania	Zvenigorod_Russia	-0.000275105	0.0629215490202211
+
+Sardinia	Seewisen_Germany	0.0515346	-0.00090992293044168
+
+Sardinia	Tartu_Estonia	0.0494528	0.0173943342367563
+
+Sardinia	Turkey	0.0503412	0.145732119755145
+
+Sardinia	Velky_Kosir_Czech_Republic	0.0516027	0.0537154525668908
+
+Sardinia	Vienna_Austria	0.0493541	0.0154231708026419
+
+Sardinia	Vlieland_NL	0.0587942	0.0677464822164318
+
+Sardinia	Westerheide	0.0490049	-0.0208381664615288
+
+Sardinia	Wytham_UK	0.051431	0.0181738015275765
+
+Sardinia	Zurich_Switzerland	0.053927	0.0811769977529598
+
+Sardinia	Zvenigorod_Russia	0.0511268	0.116385842412367
+
+Seewisen_Germany	Tartu_Estonia	0.00332034	0.0264142424699668
+
+Seewisen_Germany	Turkey	0.00398431	-0.033160434149054
+
+Seewisen_Germany	Velky_Kosir_Czech_Republic	0.00502981	0.0337427542726963
+
+Seewisen_Germany	Vienna_Austria	0.00283148	0.0662374209611384
+
+Seewisen_Germany	Vlieland_NL	0.0115449	0.141367647598997
+
+Seewisen_Germany	Westerheide	0.00361458	-0.00545331487704498
+
+Seewisen_Germany	Wytham_UK	0.00634654	-0.0711240311329248
+
+Seewisen_Germany	Zurich_Switzerland	0.00747126	0.0995998780919572
+
+Seewisen_Germany	Zvenigorod_Russia	0.00322205	0.0266750035416007
+
+Tartu_Estonia	Turkey	0.00149288	0.0545650493854208
+
+Tartu_Estonia	Velky_Kosir_Czech_Republic	0.00275078	0.0221978188388113
+
+Tartu_Estonia	Vienna_Austria	0.000608507	0.0667149598805331
+
+Tartu_Estonia	Vlieland_NL	0.00921251	0.154079893457489
+
+Tartu_Estonia	Westerheide	0.00146886	0.0872650301285467
+
+Tartu_Estonia	Wytham_UK	0.00421255	-0.099792227934937
+
+Tartu_Estonia	Zurich_Switzerland	0.00536438	0.102684875537936
+
+Tartu_Estonia	Zvenigorod_Russia	0.000905214	0.00411222920891782
+
+Turkey	Velky_Kosir_Czech_Republic	0.00343002	0.0387113904368232
+
+Turkey	Vienna_Austria	0.00129644	0.0479943078613629
+
+Turkey	Vlieland_NL	0.0100837	0.046645689825072
+
+Turkey	Westerheide	0.0020265	-0.00363144223706634
+
+Turkey	Wytham_UK	0.00473733	-0.0363902245258163
+
+Turkey	Zurich_Switzerland	0.00596436	-0.00423000217782902
+
+Turkey	Zvenigorod_Russia	0.00161542	0.0695812785922025
+
+Velky_Kosir_Czech_Republic	Vienna_Austria	0.00245606	0.0963719265120674
+
+Velky_Kosir_Czech_Republic	Vlieland_NL	0.011282	0.102630138367987
+
+Velky_Kosir_Czech_Republic	Westerheide	0.00320582	0.0375458599411836
+
+Velky_Kosir_Czech_Republic	Wytham_UK	0.00588216	-0.088619247175314
+
+Velky_Kosir_Czech_Republic	Zurich_Switzerland	0.00709623	0.0301125462981644
+
+Velky_Kosir_Czech_Republic	Zvenigorod_Russia	0.00279383	0.0662109250581706
+
+Vienna_Austria	Vlieland_NL	0.00877699	0.160316596451932
+
+Vienna_Austria	Westerheide	0.000968262	-0.000222940413720282
+
+Vienna_Austria	Wytham_UK	0.00359087	-0.16281459009443
+
+Vienna_Austria	Zurich_Switzerland	0.00487413	0.0677062008880469
+
+Vienna_Austria	Zvenigorod_Russia	0.000400703	0.0584817183747965
+
+Vlieland_NL	Westerheide	0.00935187	0.173093091852301
+
+Vlieland_NL	Wytham_UK	0.0118565	0.0692072207143026
+
+Vlieland_NL	Zurich_Switzerland	0.0135401	0.159161915632684
+
+Vlieland_NL	Zvenigorod_Russia	0.00946888	0.170671058560666
+
+Westerheide	Wytham_UK	0.00451117	-0.100974457636469
+
+Westerheide	Zurich_Switzerland	0.00561285	0.0590454983321978
+
+Westerheide	Zvenigorod_Russia	0.00117077	0.0411261637132485
+
+Wytham_UK	Zurich_Switzerland	0.00821896	-0.0479550923971847
+
+Wytham_UK	Zvenigorod_Russia	0.00390902	-0.0881874227646788
+
+Zurich_Switzerland	Zvenigorod_Russia	0.0052645	0.0450988630151931
+
