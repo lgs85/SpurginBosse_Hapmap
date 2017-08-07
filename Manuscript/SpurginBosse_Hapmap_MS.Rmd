@@ -85,14 +85,14 @@ Recombination
 
 Sampling locations and sample sizes for each population are given in Table 1. For ease of presentation, we grouped populations into "regions" for plots and analyses (see Table 1 for details). Levels of genetic diversity were generally high and LD declined rapidly in all populations, but we observed substantial differences in genetic diversity among populations. Highest levels of LD were observed in the island populations of Crete (Greece), Sardinia (Italy), Corsica (France) and Vlieland (Netherlands) with lowest levels of LD in central Europe, Turkey and Spain (Fig. 1A; Fig. S1). Similarly, heterozygosity was highest in central Europe, and lowest in Crete, Sardinia and the Balkans (Fig. 1B).
 
-Considering all European great tit populations, there was no significant pattern of isolation-by-distance (Mantel test; r = `r round2(mantel(FST~dist,data = pd)["mantelr"])`, p = `r round2(mantel(FST~dist,data = pd)["pval1"])`). Instead, the highest levels of $F_{ST}$ were found in comparisons involving island the populations of Corsica, Sardinia and Crete (Fig. 2A). Considering only comparisons involving mainland populations, pairwise $F_{ST}$ was still not related to related to geographic distance (r = `r round2(mantel(FST~dist,data = subset(pd,Island == "Not Island"))["mantelr"])`, p = `r round2(mantel(FST~dist,data = subset(pd,Island == "Not Island"))["pval1"])`). We then examined genetic structure in relation to distance from potential refugial populations (only including mainland populations), and found that $F_{ST}$ was significantly related to distance from Turkey (r = `r round2(with(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),Island == "Not Island"),cor.test(FST,dist))$estimate)`, p `r round3(with(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),Island == "Not Island"),cor.test(FST,dist))$p.value)`; Fig. 2B), but not to distance from Spain (r = `r round2(with(subset(subset(pd,p1 == "Mariola_Spain" | p2 == "Mariola_Spain"),Island == "Not Island"),cor.test(FST,dist))$estimate)`, p = `r round2(with(subset(subset(pd,p1 == "Mariola_Spain" | p2 == "Mariola_Spain"),Island == "Not Island"),cor.test(FST,dist))$p.value)`), or from Italy (r = `r round2(with(subset(subset(pd,p1 == "Italy" | p2 == "Italy"),Island == "Not Island"),cor.test(FST,dist))$estimate)`, p = `r round2(with(subset(subset(pd,p1 == "Italy" | p2 == "Italy"),Island == "Not Island"),cor.test(FST,dist))$p.value)`).
+Considering all European great tit populations, there was no significant pattern of isolation-by-distance (Mantel test; r = `r round2(mantel(FST~dist,data = pd)["mantelr"])`, p = `r round2(mantel(FST~dist,data = pd)["pval1"])`). Instead, the highest levels of $F_{ST}$ were found in comparisons involving island the populations of Corsica, Sardinia and Crete (Fig. 2A). Considering only comparisons involving mainland populations, pairwise $F_{ST}$ was still not related to related to geographic distance (r = `r round2(mantel(FST~dist,data = subset(pd,Island == "Mainland"))["mantelr"])`, p = `r round2(mantel(FST~dist,data = subset(pd,Island == "Mainland"))["pval1"])`). We then examined genetic structure in relation to distance from potential refugial populations (only including mainland populations), and found that $F_{ST}$ was significantly related to distance from Turkey (r = `r round2(with(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),Island == "Mainland"),cor.test(FST,dist))$estimate)`, p `r round3(with(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),Island == "Mainland"),cor.test(FST,dist))$p.value)`; Fig. 2B), but not to distance from Spain (r = `r round2(with(subset(subset(pd,p1 == "Mariola_Spain" | p2 == "Mariola_Spain"),Island == "Mainland"),cor.test(FST,dist))$estimate)`, p = `r round2(with(subset(subset(pd,p1 == "Mariola_Spain" | p2 == "Mariola_Spain"),Island == "Mainland"),cor.test(FST,dist))$p.value)`), or from Italy (r = `r round2(with(subset(subset(pd,p1 == "Italy" | p2 == "Italy"),Island == "Mainland"),cor.test(FST,dist))$estimate)`, p = `r round2(with(subset(subset(pd,p1 == "Italy" | p2 == "Italy"),Island == "Mainland"),cor.test(FST,dist))$p.value)`).
 
-Admixture analysis revealed patterns of genetic structure corresponding to geographical variation in European great tits (Fig. S2). The $K$ = 2 analysis assigned individuals in Sardinia and Corsica to one genetic cluster, and the remaining populations to the second. At $K$ = 3 (the model that best fitted the great tit data; Fig. S3), Spain was separated from the rest of mainland Europe (Fig. 2C). Increasing values of $K$ resulted of the separation of populations in Scotland ($K$ = 4), Sardinia (from Corsica; $K$ = 5), France ($K$ = 6), Crete ($K$ = 7) and England ($K$ = 8). The admixture output at $K$ = 8 is displayed in Fig. 2D; further increases in $K$ did not generate patterns of structure that corresponded to geographical variation (Fig. S2), and were increasingly less well supported (Fig. S3).
+Admixture analysis revealed patterns of genetic structure corresponding to geographical variation in European great tits (Fig. S2). The $K$ = 2 analysis assigned individuals in Sardinia and Corsica to one genetic cluster, and the remaining populations to the second. At $K$ = 3 (the model that best fitted the great tit data; Fig. S3), Spain was separated from the rest of mainland Europe. Increasing values of $K$ resulted of the separation of populations in Scotland ($K$ = 4), Sardinia (from Corsica; $K$ = 5), France ($K$ = 6), Crete ($K$ = 7) and England ($K$ = 8). The admixture output at $K$ = 8 is displayed in Fig. 2C; further increases in $K$ did not generate patterns of structure that corresponded to geographical variation (Fig. S2), and were increasingly less well supported (Fig. S3).
 
 Maximum likelihood analyses implemented in Treemix showed that a model with no migration explained 97.8% of variance in relatedness between populations; increasing the number of migration events substantially improved the percentage of relatedness explained, up to 99.7% when 10 migration events were fitted (Fig. S4). In Figure 3 we display maximum likelihood tree with 2 migration events, after which the variance in relatedness explained plateaued when more migration events were added (Fig. S4). The tree was generally characterised by short branch lengths, with the exception of the island populations of Sardinia and Crete, which were grouped with the population from mainland Italy.  The Spanish and Corsican populations were also grouped together, and were populations from Turkey and the Balkans, and populations from England and Scotland (Fig. 3). The two fitted migration edges both involved Sardinia, involving migration from eastern Europe, and to Corsica (Fig. 3).
 
 #### Genomic landscapes of differentiation
-
+We first explored patterns of genomic differentiation between populations assigned by Admixture analyses (at $K$ = 8), and found that $F_{ST}$ varied markedly across the genome (Fig. 4A). 
 
 ##Discussion
 
@@ -211,33 +211,106 @@ multiplot(Fig1A,Fig1B,layout = matrix(c(1:2),nrow = 1))
 
 **Figure 2**
 
-```{r Figure 2,fig.width = 7,fig.height = 7}
+```{r Figure 2,fig.width = 6,fig.height = 10}
 
-pd$FST2 <- pd$FST/(1-pd$FST)
 
-Fig2A <- ggplot(pd,
-                aes(x = dist/1000,y = FST2,col = Island))+
-                geom_point()+
+Fig2A <- rbind(pd[,c(1:3)],
+               data.frame(p1 = unique(c(pd$p1,pd$p2)),p2 = unique(c(pd$p1,pd$p2)),FST = rep(0,length(unique(c(pd$p1,pd$p2))))),
+               data.frame(p1 = pd$p2,p2 = pd$p1,FST = pd$FST)) %>%
+  mutate(pd,p1 = factor(p1,
+       levels = c("Loch_Lomond_Scotland",
+                  "Cambridge_UK",
+                  "Wytham_UK",
+                  "Mariola_Spain",
+                  "Font_Roja_Spain",
+                  "La_Rouviere_France",
+                  "Montpellier_France",
+                  "Antwerp_Belgium",
+                  "Vlieland_Netherlands",
+                  "Westerheide_Netherlands",
+                  "Zurich_Switzerland",
+                  "Radolfzell_Germany",
+                  "Seewisen_Germany",
+                  "Pirio_Muro_Corsica",
+                  "Sardinia",
+                  "Italy",
+                  "Vienna_Austria",
+                  "Velky_Kosir_Czech_Republic",
+                  "Pilis_Mountains_Hungary",
+                  "Gotland_Sweden",
+                  "Harjavalta_Finland",
+                  "Oulu_Finland",
+                  "Tartu_Estonia",
+                  "Crete",
+                  "Bulgaria",
+                  "Romania",
+                  "Turkey",
+                  "Zvenigorod_Russia"))) %>%
+    mutate(p2 = factor(p2,
+       levels = c("Loch_Lomond_Scotland",
+                  "Cambridge_UK",
+                  "Wytham_UK",
+                  "Mariola_Spain",
+                  "Font_Roja_Spain",
+                  "La_Rouviere_France",
+                  "Montpellier_France",
+                  "Antwerp_Belgium",
+                  "Vlieland_Netherlands",
+                  "Westerheide_Netherlands",
+                  "Zurich_Switzerland",
+                  "Radolfzell_Germany",
+                  "Seewisen_Germany",
+                  "Pirio_Muro_Corsica",
+                  "Sardinia",
+                  "Italy",
+                  "Vienna_Austria",
+                  "Velky_Kosir_Czech_Republic",
+                  "Pilis_Mountains_Hungary",
+                  "Gotland_Sweden",
+                  "Harjavalta_Finland",
+                  "Oulu_Finland",
+                  "Tartu_Estonia",
+                  "Crete",
+                  "Bulgaria",
+                  "Romania",
+                  "Turkey",
+                  "Zvenigorod_Russia"))) %>%
+  ggplot(aes(x = p1,y = p2))+
+    geom_tile(aes(fill = FST))+
+    scale_fill_gradientn(name = expression(italic("F")[ST]),
+                         colors = terrain.colors(10))+
+    theme(axis.text.x = element_text(angle = 90))+
+  xlab("")+
+  ylab("")
+
+
+Fig2B <- ggplot(pd,
+                aes(x = Island,y = FST))+
+                geom_boxplot()+
                 theme_bw()+
-                theme(legend.position = "none")+
                 ylab(expression(italic(F)[ST]))+
-                xlab("Distance (km)")+
-                scale_colour_manual(values = c("darkblue","grey"))
+                xlab("")
 
-Fig2B <- subset(pd,p1 == "Turkey" | p2 == "Turkey") %>%
-          ggplot(aes(x = dist/1000,y = FST2,col = Island))+
+
+Fig2C <- subset(pd,p1 == "Turkey" | p2 == "Turkey") %>%
+          ggplot(aes(x = dist/1000,y = FST))+
             geom_point()+
             theme_bw()+
             theme(legend.position = "none")+
             ylab(expression(italic(F)[ST]))+
             xlab("Distance from Turkey (km)")+
-            scale_colour_manual(values = c("darkblue","grey"))
-Fig2C <- structureplot(admix3,pops,3,xlab = F)
-Fig2D <- structureplot(admix6,pops,6)
+            scale_colour_manual(values = c("darkblue","grey")) +
+  annotate("text",
+           x = subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$dist/1000,
+           y = subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$FST-0.003,
+           label = revalue(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$p1,c(Pirio_Muro_Corsica = "Corsica")),
+           size = 3)
+
+Fig2D <- structureplot(admix8,pops,8)
 
 
 
-multiplot(Fig2A,Fig2B,Fig2C,Fig2D,layout = matrix(c(rep(c(1,2),3),rep(3,4),rep(4,6)),nrow = 8,byrow = T))
+multiplot(Fig2A,Fig2B,Fig2C,Fig2D,layout = matrix(c(rep(1,10),rep(c(2,3),3),rep(4,6)),nrow = 11,byrow = T))
 
 ```
 
@@ -246,4 +319,47 @@ multiplot(Fig2A,Fig2B,Fig2C,Fig2D,layout = matrix(c(rep(c(1,2),3),rep(3,4),rep(4
 
 ```{r Figure 3,fig.width = 6,fig.height = 6}
 plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
+```
+
+
+**Figure 4**
+```{r Figure 4,fig.width = 8,fig.height = 6}
+fst_both <- rbind(fst_admix,fst_cen)
+fst_both$data <- c(rep("Marginal populations",nrow(fst_admix)),rep("Central populations",nrow(fst_cen)))
+fst_both$MEAN_FST[fst_both$MEAN_FST < 0] <- 0
+
+Fig4A <- ggplot(fst_both,aes(x = BIN_START,y = MEAN_FST))+
+  geom_point(col = "grey",size = 2)+
+  theme_classic()+
+  geom_smooth(se = F)+
+  theme(
+        strip.background = element_blank(),
+        strip.placement = "outside",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank())+
+  xlab("")+
+  ylab(expression(italic(F)[ST])) + 
+  facet_grid(data ~ CHROM,scales = "free",space = "free_x",switch = "x") +
+  theme(axis.line.y = element_line(),
+        axis.line.x = element_line(),
+        strip.text.x = element_text(size = 2))
+
+Fig4B <- ggplot(recomb,aes(x = fst_admix,y = fst_cen))+
+  geom_point(col = "grey")+
+  geom_smooth(method = "lm")+
+  theme_classic()
+
+Fig4C <- subset(recomb,MEAN_cM > 0) %>%
+  ggplot(aes(y = fst_admix,x = log(MEAN_cM)))+
+  geom_point(col = "grey")+
+  geom_smooth(method = "lm")+
+  theme_classic()
+
+Fig4D <- subset(recomb,MEAN_cM > 0) %>%
+  ggplot(aes(y = fst_cen,x = log(MEAN_cM)))+
+  geom_point(col = "grey")+
+  geom_smooth(method = "lm")+
+  theme_classic()
+multiplot(Fig4A,Fig4B,Fig4C,Fig4D,layout = matrix(c(1,1,1,2,3,4),nrow = 2,byrow = T))
+  
 ```

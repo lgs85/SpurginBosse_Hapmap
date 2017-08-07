@@ -56,6 +56,8 @@ rm(countries)
 
 # IBD ---------------------------------------------------------------------
 
+
+
 colnames(pd) <- c("p1","p2","FST","recomb_r")
 colnames(ll) <- c("Pop","Lat","Long")
 for(i in 1:nrow(pd))
@@ -66,7 +68,13 @@ for(i in 1:nrow(pd))
 }
 
 islands <- c("Pirio_Muro_Corsica","Crete","Sardinia","Vlieland_NL","Gotland_Sweden")
-pd$Island <- ifelse(pd$p1 %in% islands | pd$p2 %in% islands, "Island","Not Island")
+pd$Island <- ifelse(pd$p1 %in% islands | pd$p2 %in% islands, "Island","Mainland")
+
+pd$p1[pd$p1 == "Westerheide"] <- "Westerheide_Netherlands"
+pd$p2[pd$p2 == "Westerheide"] <- "Westerheide_Netherlands"
+
+pd$p1[pd$p1 == "Vlieland_NL"] <- "Vlieland_Netherlands"
+pd$p2[pd$p2 == "Vlieland_NL"] <- "Vlieland_Netherlands"
 
 # LD ----------------------------------------------------------------------
 ll$LD <- ldmean$V2
@@ -182,3 +190,17 @@ hetlong$pop <- factor(countries,
 rm(countries)
 
 
+# Recombination -----------------------------------------------------------
+
+recomb$BIN_START <- recomb$POS200KB + 1
+recomb$CHROM <- recomb$V3
+recomb$V3 <- NULL
+inall <- intersect(intersect(paste(recomb$CHROM,recomb$BIN_START),paste(fst_admix$CHROM,fst_admix$BIN_START)),paste(fst_cen$CHROM,fst_cen$BIN_START))
+
+recomb <- subset(recomb,paste(recomb$CHROM,recomb$BIN_START) %in% inall)
+
+temp <- subset(fst_admix,paste(fst_admix$CHROM,fst_admix$BIN_START) %in% inall)
+recomb$fst_admix <- temp$MEAN_FST
+
+temp <- subset(fst_cen,paste(fst_cen$CHROM,fst_cen$BIN_START) %in% inall)
+recomb$fst_cen <- temp$MEAN_FST
