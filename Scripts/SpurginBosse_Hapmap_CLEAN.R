@@ -58,7 +58,7 @@ rm(countries)
 
 
 
-colnames(pd) <- c("p1","p2","FST","recomb_r")
+colnames(pd) <- c("p1","p2","FST","fst_slope","outlier_slope")
 colnames(ll) <- c("Pop","Lat","Long")
 for(i in 1:nrow(pd))
 {

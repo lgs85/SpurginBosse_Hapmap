@@ -25,6 +25,7 @@ opts_chunk$set(echo=FALSE,
                fig.width=8,
                fig.height=8)
 
+set.seed(200285)
 ```
 
 ```{r load and clean, include = F}
@@ -215,7 +216,7 @@ multiplot(Fig1A,Fig1B,layout = matrix(c(1:2),nrow = 1))
 
 **Figure 2**
 
-```{r Figure 2,fig.width = 6,fig.height = 10}
+```{r Figure 2,fig.width = 8,fig.height = 10}
 
 
 Fig2A <- rbind(pd[,c(1:3)],
@@ -290,7 +291,7 @@ Fig2A <- rbind(pd[,c(1:3)],
 
 Fig2B <- ggplot(pd,
                 aes(x = Island,y = FST))+
-                geom_boxplot()+
+                geom_jitter(col = "grey")+
                 theme_bw()+
                 ylab(expression(italic(F)[ST]))+
                 xlab("")
@@ -298,7 +299,7 @@ Fig2B <- ggplot(pd,
 
 Fig2C <- subset(pd,p1 == "Turkey" | p2 == "Turkey") %>%
           ggplot(aes(x = dist/1000,y = FST))+
-            geom_point()+
+            geom_point(col = "grey")+
             theme_bw()+
             theme(legend.position = "none")+
             ylab(expression(italic(F)[ST]))+
@@ -365,5 +366,204 @@ Fig4D <- subset(recomb,MEAN_cM > 0) %>%
   geom_smooth(method = "lm")+
   theme_classic()
 multiplot(Fig4A,Fig4B,Fig4C,Fig4D,layout = matrix(c(1,1,1,2,3,4),nrow = 2,byrow = T))
-  
+
+```
+
+**Figure 5**
+```{r Figure 5,fig.width = 8,fig.height = 8}
+
+Fig5A <- rbind(pd[,c("p1","p2","fst_slope")],
+               data.frame(p1 = unique(c(pd$p1,pd$p2)),p2 = unique(c(pd$p1,pd$p2)),fst_slope = rep(0,length(unique(c(pd$p1,pd$p2))))),
+               data.frame(p1 = pd$p2,p2 = pd$p1,fst_slope = pd$fst_slope)) %>%
+  mutate(pd,p1 = factor(p1,
+       levels = c("Loch_Lomond_Scotland",
+                  "Cambridge_UK",
+                  "Wytham_UK",
+                  "Mariola_Spain",
+                  "Font_Roja_Spain",
+                  "La_Rouviere_France",
+                  "Montpellier_France",
+                  "Antwerp_Belgium",
+                  "Vlieland_Netherlands",
+                  "Westerheide_Netherlands",
+                  "Zurich_Switzerland",
+                  "Radolfzell_Germany",
+                  "Seewisen_Germany",
+                  "Pirio_Muro_Corsica",
+                  "Sardinia",
+                  "Italy",
+                  "Vienna_Austria",
+                  "Velky_Kosir_Czech_Republic",
+                  "Pilis_Mountains_Hungary",
+                  "Gotland_Sweden",
+                  "Harjavalta_Finland",
+                  "Oulu_Finland",
+                  "Tartu_Estonia",
+                  "Crete",
+                  "Bulgaria",
+                  "Romania",
+                  "Turkey",
+                  "Zvenigorod_Russia"))) %>%
+    mutate(p2 = factor(p2,
+       levels = c("Loch_Lomond_Scotland",
+                  "Cambridge_UK",
+                  "Wytham_UK",
+                  "Mariola_Spain",
+                  "Font_Roja_Spain",
+                  "La_Rouviere_France",
+                  "Montpellier_France",
+                  "Antwerp_Belgium",
+                  "Vlieland_Netherlands",
+                  "Westerheide_Netherlands",
+                  "Zurich_Switzerland",
+                  "Radolfzell_Germany",
+                  "Seewisen_Germany",
+                  "Pirio_Muro_Corsica",
+                  "Sardinia",
+                  "Italy",
+                  "Vienna_Austria",
+                  "Velky_Kosir_Czech_Republic",
+                  "Pilis_Mountains_Hungary",
+                  "Gotland_Sweden",
+                  "Harjavalta_Finland",
+                  "Oulu_Finland",
+                  "Tartu_Estonia",
+                  "Crete",
+                  "Bulgaria",
+                  "Romania",
+                  "Turkey",
+                  "Zvenigorod_Russia"))) %>%
+  ggplot(aes(x = p1,y = p2))+
+    geom_tile(aes(fill = fst_slope))+
+    scale_fill_gradientn(name = expression(italic("B")),
+                         colors = terrain.colors(10))+
+    theme(axis.text.x = element_text(angle = 90))+
+  xlab("")+
+  ylab("")
+
+
+Fig5B <- ggplot(pd,
+                aes(x = Island,y = fst_slope))+
+                geom_jitter(col = "grey")+
+                theme_bw()+
+                ylab(expression(italic("F")[ST]*" vs recombination coefficient"))+
+                xlab("")
+
+
+Fig5C <- ggplot(pd,aes(x = dist/1000,y = fst_slope))+
+            geom_point(col = "grey")+
+  geom_smooth(method = "lm")+
+            theme_bw()+
+            theme(legend.position = "none")+
+            ylab(expression(italic("F")[ST]*" vs recombination coefficient"))+
+            xlab("Distance from Turkey (km)")+
+            scale_colour_manual(values = c("darkblue","grey"))
+
+
+
+multiplot(Fig5A,Fig5B,Fig5C,layout = matrix(c(rep(1,10),rep(c(2,3),3)),nrow = 8,byrow = T))
+
+```
+
+
+
+
+
+
+
+
+**Figure 6**
+```{r Figure 6,fig.width = 8,fig.height = 8}
+
+Fig6A <- rbind(pd[,c("p1","p2","outlier_slope")],
+               data.frame(p1 = unique(c(pd$p1,pd$p2)),p2 = unique(c(pd$p1,pd$p2)),outlier_slope = rep(0,length(unique(c(pd$p1,pd$p2))))),
+               data.frame(p1 = pd$p2,p2 = pd$p1,outlier_slope = pd$outlier_slope)) %>%
+  mutate(pd,p1 = factor(p1,
+       levels = c("Loch_Lomond_Scotland",
+                  "Cambridge_UK",
+                  "Wytham_UK",
+                  "Mariola_Spain",
+                  "Font_Roja_Spain",
+                  "La_Rouviere_France",
+                  "Montpellier_France",
+                  "Antwerp_Belgium",
+                  "Vlieland_Netherlands",
+                  "Westerheide_Netherlands",
+                  "Zurich_Switzerland",
+                  "Radolfzell_Germany",
+                  "Seewisen_Germany",
+                  "Pirio_Muro_Corsica",
+                  "Sardinia",
+                  "Italy",
+                  "Vienna_Austria",
+                  "Velky_Kosir_Czech_Republic",
+                  "Pilis_Mountains_Hungary",
+                  "Gotland_Sweden",
+                  "Harjavalta_Finland",
+                  "Oulu_Finland",
+                  "Tartu_Estonia",
+                  "Crete",
+                  "Bulgaria",
+                  "Romania",
+                  "Turkey",
+                  "Zvenigorod_Russia"))) %>%
+    mutate(p2 = factor(p2,
+       levels = c("Loch_Lomond_Scotland",
+                  "Cambridge_UK",
+                  "Wytham_UK",
+                  "Mariola_Spain",
+                  "Font_Roja_Spain",
+                  "La_Rouviere_France",
+                  "Montpellier_France",
+                  "Antwerp_Belgium",
+                  "Vlieland_Netherlands",
+                  "Westerheide_Netherlands",
+                  "Zurich_Switzerland",
+                  "Radolfzell_Germany",
+                  "Seewisen_Germany",
+                  "Pirio_Muro_Corsica",
+                  "Sardinia",
+                  "Italy",
+                  "Vienna_Austria",
+                  "Velky_Kosir_Czech_Republic",
+                  "Pilis_Mountains_Hungary",
+                  "Gotland_Sweden",
+                  "Harjavalta_Finland",
+                  "Oulu_Finland",
+                  "Tartu_Estonia",
+                  "Crete",
+                  "Bulgaria",
+                  "Romania",
+                  "Turkey",
+                  "Zvenigorod_Russia"))) %>%
+  ggplot(aes(x = p1,y = p2))+
+    geom_tile(aes(fill = outlier_slope))+
+    scale_fill_gradientn(name = expression(italic("B")),
+                         colors = terrain.colors(10))+
+    theme(axis.text.x = element_text(angle = 90))+
+  xlab("")+
+  ylab("")
+
+
+Fig6B <- ggplot(pd,
+                aes(x = Island,y = outlier_slope))+
+                geom_jitter(col = "grey")+
+                theme_bw()+
+                ylab(expression(italic("F")[ST]*" vs recombination coefficient"))+
+                xlab("")
+
+
+Fig6C <- ggplot(pd,aes(x = dist/1000,y = outlier_slope))+
+            geom_point(col = "grey")+
+  geom_smooth(method = "lm")+
+            theme_bw()+
+            theme(legend.position = "none")+
+            ylab(expression(italic("F")[ST]*" vs recombination coefficient"))+
+            xlab("Distance from Turkey (km)")+
+            scale_colour_manual(values = c("darkblue","grey"))
+
+
+
+multiplot(Fig6A,Fig6B,Fig6C,layout = matrix(c(rep(1,10),rep(c(2,3),3)),nrow = 8,byrow = T))
+
 ```
