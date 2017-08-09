@@ -28,6 +28,8 @@ opts_chunk$set(echo=FALSE,
 set.seed(200285)
 ```
 
+
+
 ```{r load and clean, include = F}
 
 #Load and clean data
@@ -58,13 +60,19 @@ Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4^\*, Veronika N. Laine^3^, The Great Tit
 
 \pagebreak
 
+
+
+
 ##Abstract
+
 
 ##Introduction
 
 Since the first studies of allozyme variation in humans [@Harris1966] and Drosophila [@Lewontin1966; @Hubby1966], there has been great interest in explaining how evolutionary and ecological processes shape the patterns of genetic variation observed within and among natural populations. One focus of research and debate in this area has beein on quantifying the roles of adaptive and neutral processes in explaining observed levels of genetic variation. However, adaptation does not occur in isolation, but against a background of recombination, gene flow, and genetic drift. More recently there has been increased effort in understanding how these fundamental evolutionary forces operate in concert to generate and maintain the levels of genetic diversity commonly observed in natural populations.
 
-The arrival of high-throughput sequencing and subsequent characterisation of genome-wide variation across large numebrs of individuals has revealed that at the genetic level, patterns of variation and divergence among natural populations and species are highly heterogeneous.
+The arrival of high-throughput sequencing and subsequent characterisation of genome-wide variation across large numebrs of individuals has revealed that at the genetic level, patterns of variation and divergence among natural populations and species are highly heterogeneous. A feature of these "genomic landscapes" of differentiaiton that has received particular attention is the presence of so-called "islands of divergence" (also called "islands of differentiation" and "islands of speciation"), which are assumed to arise as a resuls of divergent seleciton on genetic variants and closely linked genomic regions.
+
+Recent research in birds has revealed that differentiation landscapes are conserved across populations, species and even across avian families. This striking pattern has arisen, at least in part, as a result of a highly conserved recombination landscape in birds.
 
 The European great tit (*Parus major major*) is an excellent model for ecological and evolutionary study.  
 
@@ -290,8 +298,7 @@ Fig2A <- rbind(pd[,c(1:3)],
                   "Zvenigorod_Russia"))) %>%
   ggplot(aes(x = p1,y = p2))+
     geom_tile(aes(fill = FST))+
-    scale_fill_gradientn(name = expression(italic("F")[ST]),
-                         colors = terrain.colors(10))+
+    scale_fill_distiller(palette = "Greens",direction = -1)+
     theme(axis.text.x = element_text(angle = 90))+
   xlab("")+
   ylab("")
@@ -337,12 +344,13 @@ plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
 
 **Figure 4**
 ```{r Figure 4,fig.width = 8,fig.height = 6}
+
 fst_both <- rbind(fst_admix,fst_cen)
 fst_both$data <- c(rep("Marginal populations",nrow(fst_admix)),rep("Central populations",nrow(fst_cen)))
 fst_both$MEAN_FST[fst_both$MEAN_FST < 0] <- 0
 
 Fig4A <- ggplot(fst_both,aes(x = BIN_START,y = MEAN_FST))+
-  geom_point(col = "grey",size = 2)+
+  geom_point(col = "grey",size = 1)+
   theme_classic()+
   geom_smooth(se = F)+
   theme(
@@ -357,19 +365,19 @@ Fig4A <- ggplot(fst_both,aes(x = BIN_START,y = MEAN_FST))+
         axis.line.x = element_line(),
         strip.text.x = element_text(size = 2))
 
-Fig4B <- ggplot(recomb,aes(x = fst_admix,y = fst_cen))+
+Fig4B <- ggplot(recomb,aes(x = (fst_admix),y = (fst_cen)))+
   geom_point(col = "grey")+
   geom_smooth(method = "lm")+
   theme_classic()
 
 Fig4C <- subset(recomb,MEAN_cM > 0) %>%
-  ggplot(aes(y = fst_admix,x = log(MEAN_cM)))+
+  ggplot(aes(y = (fst_admix),x = log(MEAN_cM)))+
   geom_point(col = "grey")+
   geom_smooth(method = "lm")+
   theme_classic()
 
 Fig4D <- subset(recomb,MEAN_cM > 0) %>%
-  ggplot(aes(y = fst_cen,x = log(MEAN_cM)))+
+  ggplot(aes(y = (fst_cen),x = log(MEAN_cM)))+
   geom_point(col = "grey")+
   geom_smooth(method = "lm")+
   theme_classic()
@@ -443,8 +451,7 @@ Fig5A <- rbind(pd[,c("p1","p2","fst_slope")],
                   "Zvenigorod_Russia"))) %>%
   ggplot(aes(x = p1,y = p2))+
     geom_tile(aes(fill = fst_slope))+
-    scale_fill_gradientn(name = expression(italic("B")),
-                         colors = terrain.colors(10))+
+    scale_fill_distiller(palette = "Greens",direction = -1)+
     theme(axis.text.x = element_text(angle = 90))+
   xlab("")+
   ylab("")
@@ -546,8 +553,7 @@ Fig6A <- rbind(pd[,c("p1","p2","outlier_slope")],
                   "Zvenigorod_Russia"))) %>%
   ggplot(aes(x = p1,y = p2))+
     geom_tile(aes(fill = outlier_slope))+
-    scale_fill_gradientn(name = expression(italic("B")),
-                         colors = terrain.colors(10))+
+    scale_fill_distiller(palette = "Greens",direction = -1)+
     theme(axis.text.x = element_text(angle = 90))+
   xlab("")+
   ylab("")
@@ -574,4 +580,6 @@ Fig6C <- ggplot(pd,aes(x = dist/1000,y = outlier_slope))+
 
 multiplot(Fig6A,Fig6B,Fig6C,layout = matrix(c(rep(1,10),rep(c(2,3),3)),nrow = 8,byrow = T))
 
+subset(pd,fst_slope > 0.0008)
+head(pd)
 ```

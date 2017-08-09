@@ -7,7 +7,7 @@ library(Rmisc)
 library(geosphere)
 library(ecodist)
 
-ll <- read.table("Data/LatLongAllPops.txt",header = F)
+ll <- read.table("Data/LatLongAllPops.txt",header = F,stringsAsFactors = F)
 
 
 for(i in 2:10)
@@ -25,4 +25,6 @@ ld <- read.table("Data/HapMapLD.txt",header = F,stringsAsFactors = F)
 cv <- read.table("Data/CV_error.txt",header = T)
 fst_admix <- read.table("Data/Admix.windowed.weir.fst",header = T)
 fst_cen <- read.table("Data/CenEur.windowed.weir.fst",header = T) 
+fst_UKFIN <- read.table("Data/UK_Fin.windowed.weir.fst",header = T)
+fst_SARCRE <- read.table("Data/Sar_Cre.windowed.weir.fst",header = T) 
 recomb <- read.table("Data/200kb_recombination.txt",header = T)

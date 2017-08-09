@@ -1,5 +1,4 @@
 
-
 # Population names --------------------------------------------------------
 
 pops$o_pop <- pops$V1
@@ -60,6 +59,16 @@ rm(countries)
 
 colnames(pd) <- c("p1","p2","FST","fst_slope","outlier_slope")
 colnames(ll) <- c("Pop","Lat","Long")
+
+ll$Pop[ll$Pop == "Westerheide"] <- "Westerheide_Netherlands"
+ll$Pop[ll$Pop == "Vlieland_NL"] <- "Vlieland_Netherlands"
+
+pd$p1[pd$p1 == "Westerheide"] <- "Westerheide_Netherlands"
+pd$p1[pd$p1 == "Vlieland_NL"] <- "Vlieland_Netherlands"
+
+pd$p2[pd$p2 == "Westerheide"] <- "Westerheide_Netherlands"
+pd$p2[pd$p2 == "Vlieland_NL"] <- "Vlieland_Netherlands"
+
 for(i in 1:nrow(pd))
 {
   d1 <- subset(ll,Pop == pd$p1[i])
@@ -67,14 +76,10 @@ for(i in 1:nrow(pd))
   pd$dist[i] <- distGeo(c(d1$Long,d1$Lat),c(d2$Long,d2$Lat))
 }
 
-islands <- c("Pirio_Muro_Corsica","Crete","Sardinia","Vlieland_NL","Gotland_Sweden")
+islands <- c("Pirio_Muro_Corsica","Crete","Sardinia","Vlieland_Netherlands","Gotland_Sweden")
 pd$Island <- ifelse(pd$p1 %in% islands | pd$p2 %in% islands, "Island","Mainland")
 
-pd$p1[pd$p1 == "Westerheide"] <- "Westerheide_Netherlands"
-pd$p2[pd$p2 == "Westerheide"] <- "Westerheide_Netherlands"
 
-pd$p1[pd$p1 == "Vlieland_NL"] <- "Vlieland_Netherlands"
-pd$p2[pd$p2 == "Vlieland_NL"] <- "Vlieland_Netherlands"
 
 # LD ----------------------------------------------------------------------
 ll$LD <- ldmean$V2
@@ -195,7 +200,12 @@ rm(countries)
 recomb$BIN_START <- recomb$POS200KB + 1
 recomb$CHROM <- recomb$V3
 recomb$V3 <- NULL
-inall <- intersect(intersect(paste(recomb$CHROM,recomb$BIN_START),paste(fst_admix$CHROM,fst_admix$BIN_START)),paste(fst_cen$CHROM,fst_cen$BIN_START))
+
+inall <- Reduce(intersect, list(paste(recomb$CHROM,recomb$BIN_START),
+                                paste(fst_admix$CHROM,fst_admix$BIN_START),
+                                paste(fst_cen$CHROM,fst_cen$BIN_START),
+                                paste(fst_UKFIN$CHROM,fst_UKFIN$BIN_START),
+                                paste(fst_SARCRE$CHROM,fst_SARCRE$BIN_START)))
 
 recomb <- subset(recomb,paste(recomb$CHROM,recomb$BIN_START) %in% inall)
 
@@ -204,3 +214,16 @@ recomb$fst_admix <- temp$MEAN_FST
 
 temp <- subset(fst_cen,paste(fst_cen$CHROM,fst_cen$BIN_START) %in% inall)
 recomb$fst_cen <- temp$MEAN_FST
+
+temp <- subset(fst_UKFIN,paste(fst_UKFIN$CHROM,fst_UKFIN$BIN_START) %in% inall)
+recomb$fst_UKFIN <- temp$MEAN_FST
+
+temp <- subset(fst_SARCRE,paste(fst_SARCRE$CHROM,fst_SARCRE$BIN_START) %in% inall)
+recomb$fst_SARCRE <- temp$MEAN_FST
+
+recomb$recomb <- ifelse(recomb$MEAN_cM > median(recomb$MEAN_cM),"High","Low")
+
+ggplot(recomb,aes(x = log(MEAN_cM),y = fst_UKFIN))+
+  geom_point()+
+  geom_smooth(method = "lm")
+
