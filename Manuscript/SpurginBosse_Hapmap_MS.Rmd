@@ -113,7 +113,7 @@ Admixture analysis revealed patterns of genetic structure corresponding to geogr
 Maximum likelihood analyses implemented in Treemix showed that a model with no migration explained 97.8% of variance in relatedness between populations; increasing the number of migration events substantially improved the percentage of relatedness explained, up to 99.7% when 10 migration events were fitted (Fig. S4). In Figure 3 we display maximum likelihood tree with 2 migration events, after which the variance in relatedness explained plateaued when more migration events were added (Fig. S4). The tree was generally characterised by short branch lengths, with the exception of the island populations of Sardinia and Crete, which were grouped with the population from mainland Italy.  The Spanish and Corsican populations were also grouped together, and were populations from Turkey and the Balkans, and populations from England and Scotland (Fig. 3). The two fitted migration edges both involved Sardinia, involving migration from eastern Europe, and to Corsica (Fig. 3).
 
 #### Genomic landscapes of differentiation
-We first explored patterns of genomic differentiation between populations assigned by Admixture analyses (at $K$ = 8), and found that $F_{ST}$ varied markedly across the genome (Fig. 4A). 
+We found that $F_{ST}$ varied markedly across the genome, regardless of whether we considered marginal populations across which structure was higher or across central European populations with very low structure (Fig. 4A). Many of the same regions of high differentiation were observed across the central and marginal populations (Fig. A), and windowed $F_{ST}$ values were correlated across these two sets of populations (R^2 = `r round2(summary(lm(fst_admix~fst_cen,data = recomb))$r.squared)` *P* `r round3(summary(lm(fst_admix~fst_cen,data = recomb))$coefficients["fst_cen","Pr(>|t|)"])`; Fig. 4B). Across the marginal populations, $F_{ST}$ was strongly and negatively related to variation in recombination rate (R^2 = `r round2(summary(lm(fst_admix~log(MEAN_cM),data = subset(recomb,MEAN_cM > 0)))$r.squared)` *P* `r round3(summary(lm(fst_admix~log(MEAN_cM),data = subset(recomb,MEAN_cM > 0)))$coefficients["log(MEAN_cM)","Pr(>|t|)"])`; Fig. 4C). A similar, albeit slightly weaker relationship between $F_{ST}$ and recombination rate across the central populations (R^2 = `r round2(summary(lm(fst_cen~log(MEAN_cM),data = subset(recomb,MEAN_cM > 0)))$r.squared)` *P* `r round3(summary(lm(fst_cen~log(MEAN_cM),data = subset(recomb,MEAN_cM > 0)))$coefficients["log(MEAN_cM)","Pr(>|t|)"])`; Fig. 4D). 
 
 ##Discussion
 
@@ -208,7 +208,7 @@ Fig1A <- get_map(location = c(-11,31,40,66),zoom = 4,maptype = "watercolor",colo
   geom_point(data = ll,aes(x = Long,y = Lat,size = LD),col = "red")+
   xlab("Longitude")+
   ylab("Latitude")+
-  annotate("text",x = -10,y = 65,label = "A")
+  ggtitle("A")
 
 Fig1B <- ggplot(hetlong,aes(x = pop,y = het))+
   geom_boxplot(notch = T,outlier.shape = NA,coef = 0)+
@@ -217,7 +217,7 @@ Fig1B <- ggplot(hetlong,aes(x = pop,y = het))+
   coord_cartesian(ylim = c(0, 0.6))+
   ylab("Observed heterozygosity")+
   xlab("")+
-  annotate("text",x = 1,y = 0.6,label = "B")
+  ggtitle("B")
 
 multiplot(Fig1A,Fig1B,layout = matrix(c(1:2),nrow = 1))
 ```
@@ -297,11 +297,14 @@ Fig2A <- rbind(pd[,c(1:3)],
                   "Turkey",
                   "Zvenigorod_Russia"))) %>%
   ggplot(aes(x = p1,y = p2))+
+  theme_classic()+
     geom_tile(aes(fill = FST))+
     scale_fill_distiller(palette = "Greens",direction = -1)+
     theme(axis.text.x = element_text(angle = 90))+
   xlab("")+
-  ylab("")
+  ylab("")+
+  ggtitle("A")
+
 
 
 Fig2B <- ggplot(pd,
@@ -309,7 +312,8 @@ Fig2B <- ggplot(pd,
                 geom_jitter(col = "grey")+
                 theme_bw()+
                 ylab(expression(italic(F)[ST]))+
-                xlab("")
+                xlab("")+
+  ggtitle("B")
 
 
 Fig2C <- subset(pd,p1 == "Turkey" | p2 == "Turkey") %>%
@@ -324,9 +328,11 @@ Fig2C <- subset(pd,p1 == "Turkey" | p2 == "Turkey") %>%
            x = subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$dist/1000,
            y = subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$FST-0.003,
            label = revalue(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$p1,c(Pirio_Muro_Corsica = "Corsica")),
-           size = 3)
+           size = 3)+
+  ggtitle("C")
 
-Fig2D <- structureplot(admix8,pops,8)
+Fig2D <- structureplot(admix8,pops,8)+
+  ggtitle("D")
 
 
 
@@ -343,7 +349,7 @@ plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
 
 
 **Figure 4**
-```{r Figure 4,fig.width = 8,fig.height = 6}
+```{r Figure 4,fig.width = 8,fig.height = 7}
 
 fst_both <- rbind(fst_admix,fst_cen)
 fst_both$data <- c(rep("Marginal populations",nrow(fst_admix)),rep("Central populations",nrow(fst_cen)))
@@ -363,24 +369,35 @@ Fig4A <- ggplot(fst_both,aes(x = BIN_START,y = MEAN_FST))+
   facet_grid(data ~ CHROM,scales = "free",space = "free_x",switch = "x") +
   theme(axis.line.y = element_line(),
         axis.line.x = element_line(),
-        strip.text.x = element_text(size = 2))
+        strip.text.x = element_text(size = 2))+
+  ggtitle("A")
 
 Fig4B <- ggplot(recomb,aes(x = (fst_admix),y = (fst_cen)))+
   geom_point(col = "grey")+
   geom_smooth(method = "lm")+
-  theme_classic()
+  theme_classic()+
+  xlab(expression(italic(F)[`ST (marginal populations)`]))+
+  ylab(expression(italic(F)[`ST (central populations)`]))+
+  ggtitle("B")
 
 Fig4C <- subset(recomb,MEAN_cM > 0) %>%
   ggplot(aes(y = (fst_admix),x = log(MEAN_cM)))+
   geom_point(col = "grey")+
   geom_smooth(method = "lm")+
-  theme_classic()
+  theme_classic()+
+  ylab(expression(italic(F)[`ST (marginal populations)`]))+
+  xlab("log recomb. rate (cM/mb)")+
+  ggtitle("C")
 
 Fig4D <- subset(recomb,MEAN_cM > 0) %>%
   ggplot(aes(y = (fst_cen),x = log(MEAN_cM)))+
   geom_point(col = "grey")+
   geom_smooth(method = "lm")+
-  theme_classic()
+  theme_classic()+
+  ylab(expression(italic(F)[`ST (central populations)`]))+
+  xlab("log recomb. rate (cM/mb)")+
+  ggtitle("D")
+
 multiplot(Fig4A,Fig4B,Fig4C,Fig4D,layout = matrix(c(1,1,1,2,3,4),nrow = 2,byrow = T))
 
 ```
@@ -454,7 +471,9 @@ Fig5A <- rbind(pd[,c("p1","p2","fst_slope")],
     scale_fill_distiller(palette = "Greens",direction = -1)+
     theme(axis.text.x = element_text(angle = 90))+
   xlab("")+
-  ylab("")
+  ylab("")+
+  ggtitle("A")
+
 
 
 Fig5B <- ggplot(pd,
@@ -462,7 +481,8 @@ Fig5B <- ggplot(pd,
                 geom_jitter(col = "grey")+
                 theme_bw()+
                 ylab(expression(italic("F")[ST]*" vs recombination coefficient"))+
-                xlab("")
+                xlab("")+
+  ggtitle("B")
 
 
 Fig5C <- ggplot(pd,aes(x = dist/1000,y = fst_slope))+
@@ -471,8 +491,9 @@ Fig5C <- ggplot(pd,aes(x = dist/1000,y = fst_slope))+
             theme_bw()+
             theme(legend.position = "none")+
             ylab(expression(italic("F")[ST]*" vs recombination coefficient"))+
-            xlab("Distance from Turkey (km)")+
-            scale_colour_manual(values = c("darkblue","grey"))
+            xlab("Distance (km)")+
+            scale_colour_manual(values = c("darkblue","grey"))+
+  ggtitle("C")
 
 
 
@@ -556,15 +577,18 @@ Fig6A <- rbind(pd[,c("p1","p2","outlier_slope")],
     scale_fill_distiller(palette = "Greens",direction = -1)+
     theme(axis.text.x = element_text(angle = 90))+
   xlab("")+
-  ylab("")
+  ylab("")+
+  ggtitle("A")
+
 
 
 Fig6B <- ggplot(pd,
                 aes(x = Island,y = outlier_slope))+
                 geom_jitter(col = "grey")+
                 theme_bw()+
-                ylab(expression(italic("F")[ST]*" vs recombination coefficient"))+
-                xlab("")
+                ylab(expression(italic("F")[ST]*" outlier vs recombination coefficient"))+
+                xlab("")+
+  ggtitle("B")
 
 
 Fig6C <- ggplot(pd,aes(x = dist/1000,y = outlier_slope))+
@@ -572,14 +596,13 @@ Fig6C <- ggplot(pd,aes(x = dist/1000,y = outlier_slope))+
   geom_smooth(method = "lm")+
             theme_bw()+
             theme(legend.position = "none")+
-            ylab(expression(italic("F")[ST]*" vs recombination coefficient"))+
+            ylab(expression(italic("F")[ST]*" outlier vs recombination coefficient"))+
             xlab("Distance from Turkey (km)")+
-            scale_colour_manual(values = c("darkblue","grey"))
+            scale_colour_manual(values = c("darkblue","grey"))+
+  ggtitle("C")
 
 
 
 multiplot(Fig6A,Fig6B,Fig6C,layout = matrix(c(rep(1,10),rep(c(2,3),3)),nrow = 8,byrow = T))
 
-subset(pd,fst_slope > 0.0008)
-head(pd)
 ```
