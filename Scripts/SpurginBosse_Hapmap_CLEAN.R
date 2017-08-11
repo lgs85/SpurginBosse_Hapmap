@@ -221,9 +221,3 @@ recomb$fst_UKFIN <- temp$MEAN_FST
 temp <- subset(fst_SARCRE,paste(fst_SARCRE$CHROM,fst_SARCRE$BIN_START) %in% inall)
 recomb$fst_SARCRE <- temp$MEAN_FST
 
-recomb$recomb <- ifelse(recomb$MEAN_cM > median(recomb$MEAN_cM),"High","Low")
-
-ggplot(recomb,aes(x = log(MEAN_cM),y = fst_UKFIN))+
-  geom_point()+
-  geom_smooth(method = "lm")
-

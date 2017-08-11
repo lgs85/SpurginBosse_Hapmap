@@ -111,3 +111,110 @@ FigS4
 ```
 
 **Figure S4** Proportion of relatedness explained among populations in relation to the number of migration events allowed in Treemix analyses.
+
+
+
+
+
+
+
+
+```{r Figure S5,fig.width = 8,fig.height = 8}
+
+FigS5A <- rbind(pd[,c("p1","p2","outlier_slope")],
+               data.frame(p1 = unique(c(pd$p1,pd$p2)),p2 = unique(c(pd$p1,pd$p2)),outlier_slope = rep(0,length(unique(c(pd$p1,pd$p2))))),
+               data.frame(p1 = pd$p2,p2 = pd$p1,outlier_slope = pd$outlier_slope)) %>%
+  mutate(pd,p1 = factor(p1,
+       levels = c("Loch_Lomond_Scotland",
+                  "Cambridge_UK",
+                  "Wytham_UK",
+                  "Mariola_Spain",
+                  "Font_Roja_Spain",
+                  "La_Rouviere_France",
+                  "Montpellier_France",
+                  "Antwerp_Belgium",
+                  "Vlieland_Netherlands",
+                  "Westerheide_Netherlands",
+                  "Zurich_Switzerland",
+                  "Radolfzell_Germany",
+                  "Seewisen_Germany",
+                  "Pirio_Muro_Corsica",
+                  "Sardinia",
+                  "Italy",
+                  "Vienna_Austria",
+                  "Velky_Kosir_Czech_Republic",
+                  "Pilis_Mountains_Hungary",
+                  "Gotland_Sweden",
+                  "Harjavalta_Finland",
+                  "Oulu_Finland",
+                  "Tartu_Estonia",
+                  "Crete",
+                  "Bulgaria",
+                  "Romania",
+                  "Turkey",
+                  "Zvenigorod_Russia"))) %>%
+    mutate(p2 = factor(p2,
+       levels = c("Loch_Lomond_Scotland",
+                  "Cambridge_UK",
+                  "Wytham_UK",
+                  "Mariola_Spain",
+                  "Font_Roja_Spain",
+                  "La_Rouviere_France",
+                  "Montpellier_France",
+                  "Antwerp_Belgium",
+                  "Vlieland_Netherlands",
+                  "Westerheide_Netherlands",
+                  "Zurich_Switzerland",
+                  "Radolfzell_Germany",
+                  "Seewisen_Germany",
+                  "Pirio_Muro_Corsica",
+                  "Sardinia",
+                  "Italy",
+                  "Vienna_Austria",
+                  "Velky_Kosir_Czech_Republic",
+                  "Pilis_Mountains_Hungary",
+                  "Gotland_Sweden",
+                  "Harjavalta_Finland",
+                  "Oulu_Finland",
+                  "Tartu_Estonia",
+                  "Crete",
+                  "Bulgaria",
+                  "Romania",
+                  "Turkey",
+                  "Zvenigorod_Russia"))) %>%
+  ggplot(aes(x = p1,y = p2))+
+    geom_tile(aes(fill = outlier_slope))+
+    scale_fill_distiller(palette = "Greens",direction = -1)+
+    theme(axis.text.x = element_text(angle = 90))+
+  xlab("")+
+  ylab("")+
+  ggtitle("A")
+
+
+
+FigS5B <- ggplot(pd,
+                aes(x = Island,y = outlier_slope))+
+                geom_jitter(col = "grey")+
+                theme_bw()+
+                ylab(expression(italic("F")[ST]*" outlier vs recombination coefficient"))+
+                xlab("")+
+  ggtitle("B")
+
+
+FigS5C <- ggplot(pd,aes(x = dist/1000,y = outlier_slope))+
+            geom_point(col = "grey")+
+  geom_smooth(method = "lm")+
+            theme_bw()+
+            theme(legend.position = "none")+
+            ylab(expression(italic("F")[ST]*" outlier vs recombination coefficient"))+
+            xlab("Distance from Turkey (km)")+
+            scale_colour_manual(values = c("darkblue","grey"))+
+  ggtitle("C")
+
+
+
+multiplot(FigS5A,FigS5B,FigS5C,layout = matrix(c(rep(1,10),rep(c(2,3),3)),nrow = 8,byrow = T))
+
+```
+
+**Figure S5** FST outlier probability and recombination rate.
