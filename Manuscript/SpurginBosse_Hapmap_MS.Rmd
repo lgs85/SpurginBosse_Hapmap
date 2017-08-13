@@ -113,7 +113,11 @@ Admixture analysis revealed patterns of genetic structure corresponding to geogr
 Maximum likelihood analyses implemented in Treemix showed that a model with no migration explained 97.8% of variance in relatedness between populations; increasing the number of migration events substantially improved the percentage of relatedness explained, up to 99.7% when 10 migration events were fitted (Fig. S4). In Figure 3 we display maximum likelihood tree with 2 migration events, after which the variance in relatedness explained plateaued when more migration events were added (Fig. S4). The tree was generally characterised by short branch lengths, with the exception of the island populations of Sardinia and Crete, which were grouped with the population from mainland Italy.  The Spanish and Corsican populations were also grouped together, and were populations from Turkey and the Balkans, and populations from England and Scotland (Fig. 3). The two fitted migration edges both involved Sardinia, involving migration from eastern Europe, and to Corsica (Fig. 3).
 
 #### Genomic landscapes of differentiation
-We found that $F_{ST}$ varied markedly across the genome, regardless of whether we considered marginal populations across which structure was higher or across central European populations with very low structure (Fig. 4A). Many of the same regions of high differentiation were observed across the central and marginal populations (Fig. A), and windowed $F_{ST}$ values were correlated across these two sets of populations (R^2 = `r round2(summary(lm(fst_admix~fst_cen,data = recomb))$r.squared)` *P* `r round3(summary(lm(fst_admix~fst_cen,data = recomb))$coefficients["fst_cen","Pr(>|t|)"])`; Fig. 4B). Across the marginal populations, $F_{ST}$ was strongly and negatively related to variation in recombination rate (R^2 = `r round2(summary(lm(fst_admix~log(MEAN_cM),data = recomb))$r.squared)` *P* `r round3(summary(lm(fst_admix~log(MEAN_cM),data = recomb))$coefficients["log(MEAN_cM)","Pr(>|t|)"])`; Fig. 4C). However, no such relationship between $F_{ST}$ and recombination rate was found across the central populations (R^2 = `r round2(summary(lm(fst_cen~log(MEAN_cM),data = recomb))$r.squared)` *P* `r round3(summary(lm(fst_cen~log(MEAN_cM),data = recomb))$coefficients["log(MEAN_cM)","Pr(>|t|)"])`; Fig. 4D). 
+We found that $F_{ST}$ varied markedly across the genome, regardless of whether we considered marginal populations across which structure was higher or across central European populations with very low structure (Fig. 4A). Many of the same regions of high differentiation were observed across the central and marginal populations (Fig. A), and windowed $F_{ST}$ values were correlated across these two sets of populations (R = `r round2(with(recomb,cor(fst_cen,fst_admix)))` $P$ `r round3(with(recomb,cor.test(fst_cen,fst_admix))$p.value)`; Fig. 4B). Across the marginal populations, $F_{ST}$ was strongly and negatively related to variation in recombination rate (R^2^ = `r round2(summary(lm(fst_admix~log(MEAN_cM),data = recomb))$r.squared)`, $P$ `r round3(summary(lm(fst_admix~log(MEAN_cM),data = recomb))$coefficients["log(MEAN_cM)","Pr(>|t|)"])`; Fig. 4C). However, no such relationship between $F_{ST}$ and recombination rate was found across the central populations ($R^2$ = `r round3(summary(lm(fst_cen~log(MEAN_cM),data = recomb))$r.squared)`, $P$ = `r round2(summary(lm(fst_cen~log(MEAN_cM),data = recomb))$coefficients["log(MEAN_cM)","Pr(>|t|)"])`; Fig. 4D). Similarly, $F_{ST}$ outliers were likely to be found in the same regions across the marginal and central populations (R = `r round2(with(recomb,cor(outlier_cen,outlier_admix)))` $P$ `r round3(with(recomb,cor.test(outlier_cen,outlier_admix))$p.value)`). $F_{ST}$ outliers were more likely to be found in regions of low recombination across the marginal (GLM; $P$ = `r round3(summary(glm(outlier_admix~log(MEAN_cM),data = recomb,family = "binomial"))$coefficients["log(MEAN_cM)","Pr(>|z|)"])`), but not central ($P$ = `r round(summary(glm(outlier_cen~log(MEAN_cM),data = recomb,family = "binomial"))$coefficients["log(MEAN_cM)","Pr(>|z|)"])`), populations.
+
+We next quantified how the landscape of genomic differentiation was related to recombination rate for all `r nrow(pd)` pairs of populations. We found substantial variation in the slope of the relationship between $F_{ST}$ and recombination rate (Fig. 5A), although the slope was negative in the majority (`r round((sum(pd$fst_slope < 0)/nrow(pd))*100,0)`%) of cases. Importantly, the relationship between $F_{ST}$ and recombination rate was non-random with respect to population ID. Nine of the 10 most negative slopes were from pairwise comparisons involving Sardinia, with comparisons involving Corsica and Crete also exhibiting more negative relaitonships between $F_{ST}$ and recombination rate. Accordingly, pairwise comparisons involving island populations had significantly lower slopes than comparisons involving only mainland populations ($P$ `r round3(wilcox.test(fst_slope~Island,data=pd)$p.value)`; Fig. 5B). The relationship between $F_{ST}$ and recombination rate did not vary according to the geographical distance between populations (r = `r round2(mantel(fst_slope~dist,data = pd)["mantelr"])`, p = `r round2(mantel(fst_slope~dist,data = pd)["pval3"])`; Fig. 5C). The relationship between $F_{ST}$ outliers and recombination rate showed a similar pattern to that when $F_{ST}$ was modeled as a linear variable (Fig. S5). $F_{ST}$ outliers were more likely to be found in regions of low recombination in pairwise comparisons involving island populations ($P$ `r round3(wilcox.test(outlier_slope~Island,data=pd)$p.value)`; Fig. S5B). However, the relationship between $F_{ST}$ outliers and recombination rate did not vary according to the geographical distance between populations (r = `r round2(mantel(outlier_slope~dist,data = pd)["mantelr"])`, p = `r round2(mantel(outlier_slope~dist,data = pd)["pval3"])`; Fig. S5C).
+
+NEED TO LOOK AT RELATIONSHIP BETWEEN FST SLOPE AND FST
 
 ##Discussion
 
@@ -395,7 +399,6 @@ Fig4C <- recomb %>%
 Fig4D <- recomb %>%
   ggplot(aes(y = (fst_cen),x = log(MEAN_cM)))+
   geom_point(col = "grey")+
-  geom_smooth(method = "lm")+
   theme_classic()+
   ylab(expression(italic(F)[`ST (central populations)`]))+
   xlab("log recomb. rate (cM/mb)")+
@@ -490,7 +493,6 @@ Fig5B <- ggplot(pd,
 
 Fig5C <- ggplot(pd,aes(x = dist/1000,y = fst_slope))+
             geom_point(col = "grey")+
-  geom_smooth(method = "lm")+
             theme_bw()+
             theme(legend.position = "none")+
             ylab(expression(italic("F")[ST]*" vs recombination coefficient"))+
@@ -504,12 +506,5 @@ multiplot(Fig5A,Fig5B,Fig5C,layout = matrix(c(rep(1,10),rep(c(2,3),3)),nrow = 8,
 
 ```
 
-
-
-
-          ggplot(pd, aes(x = FST,y = fst_slope))+
-            geom_point(col = "grey")
-
-subset(pd,fst_slope > 0.002)
 
 

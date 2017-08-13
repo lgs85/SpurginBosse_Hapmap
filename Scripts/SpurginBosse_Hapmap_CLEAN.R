@@ -221,3 +221,6 @@ recomb$fst_UKFIN <- temp$MEAN_FST
 temp <- subset(fst_SARCRE,paste(fst_SARCRE$CHROM,fst_SARCRE$BIN_START) %in% inall)
 recomb$fst_SARCRE <- temp$MEAN_FST
 
+
+recomb$outlier_admix <- ifelse(recomb$fst_admix > quantile(recomb$fst_admix,0.95),1,0)
+recomb$outlier_cen <- ifelse(recomb$fst_cen > quantile(recomb$fst_cen,0.95),1,0)
