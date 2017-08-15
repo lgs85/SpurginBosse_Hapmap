@@ -65,14 +65,17 @@ Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4^\*, Veronika N. Laine^3^, The Great Tit
 
 ##Abstract
 
+A major aim of evolutionary biology is to understand why patterns of genetic variation difffer within genomes, and among populations and species. Widespread continental species are interesting models for studying how evolution shapes patterns of genomic divergence, as they are associated with recent and rapid colonisations, large population sizes and high levels of gene flow. We studied patterns of genomic variation among `r nrow(ll)` great tit (*Parus major*) in Europe. We found that genome-wide variation was consistent with a recent colonisation across Europe from a single refugium in the Balkans and/or Turkey. The highest levels of genome-wide structure were found between island populations in Crete, Sardinia and Corsica, most likely as a resut of mild bottlenecks and reduced gene flow among these populations. We then found that the landscape of genomic differentiation was highly heterogeneous, with clear "islands of divergence" among both closely related and structured great tit populations. 
 
 ##Introduction
 
-Since the first studies of allozyme variation in humans [@Harris1966] and Drosophila [@Lewontin1966; @Hubby1966], there has been great interest in explaining how evolutionary and ecological processes shape the patterns of genetic variation observed within and among natural populations. One focus of research and debate in this area has beein on quantifying the roles of adaptive and neutral processes in explaining observed levels of genetic variation. However, adaptation does not occur in isolation, but against a background of recombination, gene flow, and genetic drift. More recently there has been increased effort in understanding how these fundamental evolutionary forces operate in concert to generate and maintain the levels of genetic diversity commonly observed in natural populations.
+Since the first studies of allozyme variation in humans [@Harris1966] and Drosophila [@Lewontin1966; @Hubby1966], there has been great interest in explaining how evolutionary and ecological processes shape the patterns of genetic variation observed within and among natural populations. One focus of research and debate in this area has been on quantifying the roles of adaptive and neutral processes in explaining observed levels of genetic variation. However, adaptation does not occur in isolation, but against a background of recombination, gene flow, and genetic drift. More recently there has been increased effort in understanding how these fundamental evolutionary forces operate in concert to generate and maintain the levels of genetic diversity commonly observed in natural populations.
 
-The arrival of high-throughput sequencing and subsequent characterisation of genome-wide variation across large numebrs of individuals has revealed that at the genetic level, patterns of variation and divergence among natural populations and species are highly heterogeneous. A feature of these "genomic landscapes" of differentiaiton that has received particular attention is the presence of so-called "islands of divergence" (also called "islands of differentiation" and "islands of speciation"), which are assumed to arise as a resuls of divergent seleciton on genetic variants and closely linked genomic regions.
+The arrival of high-throughput sequencing and subsequent characterisation of genome-wide variation across large numbers of individuals has revealed that at the genetic level, patterns of variation and divergence among natural populations and species are highly heterogeneous. A feature of these "genomic landscapes" of differentiaiton that has received particular attention is the presence of so-called "islands of divergence"; outlier regions of the genome with high levels of divergence estimated from statistics such as $F_{ST}$ or $d_{xy}$ [e.g. @Turner2005; @Nadeau2011; @Renaut2013; @Poelstra2014]. Initially these regions were termed "islands of speciation", and were thought to arise as a result of reduced gene flow in genomic regions associated with reproductive isolation [@Turner2005]. Subsequent modelling and analysis revealed that highly heterogeneous patterns of genomic divergence in the complete absence of gene flow, as a result of linked selection on beneficial or deleterious mutations [@Noor2009; @Cruickshank2014].
 
-Recent research in birds has revealed that differentiation landscapes are conserved across populations, species and even across avian families. This striking pattern has arisen, at least in part, as a result of a highly conserved recombination landscape in birds.
+Comparing patterns of genomic differentiation among sets of populations and/or species at different stages of the speciation continuum is a powerful way of disentangling the forces that shape variation among populations.
+
+Recent research in birds has revealed that differentiation landscapes are conserved across populations, species and even across avian families [@Burri2015; @Vijay2017; @VanDoren2017]. This striking pattern has arisen, at least in part, as a result of a highly conserved recombination landscape in birds.
 
 The European great tit (*Parus major major*) is an excellent model for ecological and evolutionary study.  
 
@@ -87,7 +90,7 @@ Samples were collected from `r nrow(ll)` populations from `r length(unique(pops$
 ####Analyses
 Unless stated otherwise, all population genetic statistics were calculated in PLINK version 1.9 [@Purcell2007], and downstream analysis and plotting was carried out in R version 3.3 [@RDevelopmentCoreTeam2011]. In each population, we estimated linkage disequilibrium ($R^2$) for each pair of markers within 50kb on the same chromosome, and compared this to physical distance between marker pairs. For a simple comparison of short-range LD among populations, we also calculated, for each population, mean LD between all pairs of markers within 1kb. We then calculated observed heterozygosity for each SNP and population using a reduced SNP dataset, which was pruned based on linkage disequilibrium to remove all markers with $R^2$ > 0.1, then thinned with a probability of retaining each variant of 0.25.
 
-We calculated mean $F_{ST}$ for all loci between each pair of populations using the pruned and thinned dataset described above. Pairwise $F_{ST}$ was compared to geographic distance between populations using Mantel tests, implemented in the Ecodist package in R [@Goslee2007]. We also estimated population structure using Admixture version 1.3, with default settings [@Alexander2009]. We varied values of $K$ from one to ten; by which time increasing values of $K$ provided no informative information about population structure (see results). Model support for each value of $K$ was estimated by calculating 5-fold cross-validation error. Finally, we visualised the evolutionary history among European great populations by generating a maximum likelihood tree in TreeMix version 1.13 [@Pickrell2012]. We rooted the tree using a sample of *P. minor* individuals (n = ) sampled from Amur, Russia. We fitted models allowing for range of migration events (0-10), and used a window size of 500 SNPs [@Pickrell2012]. To assess model fit, we calculated the proportion of variance relatedness between populations explained by each model, using the equation 30 in Pickrell *et al.* [-@Pickrell2012].
+We calculated mean $F_{ST}$ for all loci between each pair of populations using the pruned and thinned dataset described above. Pairwise $F_{ST}$ was compared to geographic distance between populations using Mantel tests, implemented in the Ecodist package in R [@Goslee2007]. We also estimated population structure using Admixture version 1.3, with default settings [@Alexander2009]. We varied values of $K$ from one to ten; by which time increasing values of $K$ provided no informative information about population structure (see results). Model support for each value of $K$ was estimated by calculating 5-fold cross-validation error. Finally, we visualised the evolutionary history among European great populations by generating a maximum likelihood tree in TreeMix version 1.13 [@Pickrell2012]. We rooted the tree using a sample of *P. minor* individuals sampled from Amur, Russia. We fitted models allowing for range of migration events (0-10), and used a window size of 500 SNPs [@Pickrell2012]. To assess model fit, we calculated the proportion of variance relatedness between populations explained by each model, using the equation 30 in Pickrell *et al.* [-@Pickrell2012].
 
 We examined the genomic landscape of differentiation across European great tit populations by calculating marker-based $F_{ST}$ in Plink. For plotting and analysis, we calculted mean $F_{ST}$ values in 200kb bins, using custom R and python scripts. We first calculated windowed $F_{ST}$ between the most structured populations, as defined by Admixture analysis (hereafter "marginal populations"), and between populations within a panmictic cluster in central Europe (hereafter "central European populations"). We tested whether the same regions of the genome were highly structured among these different sets of populations by comaparing windowed $F_{ST}$ values, using Pearson correlations.
 
@@ -113,11 +116,11 @@ Admixture analysis revealed patterns of genetic structure corresponding to geogr
 Maximum likelihood analyses implemented in Treemix showed that a model with no migration explained 97.8% of variance in relatedness between populations; increasing the number of migration events substantially improved the percentage of relatedness explained, up to 99.7% when 10 migration events were fitted (Fig. S4). In Figure 3 we display maximum likelihood tree with 2 migration events, after which the variance in relatedness explained plateaued when more migration events were added (Fig. S4). The tree was generally characterised by short branch lengths, with the exception of the island populations of Sardinia and Crete, which were grouped with the population from mainland Italy.  The Spanish and Corsican populations were also grouped together, and were populations from Turkey and the Balkans, and populations from England and Scotland (Fig. 3). The two fitted migration edges both involved Sardinia, involving migration from eastern Europe, and to Corsica (Fig. 3).
 
 #### Genomic landscapes of differentiation
-We found that $F_{ST}$ varied markedly across the genome, regardless of whether we considered marginal populations across which structure was higher or across central European populations with very low structure (Fig. 4A). Many of the same regions of high differentiation were observed across the central and marginal populations (Fig. A), and windowed $F_{ST}$ values were correlated across these two sets of populations (R = `r round2(with(recomb,cor(fst_cen,fst_admix)))` $P$ `r round3(with(recomb,cor.test(fst_cen,fst_admix))$p.value)`; Fig. 4B). Across the marginal populations, $F_{ST}$ was strongly and negatively related to variation in recombination rate (R^2^ = `r round2(summary(lm(fst_admix~log(MEAN_cM),data = recomb))$r.squared)`, $P$ `r round3(summary(lm(fst_admix~log(MEAN_cM),data = recomb))$coefficients["log(MEAN_cM)","Pr(>|t|)"])`; Fig. 4C). However, no such relationship between $F_{ST}$ and recombination rate was found across the central populations ($R^2$ = `r round3(summary(lm(fst_cen~log(MEAN_cM),data = recomb))$r.squared)`, $P$ = `r round2(summary(lm(fst_cen~log(MEAN_cM),data = recomb))$coefficients["log(MEAN_cM)","Pr(>|t|)"])`; Fig. 4D). Similarly, $F_{ST}$ outliers were likely to be found in the same regions across the marginal and central populations (R = `r round2(with(recomb,cor(outlier_cen,outlier_admix)))` $P$ `r round3(with(recomb,cor.test(outlier_cen,outlier_admix))$p.value)`). $F_{ST}$ outliers were more likely to be found in regions of low recombination across the marginal (GLM; $P$ = `r round3(summary(glm(outlier_admix~log(MEAN_cM),data = recomb,family = "binomial"))$coefficients["log(MEAN_cM)","Pr(>|z|)"])`), but not central ($P$ = `r round(summary(glm(outlier_cen~log(MEAN_cM),data = recomb,family = "binomial"))$coefficients["log(MEAN_cM)","Pr(>|z|)"])`), populations.
+We found that $F_{ST}$ varied markedly across the genome, regardless of whether we considered marginal populations across which structure was higher or across central European populations with very low structure (Fig. 4A).$F_{ST}$ outliers were likely to be found in the same regions across the marginal and central populations (R = `r round2(with(recomb,cor(outlier_cen,outlier_admix)))` $P$ `r round3(with(recomb,cor.test(outlier_cen,outlier_admix))$p.value)`). $F_{ST}$ outliers were more likely to be found in regions of low recombination across the marginal (GLM; $P$ = `r round3(summary(glm(outlier_admix~log(MEAN_cM),data = recomb,family = "binomial"))$coefficients["log(MEAN_cM)","Pr(>|z|)"])`), but not central ($P$ = `r round(summary(glm(outlier_cen~log(MEAN_cM),data = recomb,family = "binomial"))$coefficients["log(MEAN_cM)","Pr(>|z|)"])`), populations. We found similar results when look at at mean windowed $F_{ST}$ values, rather than presence/absence of outliers. Mean windowed $F_{ST}$ was correlated across these two sets of populations (R = `r round2(with(recomb,cor(fst_cen,fst_admix)))` $P$ `r round3(with(recomb,cor.test(fst_cen,fst_admix))$p.value)`). $F_{ST}$ was negatively related to variation in recombination rate across the marginal populations (R^2^ = `r round2(summary(lm(fst_admix~log(MEAN_cM),data = recomb))$r.squared)`, $P$ `r round3(summary(lm(fst_admix~log(MEAN_cM),data = recomb))$coefficients["log(MEAN_cM)","Pr(>|t|)"])`; Fig. 4C), but no such relationship was found across the central populations ($R^2$ = `r round3(summary(lm(fst_cen~log(MEAN_cM),data = recomb))$r.squared)`, $P$ = `r round2(summary(lm(fst_cen~log(MEAN_cM),data = recomb))$coefficients["log(MEAN_cM)","Pr(>|t|)"])`; Fig. 4D). 
 
-We next quantified how the landscape of genomic differentiation was related to recombination rate for all `r nrow(pd)` pairs of populations. We found substantial variation in the slope of the relationship between $F_{ST}$ and recombination rate (Fig. 5A), although the slope was negative in the majority (`r round((sum(pd$fst_slope < 0)/nrow(pd))*100,0)`%) of cases. Importantly, the relationship between $F_{ST}$ and recombination rate was non-random with respect to population ID. Nine of the 10 most negative slopes were from pairwise comparisons involving Sardinia, with comparisons involving Corsica and Crete also exhibiting more negative relaitonships between $F_{ST}$ and recombination rate. Accordingly, pairwise comparisons involving island populations had significantly lower slopes than comparisons involving only mainland populations ($P$ `r round3(wilcox.test(fst_slope~Island,data=pd)$p.value)`; Fig. 5B). The relationship between $F_{ST}$ and recombination rate did not vary according to the geographical distance between populations (r = `r round2(mantel(fst_slope~dist,data = pd)["mantelr"])`, p = `r round2(mantel(fst_slope~dist,data = pd)["pval3"])`; Fig. 5C). The relationship between $F_{ST}$ outliers and recombination rate showed a similar pattern to that when $F_{ST}$ was modeled as a linear variable (Fig. S5). $F_{ST}$ outliers were more likely to be found in regions of low recombination in pairwise comparisons involving island populations ($P$ `r round3(wilcox.test(outlier_slope~Island,data=pd)$p.value)`; Fig. S5B). However, the relationship between $F_{ST}$ outliers and recombination rate did not vary according to the geographical distance between populations (r = `r round2(mantel(outlier_slope~dist,data = pd)["mantelr"])`, p = `r round2(mantel(outlier_slope~dist,data = pd)["pval3"])`; Fig. S5C).
+We next quantified how the landscape of genomic differentiation was related to recombination rate for all `r nrow(pd)` pairs of populations. The relationship between $F_{ST}$ outliers and recombination rate showed a similar pattern to that when $F_{ST}$ was modeled as a linear variable (Fig. S5). $F_{ST}$ outliers were more likely to be found in regions of low recombination in pairwise comparisons involving island populations ($P$ `r round3(wilcox.test(outlier_slope~Island,data=pd)$p.value)`; Fig. S5B). However, the relationship between $F_{ST}$ outliers and recombination rate did not vary according to the geographical distance between populations (r = `r round2(mantel(outlier_slope~dist,data = pd)["mantelr"])`, p = `r round2(mantel(outlier_slope~dist,data = pd)["pval3"])`). We found substantial variation in the slope of the relationship between $F_{ST}$ and recombination rate (Fig. 5A), although the slope was negative in the majority (`r round((sum(pd$fst_slope < 0)/nrow(pd))*100,0)`%) of cases. Importantly, the relationship between $F_{ST}$ and recombination rate was non-random with respect to population ID. Nine of the 10 most negative slopes were from pairwise comparisons involving Sardinia, with comparisons involving Corsica and Crete also exhibiting more negative relaitonships between $F_{ST}$ and recombination rate. Accordingly, pairwise comparisons involving island populations had significantly lower slopes than comparisons involving only mainland populations ($P$ `r round3(wilcox.test(fst_slope~Island,data=pd)$p.value)`; Fig. 5B). The relationship between $F_{ST}$ and recombination rate did not vary according to the geographical distance between populations (r = `r round2(mantel(fst_slope~dist,data = pd)["mantelr"])`, p = `r round2(mantel(fst_slope~dist,data = pd)["pval3"])`).
 
-NEED TO LOOK AT RELATIONSHIP BETWEEN FST SLOPE AND FST
+Finally, we tested how the relationship between $F_{ST}$ and recombination rate scaled with genome-wide variaiton in $F_{ST}$ among pairs of populations. We found a strong negative relationship between the $F_{ST}$/recombination slope and genome-wide $F_{ST}$ (r = `r round2(mantel(fst_slope~FST,data = pd)["mantelr"])`, p < `r round3(mantel(fst_slope~FST,data = pd)["pval3"])`; Fig. 5C).
 
 ##Discussion
 
@@ -411,9 +414,9 @@ multiplot(Fig4A,Fig4B,Fig4C,Fig4D,layout = matrix(c(1,1,1,2,3,4),nrow = 2,byrow 
 **Figure 5**
 ```{r Figure 5,fig.width = 8,fig.height = 8}
 
-Fig5A <- rbind(pd[,c("p1","p2","fst_slope")],
-               data.frame(p1 = unique(c(pd$p1,pd$p2)),p2 = unique(c(pd$p1,pd$p2)),fst_slope = rep(0,length(unique(c(pd$p1,pd$p2))))),
-               data.frame(p1 = pd$p2,p2 = pd$p1,fst_slope = pd$fst_slope)) %>%
+Fig5A <- rbind(pd[,c("p1","p2","outlier_slope")],
+               data.frame(p1 = unique(c(pd$p1,pd$p2)),p2 = unique(c(pd$p1,pd$p2)),outlier_slope = rep(0,length(unique(c(pd$p1,pd$p2))))),
+               data.frame(p1 = pd$p2,p2 = pd$p1,outlier_slope = pd$outlier_slope)) %>%
   mutate(pd,p1 = factor(p1,
        levels = c("Loch_Lomond_Scotland",
                   "Cambridge_UK",
@@ -473,7 +476,7 @@ Fig5A <- rbind(pd[,c("p1","p2","fst_slope")],
                   "Turkey",
                   "Zvenigorod_Russia"))) %>%
   ggplot(aes(x = p1,y = p2))+
-    geom_tile(aes(fill = fst_slope))+
+    geom_tile(aes(fill = outlier_slope))+
     scale_fill_distiller(palette = "Greens",direction = -1)+
     theme(axis.text.x = element_text(angle = 90))+
   xlab("")+
@@ -482,21 +485,24 @@ Fig5A <- rbind(pd[,c("p1","p2","fst_slope")],
 
 
 
-Fig5B <- ggplot(pd,
-                aes(x = Island,y = fst_slope))+
-                geom_jitter(col = "grey")+
-                theme_bw()+
-                ylab(expression(italic("F")[ST]*" vs recombination coefficient"))+
-                xlab("")+
-  ggtitle("B")
-
-
-Fig5C <- ggplot(pd,aes(x = dist/1000,y = fst_slope))+
-            geom_point(col = "grey")+
+Fig5B <- ggplot(pd,aes(x = dist,y = outlier_slope,col = Island))+
+            geom_point()+
+  geom_smooth(method = "lm")+
             theme_bw()+
             theme(legend.position = "none")+
             ylab(expression(italic("F")[ST]*" vs recombination coefficient"))+
             xlab("Distance (km)")+
+            scale_colour_manual(values = c("darkblue","grey"))+
+  ggtitle("B")
+
+
+Fig5C <- ggplot(pd,aes(x = FST,y = outlier_slope,col = Island))+
+            geom_point()+
+  geom_smooth(method = "lm")+
+            theme_bw()+
+            theme(legend.position = "none")+
+            ylab(expression(italic("F")[ST]*" vs recombination coefficient"))+
+            xlab(expression("Genome-wide "*italic("F")[ST]))+
             scale_colour_manual(values = c("darkblue","grey"))+
   ggtitle("C")
 
