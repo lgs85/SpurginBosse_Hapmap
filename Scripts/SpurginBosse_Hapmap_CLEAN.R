@@ -197,15 +197,13 @@ rm(countries)
 
 # Recombination -----------------------------------------------------------
 
-recomb$BIN_START <- recomb$POS200KB + 1
+recomb$BIN_START <- recomb$POS500KB + 1
 recomb$CHROM <- recomb$V3
 recomb$V3 <- NULL
 
 inall <- Reduce(intersect, list(paste(recomb$CHROM,recomb$BIN_START),
                                 paste(fst_admix$CHROM,fst_admix$BIN_START),
-                                paste(fst_cen$CHROM,fst_cen$BIN_START),
-                                paste(fst_UKFIN$CHROM,fst_UKFIN$BIN_START),
-                                paste(fst_SARCRE$CHROM,fst_SARCRE$BIN_START)))
+                                paste(fst_cen$CHROM,fst_cen$BIN_START)))
 
 recomb <- subset(recomb,paste(recomb$CHROM,recomb$BIN_START) %in% inall)
 
@@ -214,13 +212,6 @@ recomb$fst_admix <- temp$MEAN_FST
 
 temp <- subset(fst_cen,paste(fst_cen$CHROM,fst_cen$BIN_START) %in% inall)
 recomb$fst_cen <- temp$MEAN_FST
-
-temp <- subset(fst_UKFIN,paste(fst_UKFIN$CHROM,fst_UKFIN$BIN_START) %in% inall)
-recomb$fst_UKFIN <- temp$MEAN_FST
-
-temp <- subset(fst_SARCRE,paste(fst_SARCRE$CHROM,fst_SARCRE$BIN_START) %in% inall)
-recomb$fst_SARCRE <- temp$MEAN_FST
-
 
 recomb$outlier_admix <- ifelse(recomb$fst_admix > quantile(recomb$fst_admix,0.95),1,0)
 recomb$outlier_cen <- ifelse(recomb$fst_cen > quantile(recomb$fst_cen,0.95),1,0)
