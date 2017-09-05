@@ -73,11 +73,11 @@ Since the first studies of allozyme variation in humans [@Harris1966] and Drosop
 
 The arrival of high-throughput sequencing and subsequent characterisation of genome-wide variation across large numbers of individuals has revealed that at the genetic level, patterns of variation and divergence among natural populations and species are highly heterogeneous. A feature of these "genomic landscapes" of differentiaiton that has received particular attention is the presence of so-called "islands of divergence"; outlier regions of the genome with high levels of divergence estimated from statistics such as $F_{ST}$ or $d_{xy}$ [e.g. @Turner2005; @Nadeau2011; @Renaut2013; @Poelstra2014]. Initially these regions were termed "islands of speciation", and were thought to arise as a result of reduced gene flow in genomic regions associated with reproductive isolation [@Turner2005]. Subsequent modelling and analysis revealed that highly heterogeneous patterns of genomic divergence in the complete absence of gene flow, as a result of linked selection on beneficial or deleterious mutations [@Noor2009; @Cruickshank2014].
 
-Comparing patterns of genomic differentiation among sets of populations and/or species at different stages of the speciation continuum is a powerful way of disentangling the forces that shape variation among populations.
+Comparing patterns of genomic differentiation among sets of populations and/or species at different stages of the speciation continuum is a powerful way of disentangling the forces that shape variation among populations. In *Heliconius* butterflies, Nadeau et al. [-@Nadeau2011] showed that... 
 
-Recent research in birds has revealed that differentiation landscapes are conserved across populations, species and even across avian families [@Burri2015; @Vijay2017; @VanDoren2017]. This striking pattern has arisen, at least in part, as a result of a highly conserved recombination landscape in birds.
+Perhaps the most striking results from comparisons of genomic variation among populations and species have come from recent research in birds, which has revealed that differentiation landscapes are conserved across populations, species and even across avian families [@Burri2015; @Vijay2017; @VanDoren2017]. This pattern has arisen, at least in part, as a result of a highly conserved recombination landscape in birds.
 
-The European great tit (*Parus major major*) is an excellent model for ecological and evolutionary study.  
+The European great tit (*Parus major major*) is an excellent model for ecological and evolutionary study. Phyleogeographic research using mitochondrial and microsatellite loci suggests that this species has has recently expanded across its European range, possible from a single refugium in the Balkans. Contemporary populations are characterised by large effective population sizes and high levels of gene flow among populations. The genome of the great tit has recently been sequences, and a high density (650K) panel of SNP markers has been developed. A recent study of two European populations using this marker panel suggests that rapid adaptation has occurred at the genomic and phenotypic levels [@Bosse2017]. 
 
 In this study we examined how selection, gene flow and population history have shaped patterns of genomic variation across recently colonised European great tit populations. Using a large SNP panel typed across `r nrow(ll)` European populations, we first characterise variation within and among populations, in order to infer patterns of population history. We then examine how variation is partitioned across the genome, and test the hypothesis that highly divergent genomic regions have arisen as a result of variation in recombination rate across the genome. Finally, we examine how the relationship between genomic divergence and recombination varies according to geography, with the aim of inferring how gene flow and drift interact with selection to shape genomic landscapes in natural populations.
 
@@ -154,8 +154,8 @@ countries[countries %in% c("Loch_Lomond_Scotland")] <- "Scotland"
 countries[countries %in% c("Pilis_Mountains_Hungary")] <- "Hungary"
 countries[countries %in% c("Pirio_Muro_Corsica")] <- "Corsica"
 countries[countries %in% c("Radolfzell_Germany","Seewisen_Germany")] <- "Germany"
-countries[countries %in% c("Roekelse_Bos","Westerheide")] <- "Netherlands"
-countries[countries %in% c("Vlieland_NL")] <- "Netherlands (Vlieland)"
+countries[countries %in% c("Roekelse_Bos","Westerheide_Netherlands")] <- "Netherlands"
+countries[countries %in% c("Vlieland_Netherlands")] <- "Netherlands (Vlieland)"
 countries[countries %in% c("Tartu_Estonia")] <- "Estonia"
 countries[countries %in% c("Velky_Kosir_Czech_Republic")] <- "Czech Republic"
 countries[countries %in% c("Vienna_Austria")] <- "Austria"
@@ -367,6 +367,7 @@ fst_both <- rbind(fst_admix,fst_cen)
 fst_both$data <- c(rep("Marginal populations",nrow(fst_admix)),rep("Central populations",nrow(fst_cen)))
 fst_both$MEAN_FST[fst_both$MEAN_FST < 0] <- 0
 
+
 Fig4A <- ggplot(fst_both,aes(x = BIN_START,y = MEAN_FST))+
   geom_point(col = "grey",size = 1)+
   theme_classic()+
@@ -384,7 +385,9 @@ Fig4A <- ggplot(fst_both,aes(x = BIN_START,y = MEAN_FST))+
         strip.text.x = element_text(size = 2))+
   ggtitle("A")
 
-Fig4B <- ggplot(recomb,aes(x = (fst_admix),y = (fst_cen)))+
+
+
+Fig4B <- ggplot(subset(recomb,MEAN_cM < 100),aes(x = (fst_admix),y = (fst_cen)))+
   geom_point(col = "grey")+
   geom_smooth(method = "lm")+
   theme_classic()+
@@ -392,18 +395,19 @@ Fig4B <- ggplot(recomb,aes(x = (fst_admix),y = (fst_cen)))+
   ylab(expression(italic(F)[`ST (central populations)`]))+
   ggtitle("B")
 
-Fig4C <- recomb %>%
-  ggplot(aes(y = (fst_admix),x = log(MEAN_cM)))+
+Fig4C <- subset(subset(recomb,MEAN_cM < 100),MEAN_cM > -1) %>%
+  ggplot(aes(y = (fst_admix),x = (MEAN_cM)))+
   geom_point(col = "grey")+
-  geom_smooth(method = "lm")+
+  geom_smooth()+
   theme_classic()+
   ylab(expression(italic(F)[`ST (marginal populations)`]))+
   xlab("log recomb. rate (cM/mb)")+
   ggtitle("C")
 
-Fig4D <- recomb %>%
-  ggplot(aes(y = (fst_cen),x = log(MEAN_cM)))+
+Fig4D <- subset(subset(recomb,MEAN_cM < 100),MEAN_cM > -1) %>%
+  ggplot(aes(y = (fst_cen),x = (MEAN_cM)))+
   geom_point(col = "grey")+
+  geom_smooth()+
   theme_classic()+
   ylab(expression(italic(F)[`ST (central populations)`]))+
   xlab("log recomb. rate (cM/mb)")+
@@ -416,7 +420,7 @@ multiplot(Fig4A,Fig4B,Fig4C,Fig4D,layout = matrix(c(1,1,1,2,3,4),nrow = 2,byrow 
 
 **Figure 5**
 ```{r Figure 5,fig.width = 8,fig.height = 8}
-pd <- subset(pd,outlier_slope < 10)
+pd <- subset(pd,outlier_slope > -2)
 
 Fig5A <- rbind(pd[,c("p1","p2","outlier_slope")],
                data.frame(p1 = unique(c(pd$p1,pd$p2)),p2 = unique(c(pd$p1,pd$p2)),outlier_slope = rep(0,length(unique(c(pd$p1,pd$p2))))),
