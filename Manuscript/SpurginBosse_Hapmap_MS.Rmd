@@ -73,7 +73,7 @@ Since the first studies of allozyme variation in humans [@Harris1966] and Drosop
 
 The arrival of high-throughput sequencing and subsequent characterisation of genome-wide variation across large numbers of individuals has revealed that at the genetic level, patterns of variation and divergence among natural populations and species are highly heterogeneous. A feature of these "genomic landscapes" of differentiaiton that has received particular attention is the presence of so-called "islands of divergence"; outlier regions of the genome with high levels of divergence estimated from statistics such as $F_{ST}$ or $d_{xy}$ [e.g. @Turner2005; @Nadeau2011; @Renaut2013; @Poelstra2014]. Initially these regions were termed "islands of speciation", and were thought to arise as a result of reduced gene flow in genomic regions associated with reproductive isolation [@Turner2005]. Subsequent modelling and analysis revealed that highly heterogeneous patterns of genomic divergence in the complete absence of gene flow, as a result of linked selection on beneficial or deleterious mutations [@Noor2009; @Cruickshank2014].
 
-Comparing patterns of genomic differentiation among sets of populations and/or species at different stages of the speciation continuum is a powerful way of disentangling the forces that shape variation among populations. In *Heliconius* butterflies, Nadeau et al. [-@Nadeau2011] showed that... 
+Comparing patterns of genomic differentiation among sets of populations and/or species at different stages of the speciation continuum is a powerful way of disentangling the forces that shape variation among populations. Martin et al. [-@Martin2013] showed that, in *Heliconius* butterflies, 
 
 Perhaps the most striking results from comparisons of genomic variation among populations and species have come from recent research in birds, which has revealed that differentiation landscapes are conserved across populations, species and even across avian families [@Burri2015; @Vijay2017; @VanDoren2017]. This pattern has arisen, at least in part, as a result of a highly conserved recombination landscape in birds.
 
@@ -363,12 +363,15 @@ plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
 **Figure 4**
 ```{r Figure 4,fig.width = 8,fig.height = 7}
 
+fst_admix$ZFST <- (fst_admix$MEAN_FST - mean(fst_admix$MEAN_FST))/sd(fst_admix$MEAN_FST)
+fst_cen$ZFST <- (fst_cen$MEAN_FST - mean(fst_cen$MEAN_FST))/sd(fst_cen$MEAN_FST)
+
 fst_both <- rbind(fst_admix,fst_cen)
 fst_both$data <- c(rep("Marginal populations",nrow(fst_admix)),rep("Central populations",nrow(fst_cen)))
 fst_both$MEAN_FST[fst_both$MEAN_FST < 0] <- 0
 
 
-Fig4A <- ggplot(fst_both,aes(x = BIN_START,y = MEAN_FST))+
+Fig4A <- ggplot(fst_both,aes(x = BIN_START,y = ZFST))+
   geom_point(col = "grey",size = 1)+
   theme_classic()+
   geom_smooth(se = F)+
@@ -386,8 +389,10 @@ Fig4A <- ggplot(fst_both,aes(x = BIN_START,y = MEAN_FST))+
   ggtitle("A")
 
 
+recomb$zfst_admix <-  (recomb$fst_admix - mean(recomb$fst_admix))/sd(recomb$fst_admix)
+recomb$zfst_cen <-  (recomb$fst_cen - mean(recomb$fst_cen))/sd(recomb$fst_cen)
 
-Fig4B <- ggplot(subset(recomb,MEAN_cM < 100),aes(x = (fst_admix),y = (fst_cen)))+
+Fig4B <- ggplot(subset(recomb,MEAN_cM < 100),aes(x = (zfst_admix),y = (zfst_cen)))+
   geom_point(col = "grey")+
   geom_smooth(method = "lm")+
   theme_classic()+
@@ -396,7 +401,7 @@ Fig4B <- ggplot(subset(recomb,MEAN_cM < 100),aes(x = (fst_admix),y = (fst_cen)))
   ggtitle("B")
 
 Fig4C <- subset(subset(recomb,MEAN_cM < 100),MEAN_cM > -1) %>%
-  ggplot(aes(y = (fst_admix),x = (MEAN_cM)))+
+  ggplot(aes(y = (zfst_admix),x = (MEAN_cM)))+
   geom_point(col = "grey")+
   geom_smooth()+
   theme_classic()+
@@ -405,7 +410,7 @@ Fig4C <- subset(subset(recomb,MEAN_cM < 100),MEAN_cM > -1) %>%
   ggtitle("C")
 
 Fig4D <- subset(subset(recomb,MEAN_cM < 100),MEAN_cM > -1) %>%
-  ggplot(aes(y = (fst_cen),x = (MEAN_cM)))+
+  ggplot(aes(y = (zfst_cen),x = (MEAN_cM)))+
   geom_point(col = "grey")+
   geom_smooth()+
   theme_classic()+
