@@ -123,7 +123,10 @@ We next quantified how the landscape of genomic differentiation was related to r
 ##Discussion
 In this study we use a large panel of genetic markers to provide insight into the evolutionary history of the great tit in Europe. We found that, consistent with previous research in this species, levels of genomic variation were consistent with a large effective population and substantial levels of gene flow among populations. We then examine how genomic landscapes of differentiation vary among different sets of populations, and find that i) islands of differentiation arise among extremely closely related populations, ii) these same islands of differentiation arise in more distantly related populations, iii) islands of differentiation arise in regions of low recombination, iv) the relationship between recombination rate and the genomic landscape of differentiation varies substantially among populations. These findings have several implicaitons for how we interpret patterns of genomic variation among natural populations.
 
-Populaiton history of the great tit.
+Our results are consistent with great tits having colonised Europe from a single refugium in the balkans. This scenario has been suggested before, and or observed pattern of increasing genome-wide divergence from the Turkish and Balkan populations lends this hypothesis empirical support. Treemix and admixture results.
+
+##Acknowledgements
+We thank 
 
 ##References
 
@@ -376,7 +379,7 @@ Fig4A <- ggplot(fst_both,aes(x = BIN_START,y = ZFST))+
   geom_smooth(se = F)+
   theme(
         strip.background = element_blank(),
-        strip.placement = "outside",
+        #strip.placement = "outside",
         axis.ticks.x = element_blank(),
         axis.text.x = element_blank())+
   xlab("")+
