@@ -31,7 +31,6 @@ set.seed(200285)
 
 
 ```{r load and clean, include = F}
-
 #Load and clean data
 source("Scripts/SpurginBosse_Hapmap_LOAD.r")
 source("Scripts/SpurginBosse_Hapmap_FUNCTIONS.r")
@@ -427,7 +426,7 @@ multiplot(Fig4A,Fig4B,Fig4C,Fig4D,layout = matrix(c(1,1,1,2,3,4),nrow = 2,byrow 
 
 **Figure 5**
 ```{r Figure 5,fig.width = 8,fig.height = 8}
-#pd$outlier_slope[pd$outlier_slope < -2] <- 0
+pd$outlier_slope[pd$outlier_slope < -2] <- 0
 
 Fig5A <- rbind(pd[,c("p1","p2","outlier_slope")],
                data.frame(p1 = unique(c(pd$p1,pd$p2)),p2 = unique(c(pd$p1,pd$p2)),outlier_slope = rep(0,length(unique(c(pd$p1,pd$p2))))),
