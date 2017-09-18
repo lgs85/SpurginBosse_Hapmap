@@ -215,3 +215,6 @@ recomb$fst_cen <- temp$MEAN_FST
 
 recomb$outlier_admix <- ifelse(recomb$fst_admix > quantile(recomb$fst_admix,0.95),1,0)
 recomb$outlier_cen <- ifelse(recomb$fst_cen > quantile(recomb$fst_cen,0.95),1,0)
+
+recomb$zfst_admix <-  (recomb$fst_admix - mean(recomb$fst_admix))/sd(recomb$fst_admix)
+recomb$zfst_cen <-  (recomb$fst_cen - mean(recomb$fst_cen))/sd(recomb$fst_cen)
