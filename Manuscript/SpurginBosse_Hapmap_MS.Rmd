@@ -128,7 +128,7 @@ It is likely that the many, and perhaps the majority, of wild populations are ch
 
 Patterns of increasing genetic differentiation with distance from In accordance with this, we find that the tendency for outlier regions to occur in regions of low recombination increases with geographical and genetic distance from the refugial population in Turkey (Fig. 5). Thus we suggest that in contintal species, the increased genome-wide divergence that accumulates with distance from refugial populations is accelerated in regions of low recombination, resulting in highly heterogeneous landscapes of genomic differentiation.
 
-Needs more. Perhaps a discussion on role of gene flow... also need to think about what additional analyses may be required to strenghtn/add novelty to the story. One thing we could do is look in more detail at how genomic differentiaiton builds up with distance form the refugial population? Thoughts?
+Needs more. Perhaps a discussion on role of gene flow... also need to think about what additional analyses may be required to strenghtn/add novelty to the story. One thing we could do is look in more detail at how genomic differentiaiton builds up with distance from the refugial population? Thoughts?
 
 
 ##Acknowledgements
