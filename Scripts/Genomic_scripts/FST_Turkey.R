@@ -67,7 +67,7 @@ for(i in 1:nrow(recomb))
 
 
 
-q <- quantile(dd$r,0.05)
+q <- quantile(dd$r,0.1)
 dd$rf <- ifelse(dd$r < q,"Low","Not low")
 
 dd$Pop <- factor(dd$Pop,levels = unique(dd$Pop))
@@ -103,3 +103,7 @@ Fig4A <- ggplot(dd,aes(x = x,y = MEAN_FST,col = rf))+
 
 Fig4A
 
+
+ggplot(dd,aes(x = rf,y = MEAN_FST))+
+  geom_jitter()+
+  facet_wrap(~Pop,ncol = 2)
