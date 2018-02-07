@@ -43,16 +43,14 @@ for (i in 1:length(pops))
   }
 }
 
+system("mv Scripts/Genomic_scripts/Turkey.fst Data")
+system("rm Scripts/Genomic_scripts/temp.*")
 
 
 
+dd <- read.table("Data/Turkey.fst",header = T,stringsAsFactors = F)
 
-dd <- read.table("Turkey.fst",header = T,stringsAsFactors = F)
 
-
-recomb$BIN_START <- recomb$POS500KB + 1
-recomb$CHROM <- recomb$V3
-recomb$V3 <- NULL
 
 inall <- Reduce(intersect, list(paste(recomb$CHROM,recomb$BIN_START),
                                 paste(dd$CHROM,dd$BIN_START)))
@@ -67,7 +65,7 @@ for(i in 1:nrow(recomb))
 
 
 
-q <- quantile(dd$r,0.1)
+q <- quantile(dd$r,0.5)
 dd$rf <- ifelse(dd$r < q,"Low","Not low")
 
 dd$Pop <- factor(dd$Pop,levels = unique(dd$Pop))
@@ -103,7 +101,12 @@ Fig4A <- ggplot(dd,aes(x = x,y = MEAN_FST,col = rf))+
 
 Fig4A
 
+subset(dd,MEAN_FST > 0) %>%
+ggplot(aes(MEAN_FST))+
+  geom_density()+
+  facet_wrap(~Pop,ncol = 4,scales = "free_y")
 
-ggplot(dd,aes(x = rf,y = MEAN_FST))+
+dd2 <- subset(subset(dd,r < 100),r > -1)
+ggplot(dd2,aes(x = r,y = MEAN_FST))+
   geom_jitter()+
   facet_wrap(~Pop,ncol = 2)
