@@ -218,3 +218,39 @@ recomb$outlier_cen <- ifelse(recomb$fst_cen > quantile(recomb$fst_cen,0.95),1,0)
 
 recomb$zfst_admix <-  (recomb$fst_admix - mean(recomb$fst_admix))/sd(recomb$fst_admix)
 recomb$zfst_cen <-  (recomb$fst_cen - mean(recomb$fst_cen))/sd(recomb$fst_cen)
+
+
+
+
+# Turkey ------------------------------------------------------------------
+
+
+inall <- Reduce(intersect, list(paste(recomb$CHROM,recomb$BIN_START),
+                                paste(tu$CHROM,tu$BIN_START)))
+
+tu <- subset(tu,paste(tu$CHROM,tu$BIN_START) %in% inall)
+tu$r <- NA
+
+for(i in 1:nrow(recomb))
+{
+  tu$r[paste(tu$CHROM,tu$BIN_START) == paste(recomb$CHROM[i],recomb$BIN_START[i])] <- recomb$MEAN_cM[i]
+}
+
+
+
+q <- quantile(tu$r,0.5)
+tu$rf <- ifelse(tu$r < q,"Low","Not low")
+
+tu$Pop <- factor(tu$Pop,levels = unique(tu$Pop))
+
+tu <- subset(tu,CHROM < 36)
+tu$MEAN_FST[tu$MEAN_FST < 0] <- 0
+library(ggplot2)
+
+tu$x <- NA
+pops2 <- unique(tu$Pop)
+for(i in 1:length(pops2))
+{
+  tu$x[tu$Pop == pops2[i]] <- 1:sum(tu$Pop == pops2[i])
+}
+
