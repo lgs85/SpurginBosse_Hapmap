@@ -254,3 +254,11 @@ for(i in 1:length(pops2))
   tu$x[tu$Pop == pops2[i]] <- 1:sum(tu$Pop == pops2[i])
 }
 
+tu$FST_F <- NA
+pops2 <- unique(tu$Pop)
+for(i in 1:length(pops2))
+{
+  q <- quantile(tu$MEAN_FST[tu$Pop == pops2[i]],0.99)
+  tu$FST_F[tu$Pop == pops2[i] & tu$MEAN_FST > q] <- "outlier"
+  }
+tu$FST_F[is.na(tu$FST_F)] <- "not_outlier"

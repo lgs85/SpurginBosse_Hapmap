@@ -110,3 +110,39 @@ dd2 <- subset(subset(dd,r < 100),r > -1)
 ggplot(dd2,aes(x = r,y = MEAN_FST))+
   geom_jitter()+
   facet_wrap(~Pop,ncol = 2)
+
+
+
+head(tu)
+
+Fig4A <- ggplot(tu,aes(x = x,y = MEAN_FST,col = FST_F))+
+  geom_line(aes(group = NA))+
+  theme_classic()+
+  theme(
+    strip.background = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.text.x = element_blank())+
+  xlab("")+
+  ylab(expression(italic(F)[ST])) + 
+  facet_wrap(~Pop,ncol = 2) +
+  theme(axis.line.y = element_line(),
+        axis.line.x = element_line(),
+        strip.text.x = element_text(size = 6),
+        legend.position = "none")+
+  scale_colour_manual(values = c("navy","grey"))
+
+Fig4A
+
+
+x <- subset(tu,FST_F == "outlier")
+x$newbin <- round(x$BIN_START,-7)
+x1 <- subset(x,!duplicated(paste(CHROM,newbin,Pop)))
+x1$u_bin <- paste(x1$CHROM,x1$newbin)
+
+subset(x1,paste(CHROM,newbin) == "1 0")
+x2 <- table(x1$u_bin)
+x3 <- subset(x1,u_bin %in% names(x2[x2 == 10]))
+(table(x3$Pop,x3$u_bin))
+
+hist(x2,breaks = 20)
+

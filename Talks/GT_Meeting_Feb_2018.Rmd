@@ -40,10 +40,14 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 ##Hapmap update
 
 So far...
+
 - Draft completed
 - Jon and Mirte been through it
 
+<br>
+
 To do...
+
 - Sort pitch
 - Decide on final analyses
 - Write up and submit
@@ -80,7 +84,8 @@ Turner & Hahn 2005, *PLoS Biol.*
 - Should we use $F_{ST}$ or $d_{xy}$ to measure divergence
 
 
----
+##Beyond islands of speciation
+
 How does divergence build up across the genome and how do different evolutionary forces contribute to this?
 
 - Selection
@@ -88,6 +93,7 @@ How does divergence build up across the genome and how do different evolutionary
 - Drift
 - Recombination
 
+**Few studies on build up of genomic divergence along known colonisation routes**
 
 ##Hapmap samples
 
@@ -104,6 +110,11 @@ Fig1A
 ```
 
 
+##Hapmap aims
+
+- Determine colonisation route of GT throughout Europe
+- Look at how divergence across the genome accumulates along the colonisation route
+- Understand where (and why?) selection has operated (both "where" in the genome and "where" in Europe)
 
 
 ##Phylogeography
