@@ -373,68 +373,23 @@ plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
 **Figure 4**
 ```{r Figure 4,fig.width = 8,fig.height = 6}
 
-fst_admix$ZFST <- (fst_admix$MEAN_FST - mean(fst_admix$MEAN_FST))/sd(fst_admix$MEAN_FST)
-fst_cen$ZFST <- (fst_cen$MEAN_FST - mean(fst_cen$MEAN_FST))/sd(fst_cen$MEAN_FST)
-
-fst_both <- rbind(fst_admix,fst_cen)
-fst_both$data <- c(rep("Marginal populations",nrow(fst_admix)),rep("Central populations",nrow(fst_cen)))
-fst_both$MEAN_FST[fst_both$MEAN_FST < 0] <- 0
-
-
-Fig4A <- ggplot(fst_both,aes(x = BIN_START,y = ZFST))+
-  geom_point(col = "grey",size = 1)+
+Fig4A <- ggplot(tu,aes(x = x,y = MEAN_FST))+
+  geom_line(col = "darkgrey")+
   theme_classic()+
   theme(
-        strip.background = element_blank(),
-        #strip.placement = "outside",
-        axis.ticks.x = element_blank(),
-        axis.text.x = element_blank())+
+    strip.background = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.text.x = element_blank())+
   xlab("")+
-  ylab(expression(italic(ZF)[ST])) + 
-  facet_grid(data ~ CHROM,scales = "free",space = "free_x",switch = "x") +
+  ylab(expression(italic(F)[ST])) + 
+  facet_wrap(~Pop,ncol = 2) +
   theme(axis.line.y = element_line(),
         axis.line.x = element_line(),
-        strip.text.x = element_text(size = 2))+
-  ggtitle("A")
+        strip.text.x = element_text(size = 6),
+        legend.position = "none")+
+  scale_colour_manual(values = c("navy","grey"))
 
-
-recomb$outlier_cen1 <- ifelse(recomb$fst_cen > quantile(recomb$fst_cen,0.95),"outliers", "non-outliers")
-recomb$outlier_admix1 <- ifelse(recomb$fst_admix > quantile(recomb$fst_admix,0.95),"outliers", "non-outliers")
-
-
-recomb$cols <- ifelse(recomb$outlier_admix1 == "non-outliers" & recomb$outlier_cen1 == "non-outliers","neither","one")
-
-Fig4B <- ggplot(subset(recomb,MEAN_cM < 100),aes(y = (zfst_admix),x = (zfst_cen),col = cols))+
-  geom_point()+
-  theme_classic()+
-  ylab(expression(italic(ZF)[`ST (marginal populations)`]))+
-  xlab(expression(italic(ZF)[`ST (central populations)`]))+
-  ggtitle("B")+
-  geom_vline(xintercept = quantile(recomb$zfst_cen,0.95),lty = 2)+
-  geom_hline(yintercept = quantile(recomb$zfst_admix,0.95),lty = 2)+
-  scale_colour_manual(values = c("grey","navy"))+
-  theme(legend.position = "none")+
-  xlim(c(-5,10))+
-  ylim(c(-5,10))
-
-Fig4C <- subset(subset(recomb,MEAN_cM < 50),MEAN_cM > -1) %>%
-  ggplot(aes(x = (outlier_cen1),y = (MEAN_cM)))+
-  geom_jitter(col = "grey")+
-  theme_classic()+
-  xlab("")+
-  ylab("Recombination rate (cM/mb)")+
-  ggtitle("C")
-
-Fig4D <- subset(subset(recomb,MEAN_cM < 50),MEAN_cM > -1) %>%
-  ggplot(aes(x = (outlier_admix1),y = (MEAN_cM)))+
-  geom_jitter(col = "grey")+
-  theme_classic()+
-  xlab("")+
-  ylab("Recombination rate (cM/mb)")+
-  ggtitle("D")
-
-multiplot(Fig4A,Fig4B,Fig4C,Fig4D,layout = matrix(c(1,1,1,2,3,4),nrow = 2,byrow = T))
-
+Fig4A
 
 ```
 
