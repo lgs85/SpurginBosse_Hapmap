@@ -227,17 +227,23 @@ kable(Table1,digits = 3,row.names = F)
 ```{R Figure 1,fig.width = 8,fig.height = 4}
 Fig1A <- get_map(location = c(-11,31,40,66),zoom = 4,maptype = "watercolor",color = "bw") %>%
   ggmap()+
-  geom_point(data = ll,aes(x = Long,y = Lat,size = LD),col = "red")+
+  geom_point(data = ll,aes(x = Long,y = Lat),col = "red")+
   xlab("Longitude")+
   ylab("Latitude")+
   ggtitle("A")
 
-Fig1B <- ggplot(hetlong,aes(x = pop,y = het))+
-  geom_boxplot(notch = T,outlier.shape = NA,coef = 0)+
+temp <- subset(dw,pop1 == "Balkans")
+temp$pop1 <- "Turkey"
+temp$pi_pop1 <- temp$pi_Turkey
+
+Fig1B <- rbind(dw,temp) %>%
+  subset(pi_pop1 > 0.01) %>%
+  ggplot(aes(x = pop1,y = pi_pop1))+
+  geom_jitter(col = "grey",width = 0.1)+
+  geom_boxplot(notch = T,outlier.shape = NA)+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 90))+
-  coord_cartesian(ylim = c(0, 0.6))+
-  ylab("Observed heterozygosity")+
+  ylab("Pi(SNP)")+
   xlab("")+
   ggtitle("B")
 
@@ -254,7 +260,7 @@ multiplot(Fig1A,Fig1B,layout = matrix(c(1:2),nrow = 1))
 
 **Figure 2**
 
-```{r Figure 2,fig.width = 8,fig.height = 10}
+```{r Figure 2,fig.width = 8,fig.height = 6}
 
 
 Fig2A <- rbind(pd[,c(1:3)],
@@ -329,16 +335,7 @@ Fig2A <- rbind(pd[,c(1:3)],
 
 
 
-Fig2B <- ggplot(pd,
-                aes(x = Island,y = FST))+
-                geom_jitter(col = "grey")+
-                theme_bw()+
-                ylab(expression(italic(F)[ST]))+
-                xlab("")+
-  ggtitle("B")
-
-
-Fig2C <- subset(pd,p1 == "Turkey" | p2 == "Turkey") %>%
+Fig2B <- subset(pd,p1 == "Turkey" | p2 == "Turkey") %>%
           ggplot(aes(x = dist/1000,y = FST))+
             geom_point(col = "grey")+
             theme_bw()+
@@ -351,14 +348,14 @@ Fig2C <- subset(pd,p1 == "Turkey" | p2 == "Turkey") %>%
            y = subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$FST-0.003,
            label = revalue(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$p1,c(Pirio_Muro_Corsica = "Corsica")),
            size = 3)+
+  ggtitle("B")
+
+Fig2C <- structureplot(admix8,pops,8)+
   ggtitle("C")
 
-Fig2D <- structureplot(admix8,pops,8)+
-  ggtitle("D")
 
 
-
-multiplot(Fig2A,Fig2B,Fig2C,Fig2D,layout = matrix(c(rep(1,10),rep(c(2,3),3),rep(4,6)),nrow = 11,byrow = T))
+multiplot(Fig2A,Fig2B,Fig2C,layout = matrix(c(1,2,3,3),nrow = 2,byrow = T))
 
 ```
 
@@ -373,125 +370,47 @@ plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
 **Figure 4**
 ```{r Figure 4,fig.width = 8,fig.height = 6}
 
-Fig4A <- ggplot(tu,aes(x = x,y = MEAN_FST))+
-  geom_line(col = "darkgrey")+
-  theme_classic()+
-  theme(
-    strip.background = element_blank(),
-    axis.ticks.x = element_blank(),
-    axis.text.x = element_blank())+
-  xlab("")+
-  ylab(expression(italic(F)[ST])) + 
-  facet_wrap(~Pop,ncol = 2) +
-  theme(axis.line.y = element_line(),
-        axis.line.x = element_line(),
-        strip.text.x = element_text(size = 6),
-        legend.position = "none")+
-  scale_colour_manual(values = c("navy","grey"))
-
-Fig4A
+ggplot(temp,aes(y = (FST),x = (order)))+
+  geom_point(col = "grey")+
+  theme_bw()+
+  facet_wrap(~pop1)
 
 ```
 
 **Figure 5**
 ```{r Figure 5,fig.width = 8,fig.height = 8}
-#pd$outlier_slope[pd$outlier_slope < -2] <- 0
+
+temp <- subset(subset(dw,FST < 0.8),MEAN_cM < 40)
+temp$MEAN_cM[temp$MEAN_cM < 0] <- 0
+temp$FST[temp$FST < 0] <- 0
+
+x <- tapply(temp$FST,temp$pop1,mean)
+x1 <- names(x[order(x)])
+
+temp$pop1 <- factor(temp$pop1,levels = x1)
+
+ggplot(temp,aes(y = (FST),x = (MEAN_cM)))+
+  geom_point(col = "grey")+
+  theme_bw()+
+  facet_wrap(~pop1)
 
 
 
-Fig5A <- rbind(pd[,c("p1","p2","outlier_slope")],
-               data.frame(p1 = unique(c(pd$p1,pd$p2)),p2 = unique(c(pd$p1,pd$p2)),outlier_slope = rep(0,length(unique(c(pd$p1,pd$p2))))),
-               data.frame(p1 = pd$p2,p2 = pd$p1,outlier_slope = pd$outlier_slope)) %>%
-  mutate(pd,p1 = factor(p1,
-       levels = c("Loch_Lomond_Scotland",
-                  "Cambridge_UK",
-                  "Wytham_UK",
-                  "Mariola_Spain",
-                  "Font_Roja_Spain",
-                  "La_Rouviere_France",
-                  "Montpellier_France",
-                  "Antwerp_Belgium",
-                  "Vlieland_Netherlands",
-                  "Westerheide_Netherlands",
-                  "Zurich_Switzerland",
-                  "Radolfzell_Germany",
-                  "Seewisen_Germany",
-                  "Pirio_Muro_Corsica",
-                  "Sardinia",
-                  "Italy",
-                  "Vienna_Austria",
-                  "Velky_Kosir_Czech_Republic",
-                  "Pilis_Mountains_Hungary",
-                  "Gotland_Sweden",
-                  "Harjavalta_Finland",
-                  "Oulu_Finland",
-                  "Tartu_Estonia",
-                  "Crete",
-                  "Bulgaria",
-                  "Romania",
-                  "Turkey",
-                  "Zvenigorod_Russia"))) %>%
-    mutate(p2 = factor(p2,
-       levels = c("Loch_Lomond_Scotland",
-                  "Cambridge_UK",
-                  "Wytham_UK",
-                  "Mariola_Spain",
-                  "Font_Roja_Spain",
-                  "La_Rouviere_France",
-                  "Montpellier_France",
-                  "Antwerp_Belgium",
-                  "Vlieland_Netherlands",
-                  "Westerheide_Netherlands",
-                  "Zurich_Switzerland",
-                  "Radolfzell_Germany",
-                  "Seewisen_Germany",
-                  "Pirio_Muro_Corsica",
-                  "Sardinia",
-                  "Italy",
-                  "Vienna_Austria",
-                  "Velky_Kosir_Czech_Republic",
-                  "Pilis_Mountains_Hungary",
-                  "Gotland_Sweden",
-                  "Harjavalta_Finland",
-                  "Oulu_Finland",
-                  "Tartu_Estonia",
-                  "Crete",
-                  "Bulgaria",
-                  "Romania",
-                  "Turkey",
-                  "Zvenigorod_Russia"))) %>%
-  ggplot(aes(x = p1,y = p2))+
-    geom_tile(aes(fill = outlier_slope))+
-    scale_fill_distiller(palette = "Greens",direction = -1)+
-    theme(axis.text.x = element_text(angle = 90))+
-  xlab("")+
-  ylab("")+
-  ggtitle("A")
-
-
-pd1 <- subset(pd,p1 == "Turkey" | p2 == "Turkey")
-
-Fig5B <- ggplot(pd1,aes(x = dist,y = outlier_slope))+
-            geom_point(col = "grey")+
-            theme_bw()+
-            theme(legend.position = "none")+
-            ylab(expression(italic("F")[ST]*" vs recombination coefficient"))+
-            xlab("Distance from Turkey (km)")+
-  ggtitle("B")
-
-
-Fig5C <- ggplot(pd1,aes(x = FST,y = outlier_slope))+
-            geom_point(col = "grey")+
-            theme_bw()+
-            theme(legend.position = "none")+
-            ylab(expression(italic("F")[ST]*" vs recombination coefficient"))+
-            xlab(expression("Genome-wide "*italic("F")[ST]))+
-  ggtitle("C")
-
-
-
-multiplot(Fig5A,Fig5B,Fig5C,layout = matrix(c(rep(1,10),rep(c(2,3),3)),nrow = 8,byrow = T))
 ```
+
+
+```{r}
+dw$Window <- paste(dw$scaffold,dw$start)
+temp2 <- subset(dw,zFST > 10) %>%
+  ddply(.(Window),
+        summarise,
+        n_hits = length(zFST)) %>%
+  subset(n_hits < 3)
+
+x1 <- subset(subset(dw,zFST > 10),Window %in% temp2$Window)
+x1[order(x1$scaffold,x1$start),]
+```
+
 
 
 

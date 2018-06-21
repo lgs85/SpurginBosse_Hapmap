@@ -201,9 +201,46 @@ recomb$BIN_START <- recomb$POS500KB + 1
 recomb$CHROM <- recomb$V3
 recomb$V3 <- NULL
 
+countries <- dw$pop1
+
+dw$pop1 <- factor(countries,
+                  levels = c(
+                    "Scotland",
+                    "England",
+                    "Spain",
+                    "France",
+                    "Belgium",
+                    "Netherlands",
+                    "Netherlands_Vlieland",
+                    "Switzerland",
+                    "Germany",
+                    "Corsica",
+                    "Sardinia",
+                    "Italy",
+                    "Austria",
+                    "Czech_Republic",
+                    "Hungary",
+                    "Sweden",
+                    "Finland",
+                    "Estonia",
+                    "Russia",
+                    "Crete",
+                    "Balkans"))
+
+
+dw$MEAN_cM <- NA
+
+for(i in 1:nrow(recomb))
+  {
+  dw$MEAN_cM[paste(dw$scaffold,dw$start) %in% paste(recomb$CHROM[i],recomb$BIN_START[i])] <- recomb$MEAN_cM[i]
+}
+
+
 inall <- Reduce(intersect, list(paste(recomb$CHROM,recomb$BIN_START),
                                 paste(fst_admix$CHROM,fst_admix$BIN_START),
                                 paste(fst_cen$CHROM,fst_cen$BIN_START)))
+
+
 
 recomb <- subset(recomb,paste(recomb$CHROM,recomb$BIN_START) %in% inall)
 
@@ -218,7 +255,6 @@ recomb$outlier_cen <- ifelse(recomb$fst_cen > quantile(recomb$fst_cen,0.95),1,0)
 
 recomb$zfst_admix <-  (recomb$fst_admix - mean(recomb$fst_admix))/sd(recomb$fst_admix)
 recomb$zfst_cen <-  (recomb$fst_cen - mean(recomb$fst_cen))/sd(recomb$fst_cen)
-
 
 
 

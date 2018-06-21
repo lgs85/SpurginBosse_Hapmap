@@ -15,6 +15,9 @@ for(i in 2:10)
   assign(paste0("admix",i),read.table(paste0("Data/HapMapMajorPruned.", i, ".Q")))
 }
 
+
+
+
 pops <- read.table("Data/HapMapMajor.fam",stringsAsFactors = F)
 p_markers <- read.table("Data/HapMapMajorPruned.bim",stringsAsFactors = F)
 markers <- read.table("Data/HapMapMajor.bim",stringsAsFactors = F)
@@ -25,7 +28,24 @@ ld <- read.table("Data/HapMapLD.txt",header = F,stringsAsFactors = F)
 cv <- read.table("Data/CV_error.txt",header = T)
 fst_admix <- read.table("Data/Admix.windowed.weir.fst",header = T)
 fst_cen <- read.table("Data/CenEur.windowed.weir.fst",header = T) 
-fst_UKFIN <- read.table("Data/UK_Fin.windowed.weir.fst",header = T)
-fst_SARCRE <- read.table("Data/Sar_Cre.windowed.weir.fst",header = T) 
 recomb <- read.table("Data/500kb_recombination.txt",header = T)
 tu <- read.table("Data/Turkey.fst",header = T,stringsAsFactors = F)
+
+
+
+#Windowed stats
+fn <- list.files("Data/Windowed_stats")
+popname <- substr(fn,1,nchar(fn)-7)
+
+for(i in c(1:length(fn)))
+{
+  cd <-  read.csv(gzfile(paste0("Data/Windowed_stats/",popname[i],".csv.gz")))
+  colnames(cd)[6:9] <- c("pi_pop1","pi_Turkey","dxy","FST")
+  cd$pop1 <- rep(popname[i],nrow(cd))
+  cd$zFST <- (cd$FST - mean(cd$FST))/sd(cd$FST)
+  cd$order <- c(1:nrow(cd))
+  if(i == 1) dw <- cd else dw <- rbind(dw,cd)
+}
+
+rm(fn,popname,cd)
+
