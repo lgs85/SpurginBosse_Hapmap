@@ -208,6 +208,31 @@ kable(Table1,digits = 3,row.names = F)
 ```
 \pagebreak
 
+**Table 2** Outliers
+
+```{r Table 2}
+dw$Window <- paste(dw$scaffold,dw$start)
+temp2 <- subset(dw,zFST > 10) %>%
+  ddply(.(Window),
+        summarise,
+        n_hits = length(zFST)) %>%
+  subset(n_hits < 5)
+
+x1 <- subset(subset(dw,zFST > 10),Window %in% temp2$Window) %>%
+  ddply(.(scaffold, mid),
+        summarise,
+        n_hits = length(pop1),
+        countries = paste(unique(pop1),collapse = ", "))
+
+colnames(x1) <- c("Chromosome","Position","Number of outliers","Populations")
+kable(x1)
+```
+
+
+\pagebreak
+
+
+
 ##Figure legends
 
 **Figure 1** **A** Sampling locations of great tit populations used in the present study. The size of the circles represents the extent of short term LD (markers within 1kb) within each population. **B** Notched boxplots of marker-based heterozygosity in each population.
@@ -359,6 +384,7 @@ multiplot(Fig2A,Fig2B,Fig2C,layout = matrix(c(1,2,3,3),nrow = 2,byrow = T))
 
 ```
 
+\pagebreak
 
 **Figure 3**
 
@@ -366,6 +392,7 @@ multiplot(Fig2A,Fig2B,Fig2C,layout = matrix(c(1,2,3,3),nrow = 2,byrow = T))
 plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
 ```
 
+\pagebreak
 
 **Figure 4**
 ```{r Figure 4,fig.width = 8,fig.height = 6}
@@ -392,6 +419,8 @@ ggplot(temp,aes(y = zFST,x = order,col = factor(scaffold)))+
 #plot(zFST~order,data = subset(dw,pop1 == "England"))
 ```
 
+\pagebreak
+
 **Figure 5**
 ```{r Figure 5,fig.width = 8,fig.height = 8}
 
@@ -413,20 +442,10 @@ ggplot(temp,aes(y = (FST),x = (MEAN_cM)))+
 
 ```
 
+\pagebreak
 
-```{r}
-dw$Window <- paste(dw$scaffold,dw$start)
-temp2 <- subset(dw,zFST > 10) %>%
-  ddply(.(Window),
-        summarise,
-        n_hits = length(zFST)) %>%
-  subset(n_hits < 5)
-
-x1 <- subset(subset(dw,zFST > 5),Window %in% temp2$Window)
-x1[order(x1$scaffold,x1$start),]
-```
-
-```{r Figure 4,fig.width = 8,fig.height = 6}
+**Figure 6**
+```{r Figure 6,fig.width = 8,fig.height = 6}
 temp <- subset(subset(dw,FST < 0.8),scaffold == 33)
 temp$MEAN_cM[temp$MEAN_cM < 0] <- 0
 temp$FST[temp$FST < 0] <- 0
@@ -436,9 +455,15 @@ x1 <- names(x[order(x)])
 
 temp$pop1 <- factor(temp$pop1,levels = x1)
 
-ggplot(temp,aes(y = (pi_pop1),x = (start)))+
+ggplot(temp,aes(y = (FST),x = (start)))+
   geom_line(col = "grey")+
   theme_bw()+
   facet_wrap(~pop1)
+
+
+
+x <- c("a","b","c")
+paste(x,collapse = " ")
 ```
 
+x <- c("a","b","c")
