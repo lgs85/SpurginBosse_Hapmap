@@ -113,3 +113,35 @@ FigS4
 **Figure S4** Proportion of relatedness explained among populations in relation to the number of migration events allowed in Treemix analyses.
 
 
+
+
+
+
+
+**Figure 4**
+```{r Figure S4,fig.width = 8,fig.height = 6}
+
+temp <- subset(dw,FST < 0.4)
+temp$MEAN_cM[temp$MEAN_cM < 0] <- 0
+temp$FST[temp$FST < 0] <- 0
+
+x <- tapply(temp$FST,temp$pop1,mean)
+x1 <- names(x[order(x)])
+
+temp$pop1 <- factor(temp$pop1,levels = x1)
+
+temp <- subset(temp,pop1 != "Balkans")
+ggplot(temp,aes(y = FST,x = order,col = factor(scaffold)))+
+  geom_line()+
+  theme_bw()+
+  theme(axis.text.x = element_blank(),
+        legend.position = "none")+
+  facet_wrap(~pop1)+
+              ylab(expression(italic(F)[ST]))+
+            xlab("Genomic position")+
+  scale_color_manual(values = rep(c("grey","navy"),30))
+
+```
+
+**Figure S5** FST in all comparisons with Turkey
+

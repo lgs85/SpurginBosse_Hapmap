@@ -114,9 +114,8 @@ Admixture analysis revealed patterns of genetic structure corresponding to geogr
 Maximum likelihood analyses implemented in Treemix showed that a model with no migration explained 97.8% of variance in relatedness between populations; increasing the number of migration events substantially improved the percentage of relatedness explained, up to 99.7% when 10 migration events were fitted (Fig. S4). In Figure 3 we display the maximum likelihood tree with 2 migration events, after which the variance in relatedness explained plateaued when more migration events were added (Fig. S4). The tree was generally characterised by short branch lengths, with the exception of the island populations of Sardinia and Crete, which were grouped with the population from mainland Italy.  The Spanish and Corsican populations were also grouped together, as were populations from Turkey and the Balkans, and populations from England and Scotland (Fig. 3). The two fitted migration edges both involved Sardinia, involving migration from eastern Europe, and to Corsica (Fig. 3).
 
 #### Genomic landscapes of differentiation
-We found that $F_{ST}$ varied markedly across the genome, regardless of whether we considered marginal populations across which structure was higher or across central European populations with very low structure (Fig. 4A). Mean windowed $F_{ST}$ values were correlated among the central and marginal populations ($r$ = `r round2(with(recomb,cor(fst_cen,fst_admix)))`; $P$ = `r round3(with(recomb,cor.test(fst_cen,fst_admix))$p.value)`; Fig. 4B), and outliers were likely to be found in the same regions across the two sets of populations (Chi-squared test, $P$ `r round3(with(recomb,chisq.test(outlier_cen,outlier_admix))$p.value)`; Fig. 4A,B). While $F_{ST}$ outliers were generally over five times higher in the marginal populations (mean $F_{ST}$ in outlier regions = `r round3(mean(subset(recomb,outlier_admix == 1)$fst_admix))`) compared to the central populations (mean outlier $F_{ST}$ = `r round3(mean(subset(recomb,outlier_cen == 1)$fst_cen))`), relative of standardised $F_{ST}$ in outlier regions were much more similar across the two sets of populations (marginal populations, $ZF_{ST}$ = `r round3(mean(subset(recomb,outlier_admix == 1)$zfst_admix))`; central populations, $ZF_{ST}$ = `r round3(mean(subset(recomb,outlier_cen == 1)$zfst_cen))`), suggesting that although genome-wide levels of  $F_{ST}$ differ across the marginal and central populations, the landscape of genomic differentiation is highly heterogeneous across both sets of populations (Fig. 4A). $F_{ST}$ outliers were more likely to be found in regions of low recombination across both the marginal (GLM; $P$ `r round3(summary(glm(outlier_admix~MEAN_cM,data = recomb,family = "binomial"))$coefficients["MEAN_cM","Pr(>|z|)"])`; Fig. 4C), and the central ($P$ = `r round3(summary(glm(outlier_cen~MEAN_cM,data = recomb,family = "binomial"))$coefficients["MEAN_cM","Pr(>|z|)"])`; Fig. 4D), populations.
+We examined the landscape of genomic divergence between each population and Turkey, and found that $F_{ST}$ varied markedly across the genome in all comparisons (Fig. 4A; Fig. SXX). Mean windowed $F_{ST}$ values were correlated among the central and marginal populations ($r$ = `r round2(with(recomb,cor(fst_cen,fst_admix)))`; $P$ = `r round3(with(recomb,cor.test(fst_cen,fst_admix))$p.value)`; Fig. 4B), and outliers were likely to be found in the same regions across the two sets of populations (Chi-squared test, $P$ `r round3(with(recomb,chisq.test(outlier_cen,outlier_admix))$p.value)`; Fig. 4A,B). While $F_{ST}$ outliers were generally over five times higher in the marginal populations (mean $F_{ST}$ in outlier regions = `r round3(mean(subset(recomb,outlier_admix == 1)$fst_admix))`) compared to the central populations (mean outlier $F_{ST}$ = `r round3(mean(subset(recomb,outlier_cen == 1)$fst_cen))`), relative of standardised $F_{ST}$ in outlier regions were much more similar across the two sets of populations (marginal populations, $ZF_{ST}$ = `r round3(mean(subset(recomb,outlier_admix == 1)$zfst_admix))`; central populations, $ZF_{ST}$ = `r round3(mean(subset(recomb,outlier_cen == 1)$zfst_cen))`), suggesting that although genome-wide levels of  $F_{ST}$ differ across the marginal and central populations, the landscape of genomic differentiation is highly heterogeneous across both sets of populations (Fig. 4A). $F_{ST}$ outliers were more likely to be found in regions of low recombination across both the marginal (GLM; $P$ `r round3(summary(glm(outlier_admix~MEAN_cM,data = recomb,family = "binomial"))$coefficients["MEAN_cM","Pr(>|z|)"])`; Fig. 4C), and the central ($P$ = `r round3(summary(glm(outlier_cen~MEAN_cM,data = recomb,family = "binomial"))$coefficients["MEAN_cM","Pr(>|z|)"])`; Fig. 4D), populations.
 
-We next quantified how the landscape of genomic differentiation was related to recombination rate for all `r nrow(pd)` pairs of populations. The slope of the relationship between presence/absence of FST outliers and recombination rate was negative in the majority (`r round((sum(pd$outlier_slope <= 0)/nrow(pd))*100,0)`%) of pairwise comparisons (Fig. 5A). $F_{ST}$ outliers were most likely to be found in regions of low recombination in pairwise comparisons involving  populations in the UK and Spain, as well as comparisons involving Corsica and Sardinia (Fig. 5A). Outliers were found in regions with higher recombination rates in pairwise comparisons involving eastern and central European populations, and Crete (Fig. 5A). The relationship between $F_{ST}$ outlier presence/absence and recombination rate did not vary according to the geographical distance between populations (r = `r round2(mantel(outlier_slope~dist,data = pd)["mantelr"])`, p = `r round2(mantel(outlier_slope~dist,data = pd)["pval3"])`). However, we found a strong, negative relationship between the $F_{ST}$/recombination slope and genome-wide $F_{ST}$ ($r$ = `r round2(with(pd,cor(outlier_slope,FST)))`, $P$ `r round3(with(pd,cor.test(outlier_slope,FST))$p.value)`). Considering only mainland populations, we found that the relationship between presence/absence of $F_{ST}$ outliers and recombination decreased with distance from Turkey ($r$ = `r round2(with(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),Island == "Mainland"),cor.test(outlier_slope,dist))$estimate)`, $P$ = `r round3(with(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),Island == "Mainland"),cor.test(outlier_slope,dist))$p.value)`; Fig. 5B), and with genetic structure with Turkey ($r$ = `r round2(with(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),Island == "Mainland"),cor.test(outlier_slope,FST))$estimate)`, $P$ = `r round3(with(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),Island == "Mainland"),cor.test(outlier_slope,FST))$p.value)`; Fig. 5C).
 
 ##Discussion
 
@@ -396,9 +395,8 @@ plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
 
 **Figure 4**
 ```{r Figure 4,fig.width = 8,fig.height = 6}
-# temp <- subset(subset(dw,FST < 0.8),MEAN_cM < 40)
-temp <- dw
-temp$MEAN_cM[temp$MEAN_cM < 0] <- 0
+temp <- subset(dw,scaffold <30)
+#temp$MEAN_cM[temp$MEAN_cM < 0] <- 0
 temp$FST[temp$FST < 0] <- 0
 
 x <- tapply(temp$FST,temp$pop1,mean)
@@ -407,16 +405,15 @@ x1 <- names(x[order(x)])
 temp$pop1 <- factor(temp$pop1,levels = x1)
 
 temp <- subset(temp,pop1 != "Balkans")
-ggplot(temp,aes(y = zFST,x = order,col = factor(scaffold)))+
+ggplot(temp,aes(y = zFST,x = order,col = log(MEAN_cM)))+
   geom_line()+
   theme_bw()+
   theme(axis.text.x = element_blank(),
         legend.position = "none")+
   facet_wrap(~pop1)+
-  scale_color_manual(values = rep(c("grey","navy"),30))
-
-
-#plot(zFST~order,data = subset(dw,pop1 == "England"))
+              ylab(expression(italic(zF)[ST]))+
+            xlab("Genomic position")
+table(temp$scaffold)
 ```
 
 \pagebreak
@@ -459,11 +456,6 @@ ggplot(temp,aes(y = (FST),x = (start)))+
   geom_line(col = "grey")+
   theme_bw()+
   facet_wrap(~pop1)
-
-
-
-x <- c("a","b","c")
-paste(x,collapse = " ")
 ```
 
 x <- c("a","b","c")
