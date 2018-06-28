@@ -405,15 +405,15 @@ x1 <- names(x[order(x)])
 temp$pop1 <- factor(temp$pop1,levels = x1)
 
 temp <- subset(temp,pop1 != "Balkans")
-ggplot(temp,aes(y = zFST,x = order,col = log(MEAN_cM)))+
+ggplot(temp,aes(y = zFST,x = order,col = factor(scaffold)))+
   geom_line()+
   theme_bw()+
   theme(axis.text.x = element_blank(),
         legend.position = "none")+
   facet_wrap(~pop1)+
               ylab(expression(italic(zF)[ST]))+
-            xlab("Genomic position")
-table(temp$scaffold)
+            xlab("Genomic position")+
+  scale_color_manual(values = rep(c("navy","grey"),30))
 ```
 
 \pagebreak
@@ -430,7 +430,7 @@ x1 <- names(x[order(x)])
 
 temp$pop1 <- factor(temp$pop1,levels = x1)
 
-ggplot(temp,aes(y = (FST),x = (MEAN_cM)))+
+ggplot(temp,aes(y = (zFST),x = (dxy)))+
   geom_point(col = "grey")+
   theme_bw()+
   facet_wrap(~pop1)
