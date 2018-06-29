@@ -123,7 +123,7 @@ UNFINISHED - I WANT TO FINALISE THE ANALYSES/RESULTS BEFORE GOING INTO DETAIL HE
 
 In this study we use a large panel of genetic markers to provide insight into the evolutionary history of the great tit in Europe. We found that, consistent with previous research in this species, levels of genomic variation were consistent with a large effective population and substantial levels of gene flow among populations [@Kvist2003; @Laine2016]. We then examine how genomic landscapes of differentiation vary among different sets of populations, and find that i) islands of differentiation arise among extremely closely related populations, ii) these same islands of differentiation arise in more distantly related populations, iii) islands of differentiation arise in regions of low recombination, iv) the relationship between recombination rate and the genomic landscape of differentiation varies substantially among populations. These findings have several implications for how we interpret patterns of genomic variation among natural populations.
 
-Our results suggest that great tits colonised Europe from a single refugium in the Balkans. This scenario has been suggested before [@Kvist1999], and our observed pattern of increasing genome-wide divergence from the Turkish and Balkan populations lends this hypothesis empirical support. Genomic structure among mainland populations is, however, extremely low, and even with hundreds of thousands of markers Admixture was unable to separate the central European populations. Similarly, in the Treemix analysis the central European great tit  populations formed a large group characterised by shallow branching, although much of the grouping that did occur (e.g. Finland and Estonia) made geographical sense. Interestingly, Treemix grouped the Spanish and Corsican populations, which is consistent with previous subspecies descriptions of European great tits (REF). More generally, the highest levels of differentiation were found between island populations, suggesting a reduced effective population size and reduced gene flow in these populations.  
+Our results suggest that great tits colonised Europe from a single refugium in Turkey and/or the Balkans. This scenario has been suggested before [@Kvist1999], and our observed pattern of increasing genome-wide divergence from the Turkish and Balkan populations lends this hypothesis empirical support. Genomic structure among mainland populations is, however, extremely low, and even with hundreds of thousands of markers Admixture was unable to separate the central European populations. Similarly, in the Treemix analysis the central European great tit  populations formed a large group characterised by shallow branching, although much of the grouping that did occur (e.g. Finland and Estonia) made geographical sense. Interestingly, Treemix grouped the Spanish and Corsican populations, which is consistent with previous subspecies descriptions of European great tits (REF). More generally, the highest levels of differentiation were found between island populations, suggesting a reduced effective population size and reduced gene flow in these populations.  
 
 It is likely that the many, and perhaps the majority, of wild populations are characterised by highly heterogeneous patterns of differentiation across the genome (see REFS for a recent overview). What is not yet clear is how quickly "islands" of differentiation arise, nor how selection, gene flow and drift interact with genomic architecture to shape differentiation over shorter and longer evolutionary time-scales [@Burri2017]. Our results suggest that islands of differentiation arise in regions of low recombination even among populations that could be considered panmictic. The central European great tit populations have a mean $F_{ST}$ of `r round3(mean(fst_cen$MEAN_FST))`, yet islands of divergence can clearly be seen, and occur almost exclusively in regions of low recombination, regardless of which populations were examined (Figs 4,5). Thus, our results suggest that linked selection in regions of low recombination plays a key role in driving patterns of genomic differentiation even in the very earliest stages of population separation. This is not necessarily what we would expect - in the very earliest stages of differentiation it is often assumed that peaks of high differentiation are the product of selective sweeps, and that only after time do correlated patterns of genomic divergence arise [@Burri2017]. It is difficult to differentiate between positive and background selection in producing heterogeneous patterns of differentiation across the genome. Correlated patterns of genomic differentiation among sets of populations suggests that background selection likely plays a role (REFS), and that is what we find in great tits.
 
@@ -249,11 +249,16 @@ kable(x1)
 **Figure 1**
 
 ```{R Figure 1,fig.width = 8,fig.height = 4}
-Fig1A <- get_map(location = c(-11,31,40,66),zoom = 4,maptype = "watercolor",color = "bw") %>%
-  ggmap()+
-  geom_point(data = ll,aes(x = Long,y = Lat),col = "red")+
+Fig1A <- map_data("world") %>%
+  ggplot(aes(x=long, y=lat, group=group)) +
+  geom_polygon(fill="lightgrey", color='black') +
+  coord_fixed(xlim=c(-10, 40),
+              ylim=c(35, 65),
+              ratio=1.3) +
+  geom_point(data = ll,aes(x = Long,y = Lat,group = NULL),col = "red",size = 2)+
   xlab("Longitude")+
   ylab("Latitude")+
+  theme_bw()+
   ggtitle("A")
 
 temp <- subset(dw,pop1 == "Balkans")
