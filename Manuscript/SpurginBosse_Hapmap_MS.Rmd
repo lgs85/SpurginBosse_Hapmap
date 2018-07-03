@@ -114,7 +114,7 @@ Admixture analysis revealed patterns of genetic structure corresponding to geogr
 Maximum likelihood analyses implemented in Treemix showed that a model with no migration explained 97.8% of variance in relatedness between populations; increasing the number of migration events substantially improved the percentage of relatedness explained, up to 99.7% when 10 migration events were fitted (Fig. S4). In Figure 3 we display the maximum likelihood tree with 2 migration events, after which the variance in relatedness explained plateaued when more migration events were added (Fig. S4). The tree was generally characterised by short branch lengths, with the exception of the island populations of Sardinia and Crete, which were grouped with the population from mainland Italy.  The Spanish and Corsican populations were also grouped together, as were populations from Turkey and the Balkans, and populations from England and Scotland (Fig. 3). The two fitted migration edges both involved Sardinia, involving migration from eastern Europe, and to Corsica (Fig. 3).
 
 #### Genomic landscapes of differentiation
-We examined the landscape of genomic divergence between each population and Turkey, and found that $F_{ST}$ varied markedly across the genome in all comparisons (Fig. 4A; Fig. SXX). Mean windowed $F_{ST}$ values were correlated among the central and marginal populations ($r$ = `r round2(with(recomb,cor(fst_cen,fst_admix)))`; $P$ = `r round3(with(recomb,cor.test(fst_cen,fst_admix))$p.value)`; Fig. 4B), and outliers were likely to be found in the same regions across the two sets of populations (Chi-squared test, $P$ `r round3(with(recomb,chisq.test(outlier_cen,outlier_admix))$p.value)`; Fig. 4A,B). While $F_{ST}$ outliers were generally over five times higher in the marginal populations (mean $F_{ST}$ in outlier regions = `r round3(mean(subset(recomb,outlier_admix == 1)$fst_admix))`) compared to the central populations (mean outlier $F_{ST}$ = `r round3(mean(subset(recomb,outlier_cen == 1)$fst_cen))`), relative of standardised $F_{ST}$ in outlier regions were much more similar across the two sets of populations (marginal populations, $ZF_{ST}$ = `r round3(mean(subset(recomb,outlier_admix == 1)$zfst_admix))`; central populations, $ZF_{ST}$ = `r round3(mean(subset(recomb,outlier_cen == 1)$zfst_cen))`), suggesting that although genome-wide levels of  $F_{ST}$ differ across the marginal and central populations, the landscape of genomic differentiation is highly heterogeneous across both sets of populations (Fig. 4A). $F_{ST}$ outliers were more likely to be found in regions of low recombination across both the marginal (GLM; $P$ `r round3(summary(glm(outlier_admix~MEAN_cM,data = recomb,family = "binomial"))$coefficients["MEAN_cM","Pr(>|z|)"])`; Fig. 4C), and the central ($P$ = `r round3(summary(glm(outlier_cen~MEAN_cM,data = recomb,family = "binomial"))$coefficients["MEAN_cM","Pr(>|z|)"])`; Fig. 4D), populations.
+We examined the landscape of genomic divergence between each population and Turkey, and found that $F_{ST}$ varied markedly across the genome in all comparisons (Fig. 4A; Fig. SXX). 
 
 
 ##Discussion
@@ -248,8 +248,8 @@ kable(x1)
 
 **Figure 1**
 
-```{R Figure 1,fig.width = 8,fig.height = 4}
-Fig1A <- map_data("world") %>%
+```{R Figure 1,fig.width = 4,fig.height = 4}
+Fig1 <- map_data("world") %>%
   ggplot(aes(x=long, y=lat, group=group)) +
   geom_polygon(fill="lightgrey", color='black') +
   coord_fixed(xlim=c(-10, 40),
@@ -261,22 +261,9 @@ Fig1A <- map_data("world") %>%
   theme_bw()+
   ggtitle("A")
 
-temp <- subset(dw,pop1 == "Balkans")
-temp$pop1 <- "Turkey"
-temp$pi_pop1 <- temp$pi_Turkey
 
-Fig1B <- rbind(dw,temp) %>%
-  subset(pi_pop1 > 0.01) %>%
-  ggplot(aes(x = pop1,y = pi_pop1))+
-  geom_jitter(col = "grey",width = 0.1)+
-  geom_boxplot(notch = T,outlier.shape = NA)+
-  theme_bw()+
-  theme(axis.text.x = element_text(angle = 90))+
-  ylab("Pi(SNP)")+
-  xlab("")+
-  ggtitle("B")
 
-multiplot(Fig1A,Fig1B,layout = matrix(c(1:2),nrow = 1))
+Fig1
 ```
 
 
@@ -290,79 +277,22 @@ multiplot(Fig1A,Fig1B,layout = matrix(c(1:2),nrow = 1))
 **Figure 2**
 
 ```{r Figure 2,fig.width = 8,fig.height = 6}
+temp <- subset(dw,pop1 == "Balkans")
+temp$pop1 <- "Turkey"
+temp$pi_pop1 <- temp$pi_Turkey
 
 
-Fig2A <- rbind(pd[,c(1:3)],
-               data.frame(p1 = unique(c(pd$p1,pd$p2)),p2 = unique(c(pd$p1,pd$p2)),FST = rep(0,length(unique(c(pd$p1,pd$p2))))),
-               data.frame(p1 = pd$p2,p2 = pd$p1,FST = pd$FST)) %>%
-  mutate(pd,p1 = factor(p1,
-       levels = c("Loch_Lomond_Scotland",
-                  "Cambridge_UK",
-                  "Wytham_UK",
-                  "Mariola_Spain",
-                  "Font_Roja_Spain",
-                  "La_Rouviere_France",
-                  "Montpellier_France",
-                  "Antwerp_Belgium",
-                  "Vlieland_Netherlands",
-                  "Westerheide_Netherlands",
-                  "Zurich_Switzerland",
-                  "Radolfzell_Germany",
-                  "Seewisen_Germany",
-                  "Pirio_Muro_Corsica",
-                  "Sardinia",
-                  "Italy",
-                  "Vienna_Austria",
-                  "Velky_Kosir_Czech_Republic",
-                  "Pilis_Mountains_Hungary",
-                  "Gotland_Sweden",
-                  "Harjavalta_Finland",
-                  "Oulu_Finland",
-                  "Tartu_Estonia",
-                  "Crete",
-                  "Bulgaria",
-                  "Romania",
-                  "Turkey",
-                  "Zvenigorod_Russia"))) %>%
-    mutate(p2 = factor(p2,
-       levels = c("Loch_Lomond_Scotland",
-                  "Cambridge_UK",
-                  "Wytham_UK",
-                  "Mariola_Spain",
-                  "Font_Roja_Spain",
-                  "La_Rouviere_France",
-                  "Montpellier_France",
-                  "Antwerp_Belgium",
-                  "Vlieland_Netherlands",
-                  "Westerheide_Netherlands",
-                  "Zurich_Switzerland",
-                  "Radolfzell_Germany",
-                  "Seewisen_Germany",
-                  "Pirio_Muro_Corsica",
-                  "Sardinia",
-                  "Italy",
-                  "Vienna_Austria",
-                  "Velky_Kosir_Czech_Republic",
-                  "Pilis_Mountains_Hungary",
-                  "Gotland_Sweden",
-                  "Harjavalta_Finland",
-                  "Oulu_Finland",
-                  "Tartu_Estonia",
-                  "Crete",
-                  "Bulgaria",
-                  "Romania",
-                  "Turkey",
-                  "Zvenigorod_Russia"))) %>%
-  ggplot(aes(x = p1,y = p2))+
-  theme_classic()+
-    geom_tile(aes(fill = FST))+
-    scale_fill_distiller(palette = "Greens",direction = -1)+
-    theme(axis.text.x = element_text(angle = 90))+
+Fig2A <- rbind(dw,temp) %>%
+  subset(pi_pop1 > 0.01) %>%
+  ggplot(aes(x = pop1,y = pi_pop1))+
+  geom_jitter(col = "grey",width = 0.1)+
+  geom_boxplot(notch = T,outlier.shape = NA)+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90))+
+  ylab(expression(pi[SNP]))+
   xlab("")+
-  ylab("")+
-  ggtitle("A")
-
-
+  ggtitle("B")
+rm(temp)
 
 Fig2B <- subset(pd,p1 == "Turkey" | p2 == "Turkey") %>%
           ggplot(aes(x = dist/1000,y = FST))+
@@ -375,7 +305,7 @@ Fig2B <- subset(pd,p1 == "Turkey" | p2 == "Turkey") %>%
   annotate("text",
            x = subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$dist/1000,
            y = subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$FST-0.003,
-           label = revalue(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$p1,c(Pirio_Muro_Corsica = "Corsica")),
+           label = subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$p1,
            size = 3)+
   ggtitle("B")
 
@@ -404,19 +334,21 @@ temp <- subset(dw,scaffold <30)
 #temp$MEAN_cM[temp$MEAN_cM < 0] <- 0
 temp$FST[temp$FST < 0] <- 0
 
-x <- tapply(temp$FST,temp$pop1,mean)
-x1 <- names(x[order(x)])
+x <- subset(pd,p1 == "Turkey" | p2 == "Turkey") %>%
+  
+  arrange(dist) 
+apply(x[,c(1:2)],1,function(x) x[x!="Turkey"])
 
-temp$pop1 <- factor(temp$pop1,levels = x1)
+
 
 temp <- subset(temp,pop1 != "Balkans")
-ggplot(temp,aes(y = zFST,x = order,col = factor(scaffold)))+
+ggplot(temp,aes(y = FST,x = order,col = factor(scaffold)))+
   geom_line()+
   theme_bw()+
   theme(axis.text.x = element_blank(),
         legend.position = "none")+
   facet_wrap(~pop1)+
-              ylab(expression(italic(zF)[ST]))+
+              ylab(expression(italic(F)[ST]))+
             xlab("Genomic position")+
   scale_color_manual(values = rep(c("navy","grey"),30))
 ```
@@ -435,7 +367,7 @@ x1 <- names(x[order(x)])
 
 temp$pop1 <- factor(temp$pop1,levels = x1)
 
-ggplot(temp,aes(y = (zFST),x = (dxy)))+
+ggplot(temp,aes(y = (zFST),x = order))+
   geom_point(col = "grey")+
   theme_bw()+
   facet_wrap(~pop1)

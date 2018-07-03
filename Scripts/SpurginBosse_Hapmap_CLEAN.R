@@ -60,15 +60,6 @@ rm(countries)
 colnames(pd) <- c("p1","p2","FST","fst_slope","outlier_slope")
 colnames(ll) <- c("Pop","Lat","Long")
 
-ll$Pop[ll$Pop == "Westerheide"] <- "Westerheide_Netherlands"
-ll$Pop[ll$Pop == "Vlieland_NL"] <- "Vlieland_Netherlands"
-
-pd$p1[pd$p1 == "Westerheide"] <- "Westerheide_Netherlands"
-pd$p1[pd$p1 == "Vlieland_NL"] <- "Vlieland_Netherlands"
-
-pd$p2[pd$p2 == "Westerheide"] <- "Westerheide_Netherlands"
-pd$p2[pd$p2 == "Vlieland_NL"] <- "Vlieland_Netherlands"
-
 for(i in 1:nrow(pd))
 {
   d1 <- subset(ll,Pop == pd$p1[i])
@@ -76,11 +67,60 @@ for(i in 1:nrow(pd))
   pd$dist[i] <- distGeo(c(d1$Long,d1$Lat),c(d2$Long,d2$Lat))
 }
 
-islands <- c("Pirio_Muro_Corsica","Crete","Sardinia","Vlieland_Netherlands","Gotland_Sweden")
-pd$Island <- ifelse(pd$p1 %in% islands | pd$p2 %in% islands, "Island","Mainland")
 
 
+for(i in c(1:2))
+{
+countries <- pd[,paste0("p",i)]
 
+countries[countries %in% c("Antwerp_Belgium")] <- "Belgium"
+countries[countries %in% c("Cambridge_UK","Wytham_UK")] <- "England"
+countries[countries %in% c("Font_Roja_Spain","Mariola_Spain")] <- "Spain"
+countries[countries %in% c("Gotland_Sweden")] <- "Sweden"
+countries[countries %in% c("Harjavalta_Finland","Oulu_Finland")] <- "Finland"
+countries[countries %in% c("La_Rouviere_France" ,"Montpellier_France")] <- "France"
+countries[countries %in% c("Loch_Lomond_Scotland")] <- "Scotland"
+countries[countries %in% c("Pilis_Mountains_Hungary")] <- "Hungary"
+countries[countries %in% c("Pirio_Muro_Corsica")] <- "Corsica"
+countries[countries %in% c("Radolfzell_Germany","Seewisen_Germany")] <- "Germany"
+countries[countries %in% c("Roekelse_Bos","Westerheide")] <- "Netherlands"
+countries[countries %in% c("Vlieland_NL")] <- "Netherlands (Vlieland)"
+countries[countries %in% c("Tartu_Estonia")] <- "Estonia"
+countries[countries %in% c("Velky_Kosir_Czech_Republic")] <- "Czech Republic"
+countries[countries %in% c("Vienna_Austria")] <- "Austria"
+countries[countries %in% c("Zurich_Switzerland" )] <- "Switzerland"                                                               
+countries[countries %in% c("Zvenigorod_Russia")] <- "Russia"                                                               
+countries[countries %in% c("Romania", "Bulgaria")] <- "Balkans"      
+
+
+pd[,paste0("p",i)] <- factor(countries,
+                  levels = c(
+                    "Scotland",
+                    "England",
+                    "Spain",
+                    "France",
+                    "Belgium",
+                    "Netherlands",
+                    "Netherlands (Vlieland)",
+                    "Switzerland",
+                    "Germany",
+                    "Corsica",
+                    "Sardinia",
+                    "Italy",
+                    "Austria",
+                    "Czech Republic",
+                    "Hungary",
+                    "Sweden",
+                    "Finland",
+                    "Estonia",
+                    "Crete",
+                    "Balkans",
+                    "Turkey",
+                    "Russia"))
+
+rm(countries)
+
+}
 # LD ----------------------------------------------------------------------
 ll$LD <- ldmean$V2
 
