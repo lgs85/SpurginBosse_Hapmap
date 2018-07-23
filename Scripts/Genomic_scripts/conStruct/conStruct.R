@@ -40,7 +40,10 @@ out <- conStruct(spatial = TRUE,
           freqs = Hapmap.data$allele.frequencies,
           geoDist = Hapmap.data$geoDist, 
           coords = Hapmap.data$coords,
-          prefix = "HMK3")
+          make.figs = F,
+          save.files = F)
+
+system()
 
 admix <- out$chain_1$MAP$admix.proportions
 rownames(admix) <- unique(dd$CLST)
