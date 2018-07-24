@@ -7,16 +7,9 @@ library(rworldmap)
 
 # Make an input dataset ---------------------------------------------------
 
-#Filter on relatedness
 
-
-#Allele freqs
-system("plink --bfile ~/Documents/Research/Great_tit_hapmap/PlinkFiles/HapMapMajorPruned --rel-cutoff 0.05 --family --freq --out HapMapMajorPruned --autosome-num 36")
-system("rm *.log")
-system("rm *.nosex")
-
-dd <- fread("HapMapMajorPruned.frq.strat",header = T)
-system("rm HapMapMajorPruned.frq.strat")
+dd <- fread("Plink/HapMapMajorPruned.frq.strat",header = T)
+system("rm Plink/HapMapMajorPruned.frq.strat")
 
 m <- matrix(dd$MAF,nrow = length(unique(dd$CLST)), ncol = length(unique(dd$SNP)),byrow = F)
 rownames(m) <- unique(dd$CLST)
