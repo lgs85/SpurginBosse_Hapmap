@@ -240,17 +240,19 @@ dw$Window <- paste(dw$scaffold,dw$start)
 temp2 <- subset(dw,zFST > 10) %>%
   ddply(.(Window),
         summarise,
-        n_hits = length(zFST)) %>%
-  subset(n_hits < 5)
+        n_hits = length(zFST))
 
 x1 <- subset(subset(dw,zFST > 10),Window %in% temp2$Window) %>%
-  ddply(.(scaffold, mid),
+  ddply(.(scaffold, start),
         summarise,
         n_hits = length(pop1),
         countries = paste(unique(pop1),collapse = ", "))
 
 colnames(x1) <- c("Chromosome","Position","Number of outliers","Populations")
 kable(x1)
+x2 <- x1
+colnames(x2) <- c("CHR","POS","N_hits","Pops")
+write.table(x2,"~/Desktop/Outliers_for_Mirte.txt",row.names = F,quote = F)
 ```
 
 
