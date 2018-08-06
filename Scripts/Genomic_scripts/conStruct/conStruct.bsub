@@ -1,0 +1,14 @@
+#!/bin/bash
+#BSUB -q short-ib
+#BSUB -n 20
+#BSUB -x
+#BSUB -R 'span[ptile=20]'
+#BSUB -oo construct-%J.log
+#BSUB -eo construct-%J.log
+#BSUB -J "construct-20"
+
+. /etc/profile
+
+module add R
+
+Rscript conStruct.R

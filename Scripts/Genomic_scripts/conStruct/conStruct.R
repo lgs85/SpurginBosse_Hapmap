@@ -1,4 +1,5 @@
-
+library(magrittr)
+library(ggplot2)
 library(data.table)
 library(fields)
 library(conStruct)
@@ -32,12 +33,12 @@ Hapmap.data <- list(allele.frequencies = m,coords = llx,geoDist = d1)
 
 
 #Look at vignettes
-vignette(topic="format-data",package="conStruct")
-vignette(topic="run-conStruct",package="conStruct")
+# vignette(topic="format-data",package="conStruct")
+# vignette(topic="run-conStruct",package="conStruct")
 
 
 out <- conStruct(spatial = TRUE, 
-          K = 2, 
+          K = 5, 
           freqs = Hapmap.data$allele.frequencies,
           geoDist = Hapmap.data$geoDist, 
           coords = Hapmap.data$coords,
@@ -85,3 +86,18 @@ plot(c(0,rnorm(150,1,0.2),rnorm(200,3,0.2),rnorm(150,1,0.2)),type='l',
      xlab="",yaxt='n',ylab="")
 mtext(side=3,text="(c) multi-modal",padj=-0.1)
 
+
+
+# Have a look at dxy -------------------------------------------
+setwd("~/Documents/Research/Great_tit_hapmap/windowed_stats/")
+
+ox <- read.table("popfiles/Wytham_UK.txt",as.is = T) %>%
+    unlist(use.names = F) %>%
+    paste(collapse = ",")
+ca <- read.table("popfiles/Cambridge_UK.txt",as.is = T) %>%
+  unlist(use.names = F) %>%
+  paste(collapse = ",")
+
+system(paste0("python popgenWindows.py -w 500000 -m 20 -g HapMapMajor.geno.gz -o outfiles/ox_ca.csv.gz -f phased -T 2 -p ox ", ox," -p ca ",ca))
+  
+cd <-  read.csv(gzfile(paste0("outfiles/ox_ca.csv.gz")))
