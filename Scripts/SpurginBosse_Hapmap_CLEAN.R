@@ -120,6 +120,10 @@ pd[,paste0("p",i)] <- factor(countries,
 
 rm(countries)
 
+islands <- c("Crete","Corsica","Sardina")
+pd$Island <- ifelse(pd$p1 %in% islands | pd$p2 %in% islands,"Island","Mainland")
+
+
 }
 # LD ----------------------------------------------------------------------
 ll$LD <- ldmean$V2
