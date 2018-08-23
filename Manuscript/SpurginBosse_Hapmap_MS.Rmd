@@ -89,7 +89,7 @@ Samples were collected from `r nrow(ll)` populations from `r length(unique(pops$
 
 \pagebreak
 
-```{R Figure 1,fig.width = 3,fig.height = 3}
+```{R Figure 1,fig.width = 5,fig.height = 5}
 Fig1 <- map_data("world") %>%
   ggplot(aes(x=long, y=lat, group=group)) +
   geom_polygon(fill="lightgrey", color='black') +
