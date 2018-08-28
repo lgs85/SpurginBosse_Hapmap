@@ -280,27 +280,6 @@ for(i in 1:nrow(recomb))
 }
 
 
-inall <- Reduce(intersect, list(paste(recomb$CHROM,recomb$BIN_START),
-                                paste(fst_admix$CHROM,fst_admix$BIN_START),
-                                paste(fst_cen$CHROM,fst_cen$BIN_START)))
-
-
-
-recomb <- subset(recomb,paste(recomb$CHROM,recomb$BIN_START) %in% inall)
-
-temp <- subset(fst_admix,paste(fst_admix$CHROM,fst_admix$BIN_START) %in% inall)
-recomb$fst_admix <- temp$MEAN_FST
-
-temp <- subset(fst_cen,paste(fst_cen$CHROM,fst_cen$BIN_START) %in% inall)
-recomb$fst_cen <- temp$MEAN_FST
-
-recomb$outlier_admix <- ifelse(recomb$fst_admix > quantile(recomb$fst_admix,0.95),1,0)
-recomb$outlier_cen <- ifelse(recomb$fst_cen > quantile(recomb$fst_cen,0.95),1,0)
-
-recomb$zfst_admix <-  (recomb$fst_admix - mean(recomb$fst_admix))/sd(recomb$fst_admix)
-recomb$zfst_cen <-  (recomb$fst_cen - mean(recomb$fst_cen))/sd(recomb$fst_cen)
-
-
 
 # Turkey ------------------------------------------------------------------
 

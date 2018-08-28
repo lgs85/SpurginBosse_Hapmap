@@ -40,9 +40,8 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 
 #A continental-scale analysis of genomic variation in a songbird
 
-AUTHOR ORDER A SUGGESTION ONLY - PLEASE ADD/CHANGE IF REQUIRED
 
-Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4^\*, Veronika N. Laine^3^, The Great Tit HapMap Consortium, Martien A.M. Groenen^4^, Kees van Oers^3^, Ben C. Sheldon^1^, Marcel E.  Visser^3^ and Jon Slate^5^\**
+Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4^\*, Kees van Oers^3^, The Great Tit HapMap Consortium, Veronika N. Laine^3^, Martien A.M. Groenen^4^, Ben C. Sheldon^1^, Marcel E.  Visser^3^ and Jon Slate^5^\**
 
 
 1 School of Biological Sciences, University of East Anglia, Norwich Research Park, United Kingdom
@@ -106,109 +105,12 @@ Fig1
 
 **Figure 1** Sampling locations of great tit populations used in the present study. The size of the circles represents the extent of short term LD (markers within 1kb) within each population.
 
-
-\pagebreak
-
-**Table 1** Sampling details for the `r nrow(ll)` European great tit populations.
-
-```{R Table 1}
-Table1 <- ll
-Table1$LD <- NULL
-colnames(Table1) <- c("Population","Latitude","Longitude")
-
-
-temppops <- as.character(paste(Table1$Population))
-countries <- as.character(paste(Table1$Pop))
-
-
-temppops[temppops %in% c("Antwerp_Belgium")] <- "Antwerp"
-temppops[temppops %in% c("Cambridge_UK")] <- "Cambridge"
-temppops[temppops %in% c("Wytham_UK")] <- "Oxford"
-temppops[temppops %in% c("Mariola_Spain")] <- "Mariola"
-temppops[temppops %in% c("Font_Roja_Spain")] <- "Font Roja"
-temppops[temppops %in% c("Gotland_Sweden")] <- "Gotland"
-temppops[temppops %in% c("Harjavalta_Finland")] <- "Harjavalta"
-temppops[temppops %in% c("Oulu_Finland")] <- "Oulu"
-temppops[temppops %in% c("Montpellier_France")] <- "Montpellier"
-temppops[temppops %in% c("La_Rouviere_France")] <- "La Rouviere"
-temppops[temppops %in% c("Loch_Lomond_Scotland")] <- "Loch Lomond"
-temppops[temppops %in% c("Pilis_Mountains_Hungary")] <- "Pilis Mountains"
-temppops[temppops %in% c("Pirio_Muro_Corsica")] <- "Pirio Muro"
-temppops[temppops %in% c("Radolfzell_Germany")] <- "Radolfzell"
-temppops[temppops %in% c("Seewisen_Germany")] <- "Seewisen"
-temppops[temppops %in% c("Roekelse_Bos")] <- "Roekelse Bos"
-temppops[temppops %in% c("Vlieland_NL")] <- "Vlieland"
-temppops[temppops %in% c("Tartu_Estonia")] <- "Tartu"
-temppops[temppops %in% c("Velky_Kosir_Czech_Republic")] <- "Velky Kosir"
-temppops[temppops %in% c("Vienna_Austria")] <- "Vienna"
-temppops[temppops %in% c("Zurich_Switzerland" )] <- "Zurich"                             
-temppops[temppops %in% c("Zvenigorod_Russia")] <- "Zvenigorod"
-
-countries[countries %in% c("Antwerp_Belgium")] <- "Belgium"
-countries[countries %in% c("Cambridge_UK","Wytham_UK")] <- "England"
-countries[countries %in% c("Font_Roja_Spain","Mariola_Spain")] <- "Spain"
-countries[countries %in% c("Gotland_Sweden")] <- "Sweden"
-countries[countries %in% c("Harjavalta_Finland","Oulu_Finland")] <- "Finland"
-countries[countries %in% c("La_Rouviere_France" ,"Montpellier_France")] <- "France"
-countries[countries %in% c("Loch_Lomond_Scotland")] <- "Scotland"
-countries[countries %in% c("Pilis_Mountains_Hungary")] <- "Hungary"
-countries[countries %in% c("Pirio_Muro_Corsica")] <- "Corsica"
-countries[countries %in% c("Radolfzell_Germany","Seewisen_Germany")] <- "Germany"
-countries[countries %in% c("Roekelse_Bos","Westerheide")] <- "Netherlands"
-countries[countries %in% c("Vlieland_NL")] <- "Netherlands (Vlieland)"
-countries[countries %in% c("Tartu_Estonia")] <- "Estonia"
-countries[countries %in% c("Velky_Kosir_Czech_Republic")] <- "Czech Republic"
-countries[countries %in% c("Vienna_Austria")] <- "Austria"
-countries[countries %in% c("Zurich_Switzerland" )] <- "Switzerland"                             
-countries[countries %in% c("Zvenigorod_Russia")] <- "Russia"
-countries[countries %in% c("Romania", "Bulgaria")] <- "Balkans"      
-
-Table1$Population <- temppops  
-Table1$Region <- factor(countries,
-                  levels = c(
-                    "Scotland",
-                    "England",
-                    "Spain",
-                    "France",
-                    "Belgium",
-                    "Netherlands",
-                    "Netherlands (Vlieland)",
-                    "Switzerland",
-                    "Germany",
-                    "Corsica",
-                    "Sardinia",
-                    "Italy",
-                    "Austria",
-                    "Czech Republic",
-                    "Hungary",
-                    "Sweden",
-                    "Finland",
-                    "Estonia",
-                    "Crete",
-                    "Balkans",
-                    "Turkey",
-                    "Russia"))
-
-Table1$N <- table(pops$o_pop)
-
-Table1 <- Table1[order(Table1$Region),c("Population","Region","N","Latitude","Longitude")]
-kable(Table1,digits = 3,row.names = F)
-
-
-```
-
-\pagebreak
-
 ####Analyses
 Unless stated otherwise, all population genetic statistics were calculated in PLINK version 1.9 [@Purcell2007], and downstream analysis and plotting was carried out in R version 3.3 [@RDevelopmentCoreTeam2011]. In each population, we estimated linkage disequilibrium ($R^2$) for each pair of markers within 50kb on the same chromosome, and compared this to physical distance between marker pairs. For a simple comparison of short-range LD among populations, we also calculated, for each population, mean LD between all pairs of markers within 1kb. We calculated observed heterozygosity for each SNP and population using a reduced SNP dataset, which was pruned based on linkage disequilibrium to remove all markers with $R^2$ > 0.1, then thinned with a probability of retaining each variant of 0.25.
 
 We calculated genome-wide (mean) $F_{ST}$ between each pair of populations using the pruned and thinned dataset described above. Pairwise $F_{ST}$ was compared to geographic distance between populations using Mantel tests, implemented in the Ecodist package in R [@Goslee2007]. We tested whether genetic structure was related to distance from candidate refugial populations (in the Balkans, Turkey, Spain and Italy), using Pearson correlations. We also estimated population structure using Admixture version 1.3, with default settings [@Alexander2009]. We varied values of $K$ from one to ten; by which time increasing values of $K$ provided no informative information about population structure (see results). Model support for each value of $K$ was estimated by calculating 5-fold cross-validation error. Finally, we visualised the evolutionary history among European great populations by generating a maximum likelihood tree in TreeMix version 1.13 [@Pickrell2012]. We rooted the tree using a sample of *P. minor* individuals sampled from Amur, Russia. We fitted models allowing for range of migration events (0-10), and used a window size of 500 SNPs [@Pickrell2012]. To assess model fit, we calculated the proportion of variance in relatedness between populations explained by each model [equation 30 in @Pickrell2012].
 
-We examined the genomic landscape of differentiation across European great tit populations by calculating $F_{ST}$ for all markers. For plotting and analysis, we calculated mean $F_{ST}$ values in 500kb bins, using custom R and python scripts. We also calculated standardised $F_{ST}$ (hereafter $ZF_{ST}$) by mean-centring windowed $F_{ST}$ values and dividing them by the standard deviation among windows. We calculated windowed $F_{ST}$ and $ZF_{ST}$ between the most structured populations, as defined by Admixture analysis (hereafter "marginal populations"), and between populations within a panmictic cluster in central Europe (hereafter "central European populations"). We tested whether the same regions of the genome were highly structured among these different sets of populations by comparing windowed $F_{ST}$ values, using Pearson correlations. We also specifically tested whether $F_{ST}$ outliers were more likely to occur in the same regions of the genome; we defined outlier regions as 500kb bins with mean $F_{ST}$ values greater than the 95th percentile [following @Samuk2017], and tested whether outliers co-occurred among datasets using chi-squared tests.
-
-We tested whether the landscape of genomic differentiation was related to recombination rate variation using a recombination map previously developed for the great tit using a 10K SNP chip [@VanOers2014], from which we estimated recombination rates in 500kb non-overlapping windows. We tested whether outlier presence/absence was related to 500kb averaged recombination rates using logistic regression.
-
-Finally, we explored how the relationship between genomic differentiation and recombination rate variation was related to geography. We calculated genome-wide differentiation in 500kb bins for all `r nrow(pd)` population pairs, and identified $F_{ST}$ outlier regions as above. Then for every pair of populations we performed logistic regressions and outlier presence/absence against recombination rate, and extracted the slope of these models. We tested whether variation in these slopes were related to pairwise geographic distance  and pairwise genome-wide $F_{ST}$, using Mantel tests. We also tested whether the relationships between divergence and recombination varied according to distance from potential refugial populations, using Pearson correlation.
+We examined the genomic landscape of differentiation across European great tit populations by calculating $F_{ST}$ in 500kb bins, using python scripts obtained from Github (https://github.com/simonhmartin/genomics_general). We did not use estimates $d_{xy}$, as this parameter is difficult to estimate accurately from single SNP loci [@Cruickshank2014]. We also calculated standardised $F_{ST}$ (hereafter $ZF_{ST}$) by mean-centring windowed values and dividing them by the standard deviation among windows. We defined outlier regions as 500kb bins with $zF_{ST}$ values greater than ten. We tested whether the landscape of genomic differentiation was related to recombination rate variation using a recombination map previously developed for the great tit using a 10K SNP chip [@VanOers2014], from which we estimated recombination rates in 500kb non-overlapping windows.
 
 
 ##Results
@@ -230,13 +132,12 @@ temp$pi_pop1 <- temp$pi_Turkey
 Fig2A <- rbind(dw,temp) %>%
   subset(pi_pop1 > 0.01) %>%
   ggplot(aes(x = pop1,y = pi_pop1))+
-  geom_jitter(col = "grey",width = 0.1)+
-  geom_boxplot(notch = T,outlier.shape = NA)+
+  geom_boxplot(notch = T,outlier.colour = "grey")+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 90))+
   ylab(expression(pi[SNP]))+
   xlab("")+
-  ggtitle("B")
+  ggtitle("A")
 rm(temp)
 
 Fig2B <- subset(pd,p1 == "Turkey" | p2 == "Turkey") %>%
@@ -284,12 +185,134 @@ plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
 \pagebreak
 
 #### Genomic landscapes of differentiation
-We examined the landscape of genomic divergence between each population and Turkey, and found that $F_{ST}$ varied markedly across the genome in all comparisons (Fig. 4A; Fig. SXX). 
+We examined the landscape of genomic divergence between each population and Turkey, and found that $F_{ST}$ varied markedly across the genome in all comparisons (Fig. 4; Fig. S5). Outlier regions (windows with $zF_{ST}$ > 10) were found 
 
+
+\pagebreak
+
+
+```{r Figure 4,fig.width = 8,fig.height = 6}
+dw$Window <- paste(dw$scaffold,dw$start)
+temp <- subset(subset(dw,!(scaffold %in% c(36))),pop1!="Balkans")
+temp$FST[temp$FST < 0] <- 0
+temp$pop1 <- factor(temp$pop1,levels = names(tapply(temp$FST,temp$pop1,mean)[order(tapply(temp$FST,temp$pop1,mean))]))
+
+temp2 <- subset(temp,zFST > 10) %>%
+  ddply(.(Window),
+        summarise,
+        n_hits = length(zFST))
+
+x1 <- droplevels(subset(subset(temp,zFST > 10),Window %in% temp2$Window))
+x1$nhits <- tapply(x1$zFST,x1$Window,length)[x1$Window]
+x1$nhf <- ifelse(x1$nhits > 2,"Shared","Unique")
+
+Fig4 <- ggplot(temp,aes(y = FST,x = order,col = factor(scaffold)))+
+  theme_bw()+
+  theme(axis.text.x = element_blank(),
+        legend.position = "none")+
+    geom_line()+
+    geom_vline(data = x1,aes(xintercept = order,lty = nhf),col = "red",alpha = 0.15,lwd = 1.2)+
+  facet_wrap(~pop1)+
+              ylab(expression(italic(F)[ST]))+
+            xlab("Genomic position")+
+  scale_color_manual(values = rep(c("navy","grey"),30))
+Fig4
+```
+
+**Figure 4** Landscapes of genomic differentiation in European great tit populations. $F_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison between with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $F_{ST}$ values at least 10 standard deviations greater than the global mean for that comparison) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines).
+
+\pagebreak
+
+
+
+
+```{r Figure 5,fig.width = 8,fig.height = 6}
+dw$Window <- paste(dw$scaffold,dw$start)
+temp <- subset(subset(dw,!(scaffold %in% c(36))),pop1!="Balkans")
+temp$FST[temp$FST < 0] <- 0
+temp$pop1 <- factor(temp$pop1,levels = names(tapply(temp$FST,temp$pop1,mean)[order(tapply(temp$FST,temp$pop1,mean))]))
+
+temp1 <- ddply(temp,
+               .(pop1),
+               mutate,
+               OR = rank(MEAN_cM))
+
+
+temp2 <- subset(temp,zFST > 10) %>%
+  ddply(.(Window),
+        summarise,
+        n_hits = length(zFST),
+        meanfst = mean(zFST),
+        r = mean(MEAN_cM))
+
+x1 <- droplevels(subset(subset(dw,zFST > 10),Window %in% temp2$Window))
+x1$nhits <- tapply(x1$zFST,x1$Window,length)[x1$Window]
+x1$nhf <- ifelse(x1$nhits > 2,"Shared","Unique")
+
+Fig5 <- ggplot(temp1,aes(y = FST,x = log(MEAN_cM+1)))+
+  theme_bw()+
+  theme(
+        legend.position = "none")+
+    geom_point(col = "grey")+
+  geom_point(data = x1,aes(x = log(MEAN_cM+1),y = FST,col = nhf))+
+  scale_color_manual(values = c("red","navy"))+
+  facet_wrap(~pop1,scales= "free_y")+
+              ylab(expression(italic(F)[ST]))+
+            xlab("Log recombination rate")
+Fig5
+
+
+```
+
+**Figure 5** Genomic differentiation and recombination rate variation in European great tit populations. Each point is a 500kb window, with each panel displaying a pairwise comparison between with the proposed refugial population in Turkey. Coloured points represent $F_{ST}$ outliers (mean $zF_{ST}$ values > 10) shared across more than two comparisons (red), or unique to one or two comparisons (navy).
+
+\pagebreak
+
+```{r Figure 5,fig.width = 8,fig.height = 6}
+dw$Window <- paste(dw$scaffold,dw$start)
+temp <- subset(subset(dw,!(scaffold %in% c(36))),pop1!="Balkans")
+temp$FST[temp$FST < 0] <- 0
+temp$pop1 <- factor(temp$pop1,levels = names(tapply(temp$FST,temp$pop1,mean)[order(tapply(temp$FST,temp$pop1,mean))]))
+
+temp1 <- ddply(temp,
+               .(pop1),
+               mutate,
+               OR = rank(MEAN_cM))
+
+
+temp2 <- subset(temp,zFST > 10) %>%
+  ddply(.(Window),
+        summarise,
+        n_hits = length(zFST),
+        meanfst = mean(zFST),
+        r = mean(MEAN_cM))
+
+x1 <- droplevels(subset(subset(dw,zFST > 10),Window %in% temp2$Window))
+x1$nhits <- tapply(x1$zFST,x1$Window,length)[x1$Window]
+x1$nhf <- ifelse(x1$nhits > 2,"Shared","Unique")
+
+Fig5 <- ggplot(temp1,aes(x = FST))+
+  theme_bw()+
+  theme(
+        legend.position = "none")+
+geom_density()+
+  scale_color_manual(values = c("red","navy"))+
+  facet_wrap(~pop1,scales = "free")+
+              ylab(expression(italic(F)[ST]))+
+            xlab("Log recombination rate")
+Fig5
+
+Fig5 <- ggplot(temp1,aes(x = FST,fill = pop1))+
+  theme_bw()+
+  theme(
+        legend.position = "none")+
+geom_density(alpha = 0.2)+
+              ylab(expression(italic(F)[ST]))+
+            xlab("Log recombination rate")
+Fig5
+```
 
 ##Discussion
-
-UNFINISHED - I WANT TO FINALISE THE ANALYSES/RESULTS BEFORE GOING INTO DETAIL HERE. IGNORE FOR NOW OR ADD NOTES/THOUGHTS. 
 
 In this study we use a large panel of genetic markers to provide insight into the evolutionary history of the great tit in Europe. We found that, consistent with previous research in this species, levels of genomic variation were consistent with a large effective population and substantial levels of gene flow among populations [@Kvist2003; @Laine2016]. We then examine how genomic landscapes of differentiation vary among different sets of populations, and find that i) islands of differentiation arise among extremely closely related populations, ii) these same islands of differentiation arise in more distantly related populations, iii) islands of differentiation arise in regions of low recombination, iv) the relationship between recombination rate and the genomic landscape of differentiation varies substantially among populations. These findings have several implications for how we interpret patterns of genomic variation among natural populations.
 
@@ -308,121 +331,3 @@ PLEASE ADD. LGS was funded by fellowships from the Edward Grey Institute for Orn
 ##References
 
 <div id="refs"></div>
-
-
-\pagebreak
-
-##Tables and Figures
-
-\pagebreak
-
-**Table 2** Outliers
-
-```{r Table 2}
-dw$Window <- paste(dw$scaffold,dw$start)
-temp2 <- subset(dw,zFST > 10) %>%
-  ddply(.(Window),
-        summarise,
-        n_hits = length(zFST))
-
-x1 <- subset(subset(dw,zFST > 10),Window %in% temp2$Window) %>%
-  ddply(.(scaffold, start),
-        summarise,
-        n_hits = length(pop1),
-        countries = paste(unique(pop1),collapse = ", "))
-
-colnames(x1) <- c("Chromosome","Position","Number of outliers","Populations")
-kable(x1)
-
-```
-
-
-\pagebreak
-
-
-
-##Figure legends
-
-
-
-
-**Figure 4** Landscapes of genomic differentiation among European great tit populations. **A** Manhattan plot of $ZF_{ST}$ in 500kb windows across the central (top) and marginal (bottom) populations. **B** Relationship between windowed $ZF_{ST}$ values in the marginal and central populations. Dotted lines represent 95% quantiles, and outlier loci are coloured in navy. **C,D** Recombination rate at outlier and non-outlier windows in the central (*C*) and marginal (*D*) populations.
-
-**Figure 5** Genomic differentiation and recombination in European great tit populations. **A** Heatmap of the relationship (i.e. the slope from a logistic regression) between outlier presence/absence and recombination rate among all pairs of populations. **B,C** The slope of this relationship in relation to geographical (**C**) and genetic (**D**) distance to a proposed refugial population in Turkey.
-
-
-
-
-
-
-
-
-
-
-
-**Figure 4**
-```{r Figure 4,fig.width = 8,fig.height = 6}
-temp <- subset(dw,scaffold <30)
-#temp$MEAN_cM[temp$MEAN_cM < 0] <- 0
-temp$FST[temp$FST < 0] <- 0
-
-x <- subset(pd,p1 == "Turkey" | p2 == "Turkey") %>%
-  
-  arrange(dist) 
-apply(x[,c(1:2)],1,function(x) x[x!="Turkey"])
-
-
-
-temp <- subset(temp,pop1 != "Balkans")
-ggplot(temp,aes(y = FST,x = order,col = factor(scaffold)))+
-  geom_line()+
-  theme_bw()+
-  theme(axis.text.x = element_blank(),
-        legend.position = "none")+
-  facet_wrap(~pop1)+
-              ylab(expression(italic(F)[ST]))+
-            xlab("Genomic position")+
-  scale_color_manual(values = rep(c("navy","grey"),30))
-```
-
-\pagebreak
-
-**Figure 5**
-```{r Figure 5,fig.width = 8,fig.height = 8}
-
-temp <- subset(subset(dw,FST < 0.8),MEAN_cM < 40)
-temp$MEAN_cM[temp$MEAN_cM < 0] <- 0
-temp$FST[temp$FST < 0] <- 0
-
-x <- tapply(temp$FST,temp$pop1,mean)
-x1 <- names(x[order(x)])
-
-temp$pop1 <- factor(temp$pop1,levels = x1)
-
-ggplot(temp,aes(y = (zFST),x = order))+
-  geom_point(col = "grey")+
-  theme_bw()+
-  facet_wrap(~pop1)
-
-
-
-```
-
-\pagebreak
-
-**Figure 6**
-```{r Figure 6,fig.width = 8,fig.height = 6}
-temp <- subset(subset(dw,FST < 0.8),scaffold == 33)
-temp$MEAN_cM[temp$MEAN_cM < 0] <- 0
-temp$FST[temp$FST < 0] <- 0
-
-x <- tapply(temp$FST,temp$pop1,mean)
-x1 <- names(x[order(x)])
-
-temp$pop1 <- factor(temp$pop1,levels = x1)
-
-ggplot(temp,aes(y = (FST),x = (start)))+
-  geom_line(col = "grey")+
-  theme_bw()+
-  facet_wrap(~pop1)
-```

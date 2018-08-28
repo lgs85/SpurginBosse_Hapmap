@@ -43,6 +43,7 @@ for(i in c(1:length(fn)))
   colnames(cd)[6:9] <- c("pi_pop1","pi_Turkey","dxy","FST")
   cd$pop1 <- rep(popname[i],nrow(cd))
   cd$zFST <- (cd$FST - mean(cd$FST))/sd(cd$FST)
+  cd$zdxy <- (cd$dxy - mean(cd$dxy))/sd(cd$dxy)
   cd$order <- c(1:nrow(cd))
   if(i == 1) dw <- cd else dw <- rbind(dw,cd)
 }

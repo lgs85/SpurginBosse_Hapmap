@@ -1,6 +1,6 @@
 ---
 output:
-  word_document:
+  pdf_document:
 bibliography: MyBib.bib
 csl: JAE.csl
 header-includes: \usepackage{graphicx}
@@ -39,6 +39,97 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 
 #Supplementary material for "A continental-scale analysis of genomic variation in a songbird"
 
+**Table 1** Sampling details for the `r nrow(ll)` European great tit populations.
+
+```{R Table 1}
+Table1 <- ll
+Table1$LD <- NULL
+colnames(Table1) <- c("Population","Latitude","Longitude")
+
+
+temppops <- as.character(paste(Table1$Population))
+countries <- as.character(paste(Table1$Pop))
+
+
+temppops[temppops %in% c("Antwerp_Belgium")] <- "Antwerp"
+temppops[temppops %in% c("Cambridge_UK")] <- "Cambridge"
+temppops[temppops %in% c("Wytham_UK")] <- "Oxford"
+temppops[temppops %in% c("Mariola_Spain")] <- "Mariola"
+temppops[temppops %in% c("Font_Roja_Spain")] <- "Font Roja"
+temppops[temppops %in% c("Gotland_Sweden")] <- "Gotland"
+temppops[temppops %in% c("Harjavalta_Finland")] <- "Harjavalta"
+temppops[temppops %in% c("Oulu_Finland")] <- "Oulu"
+temppops[temppops %in% c("Montpellier_France")] <- "Montpellier"
+temppops[temppops %in% c("La_Rouviere_France")] <- "La Rouviere"
+temppops[temppops %in% c("Loch_Lomond_Scotland")] <- "Loch Lomond"
+temppops[temppops %in% c("Pilis_Mountains_Hungary")] <- "Pilis Mountains"
+temppops[temppops %in% c("Pirio_Muro_Corsica")] <- "Pirio Muro"
+temppops[temppops %in% c("Radolfzell_Germany")] <- "Radolfzell"
+temppops[temppops %in% c("Seewisen_Germany")] <- "Seewisen"
+temppops[temppops %in% c("Roekelse_Bos")] <- "Roekelse Bos"
+temppops[temppops %in% c("Vlieland_NL")] <- "Vlieland"
+temppops[temppops %in% c("Tartu_Estonia")] <- "Tartu"
+temppops[temppops %in% c("Velky_Kosir_Czech_Republic")] <- "Velky Kosir"
+temppops[temppops %in% c("Vienna_Austria")] <- "Vienna"
+temppops[temppops %in% c("Zurich_Switzerland" )] <- "Zurich"                             
+temppops[temppops %in% c("Zvenigorod_Russia")] <- "Zvenigorod"
+
+countries[countries %in% c("Antwerp_Belgium")] <- "Belgium"
+countries[countries %in% c("Cambridge_UK","Wytham_UK")] <- "England"
+countries[countries %in% c("Font_Roja_Spain","Mariola_Spain")] <- "Spain"
+countries[countries %in% c("Gotland_Sweden")] <- "Sweden"
+countries[countries %in% c("Harjavalta_Finland","Oulu_Finland")] <- "Finland"
+countries[countries %in% c("La_Rouviere_France" ,"Montpellier_France")] <- "France"
+countries[countries %in% c("Loch_Lomond_Scotland")] <- "Scotland"
+countries[countries %in% c("Pilis_Mountains_Hungary")] <- "Hungary"
+countries[countries %in% c("Pirio_Muro_Corsica")] <- "Corsica"
+countries[countries %in% c("Radolfzell_Germany","Seewisen_Germany")] <- "Germany"
+countries[countries %in% c("Roekelse_Bos","Westerheide")] <- "Netherlands"
+countries[countries %in% c("Vlieland_NL")] <- "Netherlands (Vlieland)"
+countries[countries %in% c("Tartu_Estonia")] <- "Estonia"
+countries[countries %in% c("Velky_Kosir_Czech_Republic")] <- "Czech Republic"
+countries[countries %in% c("Vienna_Austria")] <- "Austria"
+countries[countries %in% c("Zurich_Switzerland" )] <- "Switzerland"                             
+countries[countries %in% c("Zvenigorod_Russia")] <- "Russia"
+countries[countries %in% c("Romania", "Bulgaria")] <- "Balkans"      
+
+Table1$Population <- temppops  
+Table1$Region <- factor(countries,
+                  levels = c(
+                    "Scotland",
+                    "England",
+                    "Spain",
+                    "France",
+                    "Belgium",
+                    "Netherlands",
+                    "Netherlands (Vlieland)",
+                    "Switzerland",
+                    "Germany",
+                    "Corsica",
+                    "Sardinia",
+                    "Italy",
+                    "Austria",
+                    "Czech Republic",
+                    "Hungary",
+                    "Sweden",
+                    "Finland",
+                    "Estonia",
+                    "Crete",
+                    "Balkans",
+                    "Turkey",
+                    "Russia"))
+
+Table1$N <- table(pops$o_pop)
+
+Table1 <- Table1[order(Table1$Region),c("Population","Region","N","Latitude","Longitude")]
+kable(Table1,digits = 3,row.names = F)
+
+
+```
+
+
+\pagebreak
+
 
 ```{r FigS1}
 FigS1 <- ggplot(ld2,aes(x = dist/1000,y = meanR2))+
@@ -52,8 +143,10 @@ FigS1
 
 **Figure S1** Linkage disequilibrium in European great tit populations. Lines are means of $R^2$ values for all pairs of markers within 100bp distance bins.
 
+\pagebreak
 
-```{r FigS2,fig.width = 7,fig.height = 12}
+
+```{r FigS2,fig.width = 7,fig.height = 10}
 
 for(i in 2:9)
 {
@@ -69,8 +162,10 @@ FigS2I <- structureplot(admix10,pops,10,xlab = T)+
 
 multiplot(FigS2A,FigS2B,FigS2C,FigS2D,FigS2E,FigS2F,FigS2G,FigS2H,FigS2I,layout = matrix(c(1:8,9,9),nrow = 10))
 ```
+
 **Figure S2** Admixture analyses at $K$ = 2 to 10 in European Great tit populations.
 
+\pagebreak
 
 
 
@@ -89,6 +184,8 @@ FigS3
 
 **Figure S3** Cross-validation error from admixture analyses at $K$ = 1 to 10.
 
+
+\pagebreak
 
 
 ```{r Fig S4,fig.width = 5,fig.height = 5}
@@ -113,35 +210,41 @@ FigS4
 **Figure S4** Proportion of relatedness explained among populations in relation to the number of migration events allowed in Treemix analyses.
 
 
+\pagebreak
 
 
 
 
 
-**Figure 4**
-```{r Figure S4,fig.width = 8,fig.height = 6}
 
-temp <- subset(dw,FST < 0.4)
-temp$MEAN_cM[temp$MEAN_cM < 0] <- 0
+```{r Figure S5,fig.width = 8,fig.height = 6}
+
+dw$Window <- paste(dw$scaffold,dw$start)
+temp <- subset(subset(dw,!(scaffold %in% c(36))),pop1!="Balkans")
 temp$FST[temp$FST < 0] <- 0
+temp$pop1 <- factor(temp$pop1,levels = names(tapply(temp$FST,temp$pop1,mean)[order(tapply(temp$FST,temp$pop1,mean))]))
 
-x <- tapply(temp$FST,temp$pop1,mean)
-x1 <- names(x[order(x)])
+temp2 <- subset(temp,zFST > 10) %>%
+  ddply(.(Window),
+        summarise,
+        n_hits = length(zFST))
 
-temp$pop1 <- factor(temp$pop1,levels = x1)
+x1 <- droplevels(subset(subset(dw,zFST > 10),Window %in% temp2$Window))
+x1$nhits <- tapply(x1$zFST,x1$Window,length)[x1$Window]
+x1$nhf <- ifelse(x1$nhits > 2,"Shared","Unique")
 
-temp <- subset(temp,pop1 != "Balkans")
-ggplot(temp,aes(y = FST,x = order,col = factor(scaffold)))+
-  geom_line()+
+FigS5 <- ggplot(temp,aes(y = zFST,x = order,col = factor(scaffold)))+
   theme_bw()+
   theme(axis.text.x = element_blank(),
         legend.position = "none")+
+    geom_line()+
+    geom_vline(data = x1,aes(xintercept = order,lty = nhf),col = "red",alpha = 0.15,lwd = 1.2)+
   facet_wrap(~pop1)+
-              ylab(expression(italic(F)[ST]))+
+              ylab(expression(italic(zF)[ST]))+
             xlab("Genomic position")+
-  scale_color_manual(values = rep(c("grey","navy"),30))
-
+  scale_color_manual(values = rep(c("navy","grey"),30))
+FigS5
 ```
 
-**Figure S5** FST in all comparisons with Turkey
+**Figure S5** Landscapes of relative genomic differentiation in European great tit populations. $zF_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison between with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $zF_{ST}$ > 10) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines).
 
