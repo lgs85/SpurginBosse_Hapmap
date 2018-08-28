@@ -281,43 +281,27 @@ for(i in 1:nrow(recomb))
 
 
 
-# Turkey ------------------------------------------------------------------
-
-
-inall <- Reduce(intersect, list(paste(recomb$CHROM,recomb$BIN_START),
-                                paste(tu$CHROM,tu$BIN_START)))
-
-tu <- subset(tu,paste(tu$CHROM,tu$BIN_START) %in% inall)
-tu$r <- NA
-
-for(i in 1:nrow(recomb))
-{
-  tu$r[paste(tu$CHROM,tu$BIN_START) == paste(recomb$CHROM[i],recomb$BIN_START[i])] <- recomb$MEAN_cM[i]
-}
 
 
 
-q <- quantile(tu$r,0.5)
-tu$rf <- ifelse(tu$r < q,"Low","Not low")
+# Outlier regions ---------------------------------------------------------
 
-tu$Pop <- factor(tu$Pop,levels = unique(tu$Pop))
+dw$Window <- paste(dw$scaffold,dw$start)
+temp <- subset(subset(dw,!(scaffold %in% c(36))),pop1!="Balkans")
+temp$FST[temp$FST < 0] <- 0
+temp$pop1 <- factor(temp$pop1,levels = names(tapply(temp$FST,temp$pop1,mean)[order(tapply(temp$FST,temp$pop1,mean))]))
 
-tu <- subset(tu,CHROM < 36)
-tu$MEAN_FST[tu$MEAN_FST < 0] <- 0
-library(ggplot2)
 
-tu$x <- NA
-pops2 <- unique(tu$Pop)
-for(i in 1:length(pops2))
-{
-  tu$x[tu$Pop == pops2[i]] <- 1:sum(tu$Pop == pops2[i])
-}
+temp2 <- subset(temp,zFST > 10) %>%
+  ddply(.(Window),
+        summarise,
+        n_hits = length(zFST),
+        meanfst = mean(zFST),
+        r = mean(MEAN_cM))
 
-tu$FST_F <- NA
-pops2 <- unique(tu$Pop)
-for(i in 1:length(pops2))
-{
-  q <- quantile(tu$MEAN_FST[tu$Pop == pops2[i]],0.99)
-  tu$FST_F[tu$Pop == pops2[i] & tu$MEAN_FST > q] <- "outlier"
-  }
-tu$FST_F[is.na(tu$FST_F)] <- "not_outlier"
+outliers <- droplevels(subset(subset(dw,zFST > 10),Window %in% temp2$Window))%>%
+  ddply(.(Window),
+        summarise,
+        nhits = length(zFST),
+        Countries = paste(pop1,collapse = ", "))
+rm(temp,temp2)

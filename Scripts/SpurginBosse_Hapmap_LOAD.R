@@ -6,6 +6,7 @@ library(reshape)
 library(Rmisc)
 library(geosphere)
 library(ecodist)
+library(kableExtra)
 
 ll <- read.table("Data/LatLongAllPops.txt",header = F,stringsAsFactors = F)
 

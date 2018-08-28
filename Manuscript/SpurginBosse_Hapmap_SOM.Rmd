@@ -8,6 +8,10 @@ header-includes: \usepackage{graphicx}
     \doublespacing
     \usepackage{lineno}
     \linenumbers
+    \usepackage{pdflscape}
+    \newcommand{\blandscape}{\begin{landscape}}
+    \newcommand{\elandscape}{\end{landscape}}
+
 ---
 ```{r setup, include = F}
 
@@ -39,9 +43,9 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 
 #Supplementary material for "A continental-scale analysis of genomic variation in a songbird"
 
-**Table 1** Sampling details for the `r nrow(ll)` European great tit populations.
+**Table S1** Sampling details for the `r nrow(ll)` European great tit populations.
 
-```{R Table 1}
+```{R Table S1}
 Table1 <- ll
 Table1$LD <- NULL
 colnames(Table1) <- c("Population","Latitude","Longitude")
@@ -122,13 +126,37 @@ Table1$Region <- factor(countries,
 Table1$N <- table(pops$o_pop)
 
 Table1 <- Table1[order(Table1$Region),c("Population","Region","N","Latitude","Longitude")]
-kable(Table1,digits = 3,row.names = F)
+kable(Table1,digits = 3,row.names = F,format = "latex", booktabs = TRUE) %>%
+          kable_styling(latex_options = "scale_down")
 
 
 ```
 
 
 \pagebreak
+\blandscape
+
+**Table S2** 
+
+```{r Table S2}
+temp <- strsplit(outliers$Window,split = " ")
+TS2 <- cbind(matrix(unlist(temp),ncol = 2,byrow=T),outliers$nhits,outliers$Countries)
+TS2[,2] <- paste(round(as.numeric(TS2[,2])/10e05,1))
+
+colnames(TS2) <- c("Chromosome","Position (MB)","Number of outliers","Outlier comparisons")
+TS2 <- TS2[order(as.numeric(TS2[,"Number of outliers"]),decreasing = T),]
+TS2[,"Outlier comparisons"] <- gsub("_"," ",TS2[,"Outlier comparisons"])
+TS2[,"Chromosome"] <- gsub("30","1A",TS2[,"Chromosome"])
+TS2[,"Chromosome"] <- gsub("33","4A",TS2[,"Chromosome"])
+
+kable(TS2,format = "latex", booktabs = TRUE) %>%
+          kable_styling(latex_options = "scale_down")
+
+```
+
+\pagebreak
+\elandscape
+
 
 
 ```{r FigS1}

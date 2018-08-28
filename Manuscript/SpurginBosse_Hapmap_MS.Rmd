@@ -65,7 +65,7 @@ Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4^\*, Kees van Oers^3^, The Great Tit Hap
 
 ##Abstract
 
-A major aim of evolutionary biology is to understand why patterns of genetic variation vary within genomes, and among populations and species. Widespread continental species are interesting models for studying how evolution shapes patterns of genomic divergence, as they are associated with recent and rapid colonisations, large population sizes and high levels of gene flow. We studied patterns of genomic variation among `r nrow(ll)` great tit (*Parus major*) populations in Europe. We found that genome-wide variation was consistent with a recent colonisation across Europe from a single refugium in the Balkans and/or Turkey. The highest levels of genome-wide structure were found between island populations in Crete, Sardinia and Corsica, most likely as a result of mild bottlenecks and reduced gene flow among these populations. We then found that the landscape of genomic differentiation was highly heterogeneous, with clear "islands of divergence", even among ostensibly panmictic great tit populations. Islands of divergence were consistently found in regions of low recombination, even among the most closely related populations, suggesting that background selection can rapidly promote population differentiation among large, recently colonised populations undergoing gene flow. Finally, we found that the relationship between recombination and the landscape of genomic differentiation mirrored the population history of great tits in Europe, with the strongest relationship between population divergence and recombination found among the most distantly related populations. Together, our findings suggest that studies of genomic divergence in the wild should consider population history, demography and genomic architecture, as well as likely patterns of natural selection.
+A major aim of evolutionary biology is to understand why patterns of genetic variation vary within genomes, and among populations and species. Widespread continental species are interesting models for studying how evolution shapes patterns of genomic divergence, as they are associated with recent and rapid colonisations, large population sizes and high levels of gene flow. We studied patterns of genomic variation among `r nrow(ll)` great tit (*Parus major*) populations in Europe. We found that genome-wide variation was consistent with a recent colonisation across Europe from a single refugium in the Balkans and/or Turkey. The highest levels of genome-wide structure were found between island populations in Crete, Sardinia and Corsica, most likely as a result of mild bottlenecks and reduced gene flow among these populations. We then found that the landscape of genomic differentiation was highly heterogeneous, with clear "islands of divergence", even among ostensibly panmictic great tit populations. Islands of divergence were consistently found in regions of low recombination, even among the most closely related populations. suggesting that background selection can rapidly promote population differentiation among large, recently colonised populations undergoing gene flow. Finally, we found that the relationship between recombination and the landscape of genomic differentiation mirrored the population history of great tits in Europe, with the strongest relationship between population divergence and recombination found among the most distantly related populations. Together, our findings suggest that studies of genomic divergence in the wild should consider population history, demography and genomic architecture, as well as likely patterns of natural selection.
 
 ##Introduction
 
@@ -112,6 +112,7 @@ We calculated genome-wide (mean) $F_{ST}$ between each pair of populations using
 
 We examined the genomic landscape of differentiation across European great tit populations by calculating $F_{ST}$ in 500kb bins, using python scripts obtained from Github (https://github.com/simonhmartin/genomics_general). We did not use estimates $d_{xy}$, as this parameter is difficult to estimate accurately from single SNP loci [@Cruickshank2014]. We also calculated standardised $F_{ST}$ (hereafter $ZF_{ST}$) by mean-centring windowed values and dividing them by the standard deviation among windows. We defined outlier regions as 500kb bins with $zF_{ST}$ values greater than ten. We tested whether the landscape of genomic differentiation was related to recombination rate variation using a recombination map previously developed for the great tit using a 10K SNP chip [@VanOers2014], from which we estimated recombination rates in 500kb non-overlapping windows.
 
+To gain further insight into how selection may have shaped variation in outlier regions, we examined patterns of haplotype variation. MIRTE TO ADD.
 
 ##Results
 
@@ -170,7 +171,8 @@ multiplot(Fig2A,Fig2B,Fig2C,layout = matrix(c(1,2,3,3),nrow = 2,byrow = T))
 
 Admixture analysis revealed patterns of genetic structure corresponding to geographical variation in European great tits (Fig. S2). The $K$ = 2 analysis assigned individuals in Sardinia and Corsica to one genetic cluster, and the remaining populations to the second. At $K$ = 3 (the model that best fitted the great tit data; Fig. S3), Spain was separated from the rest of mainland Europe. Increasing values of $K$ resulted of the separation of populations in Scotland ($K$ = 4), Sardinia (from Corsica; $K$ = 5), France ($K$ = 6), Crete ($K$ = 7) and England ($K$ = 8). The Admixture output at $K$ = 8 is displayed in Fig. 2C; further increases in $K$ did not generate patterns of structure that corresponded to geographical variation (Fig. S2), and were increasingly less well supported (Fig. S3).
 
-Maximum likelihood analyses implemented in Treemix showed that a model with no migration explained 97.8% of variance in relatedness between populations; increasing the number of migration events substantially improved the percentage of relatedness explained, up to 99.7% when 10 migration events were fitted (Fig. S4). In Figure 3 we display the maximum likelihood tree with 2 migration events, after which the variance in relatedness explained plateaued when more migration events were added (Fig. S4). The tree was generally characterised by short branch lengths, with the exception of the island populations of Sardinia and Crete, which were grouped with the population from mainland Italy.  The Spanish and Corsican populations were also grouped together, as were populations from Turkey and the Balkans, and populations from England and Scotland (Fig. 3). The two fitted migration edges both involved Sardinia, involving migration from eastern Europe, and to Corsica (Fig. 3).
+Maximum likelihood analyses implemented in Treemix showed that a model with no migration explained 97.8% of variance in relatedness between populations; increasing the number of migration events substantially improved the percentage of relatedness explained, up to 99.7% when 10 migration events were fitted (Fig. S4). In Figure 3 we display the maximum likelihood tree with 2 migration events, after which the variance in relatedness explained plateaued when more migration events were added (Fig. S4). The tree was generally characterised by short branch lengths, with the exception of the island populations of Sardinia and Crete, which were grouped with the population from mainland Italy. The Spanish and Corsican populations were also grouped together, as were populations from Turkey and the Balkans, and populations from England and Scotland (Fig. 3). The two fitted migration edges both involved Sardinia, involving migration from eastern Europe, and to Corsica (Fig. 3).
+
 
 
 \pagebreak
@@ -185,7 +187,7 @@ plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
 \pagebreak
 
 #### Genomic landscapes of differentiation
-We examined the landscape of genomic divergence between each population and Turkey, and found that $F_{ST}$ varied markedly across the genome in all comparisons (Fig. 4; Fig. S5). Outlier regions (windows with $zF_{ST}$ > 10) were found 
+We examined the landscape of genomic divergence between each population and Turkey, and found that $F_{ST}$ varied markedly across the genome in all comparisons (Fig. 4; Fig. S5). Outlier regions (windows with $zF_{ST}$ > 10) were found in all comparisons apart from Crete and Sardinia, where overall levels of divergence were highest (Fig. 4). Of the XX outlier regions, XX were found in only one or two comparisons, while the other XX were found in XX, XX and XX comparisons, respectively (Table S2).
 
 
 \pagebreak
@@ -232,11 +234,6 @@ temp <- subset(subset(dw,!(scaffold %in% c(36))),pop1!="Balkans")
 temp$FST[temp$FST < 0] <- 0
 temp$pop1 <- factor(temp$pop1,levels = names(tapply(temp$FST,temp$pop1,mean)[order(tapply(temp$FST,temp$pop1,mean))]))
 
-temp1 <- ddply(temp,
-               .(pop1),
-               mutate,
-               OR = rank(MEAN_cM))
-
 
 temp2 <- subset(temp,zFST > 10) %>%
   ddply(.(Window),
@@ -249,7 +246,7 @@ x1 <- droplevels(subset(subset(dw,zFST > 10),Window %in% temp2$Window))
 x1$nhits <- tapply(x1$zFST,x1$Window,length)[x1$Window]
 x1$nhf <- ifelse(x1$nhits > 2,"Shared","Unique")
 
-Fig5 <- ggplot(temp1,aes(y = FST,x = log(MEAN_cM+1)))+
+Fig5 <- ggplot(temp,aes(y = FST,x = log(MEAN_cM+1)))+
   theme_bw()+
   theme(
         legend.position = "none")+
@@ -268,49 +265,6 @@ Fig5
 
 \pagebreak
 
-```{r Figure 5,fig.width = 8,fig.height = 6}
-dw$Window <- paste(dw$scaffold,dw$start)
-temp <- subset(subset(dw,!(scaffold %in% c(36))),pop1!="Balkans")
-temp$FST[temp$FST < 0] <- 0
-temp$pop1 <- factor(temp$pop1,levels = names(tapply(temp$FST,temp$pop1,mean)[order(tapply(temp$FST,temp$pop1,mean))]))
-
-temp1 <- ddply(temp,
-               .(pop1),
-               mutate,
-               OR = rank(MEAN_cM))
-
-
-temp2 <- subset(temp,zFST > 10) %>%
-  ddply(.(Window),
-        summarise,
-        n_hits = length(zFST),
-        meanfst = mean(zFST),
-        r = mean(MEAN_cM))
-
-x1 <- droplevels(subset(subset(dw,zFST > 10),Window %in% temp2$Window))
-x1$nhits <- tapply(x1$zFST,x1$Window,length)[x1$Window]
-x1$nhf <- ifelse(x1$nhits > 2,"Shared","Unique")
-
-Fig5 <- ggplot(temp1,aes(x = FST))+
-  theme_bw()+
-  theme(
-        legend.position = "none")+
-geom_density()+
-  scale_color_manual(values = c("red","navy"))+
-  facet_wrap(~pop1,scales = "free")+
-              ylab(expression(italic(F)[ST]))+
-            xlab("Log recombination rate")
-Fig5
-
-Fig5 <- ggplot(temp1,aes(x = FST,fill = pop1))+
-  theme_bw()+
-  theme(
-        legend.position = "none")+
-geom_density(alpha = 0.2)+
-              ylab(expression(italic(F)[ST]))+
-            xlab("Log recombination rate")
-Fig5
-```
 
 ##Discussion
 
