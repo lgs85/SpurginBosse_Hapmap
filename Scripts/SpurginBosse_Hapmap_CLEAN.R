@@ -305,3 +305,22 @@ outliers <- droplevels(subset(subset(dw,zFST > 10),Window %in% temp2$Window))%>%
         nhits = length(zFST),
         Countries = paste(pop1,collapse = ", "))
 rm(temp,temp2)
+
+
+
+
+dw$Window <- paste(dw$scaffold,dw$start)
+temp <- subset(subset(dw,!(scaffold %in% c(36))),pop1!="Balkans")
+temp$FST[temp$FST < 0] <- 0
+temp$pop1 <- factor(temp$pop1,levels = names(tapply(temp$FST,temp$pop1,mean)[order(tapply(temp$FST,temp$pop1,mean))]))
+
+temp2 <- subset(temp,zFST > 10) %>%
+  ddply(.(Window),
+        summarise,
+        n_hits = length(zFST))
+
+x1 <- droplevels(subset(subset(temp,zFST > 10),Window %in% temp2$Window))
+x1$nhits <- tapply(x1$zFST,x1$Window,length)[x1$Window]
+x1$nhf <- ifelse(x1$nhits > 2,"Shared","Unique")
+
+rm(temp,temp2)

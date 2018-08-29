@@ -41,7 +41,7 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 #A continental-scale analysis of genomic variation in a songbird
 
 
-Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4^\*, Kees van Oers^3^, The Great Tit HapMap Consortium, Veronika N. Laine^3^, Martien A.M. Groenen^4^, Ben C. Sheldon^1^, Marcel E.  Visser^3^ and Jon Slate^5^\**
+Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4^\*, The Great Tit HapMap Consortium, Veronika N. Laine^3^, Martien A.M. Groenen^4^, Ben C. Sheldon^2^, Marcel E.  Visser^3,4^, Kees van Oers^3^ and Jon Slate^5^\**
 
 
 1 School of Biological Sciences, University of East Anglia, Norwich Research Park, United Kingdom
@@ -122,6 +122,10 @@ Sampling locations and sample sizes for each population are given in Table 1. Le
 
 Considering all European great tit populations, there was no significant pattern of isolation-by-distance (Mantel test; r = `r round2(mantel(FST~dist,data = pd)["mantelr"])`, p = `r round2(mantel(FST~dist,data = pd)["pval1"])`). Instead, the highest levels of $F_{ST}$ were found in comparisons involving the island populations of Corsica, Sardinia and Crete (Fig. 2A Fig. 2B). Considering only comparisons involving mainland populations, pairwise $F_{ST}$ was still not related to related to geographic distance (r = `r round2(mantel(FST~dist,data = subset(pd,Island == "Mainland"))["mantelr"])`, p = `r round2(mantel(FST~dist,data = subset(pd,Island == "Mainland"))["pval1"])`). We then examined genetic structure in relation to distance from potential refugial populations (only including mainland populations), and found that $F_{ST}$ was significantly related to distance from Turkey (r = `r round2(with(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),Island == "Mainland"),cor.test(FST,dist))$estimate)`, p `r round3(with(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),Island == "Mainland"),cor.test(FST,dist))$p.value)`; Fig. 2C) and the Balkans (r = `r round2(with(subset(subset(pd,p1 == "Balkans" | p2 == "Balkans"),Island == "Mainland"),cor.test(FST,dist))$estimate)`, p `r round3(with(subset(subset(pd,p1 == "Balkans" | p2 == "Balkans"),Island == "Mainland"),cor.test(FST,dist))$p.value)`), but not to distance from Spain (r = `r round2(with(subset(subset(pd,p1 == "Spain" | p2 == "Spain"),Island == "Mainland"),cor.test(FST,dist))$estimate)`, p = `r round2(with(subset(subset(pd,p1 == "Spain" | p2 == "Spain"),Island == "Mainland"),cor.test(FST,dist))$p.value)`), or from Italy (r = `r round2(with(subset(subset(pd,p1 == "Italy" | p2 == "Italy"),Island == "Mainland"),cor.test(FST,dist))$estimate)`, p = `r round2(with(subset(subset(pd,p1 == "Italy" | p2 == "Italy"),Island == "Mainland"),cor.test(FST,dist))$p.value)`).
 
+Admixture analysis revealed patterns of genetic structure corresponding to geographical variation in European great tits (Fig. S2). The $K$ = 2 analysis assigned individuals in Sardinia and Corsica to one genetic cluster, and the remaining populations to the second. At $K$ = 3 (the model that best fitted the great tit data; Fig. S3), Spain was separated from the rest of mainland Europe. Increasing values of $K$ resulted of the separation of populations in Scotland ($K$ = 4), Sardinia (from Corsica; $K$ = 5), France ($K$ = 6), Crete ($K$ = 7) and England ($K$ = 8). The Admixture output at $K$ = 8 is displayed in Fig. 2C; further increases in $K$ did not generate patterns of structure that corresponded to geographical variation (Fig. S2), and were increasingly less well supported (Fig. S3).
+
+Maximum likelihood analyses implemented in Treemix showed that a model with no migration explained 97.8% of variance in relatedness between populations; increasing the number of migration events substantially improved the percentage of relatedness explained, up to 99.7% when 10 migration events were fitted (Fig. S4). In Figure 3 we display the maximum likelihood tree with 2 migration events, after which the variance in relatedness explained plateaued when more migration events were added (Fig. S4). The tree was generally characterised by short branch lengths, with the exception of the island populations of Sardinia and Crete, which were grouped with the population from mainland Italy. The Spanish and Corsican populations were also grouped together, as were populations from Turkey and the Balkans, and populations from England and Scotland (Fig. 3). The two fitted migration edges both involved Sardinia, involving migration from eastern Europe, and to Corsica (Fig. 3).
+
 \pagebreak
 
 ```{r Figure 2,fig.width = 8,fig.height = 6}
@@ -169,13 +173,7 @@ multiplot(Fig2A,Fig2B,Fig2C,layout = matrix(c(1,2,3,3),nrow = 2,byrow = T))
 
 \pagebreak
 
-Admixture analysis revealed patterns of genetic structure corresponding to geographical variation in European great tits (Fig. S2). The $K$ = 2 analysis assigned individuals in Sardinia and Corsica to one genetic cluster, and the remaining populations to the second. At $K$ = 3 (the model that best fitted the great tit data; Fig. S3), Spain was separated from the rest of mainland Europe. Increasing values of $K$ resulted of the separation of populations in Scotland ($K$ = 4), Sardinia (from Corsica; $K$ = 5), France ($K$ = 6), Crete ($K$ = 7) and England ($K$ = 8). The Admixture output at $K$ = 8 is displayed in Fig. 2C; further increases in $K$ did not generate patterns of structure that corresponded to geographical variation (Fig. S2), and were increasingly less well supported (Fig. S3).
 
-Maximum likelihood analyses implemented in Treemix showed that a model with no migration explained 97.8% of variance in relatedness between populations; increasing the number of migration events substantially improved the percentage of relatedness explained, up to 99.7% when 10 migration events were fitted (Fig. S4). In Figure 3 we display the maximum likelihood tree with 2 migration events, after which the variance in relatedness explained plateaued when more migration events were added (Fig. S4). The tree was generally characterised by short branch lengths, with the exception of the island populations of Sardinia and Crete, which were grouped with the population from mainland Italy. The Spanish and Corsican populations were also grouped together, as were populations from Turkey and the Balkans, and populations from England and Scotland (Fig. 3). The two fitted migration edges both involved Sardinia, involving migration from eastern Europe, and to Corsica (Fig. 3).
-
-
-
-\pagebreak
 
 ```{r Figure 3,fig.width = 6,fig.height = 6}
 plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
@@ -188,6 +186,9 @@ plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
 
 #### Genomic landscapes of differentiation
 We examined the landscape of genomic divergence between each population and Turkey, and found that $F_{ST}$ varied markedly across the genome in all comparisons (Fig. 4; Fig. S5). Outlier regions (windows with $zF_{ST}$ > 10) were found in all comparisons apart from Crete and Sardinia, where overall levels of divergence were highest (Fig. 4). Of the `r num2word(nrow(outliers))` outlier regions, `r num2word(nrow(subset(outliers,nhits < 3)))` were found in only one or two comparisons, while the other `r num2word(nrow(subset(outliers,nhits > 2)))` were found in `r num2word(sort(outliers[,"nhits"],decreasing = T)[1])` and `r num2word(sort(outliers[,"nhits"],decreasing = T)[2])` comparisons, respectively (Table S2). 
+
+Genomic differentiation with Turkey was negatively related to recombination rate in almost all populations (Fig. 5). The relationship between $F_{ST}$ and recombination rare was generally weak, with correlation coefficients < 0.1. In a handful of populations this relationship was substantially stronger - most notably in the island populations of Corsica, Sardinia and Crete, and in England, Scotland and Spain (Fig. 5). Outlier loci of very high high differentiaion almost exclusively occurred in relatively low recombining regions, and we found no evidence that "shared" outlier regions were more likely to be found in low recombining regions compared to loci that were outliers in only one or two populations. The recombination rate of outlier regions was significantly lower than the genome-wide average (Wilcoxon test, $P$ `r round3(wilcox.test(subset(subset(x1,!is.na(MEAN_cM)),!duplicated(MEAN_cM))$MEAN_cM,subset(dw,pop1 == "England")$MEAN_cM)$p.value)`), and there was no difference in recombination rate between 'shared' and 'unique' outlier regions ($P$ = `r round2(wilcox.test(MEAN_cM~nhf,data = subset(subset(x1,!is.na(MEAN_cM)),!duplicated(MEAN_cM)))$p.value)`).
+
 
 
 \pagebreak
@@ -223,9 +224,8 @@ Fig4
 
 **Figure 4** Landscapes of genomic differentiation in European great tit populations. $F_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison between with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $F_{ST}$ values at least 10 standard deviations greater than the global mean for that comparison) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines).
 
+
 \pagebreak
-
-
 
 
 ```{r Figure 5,fig.width = 8,fig.height = 6}
@@ -247,7 +247,6 @@ x1$nhits <- tapply(x1$zFST,x1$Window,length)[x1$Window]
 x1$nhf <- ifelse(x1$nhits > 2,"Shared","Unique")
 
 
-temp <- dw
 temp$MEAN_cM2 <- log10(temp$MEAN_cM+1)
 temp <- temp[complete.cases(temp),]
 
@@ -255,8 +254,8 @@ labs <- ddply(temp,
            .(pop1),
            summarise,
            r = paste("r =", round2(cor(FST,MEAN_cM2))),
-           x = 4,
-           y = max(FST))
+           x = Inf,
+           y = Inf)
 
 Fig5 <- ggplot(temp,aes(y = FST,x = log(MEAN_cM+1)))+
   theme_bw()+
@@ -267,7 +266,7 @@ Fig5 <- ggplot(temp,aes(y = FST,x = log(MEAN_cM+1)))+
   facet_wrap(~pop1,scales= "free_y")+
               ylab(expression(italic(F)[ST]))+
             xlab("Log recombination rate")+
-  geom_text(data = labs,aes(x = x,y = y,label = r))
+  geom_text(data = labs,aes(x = x,y = y,label = r,hjust = 1, vjust = 1))
 
 Fig5
 
