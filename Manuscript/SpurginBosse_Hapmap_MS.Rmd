@@ -187,7 +187,7 @@ plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
 \pagebreak
 
 #### Genomic landscapes of differentiation
-We examined the landscape of genomic divergence between each population and Turkey, and found that $F_{ST}$ varied markedly across the genome in all comparisons (Fig. 4; Fig. S5). Outlier regions (windows with $zF_{ST}$ > 10) were found in all comparisons apart from Crete and Sardinia, where overall levels of divergence were highest (Fig. 4). Of the XX outlier regions, XX were found in only one or two comparisons, while the other XX were found in XX, XX and XX comparisons, respectively (Table S2).
+We examined the landscape of genomic divergence between each population and Turkey, and found that $F_{ST}$ varied markedly across the genome in all comparisons (Fig. 4; Fig. S5). Outlier regions (windows with $zF_{ST}$ > 10) were found in all comparisons apart from Crete and Sardinia, where overall levels of divergence were highest (Fig. 4). Of the `r num2word(nrow(outliers))` outlier regions, `r num2word(nrow(subset(outliers,nhits < 3)))` were found in only one or two comparisons, while the other `r num2word(nrow(subset(outliers,nhits > 2)))` were found in `r num2word(sort(outliers[,"nhits"],decreasing = T)[1])` and `r num2word(sort(outliers[,"nhits"],decreasing = T)[2])` comparisons, respectively (Table S2). 
 
 
 \pagebreak
@@ -246,16 +246,29 @@ x1 <- droplevels(subset(subset(dw,zFST > 10),Window %in% temp2$Window))
 x1$nhits <- tapply(x1$zFST,x1$Window,length)[x1$Window]
 x1$nhf <- ifelse(x1$nhits > 2,"Shared","Unique")
 
+
+temp <- dw
+temp$MEAN_cM2 <- log10(temp$MEAN_cM+1)
+temp <- temp[complete.cases(temp),]
+
+labs <- ddply(temp,
+           .(pop1),
+           summarise,
+           r = paste("r =", round2(cor(FST,MEAN_cM2))),
+           x = 4,
+           y = max(FST))
+
 Fig5 <- ggplot(temp,aes(y = FST,x = log(MEAN_cM+1)))+
   theme_bw()+
-  theme(
-        legend.position = "none")+
+  theme(legend.position = "none")+
     geom_point(col = "grey")+
   geom_point(data = x1,aes(x = log(MEAN_cM+1),y = FST,col = nhf))+
   scale_color_manual(values = c("red","navy"))+
   facet_wrap(~pop1,scales= "free_y")+
               ylab(expression(italic(F)[ST]))+
-            xlab("Log recombination rate")
+            xlab("Log recombination rate")+
+  geom_text(data = labs,aes(x = x,y = y,label = r))
+
 Fig5
 
 

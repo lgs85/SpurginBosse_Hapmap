@@ -732,3 +732,15 @@ plot_resid_internal = function(d, o = NA, max = 0.009, min = -0.009, cex =0.5, w
 
 
 
+num2word <- function(x)
+{
+  numbers <- c("one","two","three","four","five","six","seven","eight","nine")
+  if(x < 10)
+  {
+    return(numbers[x])
+  } else
+  {
+    return(as.character(x))
+  }
+}
+
