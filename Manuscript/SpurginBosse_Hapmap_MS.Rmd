@@ -1,6 +1,6 @@
 ---
 output:
-  pdf_document:
+  word_document:
 bibliography: MyBib.bib
 csl: JAE.csl
 header-includes: \usepackage{graphicx}
@@ -112,7 +112,7 @@ We calculated genome-wide (mean) $F_{ST}$ between each pair of populations using
 
 We examined the genomic landscape of differentiation across European great tit populations by calculating $F_{ST}$ in 500kb bins, using python scripts obtained from Github (https://github.com/simonhmartin/genomics_general). We did not use estimates $d_{xy}$, as this parameter is difficult to estimate accurately from single SNP loci [@Cruickshank2014]. We also calculated standardised $F_{ST}$ (hereafter $ZF_{ST}$) by mean-centring windowed values and dividing them by the standard deviation among windows. We defined outlier regions as 500kb bins with $zF_{ST}$ values greater than ten. We tested whether the landscape of genomic differentiation was related to recombination rate variation using a recombination map previously developed for the great tit using a 10K SNP chip [@VanOers2014], from which we estimated recombination rates in 500kb non-overlapping windows.
 
-To gain further insight into how selection may have shaped variation in outlier regions, we examined patterns of haplotype variation. MIRTE TO ADD.
+To gain further insight into how selection may have shaped variation in outlier regions, we examined patterns of haplotype variation. MIRTE TO ADD. 
 
 ##Results
 
@@ -188,6 +188,9 @@ plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
 We examined the landscape of genomic divergence between each population and Turkey, and found that $F_{ST}$ varied markedly across the genome in all comparisons (Fig. 4; Fig. S5). Outlier regions (windows with $zF_{ST}$ > 10) were found in all comparisons apart from Crete and Sardinia, where overall levels of divergence were highest (Fig. 4). Of the `r num2word(nrow(outliers))` outlier regions, `r num2word(nrow(subset(outliers,nhits < 3)))` were found in only one or two comparisons, while the other `r num2word(nrow(subset(outliers,nhits > 2)))` were found in `r num2word(sort(outliers[,"nhits"],decreasing = T)[1])` and `r num2word(sort(outliers[,"nhits"],decreasing = T)[2])` comparisons, respectively (Table S2). 
 
 Genomic differentiation with Turkey was negatively related to recombination rate in almost all populations (Fig. 5). The relationship between $F_{ST}$ and recombination rare was generally weak, with correlation coefficients < 0.1. In a handful of populations this relationship was substantially stronger - most notably in the island populations of Corsica, Sardinia and Crete, and in England, Scotland and Spain (Fig. 5). Outlier loci of very high high differentiaion almost exclusively occurred in relatively low recombining regions, and we found no evidence that "shared" outlier regions were more likely to be found in low recombining regions compared to loci that were outliers in only one or two populations. The recombination rate of outlier regions was significantly lower than the genome-wide average (Wilcoxon test, $P$ `r round3(wilcox.test(subset(subset(x1,!is.na(MEAN_cM)),!duplicated(MEAN_cM))$MEAN_cM,subset(dw,pop1 == "England")$MEAN_cM)$p.value)`), and there was no difference in recombination rate between 'shared' and 'unique' outlier regions ($P$ = `r round2(wilcox.test(MEAN_cM~nhf,data = subset(subset(x1,!is.na(MEAN_cM)),!duplicated(MEAN_cM)))$p.value)`).
+
+To further explore how selection may have shaped variaiton in $F_{ST}$ outlier regions, we estimated levels of nucleotide and haplotype diversity. We found substantial variation among regions, with haplotype richness tranging from `r min(outlierhaps$Richness)` to `r max(outlierhaps$Richness)`. Both haplotype richness and marker density were significantly lower in "shared" outlier regions compared to "unique" regions (Wilcoxon tests: haplotype richness, $P$ = `r round2(wilcox.test(Markers~nhf,data = outlierhaps)$p.value)`; marker density, $P$ = 
+`r round2(wilcox.test(Richness~nhf,data = outlierhaps)$p.value)`). A detailed examination of haplotype structure in these regions is displayed in Figure S6.
 
 
 
@@ -270,13 +273,38 @@ Fig5 <- ggplot(temp,aes(y = FST,x = log(MEAN_cM+1)))+
 
 Fig5
 
-
 ```
 
 **Figure 5** Genomic differentiation and recombination rate variation in European great tit populations. Each point is a 500kb window, with each panel displaying a pairwise comparison between with the proposed refugial population in Turkey. Coloured points represent $F_{ST}$ outliers (mean $zF_{ST}$ values > 10) shared across more than two comparisons (red), or unique to one or two comparisons (navy).
 
 \pagebreak
 
+```{r Figure 6,fig.width=8,fig.height=4}
+Fig6A <- ggplot(outlierhaps,
+               aes(x = piTurkey,y = pi,col = nhf,size = N_hits))+
+                 geom_point()+
+    theme_bw()+
+  theme(legend.position = "none")+
+  scale_color_manual(values = c("red","navy"))+
+  xlab("Pi Turkey")+
+  ylab("Pi other pops")+
+  ggtitle("A")
+
+
+Fig6B <- ggplot(outlierhaps,
+               aes(x = log10(Markers),y = log10(Richness),col = nhf,size = N_hits))+
+                 geom_point()+
+    theme_bw()+
+  theme(legend.position = "none")+
+  scale_color_manual(values = c("red","navy"))+
+  xlab("Log marker density")+
+  ylab("Log number of haplotypes")+
+  ggtitle("B")
+
+multiplot(Fig6A,Fig6B,layout = matrix(c(1:2),nrow = 1))
+```
+
+**Figure 6** Nucleotide and haplotype diversity in FST outlier regions in European great tit population. 
 
 ##Discussion
 

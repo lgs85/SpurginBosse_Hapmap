@@ -1,0 +1,13 @@
+Bin	Richness	Markers	Most_freq	CHR	POS	N_hits	Pops
+Region_2_1	72	26	209	2	81500001	12	Austria,Belgium,Czech_Republic,Estonia,Finland,France,Germany,Hungary,Netherlands,Scotland,Sweden,Switzerland
+Region_30_1	1033	123	30	30	48500001	1	Finland
+Region_30_2	88	25	491	30	70500001	2	Czech_Republic,Russia
+Region_3_1	186	33	210	3	28000001	1	Spain
+Region_3_2	116	30	260	3	28500001	2	England,Spain
+Region_33_1	248	56	148	33	12000001	2	England,Scotland
+Region_36_1	81	20	195	36	63500001	5	France,Netherlands_Vlieland,Sardinia,Scotland,Switzerland
+Region_6_1	106	24	240	6	18000001	10	Belgium,Corsica,England,France,Germany,Hungary,Italy,Netherlands,Russia,Sweden
+Region_6_2	145	50	209	6	7500001	1	Scotland
+Region_6_3	397	54	108	6	8000001	2	Finland,Scotland
+Region_8_1	107	50	279	8	7500001	1	Netherlands_Vlieland
+Region_8_2	416	57	156	8	8000001	1	Belgium

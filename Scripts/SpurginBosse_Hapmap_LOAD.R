@@ -31,7 +31,7 @@ fst_admix <- read.table("Data/Admix.windowed.weir.fst",header = T)
 fst_cen <- read.table("Data/CenEur.windowed.weir.fst",header = T) 
 recomb <- read.table("Data/500kb_recombination.txt",header = T)
 tu <- read.table("Data/Turkey.fst",header = T,stringsAsFactors = F)
-
+outlierhaps <- read.table("Data/Outliers_for_Mirte_HAP_statistics1.txt",header = T)
 
 
 #Windowed stats

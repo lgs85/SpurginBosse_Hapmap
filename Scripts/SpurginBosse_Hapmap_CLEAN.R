@@ -324,3 +324,18 @@ x1$nhits <- tapply(x1$zFST,x1$Window,length)[x1$Window]
 x1$nhf <- ifelse(x1$nhits > 2,"Shared","Unique")
 
 rm(temp,temp2)
+
+
+
+# Outlier haplotype and nucleotide analysis -------------------------------
+outlierhaps$Window <- paste(outlierhaps$CHR,outlierhaps$POS)
+outlierhaps$nhf <- ifelse(outlierhaps$N_hits > 2,"Shared","Unique")
+outlierhaps$pi <- NA
+outlierhaps$piTurkey <- NA
+
+for(i in 1:nrow(outlierhaps))
+{
+  cd <- subset(dw,Window == outlierhaps$Window[i])
+  outlierhaps$pi[i] <- mean(cd$pi_pop1)
+  outlierhaps$piTurkey[i] <- mean(cd$pi_Turkey)
+}
