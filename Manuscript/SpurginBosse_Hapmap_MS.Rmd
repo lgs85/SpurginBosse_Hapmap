@@ -286,8 +286,8 @@ Fig6A <- ggplot(outlierhaps,
     theme_bw()+
   theme(legend.position = "none")+
   scale_color_manual(values = c("red","navy"))+
-  xlab("Pi Turkey")+
-  ylab("Pi other pops")+
+  xlab(expression(pi["Turkey"]))+
+  ylab(expression(pi["All populations"]))+
   ggtitle("A")
 
 
@@ -304,7 +304,7 @@ Fig6B <- ggplot(outlierhaps,
 multiplot(Fig6A,Fig6B,layout = matrix(c(1:2),nrow = 1))
 ```
 
-**Figure 6** Nucleotide and haplotype diversity in FST outlier regions in European great tit population. 
+**Figure 6** Genetic diversity in $F_{ST}$ outlier regions in European great tit populations. Each point is an outlier window, with point size scaled by the number of populations the outlier was found in - "shared" haplotypes are coloured red and "unique" haplotypes navy (see main text for details). In **A**, Nucleotide diversity for each window is calculated for the proposed refugial population in Turkey, and plotted against the mean for all other populations. In **B**, SNP marker density is plotted against haplotype richness for each region.
 
 ##Discussion
 
