@@ -120,7 +120,7 @@ pd[,paste0("p",i)] <- factor(countries,
 
 rm(countries)
 
-islands <- c("Crete","Corsica","Sardina")
+islands <- c("Crete","Corsica","Sardinia")
 pd$Island <- ifelse(pd$p1 %in% islands | pd$p2 %in% islands,"Island","Mainland")
 
 
@@ -332,6 +332,7 @@ outlierhaps$Window <- paste(outlierhaps$CHR,outlierhaps$POS)
 outlierhaps$nhf <- ifelse(outlierhaps$N_hits > 2,"Shared","Unique")
 outlierhaps$pi <- NA
 outlierhaps$piTurkey <- NA
+outlierhaps <- subset(outlierhaps,Window != "36 63500001")
 
 for(i in 1:nrow(outlierhaps))
 {

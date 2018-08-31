@@ -1,0 +1,16 @@
+Chromosome	Pos	Nhits	Outlier_comparisons	Genes
+2	81.5	12	"Austria, Belgium, Czech Republic, Estonia, Finland, France"	"PADP7, SRDSA1, NSUN2, UBE2QL, MED10"
+.	.	.	"Germany, Hungary, Netherlands, Scotland, Sweden, Switzerland"	.
+6	18	10	"Belgium, Corsica, England, France, Germany, Hungary, Italy"	"RASGEF1A, RET, CSGALNACT2"
+.	.	.	"Netherlands, Russia, Sweden"	.
+3	28.5	2	"England, Spain"	"PPP1CB, CALM2, TTC7A, MCFD2"
+1A	70.5	2	"Czech Republic, Russia"	CDKN1B
+4A	12	2	"England, Scotland"	COL4A5
+6	8	2	"Finland, Scotland"	"SLC18A3, RGR, LRI1, LRI2, CDHR1, GHITM"
+3	28	1	Spain	"MRPL33, RBKS, BRE, FOSL2"
+1A	48.5	1	Finland	"CBX6, CBX7, DNAL4, SUN2, NPTXR, JOSD1, TOMM22, KDELR3, DMC1, GTPBP1, DDX17, CBY1"
+.	.	.	.	"KCNJ4, THEM184B, CSNK1E, PLA2G6, MAFF, BAIAP2L2, SLC16A8, PICK1, SOX10, MICALL1"
+.	.	.	.	"EIF3L, ANKRDS4, GCAT, POLR2F"
+6	7.5	1	Scotland	"BMPR1A, SNGC, MMRN2, GLUD1, FAM35A, GPRIN2, PARG, NCOA4, OGDHL, CHAT"
+8	7.5	1	Vlieland	-
+8	8	1	Belgium	-

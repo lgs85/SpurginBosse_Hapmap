@@ -1,8 +1,8 @@
 ---
 output:
-  pdf_document:
+  word_document:
 bibliography: MyBib.bib
-csl: JAE.csl
+csl: PLoSGenetics.csl
 header-includes: \usepackage{graphicx}
     \usepackage{setspace}
     \doublespacing
@@ -136,18 +136,26 @@ kable(Table1,digits = 3,row.names = F,format = "latex", booktabs = TRUE) %>%
 \pagebreak
 \blandscape
 
-**Table S2** 
+**Table S2** Details of outlier $F_{ST}$ regions in European great tit populations. For each region, $F_{ST}$ was calculated for each population versus Turkey. The "number of outliers represents" the number of *populations* in which each region was detected as an outlier.
 
 ```{r Table S2}
-temp <- strsplit(outliers$Window,split = " ")
-TS2 <- cbind(matrix(unlist(temp),ncol = 2,byrow=T),outliers$nhits,outliers$Countries)
-TS2[,2] <- paste(round(as.numeric(TS2[,2])/10e05,1))
+# temp <- strsplit(outliers$Window,split = " ")
+# TS2 <- cbind(matrix(unlist(temp),ncol = 2,byrow=T),outliers$nhits,outliers$Countries)
+# TS2[,2] <- paste(round(as.numeric(TS2[,2])/10e05,1))
+# 
+# colnames(TS2) <- c("Chromosome","Position (MB)","Number of outliers","Outlier comparisons")
+# TS2 <- TS2[order(as.numeric(TS2[,"Number of outliers"]),decreasing = T),]
+# TS2[,"Outlier comparisons"] <- gsub("_"," ",TS2[,"Outlier comparisons"])
+# TS2[,"Chromosome"] <- gsub("30","1A",TS2[,"Chromosome"])
+# TS2[,"Chromosome"] <- gsub("33","4A",TS2[,"Chromosome"])
+# 
+# write.table(TS2,"Data/TS2.txt",row.names = F,quote = F,sep = "\t")
 
-colnames(TS2) <- c("Chromosome","Position (MB)","Number of outliers","Outlier comparisons")
-TS2 <- TS2[order(as.numeric(TS2[,"Number of outliers"]),decreasing = T),]
-TS2[,"Outlier comparisons"] <- gsub("_"," ",TS2[,"Outlier comparisons"])
-TS2[,"Chromosome"] <- gsub("30","1A",TS2[,"Chromosome"])
-TS2[,"Chromosome"] <- gsub("33","4A",TS2[,"Chromosome"])
+TS2 <- read.table("Data/TS2.txt", header = T,as.is = T)
+colnames(TS2) <- c("Chromosome","Position (MB)","Number of outliers","Outlier comparisons","Genes")
+TS2 <- as.matrix(TS2)
+TS2 <- data.frame(gsub("."," ",TS2,fixed = T))
+
 
 kable(TS2,format = "latex", booktabs = TRUE) %>%
           kable_styling(latex_options = "scale_down")
