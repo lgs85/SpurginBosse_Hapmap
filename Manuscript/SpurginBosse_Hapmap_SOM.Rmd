@@ -41,7 +41,7 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 
 
 
-#Supplementary material for "A continental-scale analysis of genomic variation in a songbird"
+#Supplementary material for "The great tit HapMap project: a continental-scale analysis of genomic variation in a songbird"
 
 **Table S1** Sampling details for the `r nrow(ll)` European great tit populations.
 
@@ -179,27 +179,48 @@ FigS1
 
 **Figure S1** Linkage disequilibrium in European great tit populations. Lines are means of $R^2$ values for all pairs of markers within 100bp distance bins.
 
+
+
+
 \pagebreak
 
 
-```{r FigS2,fig.width = 7,fig.height = 10}
+```{r FigS2,fig.width = 5,fig.height = 5}
+FigS2 <- ggplot(pd,aes(x = dist/1000,y = FST,col = Island))+
+            geom_point()+
+            theme_bw()+
+            theme(legend.position = "none")+
+            ylab(expression(italic(F)[ST]))+
+            xlab("Geographic distance (km)")+
+            scale_colour_manual(values = c("darkblue","grey"))
+
+FigS2
+```
+
+**Figure S2** Pairwise $F_{ST}$ in relation to geographic distance among European great tit populations. Pairwise comparisons involving the island populations of Corsica, Sardinia and Crete are coloured in dark blue.
+
+
+\pagebreak
+
+
+```{r FigS3,fig.width = 7,fig.height = 10}
 
 for(i in 2:9)
 {
   assign(
-    paste0("FigS2",LETTERS[i-1]),
+    paste0("FigS3",LETTERS[i-1]),
     structureplot(get(paste0("admix",i)),pops,i,xlab = F)+
       ylab(paste("K =", i))
         )
 }
 
-FigS2I <- structureplot(admix10,pops,10,xlab = T)+
+FigS3I <- structureplot(admix10,pops,10,xlab = T)+
   ylab("K = 10")
 
-multiplot(FigS2A,FigS2B,FigS2C,FigS2D,FigS2E,FigS2F,FigS2G,FigS2H,FigS2I,layout = matrix(c(1:8,9,9),nrow = 10))
+multiplot(FigS3A,FigS3B,FigS3C,FigS3D,FigS3E,FigS3F,FigS3G,FigS3H,FigS3I,layout = matrix(c(1:8,9,9),nrow = 10))
 ```
 
-**Figure S2** Admixture analyses at $K$ = 2 to 10 in European Great tit populations.
+**Figure S3** Admixture analyses at $K$ = 2 to 10 in European Great tit populations.
 
 \pagebreak
 
@@ -208,23 +229,23 @@ multiplot(FigS2A,FigS2B,FigS2C,FigS2D,FigS2E,FigS2F,FigS2G,FigS2H,FigS2I,layout 
 
 
 
-```{r FigS3,fig.width = 5,fig.height = 5}
-FigS3 <- ggplot(cv,aes(x = K,y = CV))+
+```{r FigS4,fig.width = 5,fig.height = 5}
+FigS4 <- ggplot(cv,aes(x = K,y = CV))+
   geom_line()+
   theme_bw()+
   xlab(expression(italic("K")))+
   ylab("Cross-validation error")+
   scale_x_continuous(breaks = c(1:10))
-FigS3
+FigS4
 ```
 
-**Figure S3** Cross-validation error from admixture analyses at $K$ = 1 to 10.
+**Figure S4** Cross-validation error from admixture analyses at $K$ = 1 to 10.
 
 
 \pagebreak
 
 
-```{r Fig S4,fig.width = 5,fig.height = 5}
+```{r Fig S5,fig.width = 5,fig.height = 5}
 m = 10
 vars <- rep(NA,m+1)
 vars[1] <- calcVarExplain("Data/Treemix/HapMap")$VarExplain
@@ -233,17 +254,17 @@ for(i in c(2:(m+1)))
   vars[i] <- calcVarExplain(paste0("Data/Treemix/HapMap_",i-1))$VarExplain
 }
 
-ddS4 <- data.frame(M = c(0:10),vars = vars)
-FigS4 <- ggplot(ddS4,aes(x = M,y = vars))+
+ddS5 <- data.frame(M = c(0:10),vars = vars)
+FigS5 <- ggplot(ddS5,aes(x = M,y = vars))+
   geom_line()+
   theme_bw()+
   xlab("Number of migration events")+
   ylab("Proportion relatedness explained")+
   scale_x_continuous(breaks = c(0:10))
-FigS4
+FigS5
 ```
 
-**Figure S4** Proportion of relatedness explained among populations in relation to the number of migration events allowed in Treemix analyses.
+**Figure S5** Proportion of relatedness explained among populations in relation to the number of migration events allowed in Treemix analyses.
 
 
 \pagebreak
@@ -253,7 +274,7 @@ FigS4
 
 
 
-```{r Figure S5,fig.width = 8,fig.height = 6}
+```{r Figure S6,fig.width = 8,fig.height = 6}
 
 dw$Window <- paste(dw$scaffold,dw$start)
 temp <- subset(subset(dw,!(scaffold %in% c(36))),pop1!="Balkans")
@@ -269,7 +290,7 @@ x1 <- droplevels(subset(subset(dw,zFST > 10),Window %in% temp2$Window))
 x1$nhits <- tapply(x1$zFST,x1$Window,length)[x1$Window]
 x1$nhf <- ifelse(x1$nhits > 2,"Shared","Unique")
 
-FigS5 <- ggplot(temp,aes(y = zFST,x = order,col = factor(scaffold)))+
+FigS6 <- ggplot(temp,aes(y = zFST,x = order,col = factor(scaffold)))+
   theme_bw()+
   theme(axis.text.x = element_blank(),
         legend.position = "none")+
@@ -279,8 +300,8 @@ FigS5 <- ggplot(temp,aes(y = zFST,x = order,col = factor(scaffold)))+
               ylab(expression(italic(zF)[ST]))+
             xlab("Genomic position")+
   scale_color_manual(values = rep(c("navy","grey"),30))
-FigS5
+FigS6
 ```
 
-**Figure S5** Landscapes of relative genomic differentiation in European great tit populations. $zF_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison between with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $zF_{ST}$ > 10) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines).
+**Figure S6** Landscapes of relative genomic differentiation in European great tit populations. $zF_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison between with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $zF_{ST}$ > 10) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines).
 
