@@ -1,0 +1,28 @@
+PLINK v1.90b3.26 64-bit (26 Nov 2015)
+Options in effect:
+  --autosome-num 36
+  --bfile HapMapMajorPruned
+  --out ../../SpurginBosse_Hapmap/Data/HapMap
+  --pca 4
+
+Hostname: Lewiss-MBP.lan
+Working directory: /Users/lewisspurgin/Documents/Research/Great_tit_hapmap/PlinkFiles
+Start time: Tue Sep 18 20:59:07 2018
+
+Random number seed: 1537300747
+16384 MB RAM detected; reserving 8192 MB for main workspace.
+84398 variants loaded from .bim file.
+647 samples (130 males, 243 females, 274 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to ../../SpurginBosse_Hapmap/Data/HapMap.nosex .
+83 phenotype values loaded from .fam.
+Using up to 4 threads (change this with --threads).
+Before main variant filters, 565 founders and 82 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.99468.
+84398 variants and 647 samples pass filters and QC.
+Phenotype data is quantitative.
+Relationship matrix calculation complete.
+--pca: Results saved to ../../SpurginBosse_Hapmap/Data/HapMap.eigenval and
+../../SpurginBosse_Hapmap/Data/HapMap.eigenvec .
+
+End time: Tue Sep 18 20:59:11 2018

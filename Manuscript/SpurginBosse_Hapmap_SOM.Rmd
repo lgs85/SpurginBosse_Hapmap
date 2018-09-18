@@ -1,6 +1,6 @@
 ---
 output:
-  word_document:
+  pdf_document:
 bibliography: MyBib.bib
 csl: PLoSGenetics.csl
 header-includes: \usepackage{graphicx}
@@ -244,8 +244,29 @@ FigS4
 
 \pagebreak
 
+```{r FigS5, fig.width = 5, fig.height = 7}
+FigS5 <- data.frame(Value = unlist(pca[,c(3:6)]),
+                  PC = paste0("PC",rep(c(1:4),each = nrow(pca))),
+                  Pop = rep(pca$V1,4)) %>%
+ggplot(aes(x = Pop, y = Value, col = Pop))+
+  geom_jitter(width = 0.2)+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")+
+  facet_wrap(~PC,nrow = 4)+
+  xlab("")+
+  ylab("")
 
-```{r Fig S5,fig.width = 5,fig.height = 5}
+FigS5
+```
+
+**Figure S5** Results from PCA analysis of European great tit populations.
+
+
+
+\pagebreak
+
+```{r Fig S6,fig.width = 5,fig.height = 5}
 m = 10
 vars <- rep(NA,m+1)
 vars[1] <- calcVarExplain("Data/Treemix/HapMap")$VarExplain
@@ -254,17 +275,17 @@ for(i in c(2:(m+1)))
   vars[i] <- calcVarExplain(paste0("Data/Treemix/HapMap_",i-1))$VarExplain
 }
 
-ddS5 <- data.frame(M = c(0:10),vars = vars)
-FigS5 <- ggplot(ddS5,aes(x = M,y = vars))+
+ddS6 <- data.frame(M = c(0:10),vars = vars)
+FigS6 <- ggplot(ddS6,aes(x = M,y = vars))+
   geom_line()+
   theme_bw()+
   xlab("Number of migration events")+
   ylab("Proportion relatedness explained")+
   scale_x_continuous(breaks = c(0:10))
-FigS5
+FigS6
 ```
 
-**Figure S5** Proportion of relatedness explained among populations in relation to the number of migration events allowed in Treemix analyses.
+**Figure S6** Proportion of relatedness explained among populations in relation to the number of migration events allowed in Treemix analyses.
 
 
 \pagebreak
@@ -290,7 +311,7 @@ x1 <- droplevels(subset(subset(dw,zFST > 10),Window %in% temp2$Window))
 x1$nhits <- tapply(x1$zFST,x1$Window,length)[x1$Window]
 x1$nhf <- ifelse(x1$nhits > 2,"Shared","Unique")
 
-FigS6 <- ggplot(temp,aes(y = zFST,x = order,col = factor(scaffold)))+
+FigS7<- ggplot(temp,aes(y = zFST,x = order,col = factor(scaffold)))+
   theme_bw()+
   theme(axis.text.x = element_blank(),
         legend.position = "none")+
@@ -300,8 +321,16 @@ FigS6 <- ggplot(temp,aes(y = zFST,x = order,col = factor(scaffold)))+
               ylab(expression(italic(zF)[ST]))+
             xlab("Genomic position")+
   scale_color_manual(values = rep(c("navy","grey"),30))
-FigS6
+FigS7
 ```
 
-**Figure S6** Landscapes of relative genomic differentiation in European great tit populations. $zF_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison between with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $zF_{ST}$ > 10) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines).
+**Figure S7** Landscapes of relative genomic differentiation in European great tit populations. $zF_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison between with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $zF_{ST}$ > 10) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines).
 
+\pagebreak
+
+```{r FigS8}
+knitr::include_graphics("../Haplotype_structure_figure.pdf")
+```
+
+**Figure S8** Haplotype structure underlying regions of high differentiation.
+**A** IBS clustering of all European haplotypes in the region containing a signal of high differentiation with Turkey specific to the Oulu population. The red arrow indicates the haplotype at highest frequency in Oulu. Colour indicates IBS similarity (range 0:white - 1: dark blue). **B** IBS clustering of all European haplotypes in the region on chromosome 2 containing a signal of high differentiation with Turkey in multiple populations. **C** Frequency of all identified haplotypes within each population. The red arrow indicates the high-frequency haplotype within Oulu. **D** Frequency of all identified haplotypes spanning the region on chromosome 2 within each population.

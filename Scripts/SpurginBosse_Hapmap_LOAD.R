@@ -30,6 +30,7 @@ cv <- read.table("Data/CV_error.txt",header = T)
 recomb <- read.table("Data/500kb_recombination.txt",header = T)
 tu <- read.table("Data/Turkey.fst",header = T,stringsAsFactors = F)
 outlierhaps <- read.table("Data/Outliers_for_Mirte_HAP_statistics1.txt",header = T)
+pca <- read.table("Data/HapMap.eigenvec", stringsAsFactors = F)
 
 
 #Windowed stats
