@@ -241,9 +241,6 @@ rm(countries)
 
 # Recombination -----------------------------------------------------------
 
-recomb$BIN_START <- recomb$POS500KB + 1
-recomb$CHROM <- recomb$V3
-recomb$V3 <- NULL
 
 countries <- dw$pop1
 
@@ -276,7 +273,7 @@ dw$MEAN_cM <- NA
 
 for(i in 1:nrow(recomb))
   {
-  dw$MEAN_cM[paste(dw$scaffold,dw$start) %in% paste(recomb$CHROM[i],recomb$BIN_START[i])] <- recomb$MEAN_cM[i]
+  dw$MEAN_cM[paste(dw$scaffold,dw$start) %in% paste(recomb$chrom[i],recomb$pos500[i])] <- recomb$Mean_cM[i]
 }
 
 
