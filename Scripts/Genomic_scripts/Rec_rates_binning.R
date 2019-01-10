@@ -11,3 +11,4 @@ out <- ddply(recomb,
       Mean_cM = mean(rec_rate))
 
 write.table(out,"Data/recomb_kai_500kb.txt",row.names = F,quote = F)
+
