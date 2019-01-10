@@ -1,5 +1,3 @@
-
-
 # Population names --------------------------------------------------------
 colnames(ll) <- c("Pop", "Lat", "Long", "Country")
 
