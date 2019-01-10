@@ -236,26 +236,19 @@ temp <- subset(subset(dw,!(scaffold %in% c(36))),pop1!="Balkans")
 temp$FST[temp$FST < 0] <- 0
 temp$pop1 <- factor(temp$pop1,levels = names(tapply(temp$FST,temp$pop1,mean)[order(tapply(temp$FST,temp$pop1,mean))]))
 
-
 temp2 <- subset(temp,zFST > 10) %>%
   ddply(.(Window),
         summarise,
-        n_hits = length(zFST),
-        meanfst = mean(zFST),
-        r = mean(MEAN_cM))
+        n_hits = length(zFST))
 
-x1 <- droplevels(subset(subset(dw,zFST > 10),Window %in% temp2$Window))
+x1 <- droplevels(subset(subset(temp,zFST > 10),Window %in% temp2$Window))
 x1$nhits <- tapply(x1$zFST,x1$Window,length)[x1$Window]
 x1$nhf <- ifelse(x1$nhits > 2,"Shared","Unique")
 
-
-temp$MEAN_cM2 <- log10(temp$MEAN_cM+1)
-temp <- temp[complete.cases(temp),]
-
-labs <- ddply(temp,
+labs <- ddply(subset(temp,!is.na(MEAN_cM)),
            .(pop1),
            summarise,
-           r = paste("r =", round2(cor(FST,MEAN_cM2))),
+           r = paste("r =", round2(cor(FST,(log10(MEAN_cM+1))))),
            x = Inf,
            y = Inf)
 
@@ -293,7 +286,7 @@ We examined the genomic landscape of differentiation across European great tit p
 
 
 ##Acknowledgements
-This work was supported by grants from the European Research Council (grant 202487 to J.S. and grant 339092 – E-Response to MEV) and Natural Environment Research Council (grant NE/J012599/1 to J.S.). LGS was supported by fellowships from the Edward Grey Institute for Ornithology and the BBSRC (BB/N011759/1). We thank Claire Bloor, Geoff Scopes and Alessandro Davassi of Affymetrix for their help during the chip design and genotyping calling processes. Richard Talbot and Alison Downing of Edinburgh Genomics provided the genotyping service.
+This work was supported by grants from the European Research Council (grant 202487 to J.S. and grant 339092 – E-Response to MEV) and Natural Environment Research Council (grant NE/J012599/1 to J.S. and B.C.S). L.G.S was supported by fellowships from the Edward Grey Institute for Ornithology and the BBSRC (BB/N011759/1). We thank Claire Bloor, Geoff Scopes and Alessandro Davassi of Affymetrix for their help during the chip design and genotyping calling processes. Richard Talbot and Alison Downing of Edinburgh Genomics provided the genotyping service.
 
 ##References
 
