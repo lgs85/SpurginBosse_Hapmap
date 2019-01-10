@@ -30,7 +30,9 @@ ll$Country <- factor(
 )
 
 pops <- dplyr::rename(pops,Pop = X1) %>%
-        left_join(select(ll,c(Pop,Country)),join = Pop)
+        left_join(select(ll,c(Pop,Country)),join = Pop) %>%
+  select(Country,X2,X3,X4,X5,X6,Pop)
+
 
 # IBD ---------------------------------------------------------------------
 

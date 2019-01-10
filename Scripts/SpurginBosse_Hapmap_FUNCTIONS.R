@@ -1,21 +1,18 @@
-
-
 # Structure bar plot------------------------------------------------------
 
 structureplot <- function(str_out,pops,k,xlab = T)
 {
   #Sort columns by prevalence
   str_out <- str_out[,order(apply(str_out,2,sum),decreasing = T)]
+  pops$Country <- pops[,1]
   
-  x <- melt(as.matrix(str_out)) %>%
-    transform(X1 = factor(X1, rownames(str_out)),
-              X2 = factor(X2, colnames(str_out)),
-              value = as.numeric(paste(value)))
-  
-  x$pop <- rep(pops[,1],k)
-  str_out$pop <- pops[,1]
-  x$X3 <- factor(paste(letters[as.numeric(x$pop)],x$X1,sep = "_"))
-  x <- x[order(x$X3),]
+  x <- gather(str_out) %>%
+    mutate(ind = rep(c(1:nrow(str_out)),k),
+           pop = unlist(rep(pops$Country,k))) %>%
+    mutate(X3 = factor(str_c(letters[as.numeric(pop)],ind,sep = "_"))) %>%
+    dplyr::arrange(X3)
+
+  str_out$pop <- unlist(pops$Country)
   
   pop_pos <- cumsum(tapply(1:nrow(str_out),str_out$pop,length))
   labpos <- pop_pos
@@ -49,7 +46,7 @@ structureplot <- function(str_out,pops,k,xlab = T)
   if(xlab ==T)
   {
     output <- ggplot(x,
-                     aes(x = as.numeric(X3),y = value, fill = X2))+
+                     aes(x = as.numeric(X3),y = value, fill = key))+
       geom_bar(stat = "identity",width = 1)+
       theme_bw()+
       scale_x_continuous(breaks = labpos,labels = names(pop_pos),expand = c(0,0))+
@@ -64,7 +61,7 @@ structureplot <- function(str_out,pops,k,xlab = T)
   } else
   {
     output <- ggplot(x,
-                     aes(x = as.numeric(X3),y = value, fill = X2))+
+                     aes(x = as.numeric(X3),y = value, fill = key))+
       geom_bar(stat = "identity",width = 1)+
       theme_bw()+
       scale_x_continuous(breaks = labpos,labels = rep("",length(pop_pos)),expand = c(0,0))+
