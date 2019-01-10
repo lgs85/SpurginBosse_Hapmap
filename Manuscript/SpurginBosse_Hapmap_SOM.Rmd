@@ -52,7 +52,7 @@ colnames(Table1) <- c("Population","Latitude","Longitude")
 
 
 temppops <- as.character(paste(Table1$Population))
-countries <- as.character(paste(Table1$Pop))
+countries <- as.character(paste(Table1$Population))
 
 
 temppops[temppops %in% c("Antwerp_Belgium")] <- "Antwerp"
@@ -247,7 +247,7 @@ FigS4
 ```{r FigS5, fig.width = 5, fig.height = 7}
 FigS5 <- data.frame(Value = unlist(pca[,c(3:6)]),
                   PC = paste0("PC",rep(c(1:4),each = nrow(pca))),
-                  Pop = rep(pca$V1,4)) %>%
+                  Pop = rep(pca$Country,4)) %>%
 ggplot(aes(x = Pop, y = Value, col = Pop))+
   geom_jitter(width = 0.2)+
   theme_bw()+

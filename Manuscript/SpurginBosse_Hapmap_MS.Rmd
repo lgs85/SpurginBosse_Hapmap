@@ -33,7 +33,7 @@ set.seed(200285)
 
 ```{r load and clean, include = F}
 #Load and clean data
-source("Scripts/SpurginBosse_Hapmap_LOAD.r")
+source("Scripts/SpurginBosse_Hapmap_LOAD.R")
 source("Scripts/SpurginBosse_Hapmap_FUNCTIONS.r")
 source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 ```
