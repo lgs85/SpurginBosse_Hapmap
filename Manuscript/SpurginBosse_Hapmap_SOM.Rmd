@@ -224,20 +224,20 @@ FigS6
 FigS7 <- dw %>%
   filter(scaffold != 36,
          pop1 != "Balkans") %>%
-  ggplot(aes(y = zFST,x = order,col = factor(scaffold)))+
+  ggplot(aes(y = FST,x = order,col = factor(scaffold)))+
   theme_bw()+
   theme(axis.text.x = element_blank(),
         legend.position = "none")+
     geom_line()+
     geom_vline(data = x1,aes(xintercept = order,lty = nhf),col = "red",alpha = 0.15,lwd = 1.2)+
   facet_wrap(~factor(pop1,levels = fstorder))+
-              ylab(expression(italic(zF)[ST]))+
+              ylab(expression(italic(F)[ST]))+
             xlab("Genomic position")+
   scale_color_manual(values = rep(c("navy","grey"),30))
 FigS7
 ```
 
-**Figure S7** Landscapes of relative genomic differentiation in European great tit populations. $zF_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison between with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $zF_{ST}$ > 10) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines).
+**Figure S7** Landscapes of genomic differentiation in European great tit populations. $F_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison between with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $zF_{ST}$ > 10) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines).
 
 
 \pagebreak

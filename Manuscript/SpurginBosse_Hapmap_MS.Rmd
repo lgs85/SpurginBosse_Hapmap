@@ -224,7 +224,7 @@ Fig4 <- dw %>%
 Fig4
 ```
 
-**Figure 4** Landscapes of genomic differentiation in European great tit populations. $F_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison between with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $F_{ST}$ values at least 10 standard deviations greater than the global mean for that comparison) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines). Mean, untransformed $F_{ST}$ values are given in the top-right of each panel, and are fully displayed in Fig. S7.
+**Figure 4** Landscapes of relative genomic differentiation in European great tit populations. $zF_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison between with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $F_{ST}$ values at least 10 standard deviations greater than the global mean for that comparison) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines). Mean, untransformed $F_{ST}$ values are given in the top-right of each panel, and are fully displayed in Fig. S7.
 
 
 \pagebreak
