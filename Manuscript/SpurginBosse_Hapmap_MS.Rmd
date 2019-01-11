@@ -83,7 +83,7 @@ It is now clear that the recombination landscape and linked selection are key dr
 
 Widespread continental species are excellent models for studying how demography and the environment shape genetic and phenotypic variation among populations, due to their large effective population sizes and ecologically varied ranges. Insight into the evolutionary history of such species can be gained if genetic variation is characterized across much of its geographical range. Cross-population comparisons of genetic variation can then be used to make inferences about phylogeography, levels of gene flow between populations and how adaptation to different environmental and ecological conditions occurs. Whole-genome resequencing and customized SNP genotyping arrays have made studies that characterize all, or much, of the genome tractable. The first large-scale studies were performed in humans i.e. The HapMap Projects [@Altshuler2005;@Frazer2007;@Altshuler2010] which characterized human genetic variation on different continents, with a view to determining the feasibility of association mapping studies. Similar studies have been conducted in agriculturally important species and their progenitors [@Kijas2012; @Gibbs2009; @Chia2012], and in model organisms [@@Lindblad-Toh2005; @Kirby2010]. More recently, there is a growing appreciation that HapMap-type studies are useful for studying signatures of selection and adaptation in natural populations of species with large effective population sizes and high levels of gene flow [@Horton2012; @Alonso-Blanco2016; @Williamson2014].
 
-The European great tit (*Parus major major*) is an excellent model for ecological and evolutionary study [@Gosler1993]. A wealth of ecological data exists across multiple great tit populations [e.g. @Visser1998; @Charmantier2008; @Dingemanse2012], enabling informed hypotheses about selection to be tested in this system.  Phyleogeographic research using mitochondrial DNA suggests that this species has recently expanded across its European range, possibly from a single refugium in the Balkans [@Kvist1999]. Contemporary populations are characterised by large effective population sizes and high levels of gene flow among populations, resulting in low levels of genetic differentiation [@Kvist2003; @Lemoine2016]. However, these previous cross-population molecular studies have relied on a modest number of microsatellite loci and mtDNA, making the detection of genomic regions under selection impossible. The genome of the great tit has recently been sequenced [@Laine2016], and a high density panel of SNP markers has been developed [@Kim2018]. A recent study of two European populations using this marker panel suggests that rapid adaptation has occurred at the genomic and phenotypic levels [@Bosse2017]. 
+The European great tit (*Parus major major*) is an excellent model for ecological and evolutionary study [@Gosler1993]. A wealth of ecological data exists across multiple great tit populations [e.g. @Visser1998; @Charmantier2008; @Dingemanse2012], enabling informed hypotheses about selection to be tested in this system.  Phyleogeographic research using mitochondrial DNA suggests that this species has recently expanded across its European range, possibly from a single refugium in the Balkans [@Kvist1999]. Contemporary populations are characterised by large effective population sizes and high levels of gene flow among populations, resulting in low levels of genetic differentiation [@Kvist2003; @Lemoine2016]. However, these previous cross-population molecular studies have relied on a modest number of microsatellite loci and mitochondrial DNA, making the detection of genomic regions under selection impossible. The genome of the great tit has recently been sequenced [@Laine2016], and a high density panel of SNP markers has been developed [@Kim2018]. A recent study of two European populations using this marker panel suggests that rapid adaptation has occurred at the genomic and phenotypic levels [@Bosse2017]. 
 
 Here, we perform a HapMap study of over `r nrow(pops)` unrelated individuals across `r nrow(ll)` populations, to examine how genomic architecture, natural selection and population history have shaped patterns of genomic variation across recently colonised European great tit populations. Using a large SNP panel typed across `r nrow(ll)` populations (Fig. 1), we first characterise genome-wide patterns of variation within and among populations, in order to infer population history. We then examine how variation is partitioned across the genome, and test the hypothesis that highly divergent genomic regions have arisen in regions of low recombination [@Noor2009; @Cruickshank2014]. Finally, we examine how genomic divergence accumulates along the colonisation route of this species, with the aim of inferring how recent natural selection and background selection drive variation across the genome in the wild.
 
@@ -108,7 +108,7 @@ Fig1
 
 #### Genetic diversity and population history
 
-Sampling locations and sample sizes for each population are given in Table 1. Levels of genetic diversity ($\pi_{SNP}$) were generally high, but we observed substantial differences among populations (Fig. 2A). Similarly, LD declined rapidly in all populations, reaching baseline levels within ~5kb in all populations, but also varying among populations (Fig. S1).  Highest levels of LD (and lowest levels of genetic diversity) were observed in the island populations of Crete (Greece), Sardinia (Italy), Corsica (France) and Vlieland (Netherlands) with lowest levels of LD in central and westerm Europe (Fig. S1). This is consistent with reduced effective population size and reduced gene flow in the island populations, either as result of the colonisation process, or more recent bottlenecks [@Postma2005; @James2016].
+Sampling locations and sample sizes for each population are given in Table 1. Levels of genetic diversity ($\pi_{SNP}$) were generally high, but we observed substantial differences among populations (Fig. 2A). Similarly, LD declined rapidly in all populations, reaching baseline levels within ~5kb in all populations, but also varying among populations (Fig. S1).  Highest levels of LD (and lowest levels of genetic diversity) were observed in the island populations of Crete (Greece), Sardinia (Italy), and Corsica (France) with lowest levels of LD in central and western Europe (Fig. S1). This is consistent with reduced effective population size and reduced gene flow in the island populations, either as result of the colonisation process, or more recent bottlenecks [@Postma2005; @James2016].
 
 Genome-wide $F_{ST}$ between European great tit populations was `r round3(mean(dw$FST))`, with no significant pattern of isolation-by-distance (Mantel test; r = `r round2(mantel(FST~dist,data = pd)["mantelr"])`, p = `r round2(mantel(FST~dist,data = pd)["pval1"])`). Instead, the highest levels of $F_{ST}$ were found in comparisons involving the island populations of Corsica, Sardinia and Crete (Fig. S2). Admixture analysis was consistent with this pattern (Fig. S3); the $K$ = 2 analysis assigned individuals in Sardinia and Corsica to one genetic cluster, and the remaining populations to the second. Thus, it is likely that much of the genetic structure between European great tit populations is a result of genetic drift in small island populations. Admixture also revealed some structure between (mainly peripheral) mainland and larger island populations. At $K$ = 3 (the model that best fitted the great tit data; Fig. S3), Spain was separated from the rest of mainland Europe. Increasing values of $K$ resulted of the separation of populations in Scotland ($K$ = 4), Sardinia (from Corsica; $K$ = 5), France ($K$ = 6), Crete ($K$ = 7) and England ($K$ = 8). The Admixture output at $K$ = 8 is displayed in Fig. 2C; further increases in $K$ did not generate patterns of structure that corresponded to geographical variation (Fig. S3), and were increasingly less well supported (Fig. S4). Thus, even with hundreds of thousands of markers Admixture was unable to separate many of the central European populations, confirming that levels of divergence are extremely low. PCA largely corroborated the Admixture results, with PC1 separating Corsica and Sardinia from the remaining populations, PC2 separating Spain, PC3 separating Corsica from Sardinia, and PC4 separating Scotland, England and France (Fig. S5).
 
@@ -219,7 +219,7 @@ Fig4 <- dw %>%
               ylab(expression(italic(zF)[ST]))+
             xlab("Genomic position")+
   scale_color_manual(values = rep(c("navy","grey"),30))+
-    geom_text(data = labs,aes(x = x,y = y,label = FST,hjust = 1, vjust = 1),col = "black")
+    geom_text(data = labs,aes(x = x,y = y,label = FST,hjust = 1, vjust = 1),col = "black",size = 3)
 
 Fig4
 ```
@@ -236,7 +236,7 @@ labs <- dw %>%
          pop1 != "Balkans",
          !is.na(MEAN_cM)) %>%
   group_by(pop1) %>%
-  dplyr::summarise(r = paste("r =", round2(cor(FST,(log10(MEAN_cM+1))))),
+  dplyr::summarise(r = paste("r =", round2(cor(zFST,(log10(MEAN_cM+1))))),
            x = Inf,
            y = Inf)
 
@@ -244,16 +244,16 @@ labs <- dw %>%
 Fig5 <- dw %>%   filter(scaffold != 36,
          pop1 != "Balkans",
          !is.na(MEAN_cM)) %>%
-  ggplot(aes(y = FST,x = log(MEAN_cM+1)))+
+  ggplot(aes(y = zFST,x = log(MEAN_cM+1)))+
   theme_bw()+
   theme(legend.position = "none")+
     geom_point(col = "grey")+
-  geom_point(data = x1,aes(x = log(MEAN_cM+1),y = FST,col = nhf))+
+  geom_point(data = x1,aes(x = log(MEAN_cM+1),y = zFST,col = nhf))+
   scale_color_manual(values = c("red","navy"))+
-  facet_wrap(~factor(pop1,levels = fstorder),scales = "free_y")+
-              ylab(expression(italic(F)[ST]))+
+  facet_wrap(~factor(pop1,levels = fstorder))+
+              ylab(expression(italic(zF)[ST]))+
             xlab("Log recombination rate")+
-  geom_text(data = labs,aes(x = x,y = y,label = r,hjust = 1, vjust = 1))
+  geom_text(data = labs,aes(x = x,y = y,label = r,hjust = 1, vjust = 1),size = 3)
 
 Fig5
 

@@ -64,12 +64,12 @@ pd <-
 ld <- select(ld,-X5)
 colnames(ld) <- c("dist","R2","n","Pop")
 
-ld <- mutate(ld,Pop = str_trim(Pop,side = "left")) %>%
-  left_join(select(ll,c(Pop,Country)))
+ld <- mutate(ld,Pop = str_trim(Pop,side = "left"))
 
 ld2 <- ld %>% 
   group_by(Pop,dist) %>%
-  dplyr::summarise(meanR2 = mean(R2))
+  dplyr::summarise(meanR2 = mean(R2)) %>%
+  mutate(Pop = replace_na(Pop,"Netherlands (Vlieland)"))
   
 
 

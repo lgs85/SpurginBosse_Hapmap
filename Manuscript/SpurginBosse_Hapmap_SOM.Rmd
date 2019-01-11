@@ -127,7 +127,7 @@ FigS2
 \pagebreak
 
 
-```{r FigS3,fig.width = 7,fig.height = 10}
+```{r FigS3,fig.width = 7,fig.height = 9}
 
 for(i in 2:9)
 {
@@ -141,10 +141,10 @@ for(i in 2:9)
 FigS3I <- structureplot(admix10,pops,10,xlab = T)+
   ylab("K = 10")
 
-multiplot(FigS3A,FigS3B,FigS3C,FigS3D,FigS3E,FigS3F,FigS3G,FigS3H,FigS3I,layout = matrix(c(1:8,9,9),nrow = 10))
+plot_grid(FigS3A,FigS3B,FigS3C,FigS3D,FigS3E,FigS3F,FigS3G,FigS3H,FigS3I, align = "v",ncol = 1,rel_heights = c(rep(1,8),2.5))
 ```
 
-**Figure S3** Admixture analyses at $K$ = 2 to 10 in European Great tit populations.
+**Figure S3** Admixture analyses at $K$ = 2 to 9 in European Great tit populations.
 
 \pagebreak
 

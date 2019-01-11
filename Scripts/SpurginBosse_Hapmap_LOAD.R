@@ -6,7 +6,7 @@ library(Rmisc)
 library(geosphere)
 library(ecodist)
 library(kableExtra)
-
+library(cowplot)
 
 ll <- read_tsv("Data/LatLongAllPops.txt",col_names = F)
 
