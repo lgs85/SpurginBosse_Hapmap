@@ -60,7 +60,6 @@ pd <-
                          "Mainland"))
 
 # LD ----------------------------------------------------------------------
-ll$LD <- ldmean$R2
 
 ld <- select(ld,-X5)
 colnames(ld) <- c("dist","R2","n","Pop")
@@ -85,13 +84,23 @@ dw <- dw %>%
   mutate(Window = str_c(scaffold,start,sep = " ")) %>%
   left_join(mutate(recomb,Window = str_c(chrom,pos500,sep = " ")) %>%
               select(c(Window,Mean_cM))) %>%
-  dplyr::rename(MEAN_cM = Mean_cM)
+  dplyr::rename(MEAN_cM = Mean_cM) %>%
+  mutate(MEAN_cM = replace_na(MEAN_cM,0))
 
 
 
 
 
 # Outlier regions ---------------------------------------------------------
+temp <- filter(dw,scaffold != 36,
+               pop1 != "Balkans") %>%
+  mutate(FST = replace(FST, FST < 0, 0),
+         pop1 = fct_drop(pop1))
+fstorder <- names(tapply(temp$FST,temp$pop1,mean)[order(tapply(temp$FST,temp$pop1,mean))])
+
+rm(temp)
+
+
 temp <- dw %>%
   filter(scaffold != 36,
          pop1 != "Balkans",) %>%
@@ -118,12 +127,6 @@ temp <- filter(dw,scaffold != 36,
   mutate(FST = replace(FST, FST < 0, 0),
          pop1 = fct_drop(pop1))
 
-temp$pop1 <- factor(temp$pop1,
-                    levels = names(tapply(temp$FST,
-                                          temp$pop1,
-                                          mean)[order(tapply(temp$FST,
-                                                             temp$pop1,
-                                                             mean))]))
 
 temp2 <- filter(temp,zFST > 10) %>%
   group_by(Window) %>%
@@ -145,13 +148,11 @@ rm(temp,temp2)
 outlierhaps <- outlierhaps %>%
   mutate(Window = str_c(CHR,POS,sep = " "),
          nhf = ifelse(N_hits > 2,"Shared","Unique")) %>%
-  filter(Window != "36 63500001")
-
-outlierhaps %>%
+  filter(Window != "36 63500001") %>%
   left_join(dw %>% 
               group_by(Window) %>%
               dplyr::summarise(mp = mean(pi_Turkey))) %>%
-  dplyr::rename(pi_Turkey = mp)
+  dplyr::rename(pi = mp)
 
 
 

@@ -46,86 +46,11 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 **Table S1** Sampling details for the `r nrow(ll)` European great tit populations.
 
 ```{R Table S1}
-Table1 <- ll
-Table1$LD <- NULL
-colnames(Table1) <- c("Population","Latitude","Longitude")
+Table1 <- ll %>%
+  mutate(N = table(pops$Pop)) %>%
+  select(Pop,Country,N,Lat,Long) %>%
+  dplyr::rename(Population = Pop,Latitude = Lat,Longitude = Long,Region = Country)
 
-
-temppops <- as.character(paste(Table1$Population))
-countries <- as.character(paste(Table1$Population))
-
-
-temppops[temppops %in% c("Antwerp_Belgium")] <- "Antwerp"
-temppops[temppops %in% c("Cambridge_UK")] <- "Cambridge"
-temppops[temppops %in% c("Wytham_UK")] <- "Oxford"
-temppops[temppops %in% c("Mariola_Spain")] <- "Mariola"
-temppops[temppops %in% c("Font_Roja_Spain")] <- "Font Roja"
-temppops[temppops %in% c("Gotland_Sweden")] <- "Gotland"
-temppops[temppops %in% c("Harjavalta_Finland")] <- "Harjavalta"
-temppops[temppops %in% c("Oulu_Finland")] <- "Oulu"
-temppops[temppops %in% c("Montpellier_France")] <- "Montpellier"
-temppops[temppops %in% c("La_Rouviere_France")] <- "La Rouviere"
-temppops[temppops %in% c("Loch_Lomond_Scotland")] <- "Loch Lomond"
-temppops[temppops %in% c("Pilis_Mountains_Hungary")] <- "Pilis Mountains"
-temppops[temppops %in% c("Pirio_Muro_Corsica")] <- "Pirio Muro"
-temppops[temppops %in% c("Radolfzell_Germany")] <- "Radolfzell"
-temppops[temppops %in% c("Seewisen_Germany")] <- "Seewisen"
-temppops[temppops %in% c("Roekelse_Bos")] <- "Roekelse Bos"
-temppops[temppops %in% c("Vlieland_NL")] <- "Vlieland"
-temppops[temppops %in% c("Tartu_Estonia")] <- "Tartu"
-temppops[temppops %in% c("Velky_Kosir_Czech_Republic")] <- "Velky Kosir"
-temppops[temppops %in% c("Vienna_Austria")] <- "Vienna"
-temppops[temppops %in% c("Zurich_Switzerland" )] <- "Zurich"                             
-temppops[temppops %in% c("Zvenigorod_Russia")] <- "Zvenigorod"
-
-countries[countries %in% c("Antwerp_Belgium")] <- "Belgium"
-countries[countries %in% c("Cambridge_UK","Wytham_UK")] <- "England"
-countries[countries %in% c("Font_Roja_Spain","Mariola_Spain")] <- "Spain"
-countries[countries %in% c("Gotland_Sweden")] <- "Sweden"
-countries[countries %in% c("Harjavalta_Finland","Oulu_Finland")] <- "Finland"
-countries[countries %in% c("La_Rouviere_France" ,"Montpellier_France")] <- "France"
-countries[countries %in% c("Loch_Lomond_Scotland")] <- "Scotland"
-countries[countries %in% c("Pilis_Mountains_Hungary")] <- "Hungary"
-countries[countries %in% c("Pirio_Muro_Corsica")] <- "Corsica"
-countries[countries %in% c("Radolfzell_Germany","Seewisen_Germany")] <- "Germany"
-countries[countries %in% c("Roekelse_Bos","Westerheide")] <- "Netherlands"
-countries[countries %in% c("Vlieland_NL")] <- "Netherlands (Vlieland)"
-countries[countries %in% c("Tartu_Estonia")] <- "Estonia"
-countries[countries %in% c("Velky_Kosir_Czech_Republic")] <- "Czech Republic"
-countries[countries %in% c("Vienna_Austria")] <- "Austria"
-countries[countries %in% c("Zurich_Switzerland" )] <- "Switzerland"                             
-countries[countries %in% c("Zvenigorod_Russia")] <- "Russia"
-countries[countries %in% c("Romania", "Bulgaria")] <- "Balkans"      
-
-Table1$Population <- temppops  
-Table1$Region <- factor(countries,
-                  levels = c(
-                    "Scotland",
-                    "England",
-                    "Spain",
-                    "France",
-                    "Belgium",
-                    "Netherlands",
-                    "Netherlands (Vlieland)",
-                    "Switzerland",
-                    "Germany",
-                    "Corsica",
-                    "Sardinia",
-                    "Italy",
-                    "Austria",
-                    "Czech Republic",
-                    "Hungary",
-                    "Sweden",
-                    "Finland",
-                    "Estonia",
-                    "Crete",
-                    "Balkans",
-                    "Turkey",
-                    "Russia"))
-
-Table1$N <- table(pops$o_pop)
-
-Table1 <- Table1[order(Table1$Region),c("Population","Region","N","Latitude","Longitude")]
 kable(Table1,digits = 3,row.names = F,format = "latex", booktabs = TRUE) %>%
           kable_styling(latex_options = "scale_down")
 
@@ -151,10 +76,9 @@ kable(Table1,digits = 3,row.names = F,format = "latex", booktabs = TRUE) %>%
 # 
 # write.table(TS2,"Data/TS2.txt",row.names = F,quote = F,sep = "\t")
 
-TS2 <- read.table("Data/TS2.txt", header = T,as.is = T)
-colnames(TS2) <- c("Chromosome","Position (MB)","Number of outliers","Outlier comparisons","Genes")
-TS2 <- as.matrix(TS2)
-TS2 <- data.frame(gsub("."," ",TS2,fixed = T))
+TS2 <- read_tsv("Data/TS2.txt") %>%
+  dplyr::rename("Position (MB)" = Pos,"Number of outliers" = Nhits,"Outlier comparisons" = Outlier_comparisons) %>%
+  mutate_all(funs(str_replace(.,"\\."," ")))
 
 
 kable(TS2,format = "latex", booktabs = TRUE) %>%
@@ -171,7 +95,7 @@ kable(TS2,format = "latex", booktabs = TRUE) %>%
 FigS1 <- ggplot(ld2,aes(x = dist/1000,y = meanR2))+
   geom_line()+
   theme_bw()+
-  facet_wrap(~pop)+
+  facet_wrap(~Pop)+
   xlab("Distance (kb)")+
   ylab(expression("R"^2))
 FigS1
@@ -245,8 +169,8 @@ FigS4
 \pagebreak
 
 ```{r FigS5, fig.width = 5, fig.height = 7}
-FigS5 <- data.frame(Value = unlist(pca[,c(3:6)]),
-                  PC = paste0("PC",rep(c(1:4),each = nrow(pca))),
+FigS5 <- tibble(Value = unlist(pca[,c(3:6)]),
+                  PC = str_c("PC",rep(c(1:4),each = nrow(pca))),
                   Pop = rep(pca$Country,4)) %>%
 ggplot(aes(x = Pop, y = Value, col = Pop))+
   geom_jitter(width = 0.2)+
@@ -266,7 +190,7 @@ FigS5
 
 \pagebreak
 
-```{r Fig S6,fig.width = 5,fig.height = 5}
+```{r Figure S6,fig.width = 5,fig.height = 5}
 m = 10
 vars <- rep(NA,m+1)
 vars[1] <- calcVarExplain("Data/Treemix/HapMap")$VarExplain
@@ -295,29 +219,18 @@ FigS6
 
 
 
-```{r Figure S6,fig.width = 8,fig.height = 6}
+```{r Figure S7,fig.width = 8,fig.height = 6}
 
-dw$Window <- paste(dw$scaffold,dw$start)
-temp <- subset(subset(dw,!(scaffold %in% c(36))),pop1!="Balkans")
-temp$FST[temp$FST < 0] <- 0
-temp$pop1 <- factor(temp$pop1,levels = names(tapply(temp$FST,temp$pop1,mean)[order(tapply(temp$FST,temp$pop1,mean))]))
-
-temp2 <- subset(temp,zFST > 10) %>%
-  ddply(.(Window),
-        summarise,
-        n_hits = length(zFST))
-
-x1 <- droplevels(subset(subset(dw,zFST > 10),Window %in% temp2$Window))
-x1$nhits <- tapply(x1$zFST,x1$Window,length)[x1$Window]
-x1$nhf <- ifelse(x1$nhits > 2,"Shared","Unique")
-
-FigS7<- ggplot(temp,aes(y = zFST,x = order,col = factor(scaffold)))+
+FigS7 <- dw %>%
+  filter(scaffold != 36,
+         pop1 != "Balkans") %>%
+  ggplot(aes(y = zFST,x = order,col = factor(scaffold)))+
   theme_bw()+
   theme(axis.text.x = element_blank(),
         legend.position = "none")+
     geom_line()+
     geom_vline(data = x1,aes(xintercept = order,lty = nhf),col = "red",alpha = 0.15,lwd = 1.2)+
-  facet_wrap(~pop1)+
+  facet_wrap(~factor(pop1,levels = fstorder))+
               ylab(expression(italic(zF)[ST]))+
             xlab("Genomic position")+
   scale_color_manual(values = rep(c("navy","grey"),30))
@@ -330,17 +243,13 @@ FigS7
 \pagebreak
 
 ```{r Figure S8,fig.width=8,fig.height=4}
-temp <- ddply(dw,
-              .(Window),
-              summarise,
-              piTurkey = mean(pi_Turkey),
-              pi = mean(pi_pop1))
-
-
-FigS9A <- ggplot(temp,
-               aes(x = piTurkey,y = pi))+
+FigS9A <- dw %>%
+  group_by(Window) %>%
+  dplyr::summarise(piTurkey = mean(pi_Turkey),
+              pi = mean(pi_pop1)) %>%
+  ggplot(aes(x = piTurkey,y = pi))+
                  geom_point(col = "grey")+
-  geom_point(data = outlierhaps,aes(col = nhf))+
+  geom_point(data = outlierhaps,aes(col = nhf, x = pi))+
     theme_bw()+
   theme(legend.position = "none")+
   scale_color_manual(values = c("red","navy"))+
