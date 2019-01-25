@@ -8,6 +8,8 @@ library(ecodist)
 library(kableExtra)
 library(cowplot)
 
+theme_set(theme_bw())
+
 ll <- read_tsv("Data/LatLongAllPops.txt",col_names = F)
 
 

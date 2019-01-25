@@ -94,7 +94,6 @@ kable(TS2,format = "latex", booktabs = TRUE) %>%
 ```{r FigS1}
 FigS1 <- ggplot(ld2,aes(x = dist/1000,y = meanR2))+
   geom_line()+
-  theme_bw()+
   facet_wrap(~Pop)+
   xlab("Distance (kb)")+
   ylab(expression("R"^2))
@@ -112,7 +111,6 @@ FigS1
 ```{r FigS2,fig.width = 5,fig.height = 5}
 FigS2 <- ggplot(pd,aes(x = dist/1000,y = FST,col = Island))+
             geom_point()+
-            theme_bw()+
             theme(legend.position = "none")+
             ylab(expression(italic(F)[ST]))+
             xlab("Geographic distance (km)")+
@@ -156,7 +154,6 @@ plot_grid(FigS3A,FigS3B,FigS3C,FigS3D,FigS3E,FigS3F,FigS3G,FigS3H,FigS3I, align 
 ```{r FigS4,fig.width = 5,fig.height = 5}
 FigS4 <- ggplot(cv,aes(x = K,y = CV))+
   geom_line()+
-  theme_bw()+
   xlab(expression(italic("K")))+
   ylab("Cross-validation error")+
   scale_x_continuous(breaks = c(1:10))
@@ -174,7 +171,6 @@ FigS5 <- tibble(Value = unlist(pca[,c(3:6)]),
                   Pop = rep(pca$Country,4)) %>%
 ggplot(aes(x = Pop, y = Value, col = Pop))+
   geom_jitter(width = 0.2)+
-  theme_bw()+
   theme(axis.text.x = element_text(angle = 90),
         legend.position = "none")+
   facet_wrap(~PC,nrow = 4)+
@@ -202,7 +198,6 @@ for(i in c(2:(m+1)))
 ddS6 <- data.frame(M = c(0:10),vars = vars)
 FigS6 <- ggplot(ddS6,aes(x = M,y = vars))+
   geom_line()+
-  theme_bw()+
   xlab("Number of migration events")+
   ylab("Proportion relatedness explained")+
   scale_x_continuous(breaks = c(0:10))
@@ -225,7 +220,6 @@ FigS7 <- dw %>%
   filter(scaffold != 36,
          pop1 != "Balkans") %>%
   ggplot(aes(y = FST,x = order,col = factor(scaffold)))+
-  theme_bw()+
   theme(axis.text.x = element_blank(),
         legend.position = "none")+
     geom_line()+
@@ -250,7 +244,6 @@ FigS9A <- dw %>%
   ggplot(aes(x = piTurkey,y = pi))+
                  geom_point(col = "grey")+
   geom_point(data = outlierhaps,aes(col = nhf, x = pi))+
-    theme_bw()+
   theme(legend.position = "none")+
   scale_color_manual(values = c("red","navy"))+
   xlab(expression(pi["Turkey"]))+
@@ -263,7 +256,6 @@ FigS9A <- dw %>%
 FigS9B <- ggplot(outlierhaps,
                aes(x = log10(Markers),y = log10(Richness),col = nhf,size = N_hits))+
                  geom_point()+
-    theme_bw()+
   theme(legend.position = "none")+
   scale_color_manual(values = c("red","navy"))+
   xlab("Log marker density")+

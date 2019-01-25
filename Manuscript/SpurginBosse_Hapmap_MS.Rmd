@@ -96,8 +96,7 @@ Fig1 <- map_data("world") %>%
               ratio=1.3) +
   geom_point(data = ll,aes(x = Long,y = Lat,group = NULL),col = "red",size = 2)+
   xlab("Longitude")+
-  ylab("Latitude")+
-  theme_bw()
+  ylab("Latitude")
 
 Fig1
 ```
@@ -140,7 +139,6 @@ Fig2B <- pd %>%
   filter(p1 == "Turkey" | p2 == "Turkey") %>%
           ggplot(aes(x = dist/1000,y = FST))+
             geom_point(col = "grey")+
-            theme_bw()+
             theme(legend.position = "none")+
             ylab(expression(italic(F)[ST]))+
             xlab("Distance from Turkey (km)")+
@@ -201,16 +199,15 @@ labs <- dw %>%
   filter(scaffold != 36,
          pop1 != "Balkans") %>%
   group_by(pop1) %>%
-  dplyr::summarise(FST = str_c("FST = ", round3(mean(FST))),
+  dplyr::summarise(FST = str_c("italic(F)[ST] == ", round3(mean(FST))),
            x = Inf,
-           y = Inf)
+           y = 20)
 
 
 Fig4 <- dw %>%
   filter(scaffold != 36,
          pop1 != "Balkans") %>%
   ggplot(aes(y = zFST,x = order,col = factor(scaffold)))+
-  theme_bw()+
   theme(axis.text.x = element_blank(),
         legend.position = "none")+
     geom_line()+
@@ -219,7 +216,7 @@ Fig4 <- dw %>%
               ylab(expression(italic(zF)[ST]))+
             xlab("Genomic position")+
   scale_color_manual(values = rep(c("navy","grey"),30))+
-    geom_text(data = labs,aes(x = x,y = y,label = FST,hjust = 1, vjust = 1),col = "black",size = 3)
+    geom_text(data = labs,aes(x = x,y = y,label = FST,hjust = 1, vjust = 1),col = "black",size = 3,parse = T)
 
 Fig4
 ```
@@ -237,15 +234,14 @@ labs <- dw %>%
          !is.na(MEAN_cM)) %>%
   group_by(pop1) %>%
   dplyr::summarise(r = paste("r =", round2(cor(zFST,(log10(MEAN_cM+1))))),
-           x = Inf,
-           y = Inf)
+           x = 4,
+           y = 19)
 
 
 Fig5 <- dw %>%   filter(scaffold != 36,
          pop1 != "Balkans",
          !is.na(MEAN_cM)) %>%
   ggplot(aes(y = zFST,x = log(MEAN_cM+1)))+
-  theme_bw()+
   theme(legend.position = "none")+
     geom_point(col = "grey")+
   geom_point(data = x1,aes(x = log(MEAN_cM+1),y = zFST,col = nhf))+
