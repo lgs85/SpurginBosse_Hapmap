@@ -42,7 +42,48 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 #The great tit HapMap project: a continental-scale analysis of genomic variation in a songbird
 
 
-Lewis G. Spurgin^1,2^\*\*, Mirte Bosse^3,4^\*, The Great Tit HapMap Consortium, Veronika N. Laine^3^, Martien A.M. Groenen^4^, Marcel E.  Visser^3,4^, Kees van Oers^3^, Ben C. Sheldon^2^ and Jon Slate^5^\*\*
+Lewis G. Spurgin^1,2^\*\*, Mirte Bosse^3,4^\*, The Great Tit HapMap Consortium, Veronika N. Laine^3^, 
+
+Frank Adriaensen,
+Christos Barboutis,
+Eduardo Belda,
+Andrey Bushuev,
+Jacopo Cecere,
+Mariusz Cichon,
+Niels Dingemanse,
+Tapio Eeva,
+Vyacheslav Fedorov,
+Matteo Griggio,
+Dieter Heylen,
+Sabine Hille,
+Elena Ivankina,
+Bart Kempenaers
+Anvar Kerimov,
+Milos Krist,
+Laura Kvist,
+Raivo Mänd,
+Erik Matthysen,
+Boris P. Nikolov,
+A. Cláudia Norte
+Markku Orell,
+Gergana Petrova-Dinkova,
+Diego Rubolini,
+Vallo Tilgar,
+János Török,
+Barbara Tschirren,
+Csongor I. Vágási,
+Teru Yuta
+
+
+
+
+
+
+
+
+
+
+Martien A.M. Groenen^4^, Marcel E.  Visser^3,4^, Kees van Oers^3^, Ben C. Sheldon^2^ and Jon Slate^5^\*\*
 
 
 1 School of Biological Sciences, University of East Anglia, Norwich Research Park, United Kingdom
@@ -53,7 +94,11 @@ Lewis G. Spurgin^1,2^\*\*, Mirte Bosse^3,4^\*, The Great Tit HapMap Consortium, 
 
 4 Animal Breeding and Genomics Centre, Wageningen University, the Netherlands
 
+
 5 Department of Animal and Plant Sciences, University of Sheffield, United Kingdom
+
+
+
 
 \* These authors contributed equally to this manuscript
 
