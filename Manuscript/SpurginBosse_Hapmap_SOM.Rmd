@@ -49,7 +49,8 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 Table1 <- ll %>%
   mutate(N = table(pops$Pop)) %>%
   select(Pop,Country,N,Lat,Long) %>%
-  dplyr::rename(Population = Pop,Latitude = Lat,Longitude = Long,Region = Country)
+  dplyr::rename(Population = Pop,Latitude = Lat,Longitude = Long,Region = Country) %>%
+  arrange(Region)
 
 kable(Table1,digits = 3,row.names = F,format = "latex", booktabs = TRUE) %>%
           kable_styling(latex_options = "scale_down")

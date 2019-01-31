@@ -36,7 +36,7 @@ pops <- dplyr::rename(pops,Pop = X1) %>%
 
 # IBD ---------------------------------------------------------------------
 
-colnames(pd) <- c("pop1","pop2","FST","fst_slope","outlier_slope")
+colnames(pd) <- c("pop1","pop2","FST")
 
 for(i in 1:nrow(pd))
 {
