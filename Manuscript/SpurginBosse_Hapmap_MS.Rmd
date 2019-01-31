@@ -42,60 +42,86 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 #The great tit HapMap project: a continental-scale analysis of genomic variation in a songbird
 
 
-Lewis G. Spurgin^1,2^\*\*, Mirte Bosse^3,4^\*, The Great Tit HapMap Consortium, Veronika N. Laine^3^, 
-
-Frank Adriaensen,
-Christos Barboutis,
-Eduardo Belda,
-Andrey Bushuev,
-Jacopo Cecere,
-Mariusz Cichon,
-Niels Dingemanse,
-Tapio Eeva,
-Vyacheslav Fedorov,
-Matteo Griggio,
-Dieter Heylen,
-Sabine Hille,
-Elena Ivankina,
-Bart Kempenaers
-Anvar Kerimov,
-Milos Krist,
-Laura Kvist,
-Raivo Mänd,
-Erik Matthysen,
-Boris P. Nikolov,
-A. Cláudia Norte
-Markku Orell,
-Gergana Petrova-Dinkova,
-Diego Rubolini,
-Vallo Tilgar,
-János Török,
-Barbara Tschirren,
-Csongor I. Vágási,
-Teru Yuta
+Lewis G. Spurgin^1,2^\*\*, Mirte Bosse^3,4^\*, Veronika N. Laine^3^, Frank Adriaensen^5^, Tamer Albayrak^6^, Christos Barboutis^7^, Eduardo Belda^8^, Andrey Bushuev^9^, Jacopo G. Cecere^10^, Anne Charmantier^11^, Mariusz Cichon^12^, Niels Dingemanse^13^, Blandine Doligez^14,15^, Tapio Eeva^16^, Kjell Einar Erikstad^17^, Vyacheslav Fedorov^9^, Matteo Griggio^18^, Michaela Hau^19^, Dieter Heylen^5^, Sabine Hille^20^, Camilla Hinde^21,22^, Elena Ivankina^23^, Bart Kempenaers^19^, Anvar Kerimov^9^, Milos Krist^24^, Laura Kvist^25^, Raivo Mänd^26^, Erik Matthysen^5^, Ruedi Nager^27^, Boris P. Nikolov^28^, A. Claudia Norte^29^, Markku Orell^25^, Jenny Ouyang^19,30^, Gergana Petrova-Dinkova^28^, Heinz Richner^31^, Diego Rubolini^32^, Tore Slagsvold^33^, Vallo Tilgar^26^, Joost Tinbergen^34^, János Török^35^, Barbara Tschirren^36^, Csongor I. Vágási^37^, Teru Yuta^38^, Martien A.M. Groenen^4^, Marcel E.  Visser^3,4^, Kees van Oers^3^, Ben C. Sheldon^2^ and Jon Slate^39^\*\*
 
 
+1. School of Biological Sciences, University of East Anglia, Norwich Research Park, United Kingdom
 
+2. Edward Grey Institute, University of Oxford, United Kingdom
 
+3. Department of Animal Ecology, Netherlands Institute of Ecology (NIOO-KNAW), Wageningen, the Netherlands
 
+4. Animal Breeding and Genomics Centre, Wageningen University, the Netherlands
 
+5. Evolutionary Ecology Group, University of Antwerp, Groenenborgerlaan 171, B-2020, Antwerpen, Belgium
 
+6. Department of Biology, Mehmet Akif Ersoy University, Science and Art Faculty, Ortulu, Burdur, Turkey
 
+7. Hellenic Ornithological Society / BirdLife Greece, Themistokleous 80, GR-10681 Athens
 
+8. Institut d'Investigació per a la Gestió Integrada de Zones Costaneres, Campus de Gandia, Universitat Politècnica de València, Carrer Paranimf 1, E-46730 Grau de Gandia (València), Spain
 
-Martien A.M. Groenen^4^, Marcel E.  Visser^3,4^, Kees van Oers^3^, Ben C. Sheldon^2^ and Jon Slate^5^\*\*
+9. Faculty of Biology, Lomonosov Moscow State University, Moscow 119234, Russia
 
+10. Area Avifauna Migratrice, Istituto Superiore per la Protezione e la Ricerca Ambientale (ISPRA), via Ca’ Fornacetta 9, I-40064, Ozzano Emilia, (BO), Italy
 
-1 School of Biological Sciences, University of East Anglia, Norwich Research Park, United Kingdom
+11. CEFE-CNRS, UMR 5175, 1919, route de Mende, F34293 Montpellier Cedex 5, France
 
-2 Edward Grey Institute, University of Oxford, United Kingdom
+12. Institute of Environmental Sciences, Jagiellonian University, Gronostajowa 7, 30-387 Kraków, Poland
 
-3 Department of Animal Ecology, Netherlands Institute of Ecology (NIOO-KNAW), Wageningen, the Netherlands
+13. Behavioural Ecology, Department of Biology, Ludwig Maximilians University of Munich, Planegg-Martinsried, Germany
 
-4 Animal Breeding and Genomics Centre, Wageningen University, the Netherlands
+14. UMR CNRS 5558—LBBE, Biométrie et Biologie Évolutive, UCB Lyon 1 - Bât. Grégor Mendel, 43 bd du 11 novembre 1918, 69622 VILLEURBANNE cedex, France
 
+15. Department of Ecology and Evolution, Animal Ecology, Evolutionary Biology Centre, Uppsala University, Sweden
 
-5 Department of Animal and Plant Sciences, University of Sheffield, United Kingdom
+16. Department of Biology, University of Turku, Turku 20014, Finland
+
+17. Norwegian Institute for Nature Research, FRAM-High North Research Centre for Climate and the Environment, 9296 Tromsø, Norway
+
+18. Department of Biology, University of Padova, Via U. Bassi 58/B, I-35131, Padova, Italy
+
+19. Max Planck Institute for Ornithology, Department of Behavioural Ecology & Evolutionary Genetics, Eberhard-Gwinner-Straße, House 5, 82319 Seewiesen (Starnberg), Germany
+
+20. Institute of Wildlife Biology and Game Management, University of Natural Resources and Life Science, A-1180 Vienna, Austria
+
+21. Behavioural Ecology Group, Department of Animal Sciences, Wageningen University, Wageningen 6708 PB, The Netherlands
+
+22. Department of Ecology and Evolutionary Biology, Princeton University, Princeton, NJ, United States of America
+
+23. Zvenigorod Biological Station of Lomonosov Moscow State University, P.O. Box Shikhovo, Odintsovo District, Moscow 143092, Russia
+
+24. Department of Zoology and Laboratory of Ornithology, Faculty of Science, Palacký University, Olomouc 77147, Czech Republic
+
+25. Department of Ecology and Genetics, P.O.Box 3000, 90014-University of Oulu, Finland
+
+26. Department of Zoology, Institute of Ecology and Earth Sciences, University of Tartu, Vanemuise 46, Tartu 51014, Estonia
+
+27. Institute of Biodiversity, Animal Health and Comparative Medicine, University of Glasgow, Glasgow G12 8QQ, United Kingdom
+
+28. Institute of Biodiversity and Ecosystem Research, Bulgarian Academy of Sciences, 1 Tsar Osvoboditel Blvd, 1000 Sofia, Bulgaria
+
+29. MARE - Marine and Environmental Sciences Centre, Department of Life Sciences, Faculty of Sciences and Technology, University of Coimbra, Portugal
+
+30. University of Nevada, Reno, USA
+
+31. Evolutionary Ecology Lab, Institute of Ecology and Evolution, University of Bern, Bern 3012, Switzerland
+
+32. Dipartimento di Scienze e Politiche Ambientali, Università degli Studi di Milano, via Celoria 26, I-20133, Milano, Italy
+
+33. Centre for Ecological and Evolutionary Synthesis (CEES), Department of Biosciences, University of Oslo, P.O. Box 1066, Blindern, 0316 Oslo, Norway
+
+34. Centre for Ecological and Evolutionary Studies (CEES), University of Groningen, PO Box 11103, NL-9700 CC Groningen, The Netherlands
+
+35. Behavioural Ecology Group, Department of Systematic Zoology and Ecology, Eötvös Loránd University, Budapest H-1117, Hungary
+
+36. University of Exeter, Centre for Ecology and Conservation, Treliever Road, Penryn, TR10 9FE, United Kingdom
+
+37. Evolutionary Ecology Group, Hungarian Department of Biology and Ecology, Babeș-Bolyai University, Cluj-Napoca, Romania
+
+38. Graduate School of Environmental Science, Hokkaido University, N10 W5 Sapporo, Hokkaido 060-0810, Japan
+
+39. Department of Animal and Plant Sciences, University of Sheffield, United Kingdom
 
 
 
