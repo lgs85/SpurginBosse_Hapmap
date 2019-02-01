@@ -42,7 +42,7 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 #The great tit HapMap project: a continental-scale analysis of genomic variation in a songbird
 
 
-Lewis G. Spurgin^1,2^\*\*, Mirte Bosse^3,4^\*, Veronika N. Laine^3^, Frank Adriaensen^5^, Tamer Albayrak^6^, Christos Barboutis^7^, Eduardo Belda^8^, Andrey Bushuev^9^, Jacopo G. Cecere^10^, Anne Charmantier^11^, Mariusz Cichon^12^, Niels Dingemanse^13^, Blandine Doligez^14,15^, Tapio Eeva^16^, Kjell Einar Erikstad^17^, Vyacheslav Fedorov^9^, Matteo Griggio^18^, Michaela Hau^19^, Dieter Heylen^5^, Sabine Hille^20^, Camilla Hinde^21,22^, Elena Ivankina^23^, Bart Kempenaers^19^, Anvar Kerimov^9^, Milos Krist^24^, Laura Kvist^25^, Raivo Mänd^26^, Erik Matthysen^5^, Ruedi Nager^27^, Boris P. Nikolov^28^, A. Claudia Norte^29^, Markku Orell^25^, Jenny Ouyang^19,30^, Gergana Petrova-Dinkova^28^, Heinz Richner^31^, Diego Rubolini^32^, Tore Slagsvold^33^, Vallo Tilgar^26^, Joost Tinbergen^34^, János Török^35^, Barbara Tschirren^36^, Csongor I. Vágási^37^, Teru Yuta^38^, Martien A.M. Groenen^4^, Marcel E.  Visser^3,4^, Kees van Oers^3^, Ben C. Sheldon^2^ and Jon Slate^39^\*\*
+Lewis G. Spurgin^1,2^\*\*, Mirte Bosse^3,4^\*, Veronika N. Laine^3^, Frank Adriaensen^5^, Tamer Albayrak^6^, Christos Barboutis^7^, Eduardo Belda^8^, Andrey Bushuev^9^, Jacopo G. Cecere^10^, Anne Charmantier^11^, Mariusz Cichon^12^, Niels Dingemanse^13^, Blandine Doligez^14,15^, Tapio Eeva^16^, Kjell Einar Erikstad^17^, Vyacheslav Fedorov^9^, Matteo Griggio^18^, Dieter Heylen^5^, Sabine Hille^29^, Camilla Hinde^20,21^, Elena Ivankina^22^, Bart Kempenaers^23^, Anvar Kerimov^9^, Milos Krist^24^, Laura Kvist^25^, Raivo Mänd^26^, Erik Matthysen^5^, Ruedi Nager^27^, Boris P. Nikolov^28^, A. Claudia Norte^29^, Markku Orell^25^, Jenny Ouyang^23,30^, Gergana Petrova-Dinkova^28^, Heinz Richner^31^, Diego Rubolini^32^, Tore Slagsvold^33^, Vallo Tilgar^26^, Joost Tinbergen^34^, János Török^35^, Barbara Tschirren^36^, Csongor I. Vágási^37^, Teru Yuta^38^, Martien A.M. Groenen^4^, Marcel E.  Visser^3,4^, Kees van Oers^3^, Ben C. Sheldon^2^ and Jon Slate^39^\*\*
 
 
 1. School of Biological Sciences, University of East Anglia, Norwich Research Park, United Kingdom
@@ -81,15 +81,15 @@ Lewis G. Spurgin^1,2^\*\*, Mirte Bosse^3,4^\*, Veronika N. Laine^3^, Frank Adria
 
 18. Department of Biology, University of Padova, Via U. Bassi 58/B, I-35131, Padova, Italy
 
-19. Max Planck Institute for Ornithology, Department of Behavioural Ecology & Evolutionary Genetics, Eberhard-Gwinner-Straße, House 5, 82319 Seewiesen (Starnberg), Germany
+19. Institute of Wildlife Biology and Game Management, University of Natural Resources and Life Science, A-1180 Vienna, Austria
 
-20. Institute of Wildlife Biology and Game Management, University of Natural Resources and Life Science, A-1180 Vienna, Austria
+20. Behavioural Ecology Group, Department of Animal Sciences, Wageningen University, Wageningen 6708 PB, The Netherlands
 
-21. Behavioural Ecology Group, Department of Animal Sciences, Wageningen University, Wageningen 6708 PB, The Netherlands
+21. Department of Ecology and Evolutionary Biology, Princeton University, Princeton, NJ, United States of America
 
-22. Department of Ecology and Evolutionary Biology, Princeton University, Princeton, NJ, United States of America
+22. Zvenigorod Biological Station of Lomonosov Moscow State University, P.O. Box Shikhovo, Odintsovo District, Moscow 143092, Russia
 
-23. Zvenigorod Biological Station of Lomonosov Moscow State University, P.O. Box Shikhovo, Odintsovo District, Moscow 143092, Russia
+23. Max Planck Institute for Ornithology, Department of Behavioural Ecology & Evolutionary Genetics, Eberhard-Gwinner-Straße, House 5, 82319 Seewiesen (Starnberg), Germany
 
 24. Department of Zoology and Laboratory of Ornithology, Faculty of Science, Palacký University, Olomouc 77147, Czech Republic
 
