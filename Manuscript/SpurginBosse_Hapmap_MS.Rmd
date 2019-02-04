@@ -205,6 +205,7 @@ Fig2A <- dw %>%
                   filter(pop1 == "Balkans") %>%
                   mutate(pop1 = "Turkey",
                           pi_pop1 = pi_Turkey)) %>%
+  mutate(pop1 = factor(pop1,levels = levels(ll$Country))) %>%
   filter(pi_pop1 > 0.2) %>%
   ggplot(aes(x = pop1,y = pi_pop1))+
   geom_boxplot(notch = T,outlier.colour = "grey")+
@@ -344,7 +345,7 @@ Fig5
 ####Sampling and molecular methods
 Samples were collected from `r nrow(ll)` populations from `r length(unique(pops$Country))` regions across Europe (Fig. 1; Table S1). Samples were pooled into regions either based on geographical prximity (e.g. Cambridge and Wytham woods), or based on sample size (e.g. Romania and Bulgaria). An exploratory analysis considering all sampled populations separately yielded virtually identical results to those shown here, and in no cases did we observe substructure within pooled populations in our Admixture analyses (Fig. S3). 
 
-Birds were trapped from nest boxes, or using mist nets, and ringed with a uniquely numbered aluminium ring. Blood was taken via brachial venipuncture, and stored in either 1 ml Cell Lysis Solution (Gentra Puregene Kit, Qiagen, USA), Queen’s buffer, or absolute ethanol. All samples were genotyped using a custom-made Affymetrix® great tit 650K SNP chip at Edinburgh Genomics (Edinburgh, United Kingdom), following the approaches outlined in [@Kim2018], and the filtering approaches outlined in [@Bosse2017]. After filtering, a total of `r nrow(pops)` samples typed at `r nrow(markers)` SNPs were retained for analysis.
+Birds were trapped from nest boxes, or using mist nets, and ringed with a uniquely numbered aluminium ring. Blood was taken via brachial or tarsal venipuncture, and stored in either 1 ml Cell Lysis Solution (Gentra Puregene Kit, Qiagen, USA), Queen’s buffer, or absolute ethanol. All samples were genotyped using a custom-made Affymetrix® great tit 650K SNP chip at Edinburgh Genomics (Edinburgh, United Kingdom), following the approaches outlined in [@Kim2018], and the filtering approaches outlined in [@Bosse2017]. After filtering, a total of `r nrow(pops)` samples typed at `r nrow(markers)` SNPs were retained for analysis.
 
 ####Analyses
 Unless stated otherwise, all population genetic statistics were calculated in PLINK version 1.9 [@Purcell2007], and downstream analysis and plotting was carried out in R version 3.3 [@RDevelopmentCoreTeam2011]. In each population, we estimated LD ($R^2$) for each pair of markers within 50kb on the same chromosome, and compared this to physical distance between marker pairs. We calculated observed heterozygosity for each SNP and population using a reduced SNP dataset, which was pruned based on LD to remove all markers with $R^2$ > 0.1, then thinned with a probability of retaining each variant of 0.25.
