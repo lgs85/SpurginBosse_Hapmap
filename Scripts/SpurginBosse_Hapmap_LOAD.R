@@ -7,6 +7,7 @@ library(geosphere)
 library(ecodist)
 library(kableExtra)
 library(cowplot)
+library(ggrepel)
 
 theme_set(theme_bw())
 

@@ -43,14 +43,15 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 
 #Supplementary material for "The great tit HapMap project: a continental-scale analysis of genomic variation in a songbird"
 
-**Table S1** Sampling details for the `r nrow(ll)` European great tit populations.
+**Table S1** Sampling details for the `r nrow(ll)` European great tit populations. "Code" corresponds to labels in Figure 1 of the main text.
 
 ```{R Table S1}
 Table1 <- ll %>%
   mutate(N = table(pops$Pop)) %>%
-  select(Pop,Country,N,Lat,Long) %>%
   dplyr::rename(Population = Pop,Latitude = Lat,Longitude = Long,Region = Country) %>%
-  arrange(Region)
+  arrange(Region) %>%
+  mutate(Code = c(1:nrow(ll))) %>%
+  select(Code,Population,Region,N,Latitude,Longitude)
 
 kable(Table1,digits = 3,row.names = F,format = "latex", booktabs = TRUE) %>%
           kable_styling(latex_options = "scale_down")
@@ -62,7 +63,7 @@ kable(Table1,digits = 3,row.names = F,format = "latex", booktabs = TRUE) %>%
 \pagebreak
 \blandscape
 
-**Table S2** Details of outlier $F_{ST}$ regions in European great tit populations. For each region, $F_{ST}$ was calculated for each population versus Turkey. The "number of outliers represents" the number of *populations* in which each region was detected as an outlier. All genes found within 500kb outlier windows are displayed.
+**Table S2** Details of outlier $F_{ST}$ regions in European great tit populations. For each region, $F_{ST}$ was calculated for each population versus Turkey. The "number of outliers" represents the number of *populations* in which each region was detected as an outlier. All genes found within 500kb outlier windows are displayed.
 
 ```{r Table S2}
 # temp <- strsplit(outliers$Window,split = " ")
@@ -232,7 +233,7 @@ FigS7 <- dw %>%
 FigS7
 ```
 
-**Figure S7** Landscapes of genomic differentiation in European great tit populations. $F_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison between with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $zF_{ST}$ > 10) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines).
+**Figure S7** Landscapes of genomic differentiation in European great tit populations. $F_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $zF_{ST}$ > 10) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines).
 
 
 \pagebreak
