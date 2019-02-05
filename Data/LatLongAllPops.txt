@@ -1,5 +1,5 @@
 Antwerp_Belgium	51.225792	4.390427	Belgium
-Bulgaria	42.851792	24.985853	Balkans
+Bulgaria	42.6960	23.3283	Balkans
 Cambridge_UK	52.198332	0.151964	England
 Crete	35.182501	24.960197	Crete
 Font_Roja_Spain	38.664278	-0.54398	Spain
@@ -18,7 +18,7 @@ Radolfzell_Germany	47.758526	8.956544	Germany
 Romania	46.496657	24.582111	Balkans
 Sardinia	40.05622	9.02509	Sardinia
 Seewisen_Germany	47.978262	11.232854	Germany
-Tartu_Estonia	58.375264	26.739455	Estonia
+Tartu_Estonia	58.150	24.938	Estonia
 Turkey	39.464104	34.796887	Turkey
 Velky_Kosir_Czech_Republic	49.546881	17.062009	Czech Republic
 Vienna_Austria	48.239449	16.346956	Austria

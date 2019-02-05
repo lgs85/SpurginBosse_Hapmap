@@ -69,7 +69,9 @@ ld <- mutate(ld,Pop = str_trim(Pop,side = "left"))
 ld2 <- ld %>% 
   group_by(Pop,dist) %>%
   dplyr::summarise(meanR2 = mean(R2)) %>%
-  mutate(Pop = replace_na(Pop,"Netherlands (Vlieland)"))
+  mutate(Pop = str_replace(Pop,"Czech_Republic","Czech Republic")) %>%
+  mutate(Pop = str_replace(Pop,"Netherlands_Vlieland","Netherlands (Vlieland)")) %>%
+  mutate(Pop = factor(Pop,levels = levels(ll$Country)))
   
 
 
