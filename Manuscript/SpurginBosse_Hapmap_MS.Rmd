@@ -42,7 +42,7 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 #The great tit HapMap project: a continental-scale analysis of genomic variation in a songbird
 
 
-Lewis G. Spurgin^1,2^\*\*, Mirte Bosse^3,4^\*, Veronika N. Laine^3^, Frank Adriaensen^5^, Tamer Albayrak^6^, Christos Barboutis^7^, Eduardo Belda^8^, Andrey Bushuev^9^, Jacopo G. Cecere^10^, Anne Charmantier^11^, Mariusz Cichon^12^, Niels Dingemanse^13^, Blandine Doligez^14,15^, Tapio Eeva^16^, Kjell Einar Erikstad^17^, Vyacheslav Fedorov^9^, Matteo Griggio^18^, Dieter Heylen^5^, Sabine Hille^29^, Camilla A. Hinde^20,21^, Elena Ivankina^22^, Bart Kempenaers^23^, Anvar Kerimov^9^, Milos Krist^24^, Laura Kvist^25^, Raivo Mänd^26^, Erik Matthysen^5^, Ruedi Nager^27^, Boris P. Nikolov^28^, A. Claudia Norte^29^, Markku Orell^25^, Jenny Ouyang^23,30^, Gergana Petrova-Dinkova^28^, Heinz Richner^31^, Diego Rubolini^32^, Tore Slagsvold^33^, Vallo Tilgar^26^, Joost Tinbergen^34^, János Török^35^, Barbara Tschirren^36^, Csongor I. Vágási^37^, Teru Yuta^38^, Martien A.M. Groenen^4^, Marcel E.  Visser^3,4^, Kees van Oers^3^, Ben C. Sheldon^2^ and Jon Slate^39^\*\*
+Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4^, Frank Adriaensen^5^, Tamer Albayrak^6^, Christos Barboutis^7^, Eduardo Belda^8^, Andrey Bushuev^9^, Jacopo G. Cecere^10^, Anne Charmantier^11^, Mariusz Cichon^12^, Niels Dingemanse^13^, Blandine Doligez^14,15^, Tapio Eeva^16^, Kjell Einar Erikstad^17^, Vyacheslav Fedorov^9^, Matteo Griggio^18^, Dieter Heylen^5^, Sabine Hille^29^, Camilla A. Hinde^20,21^, Elena Ivankina^22^, Veronika N. Laine^3,23^, Bart Kempenaers^24^, Anvar Kerimov^9^, Milos Krist^25^, Laura Kvist^26^, Raivo Mänd^27^, Erik Matthysen^5^, Ruedi Nager^28^, Boris P. Nikolov^29^, A. Claudia Norte^30^, Markku Orell^26^, Jenny Ouyang^24,31^, Gergana Petrova-Dinkova^29^, Heinz Richner^32^, Diego Rubolini^33^, Tore Slagsvold^34^, Vallo Tilgar^27^, János Török^35^, Barbara Tschirren^36^, Csongor I. Vágási^37^, Teru Yuta^38^, Martien A.M. Groenen^4^, Marcel E.  Visser^3,4^, Kees van Oers^3^, Ben C. Sheldon^2^ and Jon Slate^39^\*
 
 
 1. School of Biological Sciences, University of East Anglia, Norwich Research Park, United Kingdom
@@ -89,29 +89,29 @@ Lewis G. Spurgin^1,2^\*\*, Mirte Bosse^3,4^\*, Veronika N. Laine^3^, Frank Adria
 
 22. Zvenigorod Biological Station of Lomonosov Moscow State University, P.O. Box Shikhovo, Odintsovo District, Moscow 143092, Russia
 
-23. Max Planck Institute for Ornithology, Department of Behavioural Ecology & Evolutionary Genetics, Eberhard-Gwinner-Straße, House 5, 82319 Seewiesen (Starnberg), Germany
+23. Department of Molecular and Cellular Biology, Harvard University, Cambridge, MA, United States of America
 
-24. Department of Zoology and Laboratory of Ornithology, Faculty of Science, Palacký University, Olomouc 77147, Czech Republic
+24. Max Planck Institute for Ornithology, Department of Behavioural Ecology & Evolutionary Genetics, Eberhard-Gwinner-Straße, House 5, 82319 Seewiesen (Starnberg), Germany
 
-25. Department of Ecology and Genetics, P.O.Box 3000, 90014-University of Oulu, Finland
+25. Department of Zoology and Laboratory of Ornithology, Faculty of Science, Palacký University, Olomouc 77147, Czech Republic
 
-26. Department of Zoology, Institute of Ecology and Earth Sciences, University of Tartu, Vanemuise 46, Tartu 51014, Estonia
+26. Department of Ecology and Genetics, P.O.Box 3000, 90014-University of Oulu, Finland
 
-27. Institute of Biodiversity, Animal Health and Comparative Medicine, University of Glasgow, Glasgow G12 8QQ, United Kingdom
+27. Department of Zoology, Institute of Ecology and Earth Sciences, University of Tartu, Vanemuise 46, Tartu 51014, Estonia
 
-28. Institute of Biodiversity and Ecosystem Research, Bulgarian Academy of Sciences, 1 Tsar Osvoboditel Blvd, 1000 Sofia, Bulgaria
+28. Institute of Biodiversity, Animal Health and Comparative Medicine, University of Glasgow, Glasgow G12 8QQ, United Kingdom
 
-29. MARE - Marine and Environmental Sciences Centre, Department of Life Sciences, Faculty of Sciences and Technology, University of Coimbra, Portugal
+29. Institute of Biodiversity and Ecosystem Research, Bulgarian Academy of Sciences, 1 Tsar Osvoboditel Blvd, 1000 Sofia, Bulgaria
 
-30. University of Nevada, Reno, USA
+30. MARE - Marine and Environmental Sciences Centre, Department of Life Sciences, Faculty of Sciences and Technology, University of Coimbra, Portugal
 
-31. Evolutionary Ecology Lab, Institute of Ecology and Evolution, University of Bern, Bern 3012, Switzerland
+31. University of Nevada, Reno, NV, United States of America
 
-32. Dipartimento di Scienze e Politiche Ambientali, Università degli Studi di Milano, via Celoria 26, I-20133, Milano, Italy
+32. Evolutionary Ecology Lab, Institute of Ecology and Evolution, University of Bern, Bern 3012, Switzerland
 
-33. Centre for Ecological and Evolutionary Synthesis (CEES), Department of Biosciences, University of Oslo, P.O. Box 1066, Blindern, 0316 Oslo, Norway
+33. Dipartimento di Scienze e Politiche Ambientali, Università degli Studi di Milano, via Celoria 26, I-20133, Milano, Italy
 
-34. Centre for Ecological and Evolutionary Studies (CEES), University of Groningen, PO Box 11103, NL-9700 CC Groningen, The Netherlands
+34. Centre for Ecological and Evolutionary Synthesis (CEES), Department of Biosciences, University of Oslo, P.O. Box 1066, Blindern, 0316 Oslo, Norway
 
 35. Behavioural Ecology Group, Department of Systematic Zoology and Ecology, Eötvös Loránd University, Budapest H-1117, Hungary
 
@@ -125,10 +125,7 @@ Lewis G. Spurgin^1,2^\*\*, Mirte Bosse^3,4^\*, Veronika N. Laine^3^, Frank Adria
 
 
 
-
-\* These authors contributed equally to this manuscript
-
-\** **Correspondence**: l.spurgin@uea.ac.uk; j.slate@sheffield.ac.uk
+\* **Correspondence**: l.spurgin@uea.ac.uk; j.slate@sheffield.ac.uk
 
 \pagebreak
 
@@ -152,7 +149,7 @@ Comparing patterns of genomic differentiation among sets of populations or speci
 
 It is now clear that the recombination landscape and linked selection are key drivers of genomic variation within and among populations. However, we are only just beginning to understand how this linked selection interacts with other evolutionary forces to shape patterns of differentiation across natural populations and species [@Burri2017; @Ellegren2017; @Jiggins2017; @Lohse2017; @Ravinet2017]. A recent, large-scale analysis of threespine sticklebacks (*Gasterosteus aculeatus*) showed that islands of differentiation were more likely to arise in low recombination regions when gene flow occurred between populations [@Samuk2017]. There is also a significant impact of divergence time; in recently separated populations the differentiation landscape is most likely to reflect selective sweeps. Then, as divergence accumulates, genomic architecture is expected to play an increasingly important role in generating these genomic islands [@Burri2017]. 
 
-Widespread continental species are excellent models for studying how demography and the environment shape genetic and phenotypic variation among populations, due to their large effective population sizes and ecologically varied ranges. Insight into the evolutionary history of such species can be gained if genetic variation is characterized across much of its geographical range. Cross-population comparisons of genetic variation can then be used to make inferences about phylogeography, levels of gene flow between populations and how adaptation to different environmental and ecological conditions occurs. Whole-genome resequencing and customized SNP genotyping arrays have made studies that characterize all, or much, of the genome tractable. The first large-scale studies were performed in humans i.e. The HapMap Projects [@Altshuler2005;@Frazer2007;@Altshuler2010] which characterized human genetic variation on different continents, with a view to determining the feasibility of association mapping studies. Similar studies have been conducted in domesticated species and their wild ancestors [@Kijas2012; @Gibbs2009; @Chia2012], and in model organisms [@@Lindblad-Toh2005; @Kirby2010]. More recently, there is a growing appreciation that HapMap-type studies are useful for studying signatures of selection and adaptation in natural populations of species with large effective population sizes and high levels of gene flow [@Horton2012; @Alonso-Blanco2016; @Williamson2014; @Mueller2018].
+Widespread continental species are excellent models for studying how demography and the environment shape genetic and phenotypic variation among populations, due to their large effective population sizes and ecologically varied ranges. Insight into the evolutionary history of such species can be gained if genetic variation is characterized across much of its geographical range. Cross-population comparisons of genetic variation can then be used to make inferences about phylogeography, levels of gene flow between populations and how adaptation to different environmental and ecological conditions occurs. Whole-genome resequencing and customized SNP genotyping arrays have made studies that characterize all, or much, of the genome tractable. The first large-scale studies were performed in humans - i.e. the HapMap Projects [@Altshuler2005;@Frazer2007;@Altshuler2010] which characterized human genetic variation on different continents, with a view to determining the feasibility of association mapping studies. Similar studies have been conducted in domesticated species and their wild ancestors [@Kijas2012; @Gibbs2009; @Chia2012], and in model organisms [@@Lindblad-Toh2005; @Kirby2010]. More recently, there is a growing appreciation that HapMap-type studies are useful for studying signatures of selection and adaptation in natural populations of species with large effective population sizes and high levels of gene flow [@Horton2012; @Alonso-Blanco2016; @Williamson2014; @Mueller2018].
 
 The European great tit (*Parus major major*) is an excellent model for ecological and evolutionary studies [@Gosler1993]. A wealth of ecological data exists across multiple great tit populations [e.g. @Visser1998; @Charmantier2008; @Dingemanse2012], enabling informed hypotheses about selection to be tested in this system.  Phyleogeographic research using mitochondrial DNA suggests that this species has recently expanded across its European range, possibly from a single refugium in the Balkans [@Kvist1999]. Contemporary populations are characterised by large effective population sizes and high levels of gene flow among populations, resulting in low levels of genetic differentiation [@Kvist2003; @Lemoine2016]. However, these previous cross-population molecular studies have relied on a modest number of microsatellite loci and mitochondrial DNA, making the detection of genomic regions under selection impossible. The genome of the great tit has recently been sequenced [@Laine2016], and a high density panel of SNP markers has been developed [@Kim2018]. A recent study of two European populations using this marker panel suggests that rapid adaptation has occurred at the genomic and phenotypic levels, with pronounced selection on morphology [@Bosse2017]. 
 
