@@ -42,7 +42,7 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 #The great tit HapMap project: a continental-scale analysis of genomic variation in a songbird
 
 
-Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4,5^, Frank Adriaensen^6^, Tamer Albayrak^7^, Christos Barboutis^8^, Eduardo Belda^9^, Andrey Bushuev^10^, Jacopo G. Cecere^11^, Anne Charmantier^12^, Mariusz Cichon^13^, Niels Dingemanse^14^, Blandine Doligez^15,16^, Tapio Eeva^17^, Kjell Einar Erikstad^18^, Vyacheslav Fedorov^10^, Matteo Griggio^19^, Dieter Heylen^6^, Sabine Hille^20^, Camilla A. Hinde^21,22^, Elena Ivankina^23^, Veronika N. Laine^3,24^, Bart Kempenaers^25^, Anvar Kerimov^10^, Milos Krist^26^, Laura Kvist^27^, Raivo Mänd^28^, Erik Matthysen^6^, Ruedi Nager^29^, Boris P. Nikolov^30^, A. Claudia Norte^31^, Markku Orell^27^, Jenny Ouyang^25,32^, Gergana Petrova-Dinkova^30^, Heinz Richner^33^, Diego Rubolini^34^, Tore Slagsvold^35^, Vallo Tilgar^28^, János Török^36^, Barbara Tschirren^37^, Csongor I. Vágási^38^, Teru Yuta^39^, Martien A.M. Groenen^4^, Marcel E.  Visser^3,4,40^, Kees van Oers^3^, Ben C. Sheldon^2^ and Jon Slate^41^\*
+Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4,5^, Frank Adriaensen^6^, Tamer Albayrak^7^, Christos Barboutis^8^, Eduardo Belda^9^, Andrey Bushuev^10^, Jacopo G. Cecere^11^, Anne Charmantier^12^, Mariusz Cichon^13^, Niels J. Dingemanse^14^, Blandine Doligez^15,16^, Tapio Eeva^17^, Kjell Einar Erikstad^18^, Vyacheslav Fedorov^10^, Matteo Griggio^19^, Dieter Heylen^6,20,21^, Sabine Hille^22^, Camilla A. Hinde^23^, Elena Ivankina^24^, Veronika N. Laine^3,25^, Bart Kempenaers^26^, Anvar Kerimov^10^, Milos Krist^27^, Laura Kvist^28^, Raivo Mänd^29^, Erik Matthysen^6^, Ruedi Nager^30^, Boris P. Nikolov^31^, A. Claudia Norte^32^, Markku Orell^28^, Jenny Ouyang^26,33^, Gergana Petrova-Dinkova^31^, Heinz Richner^34^, Diego Rubolini^35^, Tore Slagsvold^36^, Vallo Tilgar^29^, János Török^37^, Barbara Tschirren^38^, Csongor I. Vágási^39,40^, Teru Yuta^41^, Martien A.M. Groenen^4^, Marcel E.  Visser^3,4,42^, Kees van Oers^3^, Ben C. Sheldon^2^ and Jon Slate^43^\*
 
 
 1. School of Biological Sciences, University of East Anglia, Norwich Research Park, United Kingdom
@@ -55,7 +55,7 @@ Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4,5^, Frank Adriaensen^6^, Tamer Albayrak
 
 5. Department of Ecological Science, Animal Ecology Group, Vrije Universiteit Amsterdam, Amsterdam, The Netherlands
 
-6. Evolutionary Ecology Group, University of Antwerp, Groenenborgerlaan 171, B-2020, Antwerpen, Belgium
+6. Evolutionary Ecology Group, Department of Biology, University of Antwerp, Universiteitsplein 1, 2610 Antwerp, Belgium
 
 7. Department of Biology, Mehmet Akif Ersoy University, Science and Art Faculty, Ortulu, Burdur, Turkey
 
@@ -83,49 +83,53 @@ Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4,5^, Frank Adriaensen^6^, Tamer Albayrak
 
 19. Department of Biology, University of Padova, Via U. Bassi 58/B, I-35131, Padova, Italy
 
-20. Institute of Wildlife Biology and Game Management, University of Natural Resources and Life Science, A-1180 Vienna, Austria
+20. Department of Ecology and Evolutionary Biology, Princeton University, Princeton, NJ, United States of America
 
-21. Behavioural Ecology Group, Department of Animal Sciences, Wageningen University, Wageningen 6708 PB, The Netherlands
+21. Interuniversity Institute for Biostatistics and statistical Bioinformatics, Hasselt University, Diepenbeek, Belgium
 
-22. Department of Ecology and Evolutionary Biology, Princeton University, Princeton, NJ, United States of America
+22. Institute of Wildlife Biology and Game Management, University of Natural Resources and Life Science, A-1180 Vienna, Austria
 
-23. Zvenigorod Biological Station of Lomonosov Moscow State University, P.O. Box Shikhovo, Odintsovo District, Moscow 143092, Russia
+22. Behavioural Ecology Group, Department of Animal Sciences, Wageningen University, Wageningen 6708 PB, The Netherlands
 
-24. Department of Molecular and Cellular Biology, Harvard University, Cambridge, MA, United States of America
+24. Zvenigorod Biological Station of Lomonosov Moscow State University, P.O. Box Shikhovo, Odintsovo District, Moscow 143092, Russia
 
-25. Max Planck Institute for Ornithology, Department of Behavioural Ecology & Evolutionary Genetics, Eberhard-Gwinner-Straße, House 5, 82319 Seewiesen (Starnberg), Germany
+25. Department of Molecular and Cellular Biology, Harvard University, Cambridge, MA, United States of America
 
-26. Department of Zoology and Laboratory of Ornithology, Faculty of Science, Palacký University, Olomouc 77147, Czech Republic
+26. Max Planck Institute for Ornithology, Department of Behavioural Ecology & Evolutionary Genetics, Eberhard-Gwinner-Straße, House 5, 82319 Seewiesen (Starnberg), Germany
 
-27. Department of Ecology and Genetics, P.O.Box 3000, 90014-University of Oulu, Finland
+27. Department of Zoology and Laboratory of Ornithology, Faculty of Science, Palacký University, Olomouc 77147, Czech Republic
 
-28. Department of Zoology, Institute of Ecology and Earth Sciences, University of Tartu, Vanemuise 46, Tartu 51014, Estonia
+28. Department of Ecology and Genetics, P.O.Box 3000, 90014-University of Oulu, Finland
 
-29. Institute of Biodiversity, Animal Health and Comparative Medicine, University of Glasgow, Glasgow G12 8QQ, United Kingdom
+29. Department of Zoology, Institute of Ecology and Earth Sciences, University of Tartu, Vanemuise 46, Tartu 51014, Estonia
 
-30. Institute of Biodiversity and Ecosystem Research, Bulgarian Academy of Sciences, 1 Tsar Osvoboditel Blvd, 1000 Sofia, Bulgaria
+30. Institute of Biodiversity, Animal Health and Comparative Medicine, University of Glasgow, Glasgow G12 8QQ, United Kingdom
 
-31. MARE - Marine and Environmental Sciences Centre, Department of Life Sciences, Faculty of Sciences and Technology, University of Coimbra, Portugal
+31. Bulgarian Ornithological Centre, Institute of Biodiversity and Ecosystem Research, Bulgarian Academy of Sciences, 1 Tsar Osvoboditel Blvd, 1000 Sofia, Bulgaria
 
-32. University of Nevada, Reno, NV, United States of America
+32. MARE - Marine and Environmental Sciences Centre, Department of Life Sciences, Faculty of Sciences and Technology, University of Coimbra, Portugal
 
-33. Evolutionary Ecology Lab, Institute of Ecology and Evolution, University of Bern, Bern 3012, Switzerland
+33. University of Nevada, Reno, NV, United States of America
 
-34. Dipartimento di Scienze e Politiche Ambientali, Università degli Studi di Milano, via Celoria 26, I-20133, Milano, Italy
+34. Evolutionary Ecology Lab, Institute of Ecology and Evolution, University of Bern, Bern 3012, Switzerland
 
-35. Centre for Ecological and Evolutionary Synthesis (CEES), Department of Biosciences, University of Oslo, P.O. Box 1066, Blindern, 0316 Oslo, Norway
+35. Dipartimento di Scienze e Politiche Ambientali, Università degli Studi di Milano, via Celoria 26, I-20133, Milano, Italy
 
-36. Behavioural Ecology Group, Department of Systematic Zoology and Ecology, Eötvös Loránd University, Budapest H-1117, Hungary
+36. Centre for Ecological and Evolutionary Synthesis (CEES), Department of Biosciences, University of Oslo, P.O. Box 1066, Blindern, 0316 Oslo, Norway
 
-37. University of Exeter, Centre for Ecology and Conservation, Treliever Road, Penryn, TR10 9FE, United Kingdom
+37. Behavioural Ecology Group, Department of Systematic Zoology and Ecology, Eötvös Loránd University, Budapest H-1117, Hungary
 
-38. Evolutionary Ecology Group, Hungarian Department of Biology and Ecology, Babeș-Bolyai University, Cluj-Napoca, Romania
+38. University of Exeter, Centre for Ecology and Conservation, Treliever Road, Penryn, TR10 9FE, United Kingdom
 
-39. Graduate School of Environmental Science, Hokkaido University, N10 W5 Sapporo, Hokkaido 060-0810, Japan
+39. Evolutionary Ecology Group, Hungarian Department of Biology and Ecology, Babeș-Bolyai University, Cluj-Napoca, Romania
 
-40. Groningen Institute for Evolutionary Life Sciences (GELIFES), University of Groningen, Groningen, the Netherlands
+40. Behavioural Ecology Research Group, Department of Evolutionary Zoology, University of Debrecen, Debrecen, Hungary
 
-41. Department of Animal and Plant Sciences, University of Sheffield, United Kingdom
+41. Graduate School of Environmental Science, Hokkaido University, N10 W5 Sapporo, Hokkaido 060-0810, Japan
+
+42. Groningen Institute for Evolutionary Life Sciences (GELIFES), University of Groningen, Groningen, the Netherlands
+
+43. Department of Animal and Plant Sciences, University of Sheffield, United Kingdom
 
 
 
@@ -141,7 +145,7 @@ Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4,5^, Frank Adriaensen^6^, Tamer Albayrak
 A major aim of evolutionary biology is to understand why patterns of genomic variation vary among populations and species. Large-scale genomic studies of widespread species are useful for studying how the environment and demographic history shape patterns of genomic divergence, and with the continually decreasing cost of sequencing, such studies are now becoming feasible. Here, we carry out one of the most comprehensive surveys of genomic variation in a wild vertebrate to date; the great tit (*Parus major*) HapMap project. We screened *ca* 500,000 SNP markers across `r nrow(pops)` individuals from  `r nrow(ll)` populations, spanning almost the entire geographic range of the European great tit subspecies. We found that genome-wide variation was consistent with a recent colonisation across Europe from a single refugium in the Balkans and/or Turkey, with bottlenecks and reduced genetic diversity in island populations. Differentiation across the genome was highly heterogeneous, with clear "islands of differentiation" even among populations which are ostensibly panmictic. These islands of differentiation were consistently found in regions of low recombination, suggesting that background selection can rapidly promote population differentiation among even the most recently colonised populations. We also detected genomic outlier regions that were unique to peripheral great tit populations, most likely as a result of recent directional selection at the range edges of this species. These "unique" outlier regions contained candidate genes for morphology, thermal adaptation and colouration, supporting previous research in this species, and providing avenues for future investigation. Our study suggests that comprehensive screens of genomic variation in wild organisms can provide unique insights into evolution.
 
 ##Author summary
-Studying patterns of genetic variation is a useful way of determining why populations and species differ in nature. Genetic variation is shaped by natural selection, but also by the present and past size of populations, the amount of migration, and by features of the genome, such as variation in recombination rate, of the organism being studied. Teasing apart the effects of these different processes on genomic diversity is difficult, but one way that this can be achieved is by studying genomic variation across the entire range of a species. We performed a continental-scale analysis of genetic variation in the great tit - a widespread songbird that has been the focus of extensive ecological research. We first used genomic data to reconstruct the historical colonisation of great tits across Europe, and showed that during the last ice age, this species was likely restricted to a single region in Eastern Europe, from which they spread across the continent. We then studied how patterns of variation differ along the genome, and show that recombination rate is a key driver of variation among all populations. Importantly, by comparing many populations we were able to identify genes that have been subject to natural selection in specific geographical regions. We found that natural selection occurred appeared to be strongest in populations on the edges of the great tit's range acting on traits such as morphology, stress response and colouration. Large-scale genetic analyses such as ours are therefore useful approaches for understanding how evolution operates in the wild.
+Studying patterns of genetic variation is a useful way of determining why populations and species differ in nature. Genetic variation is shaped by natural selection, but also by the present and past size of populations, the amount of migration, and by features of the genome, such as variation in recombination rate, of the organism being studied. Teasing apart the effects of these different processes on genomic diversity is difficult, but one way that this can be achieved is by studying genomic variation across the entire range of a species. We performed a continental-scale analysis of genetic variation in the great tit - a widespread songbird that has been the focus of extensive ecological research. We first used genomic data to reconstruct the historical colonisation of great tits across Europe, and showed that during the last ice age, this species was likely restricted to a single region in Eastern Europe, from which they spread across the continent. We then studied how patterns of variation differ along the genome, and show that recombination rate is a key driver of variation among all populations. Importantly, by comparing many populations we were able to identify genes that have been subject to natural selection in specific geographical regions. We found that natural selection appeared to be strongest in populations on the edges of the great tit's range acting on traits such as morphology, stress response and colouration. Large-scale genetic analyses such as ours are therefore useful approaches for understanding how evolution operates in the wild.
 
 ##Introduction
 
@@ -188,9 +192,9 @@ Fig1
 
 #### Genetic diversity and population history
 
-Sampling locations and sample sizes for each population are given in Table S1. Levels of genetic diversity ($\pi_{SNP}$) were generally high, but we observed substantial differences among populations (Fig. 2A). Similarly, LD declined rapidly with genomic distance in all populations, reaching baseline levels within ~5kb in all populations, but also varying among populations (Fig. S1).  Highest levels of LD (and lowest levels of genetic diversity) were observed in the Mediterranean island populations of Crete (Greece) and Sardinia (Italy), with lowest levels of LD in central and western Europe (Fig. S1). This is consistent with reduced effective population size in these island populations, either as result of the colonisation process or more recent bottlenecks, along with low levels of subsequent gene flow to the islands [@Postma2005; @James2016].
+Sampling locations and sample sizes for each population are given in Table S1. Levels of genetic diversity ($\pi_{SNP}$) were generally high, but we observed substantial differences among populations (Fig. 2A). Similarly, LD declined rapidly with genomic distance in all populations, reaching baseline levels within ~5kb in all populations, but also varying among populations (Fig. S1).  Highest levels of LD (and lowest levels of genetic diversity) were observed in the Mediterranean island populations of Crete (Greece) and Sardinia (Italy), with lowest levels of LD in central and western Europe (Fig. S1). This is consistent with reduced effective population size in these island populations, either as result of the colonisation process or more recent bottlenecks, along with low levels of subsequent gene flow from the continent to the islands [@Postma2005; @James2016].
 
-Genome-wide $F_{ST}$ between European great tit populations was `r round3(mean(dw$FST))`, with no significant pattern of isolation-by-distance (Mantel test; r = `r round2(mantel(FST~dist,data = pd)["mantelr"])`, p = `r round2(mantel(FST~dist,data = pd)["pval1"])`; Fig. S2). Instead, the highest levels of $F_{ST}$ were found in comparisons involving the Mediterranean island populations of Corsica (France), Sardinia and Crete (Fig. S2). Admixture analysis was consistent with this pattern (Fig. S3); the $K$ = 2 analysis assigned individuals in Sardinia and Corsica to one genetic cluster, and the remaining populations to the second. Thus, it is likely that much of the genetic structure between European great tit populations is a result of genetic drift in these small island populations. Admixture analysis also revealed some structure between (mainly peripheral) mainland and larger island populations. At $K$ = 3 (the model that best fitted the great tit data; Fig. S3), Spain was separated from the rest of mainland Europe. Increasing values of $K$ resulted in the separation of populations in Scotland ($K$ = 4), Sardinia (from Corsica; $K$ = 5), southern France ($K$ = 6), Crete ($K$ = 7) and England ($K$ = 8). The Admixture output at $K$ = 8 is displayed in Fig. 2C as this gives the most detailed picture of genetic structure among European great tit populations. Further increases in $K$ did not generate patterns of structure that corresponded to geographical variation (Fig. S3), and were increasingly less well supported (Fig. S4). Thus, even with hundreds of thousands of markers Admixture was unable to separate many of the European populations, confirming that levels of divergence are extremely low. PCA largely corroborated the Admixture results, with PC1 separating Corsica and Sardinia from the remaining populations, PC2 separating Spain, PC3 separating Corsica from Sardinia, and PC4 separating Scotland, England and France (Fig. S5).
+Genome-wide $F_{ST}$ between European great tit populations was `r round3(mean(dw$FST))`, with no significant pattern of isolation-by-distance (Mantel test; r = `r round2(mantel(FST~dist,data = pd)["mantelr"])`, p = `r round2(mantel(FST~dist,data = pd)["pval1"])`; Fig. S2). Instead, the highest levels of $F_{ST}$ were found in comparisons involving the Mediterranean island populations of Corsica (France), Sardinia and Crete (Fig. S2). Admixture analysis was consistent with this pattern (Fig. S3); the $K$ = 2 analysis assigned individuals in Sardinia and Corsica to one genetic cluster, and the remaining populations to the second. Thus, it is likely that much of the genetic structure between European great tit populations is a result of genetic drift in these small island populations. Admixture analysis also revealed some structure between (mainly peripheral) mainland and larger island populations. At $K$ = 3 (the model that best fitted the great tit data; Fig. S4), Spain was separated from the rest of mainland Europe. Increasing values of $K$ resulted in the separation of populations in Scotland ($K$ = 4), Sardinia (from Corsica; $K$ = 5), southern France ($K$ = 6), Crete ($K$ = 7) and England ($K$ = 8). The Admixture output at $K$ = 8 is displayed in Fig. 2C as this gives the most detailed picture of genetic structure among European great tit populations. Further increases in $K$ did not generate patterns of structure that corresponded to geographical variation (Fig. S3), and were increasingly less well supported (Fig. S4). Thus, even with hundreds of thousands of markers Admixture was unable to separate many of the European populations, confirming that levels of divergence are extremely low. PCA largely corroborated the Admixture results, with PC1 separating Corsica and Sardinia from the remaining populations, PC2 separating Spain, while PC3 and PC4 separated Scotland, England, Corsica, Sardinia and Crete (Fig. S5).
 
 Maximum likelihood analyses implemented in TreeMix showed that a model with no migration explained 97.8% of variance in relatedness between populations [see @Pickrell2012]; increasing the number of migration events substantially improved the percentage of relatedness explained, up to 99.7% when 10 migration events were fitted (Fig. S6). In Figure 3 we display the maximum likelihood tree with two migration events, after which the variance in relatedness explained plateaued when more migration events were added (Fig. S6). The tree was generally characterised by short branch lengths, with the exception of the island populations of Sardinia and Crete, which were grouped with the population from mainland Italy (Fig. 3). Thus, the TreeMix analysis is consistent with the pattern of low overall genomic divergence, with the exception of the Mediterranean island populations. However, much (though not all) of the grouping that did occur among continental populations made geographical sense, with populations from Finland and Estonia grouped together, as were populations from Turkey and the Balkans, and populations from England and Scotland (Fig. 3). Interestingly, TreeMix grouped the Spanish and Corsican populations, which is consistent with previous subspecies descriptions of European great tits [@Clements2007]. The two fitted migration edges both involved Sardinia, with migration from eastern Europe to Sardinia, and from Sardinia to Corsica (Fig. 3).
 
@@ -211,7 +215,7 @@ Fig2A <- dw %>%
   ggplot(aes(x = pop1,y = pi_pop1))+
   geom_boxplot(notch = T,outlier.colour = "grey")+
   theme_bw()+
-  theme(axis.text.x = element_text(angle = 90))+
+  theme(axis.text.x = element_text(angle = 90,vjust = 0.5,hjust=1))+
   ylab(expression(pi[SNP]))+
   xlab("")+
   ggtitle("A")
@@ -251,12 +255,12 @@ multiplot(Fig2A,Fig2B,Fig2C,layout = matrix(c(1,2,3,3),nrow = 2,byrow = T))
 plot_tree("Data/TreeMix/HapMap_2",mbar = F,cex = 0.8)
 ```
 
-**Figure 3** Maximum likelihood tree inferred by TreeMix, allowing ten migration events. The two migration events (arrows) are coloured according to their weight (red = higher migration), and horizontal branch lengths are proportional to the amount of genetic drift that has occurred along the branch. A population the great tit's sister species, *Parus minor*, was used as an outgroup. Population details are given in Table S1.
+**Figure 3** Maximum likelihood tree inferred by TreeMix, allowing two migration events. The two migration events (arrows) are coloured according to their weight (red = higher migration), and horizontal branch lengths are proportional to the amount of genetic drift that has occurred along the branch. A population of the great tit's sister species, *Parus minor*, was used as an outgroup. Population details are given in Table S1.
 
 \pagebreak
 
 #### Genomic landscapes of differentiation
-It is likely that many, and perhaps the majority, of wild populations are characterised by highly heterogeneous patterns of differentiation across the genome [see @Ravinet2017 for a recent overview]. To examine how landscapes of genomic divergence have formed along the colonisation route of European great tits, we calculated windowed $F_{ST}$ in 500kb bins between each population and the proposed refugial population in Turkey. We found that $F_{ST}$ varied markedly across the genome in all comparisons (Fig. 4; Fig. S7). Outlier regions (windows with standardized $F_{ST}$ - hereafter $zF_{ST}$ - > 10) were found in all comparisons apart from Crete and Sardinia, in which overall levels of divergence were highest (Fig. 4). Our results suggest, therefore, that genomic islands of differentiation can and do arise even among populations that could be considered panmictic. 
+It is likely that many, and perhaps the majority, of wild populations are characterised by highly heterogeneous patterns of differentiation across the genome [see @Ravinet2017 for a recent overview]. To examine how landscapes of genomic divergence have formed along the colonisation route of European great tits, we calculated windowed $F_{ST}$ in 500kb bins between each population and the proposed refugial population in Turkey. We found that $F_{ST}$ varied markedly across the genome in all comparisons (Fig. 4; Fig. S7). Outlier regions (windows with standardized $F_{ST}$,hereafter $zF_{ST}$, > 10) were found in all comparisons apart from Crete and Sardinia, in which overall levels of divergence were highest (Fig. 4). Our results suggest, therefore, that genomic islands of differentiation can and do arise even among populations that could be considered panmictic. 
 
 Genomic differentiation was negatively related to recombination rate in almost all comparisons with Turkey (Fig. 5). The relationship between $F_{ST}$ and recombination rate was generally weak, with correlation coefficients < 0.1. In a handful of populations this relationship was substantially stronger - most notably in the island populations of Corsica, Sardinia and Crete, and in England, Scotland, Spain, Finland and France (Fig. 5). Outlier regions of very high differentiation ($zF_{ST}$ > 10) almost exclusively occurred in relatively low recombining regions, and accordingly, the recombination rate of outlier regions was lower than the genome-wide average, albeit not significantly (Wilcoxon test, $P$ = `r round3(wilcox.test(subset(x1,!duplicated(Window))$MEAN_cM, subset(dw,pop1 == "England")$MEAN_cM)$p.value)`). Nonetheless, there is a suggestion that linked selection in regions of low recombination may play a key role in driving patterns of genomic differentiation even in the very earliest stages of population separation. 
 
