@@ -7,7 +7,7 @@ Gotland_Sweden	57.504006	18.466441	Sweden
 Harjavalta_Finland	61.313772	22.139047	Finland
 La_Rouviere_France	43.929961	4.235439	France
 Loch_Lomond_Scotland	56.10752	-4.562054	Scotland
-Mariola_Spain	37.717382	-0.658467	Spain
+Mariola_Spain	38.737382	-0.658467	Spain
 Matera_Italy	40.601	16.514	Italy
 Montpellier_France	43.098003	3.569345	France
 Oulu_Finland	65.012683	25.467504	Finland
