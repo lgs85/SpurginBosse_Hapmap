@@ -42,7 +42,7 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 #The great tit HapMap project: a continental-scale analysis of genomic variation in a songbird
 
 
-Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4,5^, Frank Adriaensen^6^, Tamer Albayrak^7^, Christos Barboutis^8^, Eduardo Belda^9^, Andrey Bushuev^10^, Jacopo G. Cecere^11^, Anne Charmantier^12^, Mariusz Cichon^13^, Niels J. Dingemanse^14^, Blandine Doligez^15,16^, Tapio Eeva^17^, Kjell Einar Erikstad^18^, Vyacheslav Fedorov^10^, Matteo Griggio^19^, Dieter Heylen^6,20,21^, Sabine Hille^22^, Camilla A. Hinde^23^, Elena Ivankina^24^, Veronika N. Laine^3,25^, Bart Kempenaers^26^, Anvar Kerimov^10^, Milos Krist^27^, Laura Kvist^28^, Raivo Mänd^29^, Erik Matthysen^6^, Ruedi Nager^30^, Boris P. Nikolov^31^, A. Claudia Norte^32^, Markku Orell^28^, Jenny Ouyang^26,33^, Gergana Petrova-Dinkova^31^, Heinz Richner^34^, Diego Rubolini^35^, Tore Slagsvold^36^, Vallo Tilgar^29^, János Török^37^, Barbara Tschirren^38^, Csongor I. Vágási^39,40^, Teru Yuta^41^, Martien A.M. Groenen^4^, Marcel E.  Visser^3,4,42^, Kees van Oers^3^, Ben C. Sheldon^2^ and Jon Slate^43^\*
+Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4,5^, Frank Adriaensen^6^, Tamer Albayrak^7^, Christos Barboutis^8^, Eduardo Belda^9^, Andrey Bushuev^10^, Jacopo G. Cecere^11^, Anne Charmantier^12^, Mariusz Cichon^13^, Niels J. Dingemanse^14^, Blandine Doligez^15,16^, Tapio Eeva^17^, Kjell Einar Erikstad^18^, Vyacheslav Fedorov^10^, Matteo Griggio^19^, Dieter Heylen^6,20,21^, Sabine Hille^22^, Camilla A. Hinde^23^, Elena Ivankina^24^, Bart Kempenaers^25^, Anvar Kerimov^10^, Milos Krist^26^, Laura Kvist^27^, Veronika N. Laine^3,28^, Raivo Mänd^29^, Erik Matthysen^6^, Ruedi Nager^30^, Boris P. Nikolov^31^, A. Claudia Norte^32^, Markku Orell^28^, Jenny Ouyang^26,33^, Gergana Petrova-Dinkova^31^, Heinz Richner^34^, Diego Rubolini^35^, Tore Slagsvold^36^, Vallo Tilgar^29^, János Török^37^, Barbara Tschirren^38^, Csongor I. Vágási^39,40^, Teru Yuta^41^, Martien A.M. Groenen^4^, Marcel E.  Visser^3,4,42^, Kees van Oers^3^, Ben C. Sheldon^2^ and Jon Slate^43^\*
 
 
 1. School of Biological Sciences, University of East Anglia, Norwich Research Park, United Kingdom
@@ -93,13 +93,13 @@ Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4,5^, Frank Adriaensen^6^, Tamer Albayrak
 
 24. Zvenigorod Biological Station of Lomonosov Moscow State University, P.O. Box Shikhovo, Odintsovo District, Moscow 143092, Russia
 
-25. Department of Molecular and Cellular Biology, Harvard University, Cambridge, MA, United States of America
+25. Max Planck Institute for Ornithology, Department of Behavioural Ecology & Evolutionary Genetics, Eberhard-Gwinner-Straße, House 5, 82319 Seewiesen (Starnberg), Germany
 
-26. Max Planck Institute for Ornithology, Department of Behavioural Ecology & Evolutionary Genetics, Eberhard-Gwinner-Straße, House 5, 82319 Seewiesen (Starnberg), Germany
+26. Department of Zoology and Laboratory of Ornithology, Faculty of Science, Palacký University, Olomouc 77147, Czech Republic
 
-27. Department of Zoology and Laboratory of Ornithology, Faculty of Science, Palacký University, Olomouc 77147, Czech Republic
+27. Department of Ecology and Genetics, P.O.Box 3000, 90014-University of Oulu, Finland
 
-28. Department of Ecology and Genetics, P.O.Box 3000, 90014-University of Oulu, Finland
+28. Department of Molecular and Cellular Biology, Harvard University, Cambridge, MA, United States of America
 
 29. Department of Zoology, Institute of Ecology and Earth Sciences, University of Tartu, Vanemuise 46, Tartu 51014, Estonia
 
@@ -144,8 +144,6 @@ Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4,5^, Frank Adriaensen^6^, Tamer Albayrak
 
 A major aim of evolutionary biology is to understand why patterns of genomic variation vary among populations and species. Large-scale genomic studies of widespread species are useful for studying how the environment and demographic history shape patterns of genomic divergence, and with the continually decreasing cost of sequencing, such studies are now becoming feasible. Here, we carry out one of the most comprehensive surveys of genomic variation in a wild vertebrate to date; the great tit (*Parus major*) HapMap project. We screened *ca* 500,000 SNP markers across `r nrow(pops)` individuals from  `r nrow(ll)` populations, spanning almost the entire geographic range of the European great tit subspecies. We found that genome-wide variation was consistent with a recent colonisation across Europe from a single refugium in the Balkans and/or Turkey, with bottlenecks and reduced genetic diversity in island populations. Differentiation across the genome was highly heterogeneous, with clear "islands of differentiation" even among populations which are ostensibly panmictic. These islands of differentiation were consistently found in regions of low recombination, suggesting that background selection can rapidly promote population differentiation among even the most recently colonised populations. We also detected genomic outlier regions that were unique to peripheral great tit populations, most likely as a result of recent directional selection at the range edges of this species. These "unique" outlier regions contained candidate genes for morphology, thermal adaptation and colouration, supporting previous research in this species, and providing avenues for future investigation. Our study suggests that comprehensive screens of genomic variation in wild organisms can provide unique insights into evolution.
 
-##Author summary
-Studying patterns of genetic variation is a useful way of determining why populations and species differ in nature. Genetic variation is shaped by natural selection, but also by the present and past size of populations, the amount of migration, and by features of the genome, such as variation in recombination rate, of the organism being studied. Teasing apart the effects of these different processes on genomic diversity is difficult, but one way that this can be achieved is by studying genomic variation across the entire range of a species. We performed a continental-scale analysis of genetic variation in the great tit - a widespread songbird that has been the focus of extensive ecological research. We first used genomic data to reconstruct the historical colonisation of great tits across Europe, and showed that during the last ice age, this species was likely restricted to a single region in Eastern Europe, from which they spread across the continent. We then studied how patterns of variation differ along the genome, and show that recombination rate is a key driver of variation among all populations. Importantly, by comparing many populations we were able to identify genes that have been subject to natural selection in specific geographical regions. We found that natural selection appeared to be strongest in populations on the edges of the great tit's range acting on traits such as morphology, stress response and colouration. Large-scale genetic analyses such as ours are therefore useful approaches for understanding how evolution operates in the wild.
 
 ##Introduction
 
