@@ -358,6 +358,9 @@ This work was supported by grants from the European Research Council (grant 2024
 ##Author contributions
 Performed genomics analysis: LGS, MB; Estimated recombination rates: KvO, JS, MAMG, VNL; Coordinated sample collection: KvO, MEV, BCS, JS; Collected samples: BCS, MEV, KvO, FA, TA, CB, EB, AB, JGC, AC, MC, ND, BD, TE, KEE, VF, MG, DH, SH, CAH, EI, BK, AK, MK, LK, RM, EM, RN, BPN, ACN, MO, JO, GPD, HR, DR, TS, VT, JT, BT, CIV, TY); Coordinated genotyping: MAMG, MEV, JS; Performed quality control of genotype data: LGS, MB, VNL, KvO; Wrote manuscript: LGS with input from JS, MB; Edited and approved manuscript: All authors; Conceived and coordinated HapMap project: JS, KvO, MEV & BCS. Conceived present manuscript: LGS, MB, JS.
 
+##Declaration of interests
+The authors declare no competing interests
+
 ##References
 
 <div id="refs"></div>
