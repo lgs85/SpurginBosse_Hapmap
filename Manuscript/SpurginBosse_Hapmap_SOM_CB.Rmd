@@ -2,7 +2,7 @@
 output:
   pdf_document:
 bibliography: MyBib.bib
-csl: PLoSGenetics.csl
+csl: CurrentBiology.csl
 header-includes: \usepackage{graphicx}
     \usepackage{setspace}
     \doublespacing
@@ -66,7 +66,7 @@ kable(Table1,digits = 3,row.names = F,format = "latex", booktabs = TRUE) %>%
 **Table S2** Cross-validation error from Admixture analyses at $K$ = 1 to 10. Related to Figure 2.
 
 
-```{r Table S3}
+```{r Table S2}
 TableS2 <- cv %>%
   dplyr::rename(`Cross-validation error` = CV)
   
