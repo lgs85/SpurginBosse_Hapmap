@@ -86,6 +86,8 @@ dw <- dw %>%
   mutate(Window = str_c(scaffold,start,sep = " ")) %>%
   left_join(mutate(recomb,Window = str_c(chrom,pos500,sep = " ")) %>%
               select(c(Window,Mean_cM))) %>%
+  left_join(mutate(gd,Window = str_c(CHROM,WINDOW_START,sep = " ")) %>%
+              select(c(Window,GENE_BP))) %>%
   dplyr::rename(MEAN_cM = Mean_cM) %>%
   mutate(MEAN_cM = replace_na(MEAN_cM,0))
 

@@ -317,17 +317,17 @@ labs <- dw %>%
          !is.na(MEAN_cM)) %>%
   group_by(pop1) %>%
   dplyr::summarise(r = paste("r =", round2(cor(zFST,(log10(MEAN_cM+1))))),
-           x = 4,
+           x = 1.5,
            y = 19)
 
 
 Fig5 <- dw %>%   filter(scaffold != 36,
          pop1 != "Balkans",
          !is.na(MEAN_cM)) %>%
-  ggplot(aes(y = zFST,x = log(MEAN_cM+1)))+
+  ggplot(aes(y = zFST,x = log10(MEAN_cM+1)))+
   theme(legend.position = "none")+
     geom_point(col = "grey")+
-  geom_point(data = x1,aes(x = log(MEAN_cM+1),y = zFST,col = nhf))+
+  geom_point(data = x1,aes(x = log10(MEAN_cM+1),y = zFST,col = nhf))+
   scale_color_manual(values = c("red","navy"))+
   facet_wrap(~factor(pop1,levels = fstorder))+
               ylab(expression(italic(zF)[ST]))+
