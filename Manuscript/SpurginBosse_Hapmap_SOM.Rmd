@@ -229,7 +229,7 @@ FigS7 <- dw %>%
         legend.position = "none")+
     geom_line()+
     geom_vline(data = x1,aes(xintercept = order,lty = nhf),col = "red",alpha = 0.15,lwd = 1.2)+
-  facet_wrap(~factor(pop1,levels = fstorder))+
+  facet_wrap(~factor(pop1,levels = dist_order))+
               ylab(expression(italic(F)[ST]))+
             xlab("Genomic position")+
   scale_color_manual(values = rep(c("navy","grey"),30))

@@ -102,7 +102,9 @@ temp <- filter(dw,scaffold != 36,
          pop1 = fct_drop(pop1))
 fstorder <- names(tapply(temp$FST,temp$pop1,mean)[order(tapply(temp$FST,temp$pop1,mean))])
 
+
 rm(temp)
+
 
 
 temp <- dw %>%
@@ -158,6 +160,16 @@ outlierhaps <- outlierhaps %>%
               dplyr::summarise(mp = mean(pi_Turkey))) %>%
   dplyr::rename(pi = mp)
 
+
+# Pop order for fst outlier plots -----------------------------------------
+
+temp <- filter(pd,p1 == "Turkey" | p2 == "Turkey") %>%
+  mutate_if(is.factor,as.character) %>%
+  arrange(dist) %>%
+  mutate(p3 = ifelse(p1 == "Turkey",p2,p1)) %>%
+  filter(!duplicated(p3))
+
+dist_order <- temp$p3
 
 
 # PCA ---------------------------------------------------------------------
