@@ -1,0 +1,11 @@
+PLINK v1.90b3 64-bit (11 Jan 2015)
+8 arguments: --autosome-num 37 --bfile ../PlinkFiles/HapMapMajor --family --fst --out HapMapMajor
+Hostname: C02R10QDGG7N
+Working directory: /Users/x0504807/OneDrive - University of East Anglia/Documents/Research/SpurginBosse_Hapmap
+Start time: Tue Jul 30 15:03:34 2019
+
+Random number seed: 1564495414
+8192 MB RAM detected; reserving 4096 MB for main workspace.
+Error: Failed to open ../PlinkFiles/HapMapMajor.bed.
+
+End time: Tue Jul 30 15:03:34 2019

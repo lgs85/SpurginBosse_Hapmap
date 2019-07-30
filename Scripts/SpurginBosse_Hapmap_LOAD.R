@@ -32,7 +32,11 @@ recomb <- read_delim("Data/recomb_kai_500kb.txt", delim = " ")
 tu <- read_delim("Data/Turkey.fst", delim = " ")
 outlierhaps <- read_tsv("Data/Outliers_for_Mirte_HAP_statistics1.txt")
 pca <- read_delim("Data/HapMapMajor.eigenvec", delim = " ", col_names = F)
-gd <- read_csv("Data/gene_density.csv")
+gd500 <- read_csv("Data/gene_density500kb.csv",col_types = "cddddd")
+gd10 <- read_csv("Data/gene_density10kb.csv",col_types = "cddddd")
+fst500 <- read_delim("Data/HapMapMajor500kb.windowed.fst",delim = "\t",col_types = "cdddd")
+fst10 <- read_delim("Data/HapMapMajor10kb.windowed.fst",delim = "\t",col_types = "cdddd")
+
 
 #Windowed stats
 fn <- list.files("Data/Windowed_stats")

@@ -74,6 +74,13 @@ ld2 <- ld %>%
   mutate(Pop = factor(Pop,levels = levels(ll$Country)))
   
 
+# Overall FST recombination and gene density ------------------------------
+fst500 <- left_join(fst500,dplyr::rename(recomb,CHROM = chrom,WINDOW_START=pos500)) %>%
+  left_join(gd500) %>%
+  drop_na()
+
+fst10 <- left_join(fst10,gd10) %>%
+  drop_na()
 
 # Recombination -----------------------------------------------------------
 
@@ -86,7 +93,7 @@ dw <- dw %>%
   mutate(Window = str_c(scaffold,start,sep = " ")) %>%
   left_join(mutate(recomb,Window = str_c(chrom,pos500,sep = " ")) %>%
               select(c(Window,Mean_cM))) %>%
-  left_join(mutate(gd,Window = str_c(CHROM,WINDOW_START,sep = " ")) %>%
+  left_join(mutate(gd500,Window = str_c(CHROM,WINDOW_START,sep = " ")) %>%
               select(c(Window,GENE_BP))) %>%
   dplyr::rename(MEAN_cM = Mean_cM) %>%
   mutate(MEAN_cM = replace_na(MEAN_cM,0))
@@ -109,7 +116,7 @@ rm(temp)
 
 temp <- dw %>%
   filter(scaffold != 36,
-         pop1 != "Balkans",) %>%
+         pop1 != "Balkans") %>%
   mutate(FST = replace(FST, FST < 0, 0),
          pop1 = fct_drop(pop1)) %>%
   filter(zFST > 10) %>%
