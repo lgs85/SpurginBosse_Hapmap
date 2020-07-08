@@ -1,23 +1,25 @@
-library(reshape)
 library(tidyverse)
 library(ggmap)
 library(rworldmap)
-library(Rmisc)
 library(geosphere)
 library(ecodist)
 library(kableExtra)
 library(cowplot)
 library(ggrepel)
 
+#Set theme
 theme_set(theme_bw())
 
+#Latitude and longitude
 ll <- read_tsv("Data/LatLongAllPops.txt",col_names = F)
 
 
-for(i in 2:10)
-{
-  assign(str_c("admix",i),read_delim(str_c("Data/HapMapMajorPruned.", i, ".Q"),delim = " ",col_names = F))
-}
+#Admixture
+files <- list.files("Data",pattern = "*.Q")
+admix <- tibble(Q = files) %>%
+  mutate(contents = map(Q, ~ read_delim(file.path("Data", .), delim = " ")))
+
+
 
 
 
@@ -39,25 +41,18 @@ fst10 <- read_delim("Data/HapMapMajor10kb.windowed.fst",delim = "\t",col_types =
 
 
 #Windowed stats
-fn <- list.files("Data/Windowed_stats")
-popname <- str_sub(fn,1,str_length(fn)-7)
+files <- list.files("Data/Windowed_stats",pattern = "*.csv.gz")
 
-for(i in c(1:length(fn)))
-{
-  cd <-  read_csv(gzfile(str_c("Data/Windowed_stats/",popname[i],".csv.gz")))
-  cd <- cd %>% 
-    dplyr::rename(pi_pop1 = 6,
-                       pi_Turkey = 7,
-                       dxy = 8,
-                       FST = 9) %>%
-    mutate(pop1 = popname[i],
-           zFST = (FST - mean(FST))/sd(FST),
-           zdxy = (dxy - mean(dxy))/sd(dxy),
-           zpi = (pi_pop1 - mean(pi_pop1))/sd(pi_pop1),
-           order = c(1:nrow(cd)))
+dw <- tibble(pop1 = str_remove(files,".csv.gz")) %>%
+  mutate(data = map(files, ~ read_csv(gzfile(file.path("Data/Windowed_stats",.))) %>%
+                      dplyr::rename(pi_pop1 = 6,
+                                    pi_Turkey = 7,
+                                    dxy = 8,
+                                    FST = 9) %>%
+                      mutate(zFST = (FST - mean(FST))/sd(FST),
+                             zdxy = (dxy - mean(dxy))/sd(dxy),
+                             zpi = (pi_pop1 - mean(pi_pop1))/sd(pi_pop1),
+                             order = c(1:n())))) %>%
+  unnest(cols = data)
 
-  if(i == 1) dw <- cd else dw <- rbind(dw,cd)
-}
-
-rm(fn,popname,cd)
 

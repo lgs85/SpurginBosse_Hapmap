@@ -36,19 +36,14 @@ pops <- dplyr::rename(pops,Pop = X1) %>%
 
 # IBD ---------------------------------------------------------------------
 
+islands <- c("Crete","Corsica","Sardinia")
 colnames(pd) <- c("pop1","pop2","FST")
 
-for(i in 1:nrow(pd))
-{
-  d1 <- subset(ll,Pop == pd$pop1[i])
-  d2 <- subset(ll,Pop == pd$pop2[i])
-  pd$dist[i] <- distGeo(c(d1$Long,d1$Lat),c(d2$Long,d2$Lat))
-}
-
-islands <- c("Crete","Corsica","Sardinia")
-
-pd <- 
-  pd %>%
+pd %<>%
+  mutate(dist = flatten_dbl(map2(pop1,pop2, ~ distGeo(c(filter(ll,Pop == .x)$Long,
+                                            filter(ll,Pop == .x)$Lat),
+                                          c(filter(ll,Pop == .y)$Long,
+                                            filter(ll,Pop == .y)$Lat))))) %>%
   left_join(dplyr::rename(ll,pop1 = Pop) %>%
               select(c(pop1,Country))) %>%
   dplyr::rename(p1 = Country) %>%
@@ -61,56 +56,54 @@ pd <-
 
 # LD ----------------------------------------------------------------------
 
-ld <- select(ld,-X5)
-colnames(ld) <- c("dist","R2","n","Pop")
-
-ld <- mutate(ld,Pop = str_trim(Pop,side = "left"))
-
-ld2 <- ld %>% 
+ld %<>% select(dist = X1,R2 = X2,n = X3,Pop = X4) %>%
+  mutate(Pop = str_trim(Pop,side = "left"))%>% 
   group_by(Pop,dist) %>%
   dplyr::summarise(meanR2 = mean(R2)) %>%
-  mutate(Pop = str_replace(Pop,"Czech_Republic","Czech Republic")) %>%
-  mutate(Pop = str_replace(Pop,"Netherlands_Vlieland","Netherlands (Vlieland)")) %>%
+  ungroup() %>%
+  mutate(Pop = recode(Pop,"Czech_Republic" = "Czech Republic", "Netherlands_Vlieland" = "Netherlands (Vlieland)")) %>%
   mutate(Pop = factor(Pop,levels = levels(ll$Country)))
   
 
 # Overall FST recombination and gene density ------------------------------
-fst500 <- left_join(fst500,dplyr::rename(recomb,CHROM = chrom,WINDOW_START=pos500)) %>%
+fst500 %<>% left_join(dplyr::rename(recomb,CHROM = chrom,WINDOW_START=pos500)) %>%
   left_join(gd500) %>%
   drop_na()
 
-fst10 <- left_join(fst10,gd10) %>%
+fst10 %<>% left_join(gd10) %>%
   drop_na()
 
-# Recombination -----------------------------------------------------------
+# Recombination and gene density -----------------------------------------------------------
 
-dw$pop1 <- str_replace(dw$pop1,"Czech_Republic","Czech Republic")
-dw$pop1 <- str_replace(dw$pop1,"Netherlands_Vlieland","Netherlands (Vlieland)")
-dw$pop1 <- factor(dw$pop1,
-                  levels = levels(fct_drop(ll$Country[ll$Country!="Turkey"])))
-
-dw <- dw %>%
-  mutate(Window = str_c(scaffold,start,sep = " ")) %>%
-  left_join(mutate(recomb,Window = str_c(chrom,pos500,sep = " ")) %>%
-              select(c(Window,Mean_cM))) %>%
-  left_join(mutate(gd500,Window = str_c(CHROM,WINDOW_START,sep = " ")) %>%
-              select(c(Window,GENE_BP))) %>%
+dw %<>%
+  mutate(pop1 = recode(pop1,"Czech_Republic" = "Czech Republic", "Netherlands_Vlieland" = "Netherlands (Vlieland)")) %>%
+  mutate(pop1 = factor(pop1,levels(fct_drop(ll$Country[ll$Country!="Turkey"])))) %>%
+  left_join(recomb %>% 
+              rename(scaffold = chrom,start = pos500) %>% 
+              filter(!scaffold %in% c("Un","Z")) %>%
+              mutate(scaffold = as.numeric(recode(scaffold, "1A" = "30", "4A" = "33"))),
+            by = c("scaffold","start")) %>%
+  left_join(gd500 %>% 
+              rename(scaffold = CHROM,start = WINDOW_START) %>%
+              select(scaffold,start,GENE_BP) %>%
+              filter(!scaffold %in% c("Un","Z")) %>%
+              mutate(scaffold = as.numeric(recode(scaffold, "1A" = "30", "4A" = "33"))),
+            by = c("scaffold","start"))
   dplyr::rename(MEAN_cM = Mean_cM) %>%
   mutate(MEAN_cM = replace_na(MEAN_cM,0))
 
 
-
-
-
 # Outlier regions ---------------------------------------------------------
-temp <- filter(dw,scaffold != 36,
-               pop1 != "Balkans") %>%
-  mutate(FST = replace(FST, FST < 0, 0),
-         pop1 = fct_drop(pop1))
-fstorder <- names(tapply(temp$FST,temp$pop1,mean)[order(tapply(temp$FST,temp$pop1,mean))])
 
-
-rm(temp)
+fstorder <- dw %>%
+  filter(scaffold != 36,
+         pop1!= "Balkans") %>%
+  mutate(FST = replace(FST,FST < 0,0),
+         pop1 = fct_drop(pop1)) %>%
+  group_by(pop1) %>%
+  summarise(meanFST = mean(FST)) %>%
+  arrange(meanFST) %>%
+  pull(pop1)
 
 
 
@@ -120,11 +113,11 @@ temp <- dw %>%
   mutate(FST = replace(FST, FST < 0, 0),
          pop1 = fct_drop(pop1)) %>%
   filter(zFST > 10) %>%
-  group_by(Window) %>%
+  group_by(scaffold,start) %>%
         dplyr::summarise(
         n_hits = n(),
         meanfst = mean(zFST),
-        r = mean(MEAN_cM))
+        r = mean(Mean_cM))
 
 outliers <- dw %>% 
   filter(Window %in% temp$Window,
@@ -132,6 +125,20 @@ outliers <- dw %>%
   group_by(Window) %>%
   dplyr::summarise(nhits = n(),
             Countries = str_c(pop1,collapse = ", "))
+
+
+outliers2 <- dw %>%
+  filter(scaffold != 36,
+         pop1 != "Balkans") %>%
+  mutate(FST = replace(FST, FST < 0, 0),
+         pop1 = fct_drop(pop1)) %>%
+  filter(zFST > 10) %>%
+  group_by(Window) %>%
+  mutate(
+    n_hits = n(),
+    meanfst = mean(zFST),
+    r = mean(MEAN_cM))
+  
 
 rm(temp)
 
@@ -182,5 +189,5 @@ dist_order <- temp$p3
 # PCA ---------------------------------------------------------------------
 
 pca <- dplyr::rename(pca,Pop = X1) %>%
-  left_join(select(ll,c(Pop,Country)),join = Pop)
+  left_join(select(ll,c(Pop,Country)),by = Pop)
 
