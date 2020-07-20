@@ -3,6 +3,7 @@ library(tidyverse)
 data_path <- "../Great_tit_hapmap/rsb"
 fstfiles <- list.files(data_path,pattern = "Fst*")
 rsbfiles <- list.files(data_path,pattern = "*Rsb*")
+recomb <- read_delim("Data/500kb_recombination.txt", delim = " ")
 
 fst <- tibble(comparison = fstfiles) %>%
   mutate(contents = map(comparison, ~ read_tsv(file.path(data_path, .)))) %>%
@@ -16,12 +17,11 @@ rsb <- tibble(comparison = rsbfiles) %>%
   mutate(comparison = str_split(comparison,"Rsb_",simplify = TRUE)[,2]) %>%
   unnest(cols = contents)
 
-  
+  recomb$MEAN_cM[recomb$MEAN_cM < 0] <- 0
 
 recomb2 <- recomb %>% 
-  rename(CHR = chrom,window = pos500) %>% 
-  filter(!CHR %in% c("Un","Z")) %>%
-  mutate(CHR = as.numeric(recode(CHR, "1A" = "30", "4A" = "33")))
+  rename(CHR = V3,window = POS500KB) %>%
+  mutate(window = window+1)
 
 dd <- left_join(rsb,fst,by = c("CHR","SNP","POS","comparison")) %>%
   filter(!is.nan(FST)) %>%
@@ -34,11 +34,24 @@ dd <- left_join(rsb,fst,by = c("CHR","SNP","POS","comparison")) %>%
             meanRsb = mean(Rsb, na.rm = T)) %>%
   left_join(recomb2,by = c("CHR","window"))
 
-  dd %>% ggplot(aes(x = log10(Mean_cM+1),y = abs(meanRsb)))+
+dd$meanFST[dd$meanFST < 0] <- 0
+
+write_tsv(dd,"Data/Hapmap_rsb.txt")
+
+
+  dd %>% ggplot(aes(y = abs(meanRsb),x = log(MEAN_cM+1)))+
     geom_point()+
     geom_smooth()+
     facet_wrap(~comparison)
 
+
+  dd %>% 
+    drop_na() %>%
+    group_by(comparison) %>%
+    summarise(FST_R= cor(meanFST,MEAN_cM),
+              RSB_R = cor(abs(meanRsb),MEAN_cM))
+
+  
 f <- filter(dd,meanFST > quantile(meanFST,0.95))
 r <- filter(dd,meanRsb > quantile(meanRsb,0.95,na.rm = T))
 

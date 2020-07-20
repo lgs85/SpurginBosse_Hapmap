@@ -1,6 +1,6 @@
 ---
 output:
-  pdf_document:
+  word_document:
 bibliography: MyBib.bib
 csl: PLoSGenetics.csl
 header-includes: \usepackage{graphicx}
@@ -41,7 +41,7 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 
 
 
-#Supplementary material for "The great tit HapMap project: a continental-scale analysis of genomic variation in a songbird"
+# Supplementary material for "The great tit HapMap project: a continental-scale analysis of genomic variation in a songbird"
 
 **Table S1** Sampling details for the `r nrow(ll)` European great tit populations. "Code" corresponds to labels in Figure 1 of the main text.
 
@@ -54,8 +54,7 @@ Table1 <- ll %>%
   mutate(Code = c(1:nrow(ll))) %>%
   select(Code,Population,Region,N,Latitude,Longitude)
 
-kable(Table1,digits = 3,row.names = F,format = "latex", booktabs = TRUE) %>%
-          kable_styling(latex_options = "scale_down")
+kable(Table1,digits = 3,row.names = F,format = "simple")
 
 
 ```
@@ -84,8 +83,7 @@ TS2 <- read_tsv("Data/TS2.txt") %>%
   mutate_all(funs(str_replace(.,"\\."," ")))
 
 
-kable(TS2,format = "latex", booktabs = TRUE) %>%
-          kable_styling(latex_options = "scale_down")
+kable(TS2, format = "simple")
 
 ```
 
@@ -96,7 +94,7 @@ kable(TS2,format = "latex", booktabs = TRUE) %>%
 
 ```{r FigS1}
 
-FigS1 <- ld2 %>%
+FigS1 <- ld %>%
   ggplot(aes(x = dist/1000,y = meanR2))+
   geom_line()+
   facet_wrap(~Pop)+
@@ -132,19 +130,18 @@ FigS2
 
 ```{r FigS3,fig.width = 7,fig.height = 9}
 
-for(i in 2:9)
-{
-  assign(
-    paste0("FigS3",LETTERS[i-1]),
-    structureplot(get(paste0("admix",i)),pops,i,xlab = F)+
-      ylab(paste("K =", i))
-        )
-}
 
-FigS3I <- structureplot(admix10,pops,10,xlab = T)+
-  ylab("K = 10")
+p <- admix %>%
+  mutate(K = as.numeric(str_split(Q,"\\.",simplify = TRUE)[,2])) %>%
+  filter(K > 1) %>%
+  arrange(K) %>%
+  mutate(xaxis = K == 10)
 
-plot_grid(FigS3A,FigS3B,FigS3C,FigS3D,FigS3E,FigS3F,FigS3G,FigS3H,FigS3I, align = "v",ncol = 1,rel_heights = c(rep(1,8),2.5))
+
+out <- pmap(list(p$contents,p$K,p$xaxis), ~admixtureplot(str_out = ..1,pops,k = ..2, xaxis = ..3))
+
+
+plot_grid(plotlist = out,ncol = 1,rel_heights = c(rep(1,8),2))
 ```
 
 **Figure S3** Admixture analyses at $K$ = 2 to 10 in European great tit populations.
@@ -228,7 +225,7 @@ FigS7 <- dw %>%
   theme(axis.text.x = element_blank(),
         legend.position = "none")+
     geom_line()+
-    geom_vline(data = x1,aes(xintercept = order,lty = nhf),col = "red",alpha = 0.15,lwd = 1.2)+
+    geom_vline(data = outlier_lines,aes(xintercept = order,lty = outlier_type),col = "red",alpha = 0.15,lwd = 1.2)+
   facet_wrap(~factor(pop1,levels = dist_order))+
               ylab(expression(italic(F)[ST]))+
             xlab("Genomic position")+
@@ -243,6 +240,7 @@ FigS7
 
 ```{r Figure S8,fig.width=8,fig.height=4}
 FigS9A <- dw %>%
+  mutate(Window = paste(scaffold,start)) %>%
   group_by(Window) %>%
   dplyr::summarise(piTurkey = mean(pi_Turkey),
               pi = mean(pi_pop1)) %>%
@@ -254,8 +252,7 @@ FigS9A <- dw %>%
   xlab(expression(pi["Turkey"]))+
   ylab(expression(pi["All populations"]))+
   xlim(c(0.15,0.5))+
-  ylim(c(0.15,0.5))+
-  ggtitle("A")
+  ylim(c(0.15,0.5))
 
 
 FigS9B <- ggplot(outlierhaps,
@@ -264,10 +261,9 @@ FigS9B <- ggplot(outlierhaps,
   theme(legend.position = "none")+
   scale_color_manual(values = c("red","navy"))+
   xlab("Log marker density")+
-  ylab("Log number of haplotypes")+
-  ggtitle("B")
+  ylab("Log number of haplotypes")
 
-multiplot(FigS9A,FigS9B,layout = matrix(c(1:2),nrow = 1))
+plot_grid(FigS9A,FigS9B,nrow = 1,labels = "AUTO")
 
 ```
 
@@ -278,8 +274,34 @@ multiplot(FigS9A,FigS9B,layout = matrix(c(1:2),nrow = 1))
 \pagebreak
 
 ```{r FigS9}
-knitr::include_graphics("../Figures/Haplotype_structure_figure.pdf")
+knitr::include_graphics("Figures/Haplotype_structure_figure.png")
 ```
 
 **Figure S9** Haplotype structure underlying regions of high differentiation.
 **A** IBS clustering of all European haplotypes in the region containing a signal of high differentiation with Turkey specific to the Oulu population. The red arrow indicates the haplotype at highest frequency in Finland. Colour indicates IBS similarity (range 0: white - 1: dark blue). **B** IBS clustering of all European haplotypes in the region on chromosome 2 containing a signal of high differentiation with Turkey in multiple populations. **C** Frequency of all identified haplotypes within each population. The red arrow indicates the high-frequency haplotype within Finland. **D** Frequency of all identified haplotypes spanning the region on chromosome 2 within each population.
+
+
+```{r FigS10,fig.width = 8,fig.height=4}
+
+rsb %>%
+  group_by(comparison) %>%
+  mutate(outlier = ifelse(meanFST > quantile(meanFST,0.99),"FST outlier","Non-FST outlier")) %>%
+  ungroup() %>%
+  mutate(comparison = str_replace(comparison,"_", " vs ")) %>%
+  mutate(comparison = str_replace(comparison,"Westerheide", "Netherlands")) %>%
+ggplot(aes(x = log10(MEAN_cM+1),y = meanRsb,col = outlier))+
+  geom_point() + 
+  theme_bw() +
+  scale_colour_manual(values = c("red","grey"))+
+  facet_wrap(~comparison) +
+  theme(legend.position = "none")+
+  ylab(expression(italic("Rsb")))+
+            xlab("Log recombination rate")
+
+```
+
+**Figure S10** *Rsb* in relation to recombination in three pairwise comparisons, averaged across 500kb windows. Red points represent the top 1% of FST outliers.
+
+
+
+

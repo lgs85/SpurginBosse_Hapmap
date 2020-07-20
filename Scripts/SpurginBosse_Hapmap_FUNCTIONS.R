@@ -1,37 +1,45 @@
 # Structure bar plot------------------------------------------------------
 
-structureplot <- function(str_out,pops,k,xlab = T)
+admixtureplot <- function(str_out,pops,k,xaxis = T)
 {
+  require(tidyverse)
+  #Check the number of k specified in the input matches the data
+  dataK <- ncol(str_out)
+  if(dataK != k) stop('The specified number of clusters does not match the data')
+  
+  str_out <- str_out[order(pops$Country),]
+  pops <- pops[order(pops$Country),]
+  
   #Sort columns by prevalence
   str_out <- str_out[,order(apply(str_out,2,sum),decreasing = T)]
-  pops$Country <- pops[,1]
   
-  x <- gather(str_out) %>%
-    mutate(ind = rep(c(1:nrow(str_out)),k),
-           pop = unlist(rep(pops$Country,k))) %>%
-    mutate(X3 = factor(str_c(letters[as.numeric(pop)],ind,sep = "_"))) %>%
-    dplyr::arrange(X3)
-
-  str_out$pop <- unlist(pops$Country)
+  #Turn into long format
+  x <- gather(str_out,key = "K",value = "Q") %>%
+    mutate(ind = rep(1:nrow(str_out),k))
   
-  pop_pos <- cumsum(tapply(1:nrow(str_out),str_out$pop,length))
-  labpos <- pop_pos
+  #Population positions
+  x$pop <- rep(pops$Country,k)
   
-  for(i in 1:length(pop_pos))
+  pos <- x %>%
+    group_by(pop) %>%
+    summarise(pop_pos = n()) %>%
+    mutate(pop_pos = cumsum(pop_pos/k),
+           lab_pos = 0)
+  
+  for(i in 1:nrow(pos))
   {
     if(i == 1)
     {
-      labpos[i] <- pop_pos[i]/2
+      pos$lab_pos[i] <- pos$pop_pos[i]/2
     } else
     {
-      labpos[i] <- pop_pos[i-1] + (pop_pos[i]-pop_pos[i-1])/2
+      pos$lab_pos[i] <- pos$pop_pos[i-1] + (pos$pop_pos[i]-pos$pop_pos[i-1])/2
     }
   }
   
-  labpos <- round(labpos,0)
+  pos$lab_pos <- round(pos$lab_pos,0)
   
-  
-  #Specify some nice colours
+  #Set colours
   mycols <- c("#a6cee3",
               "#1f78b4",
               "#b2df8a",
@@ -43,41 +51,27 @@ structureplot <- function(str_out,pops,k,xlab = T)
               "#cab2d6",
               "#6a3d9a")[1:k]
   
-  if(xlab ==T)
-  {
-    output <- ggplot(x,
-                     aes(x = as.numeric(X3),y = value, fill = key))+
-      geom_bar(stat = "identity",width = 1)+
-      theme_bw()+
-      scale_x_continuous(breaks = labpos,labels = names(pop_pos),expand = c(0,0))+
-      scale_y_continuous(expand = c(0,0))+
-      geom_vline(xintercept = pop_pos)+
-      xlab("")+
-      ylab("")+
-      theme(axis.text.x = element_text(vjust = 0.1,hjust = 1,angle = 90),
+  #Make a graph
+  ggplot(x,
+         aes(x = factor(ind),y = Q, fill = K))+
+    geom_bar(stat = "identity",width = 1)+
+    theme_bw()+
+    scale_x_discrete(breaks = pos$lab_pos,labels = paste(pos$pop))+
+    scale_y_continuous(expand = c(0,0))+
+    geom_vline(xintercept = pos$pop_pos)+
+    xlab("")+
+    ylab("")+
+    scale_fill_manual(values = mycols)+
+    if(xaxis) {
+      theme(axis.text.x = element_text(angle = 90,size = 8,hjust = 1),
             axis.ticks = element_blank(),
-            legend.position = "none")+
-      scale_fill_manual(values = mycols)
-  } else
-  {
-    output <- ggplot(x,
-                     aes(x = as.numeric(X3),y = value, fill = key))+
-      geom_bar(stat = "identity",width = 1)+
-      theme_bw()+
-      scale_x_continuous(breaks = labpos,labels = rep("",length(pop_pos)),expand = c(0,0))+
-      scale_y_continuous(expand = c(0,0))+
-      geom_vline(xintercept = pop_pos)+
-      xlab("")+
-      ylab("")+
-      theme(axis.text.x = element_text(vjust = 0.1,hjust = 1,angle = 90),
+            legend.position = "none")
+    } else {
+      theme(axis.text.x = element_blank(),
             axis.ticks = element_blank(),
-            legend.position = "none")+
-      scale_fill_manual(values = mycols)
-  }
+            legend.position = "none")
+    }
   
-
-  
-  return(output)
 }
 
 # Standard error ----------------------------------------------------------

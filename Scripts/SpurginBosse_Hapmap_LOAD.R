@@ -17,7 +17,7 @@ ll <- read_tsv("Data/LatLongAllPops.txt",col_names = F)
 #Admixture
 files <- list.files("Data",pattern = "*.Q")
 admix <- tibble(Q = files) %>%
-  mutate(contents = map(Q, ~ read_delim(file.path("Data", .), delim = " ")))
+  mutate(contents = map(Q, ~ read_delim(file.path("Data", .), delim = " ",col_names = F)))
 
 
 
@@ -38,7 +38,7 @@ gd500 <- read_csv("Data/gene_density500kb.csv",col_types = "cddddd")
 gd10 <- read_csv("Data/gene_density10kb.csv",col_types = "cddddd")
 fst500 <- read_delim("Data/HapMapMajor500kb.windowed.fst",delim = "\t",col_types = "cdddd")
 fst10 <- read_delim("Data/HapMapMajor10kb.windowed.fst",delim = "\t",col_types = "cdddd")
-
+rsb <- read_tsv("Data/Hapmap_rsb.txt")
 
 #Windowed stats
 files <- list.files("Data/Windowed_stats",pattern = "*.csv.gz")

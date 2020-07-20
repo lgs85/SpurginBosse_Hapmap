@@ -88,7 +88,7 @@ dw %<>%
               select(scaffold,start,GENE_BP) %>%
               filter(!scaffold %in% c("Un","Z")) %>%
               mutate(scaffold = as.numeric(recode(scaffold, "1A" = "30", "4A" = "33"))),
-            by = c("scaffold","start"))
+            by = c("scaffold","start")) %>%
   dplyr::rename(MEAN_cM = Mean_cM) %>%
   mutate(MEAN_cM = replace_na(MEAN_cM,0))
 
@@ -107,7 +107,7 @@ fstorder <- dw %>%
 
 
 
-temp <- dw %>%
+outliers <- dw %>%
   filter(scaffold != 36,
          pop1 != "Balkans") %>%
   mutate(FST = replace(FST, FST < 0, 0),
@@ -117,51 +117,16 @@ temp <- dw %>%
         dplyr::summarise(
         n_hits = n(),
         meanfst = mean(zFST),
-        r = mean(Mean_cM))
+        r = mean(MEAN_cM),
+        Countries = str_c(pop1,collapse = ", ")) %>%
+  left_join(select(dw,scaffold,start,MEAN_cM)) %>%
+  distinct()
 
-outliers <- dw %>% 
-  filter(Window %in% temp$Window,
-         zFST > 10) %>%
-  group_by(Window) %>%
-  dplyr::summarise(nhits = n(),
-            Countries = str_c(pop1,collapse = ", "))
-
-
-outliers2 <- dw %>%
-  filter(scaffold != 36,
-         pop1 != "Balkans") %>%
-  mutate(FST = replace(FST, FST < 0, 0),
-         pop1 = fct_drop(pop1)) %>%
-  filter(zFST > 10) %>%
-  group_by(Window) %>%
-  mutate(
-    n_hits = n(),
-    meanfst = mean(zFST),
-    r = mean(MEAN_cM))
-  
-
-rm(temp)
-
-temp <- filter(dw,scaffold != 36,
-               pop1 != "Balkans") %>%
-  mutate(FST = replace(FST, FST < 0, 0),
-         pop1 = fct_drop(pop1))
-
-
-temp2 <- filter(temp,zFST > 10) %>%
-  group_by(Window) %>%
-        dplyr::summarise(n_hits = n())
-
-x1 <- filter(temp,
-             zFST > 10,
-             Window %in% temp2$Window) %>%
-  group_by(Window) %>%
-  dplyr::mutate(nhits = n()) %>%
-  ungroup(Window) %>%
-  dplyr::mutate(nhf = ifelse(nhits > 2,"Shared","Unique"))
-
-rm(temp,temp2)
-
+outlier_lines <- outliers %>%
+  mutate(outlier_type = ifelse(str_count(Countries,",") > 1,"Shared","Unique")) %>%
+  separate_rows(Countries,sep = ", ") %>%
+  rename(pop1 = Countries) %>%
+  left_join(dw,by = c("scaffold","start","pop1","MEAN_cM"))
 
 
 # Outlier haplotype and nucleotide analysis -------------------------------
@@ -170,6 +135,7 @@ outlierhaps <- outlierhaps %>%
          nhf = ifelse(N_hits > 2,"Shared","Unique")) %>%
   filter(Window != "36 63500001") %>%
   left_join(dw %>% 
+              mutate(Window = paste(scaffold,start)) %>%
               group_by(Window) %>%
               dplyr::summarise(mp = mean(pi_Turkey))) %>%
   dplyr::rename(pi = mp)
@@ -178,6 +144,7 @@ outlierhaps <- outlierhaps %>%
 # Pop order for fst outlier plots -----------------------------------------
 
 temp <- filter(pd,p1 == "Turkey" | p2 == "Turkey") %>%
+  filter(p1 != "Balkans" & p2 != "Balkans") %>%
   mutate_if(is.factor,as.character) %>%
   arrange(dist) %>%
   mutate(p3 = ifelse(p1 == "Turkey",p2,p1)) %>%
@@ -189,5 +156,6 @@ dist_order <- temp$p3
 # PCA ---------------------------------------------------------------------
 
 pca <- dplyr::rename(pca,Pop = X1) %>%
-  left_join(select(ll,c(Pop,Country)),by = Pop)
+  left_join(select(ll,c(Pop,Country)),
+            by = "Pop")
 
