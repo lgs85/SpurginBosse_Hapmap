@@ -1,17 +1,9 @@
 ---
 output:
   word_document:
+    reference_docx: mystyle1.docx
 bibliography: MyBib.bib
 csl: PLoSGenetics.csl
-header-includes: \usepackage{graphicx}
-    \usepackage{setspace}
-    \doublespacing
-    \usepackage{lineno}
-    \linenumbers
-    \usepackage{pdflscape}
-    \newcommand{\blandscape}{\begin{landscape}}
-    \newcommand{\elandscape}{\end{landscape}}
-
 ---
 ```{r setup, include = F}
 
@@ -49,7 +41,7 @@ source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
 Table1 <- ll %>%
   mutate(N = table(pops$Pop),
          Pop = str_replace(Pop,"Tartu_Estonia","Kilingi-Nõmme_Estonia")) %>%
-  dplyr::rename(Population = Pop,Latitude = Lat,Longitude = Long,Region = Country) %>%
+         dplyr::rename(Population = Pop,Latitude = Lat,Longitude = Long,Region = Country) %>%
   arrange(Region) %>%
   mutate(Code = c(1:nrow(ll))) %>%
   select(Code,Population,Region,N,Latitude,Longitude)
@@ -113,11 +105,11 @@ FigS1
 
 ```{r FigS2,fig.width = 5,fig.height = 5}
 FigS2 <- ggplot(pd,aes(x = dist/1000,y = FST,col = Island))+
-            geom_point()+
-            theme(legend.position = "none")+
-            ylab(expression(italic(F)[ST]))+
-            xlab("Geographic distance (km)")+
-            scale_colour_manual(values = c("darkblue","grey"))
+  geom_point()+
+  theme(legend.position = "none")+
+  ylab(expression(italic(F)[ST]))+
+  xlab("Geographic distance (km)")+
+  scale_colour_manual(values = c("darkblue","grey"))
 
 FigS2
 ```
@@ -169,9 +161,9 @@ FigS4
 
 ```{r FigS5, fig.width = 5, fig.height = 7}
 FigS5 <- tibble(Value = unlist(pca[,c(3:6)]),
-                  PC = str_c("PC",rep(c(1:4),each = nrow(pca))),
-                  Pop = rep(pca$Country,4)) %>%
-ggplot(aes(x = Pop, y = Value, col = Pop))+
+                PC = str_c("PC",rep(c(1:4),each = nrow(pca))),
+                Pop = rep(pca$Country,4)) %>%
+  ggplot(aes(x = Pop, y = Value, col = Pop))+
   geom_jitter(width = 0.2)+
   theme(axis.text.x = element_text(angle = 90,vjust=0.5,hjust=1),
         legend.position = "none")+
@@ -220,15 +212,15 @@ FigS6
 
 FigS7 <- dw %>%
   filter(scaffold != 36,
-         pop1 != "Balkans") %>%
+         pop1 != "Romania/Bulgaria") %>%
   ggplot(aes(y = FST,x = order,col = factor(scaffold)))+
   theme(axis.text.x = element_blank(),
         legend.position = "none")+
-    geom_line()+
-    geom_vline(data = outlier_lines,aes(xintercept = order,lty = outlier_type),col = "red",alpha = 0.15,lwd = 1.2)+
+  geom_line()+
+  geom_vline(data = outlier_lines,aes(xintercept = order,lty = outlier_type),col = "red",alpha = 0.15,lwd = 1.2)+
   facet_wrap(~factor(pop1,levels = dist_order))+
-              ylab(expression(italic(F)[ST]))+
-            xlab("Genomic position")+
+  ylab(expression(italic(F)[ST]))+
+  xlab("Genomic position")+
   scale_color_manual(values = rep(c("navy","grey"),30))
 FigS7
 ```
@@ -236,16 +228,59 @@ FigS7
 **Figure S7** Landscapes of genomic differentiation in European great tit populations. $F_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $zF_{ST}$ > 10) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines).
 
 
+
+```{r FigS8,fig.width = 8,fig.height=4}
+
+rsbbin <- rsb %>%
+  filter(CHR != 36) %>%
+  mutate(comparison = str_replace(comparison,"_", " vs ")) %>%
+  mutate(comparison = str_replace(comparison,"Westerheide", "Netherlands")) %>%
+  mutate(MEAN_cM = replace_na(MEAN_cM,0)) %>%
+  mutate(logRR = log10(MEAN_cM+1)) %>%
+  mutate(binRR = ceiling(logRR*10)/10) %>%
+  group_by(comparison,binRR) %>%
+  summarise(
+    med = median(meanRsb, na.rm = T),
+    u99 = quantile(meanRsb,0.99, na.rm = T),
+    l99 = quantile(meanRsb,0.01, na.rm = T)) %>%
+  ungroup() %>%
+  filter(binRR <= 1.5)
+
+rsb %>%
+  mutate(MEAN_cM = replace_na(MEAN_cM,0)) %>%
+  mutate(logRR = log10(MEAN_cM+1)) %>%
+  group_by(comparison) %>%
+  mutate(outlier = ifelse(meanFST > quantile(meanFST,0.99),"FST outlier","Non-FST outlier")) %>%
+  ungroup() %>%
+  mutate(comparison = str_replace(comparison,"_", " vs ")) %>%
+  mutate(comparison = str_replace(comparison,"Westerheide", "Netherlands")) %>%
+  ggplot(aes(x = logRR,y = meanRsb))+
+  geom_point(aes(col = outlier)) +
+  geom_line(data = rsbbin,aes(x = binRR,y = med))+
+  geom_line(data = rsbbin,aes(x = binRR,y = u99),lty = 2)+
+  geom_line(data = rsbbin,aes(x = binRR,y = l99),lty = 2)+
+  theme_bw() +
+  scale_colour_manual(values = c("red","grey"))+
+  facet_wrap(~comparison) +
+  theme(legend.position = "none")+
+  ylab(expression(italic("Rsb")))+
+  xlab("Log recombination rate")
+
+```
+
+**Figure S8** *Rsb* in relation to recombination in three pairwise comparisons, averaged across 500kb windows. Red points represent the top 1% of FST outliers, and solid and dotted lines represent median and 99% quantiles of $Rsb$ windows from bins of 0.1 log cM.
+
+
 \pagebreak
 
-```{r Figure S8,fig.width=8,fig.height=4}
+```{r Figure S9,fig.width=8,fig.height=4}
 FigS9A <- dw %>%
   mutate(Window = paste(scaffold,start)) %>%
   group_by(Window) %>%
   dplyr::summarise(piTurkey = mean(pi_Turkey),
-              pi = mean(pi_pop1)) %>%
+                   pi = mean(pi_pop1)) %>%
   ggplot(aes(x = piTurkey,y = pi))+
-                 geom_point(col = "grey")+
+  geom_point(col = "grey")+
   geom_point(data = outlierhaps,aes(col = nhf, x = pi))+
   theme(legend.position = "none")+
   scale_color_manual(values = c("red","navy"))+
@@ -256,8 +291,8 @@ FigS9A <- dw %>%
 
 
 FigS9B <- ggplot(outlierhaps,
-               aes(x = log10(Markers),y = log10(Richness),col = nhf,size = N_hits))+
-                 geom_point()+
+                 aes(x = log10(Markers),y = log10(Richness),col = nhf,size = N_hits))+
+  geom_point()+
   theme(legend.position = "none")+
   scale_color_manual(values = c("red","navy"))+
   xlab("Log marker density")+
@@ -267,40 +302,18 @@ plot_grid(FigS9A,FigS9B,nrow = 1,labels = "AUTO")
 
 ```
 
-**Figure S8** Genetic diversity in $F_{ST}$ outlier regions in European great tit populations. Each point is an outlier window, with point size scaled by the number of populations the outlier was found in - "shared" haplotypes are coloured red and "unique" haplotypes dark blue (see main text for details). In **A**, Nucleotide diversity for each window is calculated for the proposed refugial population in Turkey, and plotted against the mean for all other populations. In **B**, SNP marker density is plotted against haplotype richness for each region.
+**Figure S9** Genetic diversity in $F_{ST}$ outlier regions in European great tit populations. Each point is an outlier window, with point size scaled by the number of populations the outlier was found in - "shared" haplotypes are coloured red and "unique" haplotypes dark blue (see main text for details). In **A**, Nucleotide diversity for each window is calculated for the proposed refugial population in Turkey, and plotted against the mean for all other populations. In **B**, SNP marker density is plotted against haplotype richness for each region.
 
 
 
 \pagebreak
 
-```{r FigS9}
-knitr::include_graphics("Figures/Haplotype_structure_figure.png")
+```{r FigS10}
+knitr::include_graphics("Haplotype_structure_figure.png")
 ```
 
-**Figure S9** Haplotype structure underlying regions of high differentiation.
+**Figure S10** Haplotype structure underlying regions of high differentiation.
 **A** IBS clustering of all European haplotypes in the region containing a signal of high differentiation with Turkey specific to the Oulu population. The red arrow indicates the haplotype at highest frequency in Finland. Colour indicates IBS similarity (range 0: white - 1: dark blue). **B** IBS clustering of all European haplotypes in the region on chromosome 2 containing a signal of high differentiation with Turkey in multiple populations. **C** Frequency of all identified haplotypes within each population. The red arrow indicates the high-frequency haplotype within Finland. **D** Frequency of all identified haplotypes spanning the region on chromosome 2 within each population.
-
-
-```{r FigS10,fig.width = 8,fig.height=4}
-
-rsb %>%
-  group_by(comparison) %>%
-  mutate(outlier = ifelse(meanFST > quantile(meanFST,0.99),"FST outlier","Non-FST outlier")) %>%
-  ungroup() %>%
-  mutate(comparison = str_replace(comparison,"_", " vs ")) %>%
-  mutate(comparison = str_replace(comparison,"Westerheide", "Netherlands")) %>%
-ggplot(aes(x = log10(MEAN_cM+1),y = meanRsb,col = outlier))+
-  geom_point() + 
-  theme_bw() +
-  scale_colour_manual(values = c("red","grey"))+
-  facet_wrap(~comparison) +
-  theme(legend.position = "none")+
-  ylab(expression(italic("Rsb")))+
-            xlab("Log recombination rate")
-
-```
-
-**Figure S10** *Rsb* in relation to recombination in three pairwise comparisons, averaged across 500kb windows. Red points represent the top 1% of FST outliers.
 
 
 

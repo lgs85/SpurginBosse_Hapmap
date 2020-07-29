@@ -6,6 +6,7 @@ library(ecodist)
 library(kableExtra)
 library(cowplot)
 library(ggrepel)
+library(magrittr)
 
 #Set theme
 theme_set(theme_bw())
