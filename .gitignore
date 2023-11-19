@@ -1,0 +1,13 @@
+.Rproj.user
+*.Rhistory
+.RData
+.Ruserdata
+*.docx
+Talks/*
+*.png
+Data/*
+*.xlsx
+*.pptx
+*.pdf
+*.bib
+*.csl

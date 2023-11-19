@@ -1,0 +1,345 @@
+---
+output:
+  word_document:
+    reference_docx: mystyle1.docx
+bibliography: MyBib.bib
+csl: PLoSGenetics.csl
+---
+```{r setup, include = F}
+
+rm(list=ls())
+
+#Load knitr
+library(knitr)
+
+#Set some options
+options(na.action='na.fail')
+opts_knit$set(root.dir = '..')
+opts_chunk$set(echo=FALSE,
+               warning=FALSE,
+               message=FALSE,
+               fig.width=8,
+               fig.height=8)
+
+```
+
+```{r load and clean, include = F}
+
+#Load and clean data
+source("Scripts/SpurginBosse_Hapmap_LOAD.r")
+source("Scripts/SpurginBosse_Hapmap_FUNCTIONS.r")
+source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
+```
+
+
+
+# Supplementary material for "The great tit HapMap project: a continental-scale analysis of genomic variation in a songbird"
+
+**Table S1** Sampling details for the `r nrow(ll)` European great tit populations. "Code" corresponds to labels in Figure 1 of the main text. Sample size (N) is after pruning (see Methods).
+
+```{R Table S1}
+Table1 <- ll %>%
+  mutate(N = table(pops$Pop),
+         Pop = str_replace(Pop,"Tartu_Estonia","Kilingi-Nõmme_Estonia")) %>%
+         dplyr::rename(Population = Pop,Latitude = Lat,Longitude = Long,Region = Country) %>%
+  arrange(Region) %>%
+  mutate(Code = c(1:nrow(ll))) %>%
+  select(Code,Population,Region,N,Latitude,Longitude)
+
+kable(Table1,digits = 3,row.names = F,format = "simple")
+
+
+```
+
+
+\pagebreak
+\blandscape
+
+**Table S2** Details of outlier $F_{ST}$ regions in European great tit populations. For each region, $F_{ST}$ was calculated for each population versus Turkey. The "number of outliers" represents the number of *populations* in which each region was detected as an outlier. Selected candidate genes found within 500kb outlier windows (see main text) are displayed.
+
+```{r Table S2}
+outliers$Window <- paste(outliers$scaffold,outliers$start)
+
+TS2 <- select(outliers,scaffold,start,n_hits,Countries) %>%
+  mutate(start = round(as.numeric(start)/10e05,1),
+         Countries = str_replace_all(Countries,"_"," "),
+         scaffold = str_replace_all(as.character(scaffold),
+                                    c("30" = "1A",
+                                    "33" = "4A"))) %>%
+  rename("Chromosome" = scaffold,
+         "Position (MB)" = start,
+         "Number of outliers" = n_hits,
+         "Outlier comparisons" = Countries) %>%
+  arrange(-`Number of outliers`) %>%
+  mutate(`Candidate genes` = "")
+
+TS2$`Candidate genes`[TS2$Chromosome == "4A"] <- "COL4A5"
+TS2$`Candidate genes`[TS2$Chromosome == "6" & TS2$`Position (MB)` == 7.5] <- "BMP1RA"
+TS2$`Candidate genes`[TS2$Chromosome == "3" & TS2$`Position (MB)` == 28.5] <- "PPP1CB"
+TS2$`Candidate genes`[TS2$Chromosome == "6" & TS2$`Position (MB)` == 8] <- "GHITM"
+TS2$`Candidate genes`[TS2$Chromosome == "1A" & TS2$`Position (MB)` == 70.5] <- "CDKN1B"
+TS2$`Candidate genes`[TS2$Chromosome == "3" & TS2$`Position (MB)` == 28] <- "MRPL33"
+TS2$`Candidate genes`[TS2$Chromosome == "1A" & TS2$`Position (MB)` == 48.5] <- "BMP1RA"
+
+kable(TS2, format = "simple")
+
+```
+
+\pagebreak
+\elandscape
+
+
+
+```{r FigS1}
+
+FigS1 <- ld %>%
+  ggplot(aes(x = dist/1000,y = meanR2))+
+  geom_line()+
+  xlim(c(0,20))+
+  facet_wrap(~Pop)+
+  xlab("Distance (kb)")+
+  ylab(expression("R"^2))
+FigS1
+```
+
+**Figure S1** Linkage disequilibrium in European great tit populations. Lines are means of $R^2$ values for all pairs of markers within 1000bp distance bins.
+
+
+
+
+\pagebreak
+
+
+```{r FigS2,fig.width = 8,fig.height = 4}
+
+FigS2A <- pd %>%
+  bind_rows(rename(pd,pop2 = pop1, pop1 = pop2)) %>%
+  select(pop1,pop2,FST) %>%
+  bind_rows(tibble(pop1 = unique(c(pd$pop1,pd$pop2)),pop2 = unique(c(pd$pop1,pd$pop2)),FST = 0)) %>%
+  distinct()%>%
+  ggplot(aes(x = pop1,y = pop2,fill = FST))+
+  geom_tile()+
+  theme(axis.text = element_text(size = 5),
+        axis.text.x = element_text(angle = 90,hjust = 1,vjust = 0.5),
+        axis.title = element_text(),
+        legend.position = "top",
+        legend.title = element_text(size = 9),
+        legend.text = element_text(size = 7))+
+  labs(x = "",y = "",fill = expression(italic("F")[ST]))
+
+FigS2B <- ggplot(pd,aes(x = dist/1000,y = FST,col = Island))+
+  geom_point()+
+  theme(legend.position = "none")+
+  ylab(expression(italic(F)[ST]))+
+  xlab("Geographic distance (km)")+
+  scale_colour_manual(values = c("darkblue","grey"))
+
+
+
+plot_grid(FigS2A,FigS2B,nrow = 1,labels = "AUTO")
+```
+
+**Figure S2** **A** Heatmap of pairwise $F_{ST}$ values between all populations, and **B** Pairwise $F_{ST}$ in relation to geographic distance among European great tit populations. In **B**, pairwise comparisons involving the island populations of Corsica, Sardinia and Crete are coloured in dark blue.
+
+
+\pagebreak
+
+
+```{r FigS3,fig.width = 7,fig.height = 9}
+
+
+p <- admix %>%
+  mutate(K = as.numeric(str_split(Q,"\\.",simplify = TRUE)[,2])) %>%
+  filter(K > 1) %>%
+  arrange(K) %>%
+  mutate(xaxis = K == 10)
+
+
+out <- pmap(list(p$contents,p$K,p$xaxis), ~admixtureplot(str_out = ..1,pops,k = ..2, xaxis = ..3)+
+              ylab(paste("K =",..2)))
+
+
+plot_grid(plotlist = out,ncol = 1,rel_heights = c(rep(1,8),2.3))
+```
+
+**Figure S3** Admixture analyses at $K$ = 2 to 10 in European great tit populations.
+
+\pagebreak
+
+
+
+
+
+
+```{r FigS4,fig.width = 5,fig.height = 5}
+FigS4 <- ggplot(cv,aes(x = K,y = CV))+
+  geom_line()+
+  xlab(expression(italic("K")))+
+  ylab("Cross-validation error")+
+  scale_x_continuous(breaks = c(1:10))
+FigS4
+```
+
+**Figure S4** Cross-validation error from Admixture analyses at $K$ = 1 to 10.
+
+
+\pagebreak
+
+```{r FigS5, fig.width = 5, fig.height = 7}
+FigS5 <- tibble(Value = unlist(pca[,c(3:6)]),
+                PC = str_c("PC",rep(c(1:4),each = nrow(pca))),
+                Pop = rep(pca$Country,4)) %>%
+  ggplot(aes(x = Pop, y = Value, col = Pop))+
+  geom_jitter(width = 0.2)+
+  theme(axis.text.x = element_text(angle = 90,vjust=0.5,hjust=1),
+        legend.position = "none")+
+  facet_wrap(~PC,nrow = 4)+
+  xlab("")+
+  ylab("Score")
+
+FigS5
+```
+
+**Figure S5** Results from PCA analysis of European great tit populations.
+
+
+
+\pagebreak
+
+```{r Figure S6,fig.width = 5,fig.height = 5}
+m = 10
+vars <- rep(NA,m+1)
+vars[1] <- calcVarExplain("Data/Treemix/HapMap")$VarExplain
+for(i in c(2:(m+1)))
+{
+  vars[i] <- calcVarExplain(paste0("Data/Treemix/HapMap_",i-1))$VarExplain
+}
+
+ddS6 <- data.frame(M = c(0:10),vars = vars)
+FigS6 <- ggplot(ddS6,aes(x = M,y = vars))+
+  geom_line()+
+  xlab("Number of migration events")+
+  ylab("Proportion relatedness explained")+
+  scale_x_continuous(breaks = c(0:10))
+FigS6
+```
+
+**Figure S6** Proportion of relatedness explained among populations in relation to the number of migration events allowed in TreeMix analyses.
+
+
+\pagebreak
+
+
+
+
+
+
+```{r Figure S7,fig.width = 8,fig.height = 6}
+
+FigS7 <- dw %>%
+  filter(scaffold != 36,
+         pop1 != "Romania/Bulgaria") %>%
+  ggplot(aes(y = FST,x = order,col = factor(scaffold)))+
+  theme(axis.text.x = element_blank(),
+        legend.position = "none")+
+  geom_line()+
+  geom_vline(data = outlier_lines,aes(xintercept = order,lty = outlier_type),col = "red",alpha = 0.15,lwd = 1.2)+
+  facet_wrap(~factor(pop1,levels = dist_order))+
+  ylab(expression(italic(F)[ST]))+
+  xlab("Genomic position")+
+  scale_color_manual(values = rep(c("navy","grey"),30))
+FigS7
+```
+
+**Figure S7** Landscapes of genomic differentiation in European great tit populations. $F_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $zF_{ST}$ > 10) shared across more than two comparisons (solid red lines), or unique to one or two comparisons (dashed red lines).
+
+
+
+```{r FigS8,fig.width = 8,fig.height=4}
+
+rsbbin <- rsb %>%
+  filter(CHR != 36) %>%
+  mutate(comparison = str_replace(comparison,"_", " vs ")) %>%
+  mutate(comparison = str_replace(comparison,"Westerheide", "Netherlands")) %>%
+  mutate(MEAN_cM = replace_na(MEAN_cM,0)) %>%
+  mutate(logRR = log10(MEAN_cM+1)) %>%
+  mutate(binRR = ceiling(logRR*10)/10) %>%
+  group_by(comparison,binRR) %>%
+  summarise(
+    med = median(meanRsb, na.rm = T),
+    u99 = quantile(meanRsb,0.99, na.rm = T),
+    l99 = quantile(meanRsb,0.01, na.rm = T)) %>%
+  ungroup() %>%
+  filter(binRR <= 1.5)
+
+rsb %>%
+  mutate(MEAN_cM = replace_na(MEAN_cM,0)) %>%
+  mutate(logRR = log10(MEAN_cM+1)) %>%
+  group_by(comparison) %>%
+  mutate(outlier = ifelse(meanFST > quantile(meanFST,0.99),"FST outlier","Non-FST outlier")) %>%
+  ungroup() %>%
+  mutate(comparison = str_replace(comparison,"_", " vs ")) %>%
+  mutate(comparison = str_replace(comparison,"Westerheide", "Netherlands")) %>%
+  ggplot(aes(x = logRR,y = meanRsb))+
+  geom_point(aes(col = outlier)) +
+  geom_line(data = rsbbin,aes(x = binRR,y = med))+
+  geom_line(data = rsbbin,aes(x = binRR,y = u99),lty = 2)+
+  geom_line(data = rsbbin,aes(x = binRR,y = l99),lty = 2)+
+  theme_bw() +
+  scale_colour_manual(values = c("red","grey"))+
+  facet_wrap(~comparison) +
+  theme(legend.position = "none")+
+  ylab(expression(italic("Rsb")))+
+  xlab("Log recombination rate")
+
+```
+
+**Figure S8** $Rsb$ in relation to local recombination rate in three pairwise comparisons, averaged across 500kb windows. Red points represent the top 1% of FST outliers, and solid and dotted lines represent median and 99% quantiles of $Rsb$ windows from bins of 0.1 log cM/Mbp. $Rsb$ outliers greater than zero indicate selection in the first population and values less than zero indicate selection in the second population.
+
+
+\pagebreak
+
+```{r Figure S9,fig.width=8,fig.height=4}
+FigS9A <- dw %>%
+  mutate(Window = paste(scaffold,start)) %>%
+  group_by(Window) %>%
+  dplyr::summarise(piTurkey = mean(pi_Turkey),
+                   pi = mean(pi_pop1)) %>%
+  ggplot(aes(x = piTurkey,y = pi))+
+  geom_point(col = "grey")+
+  geom_point(data = outlierhaps,aes(col = nhf, x = pi))+
+  theme(legend.position = "none")+
+  scale_color_manual(values = c("red","navy"))+
+  xlab(expression(pi["Turkey"]))+
+  ylab(expression(pi["All populations"]))+
+  xlim(c(0.15,0.5))+
+  ylim(c(0.15,0.5))
+
+
+FigS9B <- ggplot(outlierhaps,
+                 aes(x = log10(Markers),y = log10(Richness),col = nhf,size = N_hits))+
+  geom_point()+
+  theme(legend.position = "none")+
+  scale_color_manual(values = c("red","navy"))+
+  xlab("Log marker density")+
+  ylab("Log number of haplotypes")
+
+plot_grid(FigS9A,FigS9B,nrow = 1,labels = "AUTO")
+
+```
+
+**Figure S9** Genetic diversity in $F_{ST}$ outlier regions in European great tit populations. Each point is an outlier window, with point size scaled by the number of populations the outlier was found in - "shared" haplotypes are coloured red and "unique" haplotypes dark blue (see main text for details). In **A**, Nucleotide diversity for each window is calculated for the proposed refugial population in Turkey, and plotted against the mean for all other populations. In **B**, SNP marker density is plotted against haplotype richness for each region. Low marker density regions tend to have low local recombination rates. Thus, shared regions are more likely to be regions of low recombination rate but unique outlier regions are not.
+
+
+
+\pagebreak
+
+```{r FigS10}
+knitr::include_graphics("Haplotype_structure_figure.png")
+```
+
+**Figure S10** Haplotype structure underlying regions of high differentiation in a unique vs shared outlier region. **A** IBS clustering of all European haplotypes in the region containing a signal of high differentiation with Turkey specific to the Oulu population. The red arrow indicates the haplotype at highest frequency in Finland. Colour indicates IBS similarity (range 0: white - 1: dark blue). **B** IBS clustering of all European haplotypes in the region on chromosome 2 containing a signal of high differentiation with Turkey in multiple populations. **C** Frequency of all identified haplotypes within each population. The red arrow indicates the high-frequency haplotype within Finland. **D** Frequency of all identified haplotypes spanning the region on chromosome 2 within each population.
+
+
+
+

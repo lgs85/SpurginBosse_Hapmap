@@ -1,0 +1,386 @@
+
+---
+output:
+  word_document:
+    reference_docx: mystyle1.docx
+bibliography: MyBib.bib
+csl: PLoSGenetics.csl
+---
+```{r setup, include = F}
+
+rm(list=ls())
+
+#Load knitr
+library(knitr)
+
+#Set some options
+options(na.action='na.fail')
+opts_knit$set(root.dir = '..')
+opts_chunk$set(echo=FALSE,
+               warning=FALSE,
+               message=FALSE,
+               fig.width=8,
+               fig.height=8)
+
+set.seed(200285)
+```
+
+
+
+```{r load and clean, include = F}
+#Load and clean data
+source("Scripts/SpurginBosse_Hapmap_LOAD.R")
+source("Scripts/SpurginBosse_Hapmap_FUNCTIONS.r")
+source("Scripts/SpurginBosse_Hapmap_CLEAN.r")
+```
+
+
+# The great tit HapMap project: a continental-scale analysis of genomic variation in a songbird
+
+
+Lewis G. Spurgin^1,2^\*, Mirte Bosse^3,4,5^, Frank Adriaensen^6^, Tamer Albayrak^7^, Christos Barboutis^8^, Eduardo Belda^9^, Andrey Bushuev^10^, Jacopo G. Cecere^11^, Anne Charmantier^12^, Mariusz Cichon^13^, Niels J. Dingemanse^14^, Blandine Doligez^15,16^, Tapio Eeva^17^, Kjell Einar Erikstad^18^, Vyacheslav Fedorov^10^\*\*, Matteo Griggio^19^\*\*, Dieter Heylen^6,20,21^, Sabine Hille^22^, Camilla A. Hinde^23^, Elena Ivankina^24^, Bart Kempenaers^25^, Anvar Kerimov^10^, Milos Krist^26^, Laura Kvist^27^, Veronika N. Laine^3,28^, Raivo Mänd^29^, Erik Matthysen^6^, Ruedi Nager^30^, Boris P. Nikolov^31^, A. Claudia Norte^32^, Markku Orell^28^, Jenny Ouyang^26,33^, Gergana Petrova-Dinkova^31^, Heinz Richner^34^, Diego Rubolini^35^, Tore Slagsvold^36^, Vallo Tilgar^29^, János Török^37^, Barbara Tschirren^38^, Csongor I. Vágási^39,40^, Teru Yuta^41^, Martien A.M. Groenen^4^, Marcel E.  Visser^3,4,42^, Kees van Oers^3^, Ben C. Sheldon^2^ and Jon Slate^43^\*
+
+
+1. School of Biological Sciences, University of East Anglia, Norwich Research Park, United Kingdom
+
+2. Edward Grey Institute, University of Oxford, United Kingdom
+
+3. Department of Animal Ecology, Netherlands Institute of Ecology (NIOO-KNAW), Wageningen, the Netherlands
+
+4. Animal Breeding and Genomics Centre, Wageningen University, the Netherlands
+
+5. Department of Ecological Science, Animal Ecology Group, Vrije Universiteit Amsterdam, Amsterdam, The Netherlands
+
+6. Evolutionary Ecology Group, Department of Biology, University of Antwerp, Universiteitsplein 1, 2610 Antwerp, Belgium
+
+7. Department of Biology, Mehmet Akif Ersoy University, Science and Art Faculty, Ortulu, Burdur, Turkey
+
+8. Hellenic Ornithological Society / BirdLife Greece, Themistokleous 80, GR-10681 Athens
+
+9. Institut d'Investigació per a la Gestió Integrada de Zones Costaneres, Campus de Gandia, Universitat Politècnica de València, Carrer Paranimf 1, E-46730 Grau de Gandia (València), Spain
+
+10. Faculty of Biology, Lomonosov Moscow State University, Moscow 119234, Russia
+
+11. Area Avifauna Migratrice, Istituto Superiore per la Protezione e la Ricerca Ambientale (ISPRA), via Ca’ Fornacetta 9, I-40064, Ozzano Emilia, (BO), Italy
+
+12. CEFE-CNRS, UMR 5175, 1919, route de Mende, F34293 Montpellier Cedex 5, France
+
+13. Institute of Environmental Sciences, Jagiellonian University, Gronostajowa 7, 30-387 Kraków, Poland
+
+14. Behavioural Ecology, Department of Biology, Ludwig Maximilians University of Munich, Planegg-Martinsried, Germany
+
+15. UMR CNRS 5558—LBBE, Biométrie et Biologie Évolutive, UCB Lyon 1 - Bât. Grégor Mendel, 43 bd du 11 novembre 1918, 69622 VILLEURBANNE cedex, France
+
+16. Department of Ecology and Evolution, Animal Ecology, Evolutionary Biology Centre, Uppsala University, Sweden
+
+17. Department of Biology, University of Turku, Turku 20014, Finland
+
+18. Norwegian Institute for Nature Research, FRAM-High North Research Centre for Climate and the Environment, 9296 Tromsø, Norway
+
+19. Department of Biology, University of Padova, Via U. Bassi 58/B, I-35131, Padova, Italy
+
+20. Department of Ecology and Evolutionary Biology, Princeton University, Princeton, NJ, United States of America
+
+21. Interuniversity Institute for Biostatistics and statistical Bioinformatics, Hasselt University, Diepenbeek, Belgium
+
+22. Institute of Wildlife Biology and Game Management, University of Natural Resources and Life Science, A-1180 Vienna, Austria
+
+23. Behavioural Ecology Group, Department of Life Sciences, Anglia Ruskin University, East Road Cambridge, Cambridgeshire, CB1 1PT, UK.
+
+24. Zvenigorod Biological Station of Lomonosov Moscow State University, P.O. Box Shikhovo, Odintsovo District, Moscow 143036, Russia
+
+25. Max Planck Institute for Ornithology, Department of Behavioural Ecology & Evolutionary Genetics, Eberhard-Gwinner-Straße, House 5, 82319 Seewiesen (Starnberg), Germany
+
+26. Department of Zoology and Laboratory of Ornithology, Faculty of Science, Palacký University, Olomouc 77147, Czech Republic
+
+27. Department of Ecology and Genetics, P.O.Box 3000, 90014-University of Oulu, Finland
+
+28. Department of Molecular and Cellular Biology, Harvard University, Cambridge, MA, United States of America
+
+29. Department of Zoology, Institute of Ecology and Earth Sciences, University of Tartu, Vanemuise 46, Tartu 51014, Estonia
+
+30. Institute of Biodiversity, Animal Health and Comparative Medicine, University of Glasgow, Glasgow G12 8QQ, United Kingdom
+
+31. Bulgarian Ornithological Centre, Institute of Biodiversity and Ecosystem Research, Bulgarian Academy of Sciences, 1 Tsar Osvoboditel Blvd, 1000 Sofia, Bulgaria
+
+32. MARE - Marine and Environmental Sciences Centre, Department of Life Sciences, Faculty of Sciences and Technology, University of Coimbra, Portugal
+
+33. University of Nevada, Reno, NV, United States of America
+
+34. Evolutionary Ecology Lab, Institute of Ecology and Evolution, University of Bern, Bern 3012, Switzerland
+
+35. Dipartimento di Scienze e Politiche Ambientali, Università degli Studi di Milano, via Celoria 26, I-20133, Milano, Italy
+
+36. Centre for Ecological and Evolutionary Synthesis (CEES), Department of Biosciences, University of Oslo, P.O. Box 1066, Blindern, 0316 Oslo, Norway
+
+37. Behavioural Ecology Group, Department of Systematic Zoology and Ecology, Eötvös Loránd University, Budapest H-1117, Hungary
+
+38. University of Exeter, Centre for Ecology and Conservation, Treliever Road, Penryn, TR10 9FE, United Kingdom
+
+39. Evolutionary Ecology Group, Hungarian Department of Biology and Ecology, Babeș-Bolyai University, Cluj-Napoca, Romania
+
+40. Behavioural Ecology Research Group, Department of Evolutionary Zoology, University of Debrecen, Debrecen, Hungary
+
+41. Graduate School of Environmental Science, Hokkaido University, N10 W5 Sapporo, Hokkaido 060-0810, Japan
+
+42. Groningen Institute for Evolutionary Life Sciences (GELIFES), University of Groningen, Groningen, the Netherlands
+
+43. Department of Animal and Plant Sciences, University of Sheffield, United Kingdom
+
+
+
+\* **Correspondence**: l.spurgin@uea.ac.uk; j.slate@sheffield.ac.uk
+
+\*\* Deceased
+
+\pagebreak
+
+
+
+
+## Abstract
+
+A major aim of evolutionary biology is to understand why patterns of genomic diversity vary among populations and species. Large-scale genomic studies of widespread species are useful for studying how the environment and demographic history shape patterns of genomic divergence, and with the continually decreasing cost of sequencing and genotyping, such studies are now becoming feasible. Here, we carry out one of the most geographically comprehensive surveys of genomic variation in a wild vertebrate to date; the great tit (*Parus major*) HapMap project. We screened *ca* 500,000 SNP markers across `r nrow(pops)` individuals from  `r nrow(ll)` populations, spanning almost the entire geographic range of the European great tit subspecies. We found that genome-wide variation was consistent with a recent colonisation across Europe from a single refugium in South-East Europe, with bottlenecks and reduced genetic diversity in island populations. Differentiation across the genome was highly heterogeneous, with clear "islands of differentiation" even among populations with very low levels of genome-wide differentiation. Low local recombination rate in the genome was a strong predictor of high local genomic differentiation ($F_{ST}$), especially in island and peripheral mainland populations, suggesting that the interplay between genetic drift and recombination is a key driver of highly heterogeneous differentiation landscapes. We also detected genomic outlier regions that were confined to one or more peripheral great tit populations, most likely as a result of recent directional selection at the range edges of this species. Haplotype-based measures of selection were also related to recombination rate, albeit less strongly, and highlighted population-specific sweeps that likely resulted from positive selection. These regions under positive selection contained candidate genes associated with morphology, thermal adaptation and colouration, providing promising avenues for future investigation. Our study highlights how comprehensive screens of genomic variation in wild organisms can provide unique insights into evolution.
+
+
+## Introduction
+
+Since the first studies of allozyme variation in humans [@Harris1966] and *Drosophila* [@Lewontin1966; @Hubby1966], there has been great interest in explaining how evolutionary and ecological processes shape the patterns of genetic variation observed within and among natural populations. One focus of research and debate in this area has been on quantifying the roles of adaptive and neutral processes in explaining observed levels of genetic variation [@Nei2005]. However, adaptation does not occur in isolation, but acts on genetic variation that is also shaped by mutation, recombination, gene flow, and genetic drift [@Hartl1997]. More recently there has been increased effort in understanding how these fundamental evolutionary forces operate in concert to generate and maintain the levels of genetic diversity commonly observed in natural populations [e.g. @Feder2012; @Lanfear2014].
+
+The increasing feasibility of high-throughput sequencing and genotyping, alongside subsequent characterisation of genome-wide variation across large numbers of individuals, has revealed that at the genomic level, patterns of variation and divergence among natural populations and species are highly heterogeneous [@Turner2005]. A key feature of these "genomic landscapes" of divergence that has received particular attention is the presence of so-called "islands of differentiation": outlier regions of the genome with high levels of divergence estimated from statistics such as $F_{ST}$ or $d_{xy}$ that consistently emerge at the same loci in different comparisons between populations or related species [e.g. @Turner2005; @Nadeau2011; @Renaut2013; @Poelstra2014]. Initially these regions were termed "islands of speciation", and were thought to arise as a result of reduced gene flow in genomic regions associated with reproductive isolation [@Turner2005; @Wolf2017]. Subsequent research has revealed that highly heterogeneous patterns of genomic divergence can occur even in the complete absence of gene flow, as a result of recombination rate variation and linked selection [@Noor2009; @Cruickshank2014]. In genomic regions of low recombination, selection for beneficial mutations (positive selection), or against deleterious mutations (background selection), will impact relatively large genomic regions as a result of high levels of linkage disequilibrium (LD) among sites. Selection within these regions reduces diversity within populations, and increases levels of differentiation among them, resulting in "islands" of increased differentiation that persist over evolutionary time [@Turner2010; @Cruickshank2014]. Another, less well explored reason for which islands of divergence can arise is due to the differential effects of genetic drift in response to variation in effective population size across different genomic regions; something that may be particularly important in recently colonised populations [@Ma2018; @Campagna2015]. These circumstances promote fixation of haplotypes and therefore result in either reduced or inflated local differentiation. 
+
+Comparing patterns of genomic differentiation among sets of populations or species at different stages of the divergence/speciation continuum is a powerful way of disentangling the forces that shape variation among populations. Martin et al. [-@Martin2013] showed that, across multiple *Heliconius* butterfly populations and species, patterns of genomic variation were shaped by a combination of gene flow and selection, particularly in genomic regions harbouring genes involved in wing patterning. In contrast, Renaut et al. [-@Renaut2013] showed that in *Helianthus* sunflowers, genomic architecture was the main driver of genomic differentiation across sets of populations. Similarly, recent research in birds has revealed that differentiation landscapes are conserved across populations, species and even across avian families, with the same islands of differentiation arising among populations of distantly related species [@Burri2015; @Vijay2017; @VanDoren2017]. This latter pattern appears to have arisen, at least in part, as a result of a highly conserved synteny and recombination landscape in birds [@Zhang2014], with background selection in regions of low recombination producing recurrent islands of differentiation [@Burri2017].
+
+It is now clear that the recombination landscape and linked selection are key drivers of genomic variation within and among populations. However, we are only just beginning to understand how this linked selection interacts with other evolutionary forces to shape patterns of differentiation across natural populations and species [@Burri2017; @Ellegren2017; @Jiggins2017; @Lohse2017; @Ravinet2017; @Perrier2019]. A recent, large-scale analysis of threespine sticklebacks (*Gasterosteus aculeatus*) showed that islands of differentiation were more likely to arise in low recombination regions when gene flow occurred between populations [@Samuk2017]. There is also a significant impact of divergence time; in recently separated populations the differentiation landscape is most likely to reflect selective sweeps. Then, as divergence accumulates, genomic architecture is expected to play an increasingly important role in generating these genomic islands [@Burri2017]. 
+
+Widespread continental species are excellent models for studying how demography and the environment shape genetic and phenotypic variation among populations, due to their large effective population sizes and ecologically varied ranges. Insight into the evolutionary history of such species can be gained if genetic variation is characterized across much of its geographical range. Cross-population comparisons of genetic variation can then be utilised to make inferences about phylogeography, levels of gene flow between populations and how adaptation to different environmental and ecological conditions occurs [@Perrier2020]. The first large-scale studies were performed in humans - i.e. the HapMap Projects [@Altshuler2005;@Frazer2007;@Altshuler2010] which characterized human genetic variation on different continents, with a view to determining the feasibility of association mapping studies. Similar studies have been conducted in domesticated species and their wild ancestors [@Kijas2012; @Gibbs2009; @Chia2012], and in model organisms [@@Lindblad-Toh2005; @Kirby2010]. More recently, there is a growing appreciation that HapMap-type studies are useful for studying signatures of selection and adaptation in natural populations of species with large effective population sizes and high levels of gene flow [@Horton2012; @Alonso-Blanco2016; @Williamson2014; @Mueller2018].
+
+The European great tit (*Parus major major*) is an excellent model for ecological and evolutionary studies [@Gosler1993]. As is the case with several avian species which are amenable to long-term study [@Culina2020], a wealth of ecological data exists across multiple great tit populations [e.g. @Visser1998; @Charmantier2008; @Dingemanse2012], enabling informed hypotheses about selection to be tested in this system.  Phyleogeographic research using mitochondrial DNA suggests that this species has recently expanded across its European range, possibly from a single refugium in South-East Europe [@Kvist1999]. Contemporary populations are characterised by large effective population sizes and low levels of genetic differentiation [@Kvist2003; @Lemoine2016]. However, these previous cross-population molecular studies have relied on a modest number of microsatellite loci and mitochondrial DNA, making the detection of genomic regions under selection impossible. The genome of the great tit has recently been sequenced [@Laine2016], and a high density panel of *ca* 500,000 SNP markers has been developed [@Kim2018]. A recent study of two European populations using this marker panel suggests that rapid adaptation has occurred at the genomic and phenotypic levels, with pronounced selection on morphology [@Bosse2017]. 
+
+Here, we perform a HapMap study of `r nrow(pops)` unrelated individuals across `r nrow(ll)` populations (Fig. 1), to examine how genomic architecture, natural selection and population history have shaped patterns of genomic variation across recently colonised European great tit populations. Using a large SNP panel typed across all individuals, we first characterise genome-wide patterns of variation within and among populations, in order to infer population history. We then examine how variation is partitioned across the genome, and test the hypothesis that highly divergent genomic regions have arisen in genomic regions of low recombination [@Noor2009; @Cruickshank2014]. Finally, we examine how genomic divergence accumulates along the colonisation route of this species, with the aim of inferring how recent natural selection and demography drive variation across the genome in the wild.
+
+```{R Figure 1,fig.width = 5,fig.height = 5}
+Table1 <- ll %>%
+  mutate(N = table(pops$Pop)) %>%
+  dplyr::rename(Population = Pop,Latitude = Lat,Longitude = Long,Region = Country) %>%
+  arrange(Region) %>%
+  mutate(Code = c(1:nrow(ll))) %>%
+  select(Code,Population,Region,N,Latitude,Longitude)
+
+Fig1 <- map_data("world") %>%
+  ggplot(aes(x=long, y=lat, group=group)) +
+  geom_polygon(fill=grey(0.7), color=grey(0.7),size = 0.1,col = "darkgrey") +
+  coord_fixed(xlim=c(-10, 40),
+              ylim=c(35, 65),
+              ratio=1.3) +
+  geom_point(data = Table1,aes(x = Longitude,y = Latitude,group = NULL),col = "red",size = 2) +
+  geom_text_repel(data = Table1,aes(x = Longitude,y = Latitude,group = NULL,label = Code),col = "black",size = 2) +
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_classic()
+
+Fig1
+```
+
+**Figure 1** Sampling locations of great tit populations. Population names and sample sizes are given in Table S1, and numbers on the map correspond to the "code" column in Table S1.
+
+## Results and Discussion
+
+*Genetic diversity and population history*
+
+Sampling locations and sample sizes for each population are given in Table S1. Levels of genetic diversity ($\pi_{SNP}$) were generally high, but we observed substantial differences among populations (Fig. 2A). Similarly, LD declined rapidly with genomic distance in all populations, reaching baseline levels within ~5kb in all populations, but also varied among populations (Fig. S1).  Highest levels of LD (and lowest levels of genetic diversity) were observed in the Mediterranean island populations of Crete (Greece) and Sardinia (Italy), with lowest levels of LD in central and western Europe (Fig. S1). This is consistent with reduced effective population size in these island populations, either as result of the colonisation process or more recent bottlenecks, along with low levels of subsequent gene flow from the continent to the islands [@Postma2005; @James2016].
+
+Mean genome-wide $F_{ST}$ between all pairs of European great tit populations was `r round3(mean(pd$FST))`, with no significant pattern of isolation-by-distance (Mantel test; r = `r round2(mantel(FST~dist,data = pd)["mantelr"])`, p = `r round2(mantel(FST~dist,data = pd)["pval1"])`; Fig. S2). Instead, the highest levels of $F_{ST}$ were found in comparisons involving the Mediterranean island populations of Corsica (France), Sardinia and Crete (Fig. S2). Admixture analysis was consistent with this pattern (Fig. S3); the $K$ = 2 analysis assigned individuals in Sardinia and Corsica to one genetic cluster, and the remaining populations to the second. Thus, it is likely that much of the genetic structure between European great tit populations is a result of genetic drift in these small island populations. Admixture analysis also revealed some structure between (mainly peripheral) mainland and larger island populations. At $K$ = 3 (the model that best fitted the great tit data; Fig. S4), Spain was separated from the rest of mainland Europe. Increasing values of $K$ resulted in the separation of populations in Scotland ($K$ = 4), Sardinia (from Corsica; $K$ = 5), southern France ($K$ = 6), Crete ($K$ = 7) and England ($K$ = 8). The Admixture output at $K$ = 8 is displayed in Fig. 2C as this gives the most detailed picture of genetic structure among European great tit populations. Further increases in $K$ did not generate patterns of structure that corresponded to geographical variation (Fig. S3), and were increasingly less well supported (Fig. S4). Thus, even with hundreds of thousands of markers Admixture was unable to separate many of the European populations, confirming that levels of divergence are extremely low [@Laine2016]. PCA largely corroborated the Admixture results, with PC1 separating Corsica and Sardinia from the remaining populations, PC2 separating Spain, while PC3 and PC4 separated Scotland, England, Corsica, Sardinia and Crete (Fig. S5).
+
+Maximum likelihood analyses implemented in TreeMix showed that a model with no migration explained 97.8% of variance in relatedness between populations [see @Pickrell2012]; increasing the number of migration events substantially improved the percentage of relatedness explained, up to 99.7% when 10 migration events were fitted (Fig. S6). In Figure 3 we display the maximum likelihood tree with three migration events, after which the variance in relatedness explained plateaued when more migration events were added (Fig. S6). The tree was generally characterised by short branch lengths, with the exception of the island populations of Sardinia and Crete, which were grouped with the population from mainland Italy (Fig. 3). Thus, the TreeMix analysis is consistent with large populations and low overall genomic divergence, with the exception of the Mediterranean island populations. However, much (though not all) of the grouping that did occur among continental populations made geographical sense, with populations from Finland and Estonia grouped together, as were some populations from South-East Europe, and populations from England and Scotland (Fig. 3). Interestingly, TreeMix grouped the Spanish and Corsican populations, which is consistent with previous subspecies descriptions of European great tits [@Clements2007]. The three fitted migration edges all involved Sardinia, with migration from eastern Europe to Sardinia, and from Sardinia to Corsica and Spain (Fig. 3).
+
+We next tested the hypothesis that great tits colonised Europe from a single refugium in South-East Europe. This scenario has been suggested before [@Kvist1999], but due to the low number of genetic markers available there has been limited power with which to test this hypothesis. Using our genome-wide panel of SNP markers, we compared genetic and geographic distance between each population and the proposed refugial populations. Because of the elevated structure in Corsica, Sardinia and Crete (Fig. S2), we excluded comparisons involving these populations. We found that $F_{ST}$ was significantly related to distance from Turkey (r = `r round2(with(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),Island == "Mainland"),cor.test(FST,dist))$estimate)`, p `r round3(with(subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),Island == "Mainland"),cor.test(FST,dist))$p.value)`; Fig. 2B) and Romania/Bulgaria (r = `r round2(with(subset(subset(pd,p1 == "Romania/Bulgaria" | p2 == "Romania/Bulgaria"),Island == "Mainland"),cor.test(FST,dist))$estimate)`, p = `r round3(with(subset(subset(pd,p1 == "Romania/Bulgaria" | p2 == "Romania/Bulgaria"),Island == "Mainland"),cor.test(FST,dist))$p.value)`). The same relationship was not found for alternative potential refugial populations [@Hewitt1999] in Spain (r = `r round2(with(subset(subset(pd,p1 == "Spain" | p2 == "Spain"),Island == "Mainland"),cor.test(FST,dist))$estimate)`, p = `r round2(with(subset(subset(pd,p1 == "Spain" | p2 == "Spain"),Island == "Mainland"),cor.test(FST,dist))$p.value)`), or southern Italy (r = `r round2(with(subset(subset(pd,p1 == "Italy" | p2 == "Italy"),Island == "Mainland"),cor.test(FST,dist))$estimate)`, p = `r round2(with(subset(subset(pd,p1 == "Italy" | p2 == "Italy"),Island == "Mainland"),cor.test(FST,dist))$p.value)`). Our results therefore lend empirical support to the hypothesis [@Kvist1999] that great tits colonised Europe primarily from a single refugium in the south-east. Clearly, although our sampling was extensive, it is not exhaustive, and more fine-scaled sampling in eastern Europe would be required to determine the extact location and extent of refugial great tit populations. Sampling in North Africa would also be useful to determine whether further refugia exist, and to quantify the extent of admixture between European and African great tit populations.
+
+
+\pagebreak
+
+```{r Figure 2,fig.width = 8,fig.height = 6}
+
+Fig2A <- dw %>%
+  bind_rows(dw %>%
+              filter(pop1 == "Romania/Bulgaria") %>%
+              mutate(pop1 = "Turkey",
+                     pi_pop1 = pi_Turkey)) %>%
+  mutate(pop1 = factor(pop1,levels = levels(ll$Country))) %>%
+  ggplot(aes(x = pop1,y = pi_pop1))+
+  geom_boxplot(notch = T,outlier.colour = NA)+
+  theme_bw()+
+  ylim(c(0.24,0.41))+
+  theme(axis.text.x = element_text(angle = 90,vjust = 0.5,hjust=1))+
+  ylab(expression(pi[SNP]))+
+  xlab("")
+
+
+Fig2B <- pd %>%
+  filter(p1 == "Turkey" | p2 == "Turkey") %>%
+  ggplot(aes(x = dist/1000,y = FST))+
+  geom_point(col = "grey")+
+  theme(legend.position = "none")+
+  ylab(expression(italic(F)[ST]))+
+  xlab("Distance from Turkey (km)")+
+  annotate("text",
+           x = subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$dist/1000,
+           y = subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$FST-0.003,
+           label = subset(subset(pd,p1 == "Turkey" | p2 == "Turkey"),FST > 0.02)$p1,
+           size = 3)
+
+Fig2C <- admixtureplot(admix$contents[grep(".8.Q",admix$Q)][[1]],pops,8)
+
+
+plot_grid(plot_grid(Fig2A,Fig2B,labels = "AUTO",nrow = 1),Fig2C,labels = c("","C"),nrow = 2)
+
+```
+
+**Figure 2** Genetic diversity and structure in European Great tit populations. **A** Nucleotide diversity within each population. **B** Pairwise $F_{ST}$ in relation to geographic distance from the Turkey, only including comparisons involving Turkey. **C** Output from Admixture analysis at $K$ = 8. Population details can be found in Table S1.
+
+\pagebreak
+
+
+
+```{r Figure 3,fig.width = 8,fig.height = 8}
+plot_tree("Data/TreeMix/HapMap_3",mbar = F,cex = 0.8)
+```
+
+**Figure 3** Maximum likelihood tree inferred by TreeMix, allowing three migration events. The two migration events (arrows) are coloured according to their weight (red = higher migration), and horizontal branch lengths are proportional to the amount of genetic drift that has occurred along the branch. A population of the great tit's sister species, *Parus minor*, was used as an outgroup. Population details are given in Table S1.
+
+\pagebreak
+
+*Genomic landscapes of differentiation*
+
+It is likely that many, and perhaps the majority, of wild populations are characterised by highly heterogeneous patterns of differentiation across the genome [see @Ravinet2017 for a recent overview]. This is the case in European great tits - despite the extremely low average $F_{ST}$, we found genomic regions with very high levels of genomic structure (maximum $F_{ST}$ for 10kb and 500kb windows was `r round2(max(fst10$FST))` and `r round2(max(fst500$FST))`, respectively). To examine how landscapes of genomic divergence have formed along the colonisation route of European great tits, we calculated windowed $F_{ST}$ in 500kb bins between each population and the proposed refugial population in Turkey. We found that $F_{ST}$ varied markedly across the genome in all comparisons (Fig. 4; Fig. S7). Outlier regions (windows with standardized $F_{ST}$,hereafter $zF_{ST}$, > 10) were found in all comparisons apart from Crete and Sardinia, in which overall levels of divergence were highest, with some outlier regions found across multiple comparisons (Fig. 4). Our results suggest, therefore, that genomic islands of differentiation can and do arise even among recently separated populations. 
+
+Considering all populations, $F_{ST}$ calculated in 500kb windows was strongly negatively correlated with local variation in recombination rate (Spearman correlation, r = `r round2(with(fst500,cor.test(FST,Mean_cM,method = "spearman"))$estimate)`, p `r round3(with(fst500,cor.test(FST,Mean_cM,method = "spearman"))$p.value)`). Although recombination rate and gene density were positively correlated, (r = `r round2(with(fst500,cor.test(Mean_cM,GENES_PER_MB,method = "spearman"))$estimate)`, p `r round3(with(fst500,cor.test(Mean_cM,GENES_PER_MB,method = "spearman"))$p.value)`), $F_{ST}$ was only moderately correlated with gene density in 500kb windows (r = `r round2(with(fst500,cor.test(FST,GENES_PER_MB,method = "spearman"))$estimate)`, p `r round3(with(fst500,cor.test(FST,GENES_PER_MB,method = "spearman"))$p.value)`), and this correlation became weak when calculated in 10kb windows (r = `r round2(with(fst10,cor.test(FST,GENES_PER_MB,method = "spearman"))$estimate)`, p `r round3(with(fst10,cor.test(FST,GENES_PER_MB,method = "spearman"))$p.value)`). Thus it appears that the negative relationship between $F_{ST}$ and recombination rate is not driven by gene density. Examining how the relationship between genomic differentiation and recombination varied among populations revealed that $F_{ST}$ was negatively related to recombination rate in almost all comparisons with Turkey (Fig. 5). The relationship between $F_{ST}$ and recombination rate was generally weak, but in a handful of populations this relationship was substantially stronger - most notably in the island populations of Corsica, Sardinia and Crete, and in the peripheral mainland populations of England, Scotland, Spain, Finland and France, which are the populations that are likely most susceptible to drift (Fig. 5). 
+
+As a further examination of how allele frequency variation and haplotype structure may be shaped by neutral and adaptive processes, we compared $F_{ST}$ and recombination rate with $Rsb$ - a measure which aims to detect regions of the genome under positive selection by comparing extended haplotype homozygosity profiles between populations, and is expected to be less sensitive to variation in recombination rate because extended haplotypes should be present in both populations when recombination frequency is lower [@Tang2007]. Specifically, we compared the distributions of these statistics in 500kb windows using three populations in the Netherlands, Finland and Spain, with the aim of exploring how $Rsb$ varies with recombination rate and with $F_{ST}$. We found that, across the genome, correlations between absolute $Rsb$ and recombination rate were only slightly weaker (Spearman rank r between `r round2(min(rsb %>% group_by(comparison) %>% drop_na() %>% summarise(r = cor(abs(meanRsb),MEAN_cM, method = "spearman")) %>% pull (r)))` and `r round2(max(rsb %>% group_by(comparison) %>% drop_na() %>% summarise(r = cor(abs(meanRsb),MEAN_cM, method = "spearman")) %>% pull (r)))`) compared to those between $F_{ST}$ and recombination for the same pairwise comparisons (r between `r round2(min(rsb %>% group_by(comparison) %>% drop_na() %>% summarise(r = cor(abs(meanFST),MEAN_cM, method = "spearman")) %>% pull (r)))` and `r round2(max(rsb %>% group_by(comparison) %>% drop_na() %>% summarise(r = cor(abs(meanFST),MEAN_cM, method = "spearman")) %>% pull (r)))`), and that the regions of high $F_{ST}$ in these comparisons tended to be in these same regions of low recombination and high $Rsb$ (Fig. S8). Notably, though, there were several cases where windows with extreme $Rsb$ values occurred in regions of high recombination, and most high $F_{ST}$ regions in high recombination regions were also $Rsb$ outliers (Fig. S8). Below we explore the possibility that such regions are strong candidates for recent adaptive evolution.
+
+Background selection is a key driver of genomic differentiation in birds [@Vijay2017; @VanDoren2017], and other organisms [@Comeron2017], but is not expected to play a major role in driving islands of differentiation over the timescales (tens of thousands of years) relevant to this study [@Burri2017; @Samuk2017]. On the other hand, differential effects of drift operating across the genome could contribute substantially to the highly heterogeneous patterns of differentiation observed in European great tits. Our finding that the relationship between recombination rate and $F_{ST}$ is strongest in populations experiencing the greatest levels of drift (e.g. islands; Fig. 5) is consistent with this - low recombining regions have reduced effective population size and increased rates of lineage sorting due to drift. Drift has been suggested to be a driver of heterogeneous genomic landscapes in other systems [@Ma2018; @Campagna2015], and our study suggests that it may play a key role in shaping genomic structure in widespread, continental species. 
+
+Outlier regions of very high differentiation ($zF_{ST}$ > 10) mostly occurred in areas of the genome with low recombination rates (Fig. 5) and the recombination rate of outlier regions was (just) significantly lower than the genome-wide average (Wilcoxon test, $P$ = `r round3(wilcox.test(filter(outlier_lines,!duplicated(paste(scaffold,start))) %>% pull(MEAN_cM), dplyr::filter(fst500, !paste(CHROM,WINDOW_START) %in% paste(outliers$scaffold, outliers$start)) %>% pull(Mean_cM))$p.value)`). Of the `r num2word(nrow(outliers))` outlier regions, `r num2word(nrow(subset(outliers,n_hits < 3)))` were found in only one or two comparisons, while the other `r num2word(nrow(subset(outliers,n_hits > 2)))` were found in `r num2word(arrange(outliers,desc(n_hits))$n_hits[1])` and `r num2word(arrange(outliers,desc(n_hits))$n_hits[2])` comparisons, respectively (Table S2). We hereafter refer to outlier regions found in one or two comparisons as "population-specific" outlier regions, and to those found in more than two comparisons as "shared" regions. 
+
+Regions of high differentiation that are not shared among populations could potentially arise as a result of recent drift, but are also candidate regions for recent positive selection [@Burri2017]. Several lines of evidence suggest that this may be the case in European great tits. Firstly, population-specific regions tended to occur in regions of higher recombination than shared outliers, although low sample size prevents a formal statistical analysis of this. Second, population-specific outliers tended to be found in the most peripheral European great tit populations, with three found in Scotland, and two in England, Spain and Finland; the remaining outlier regions were found in comparisons involving the Czech republic, Russia, Vlieland (Netherlands) and Belgium (Table S2). Notably, these populations are not the lowest in genetic diversity and therefore drift effects are not necessarily stronger in these peripheral populations. Third, the $Rsb$ tests, which indicate which population has undergone a selective sweep, also tend to find evidence of positive selection in the more peripheral population, as expected under an adaptive evolution scenario (Fig. S8). This directionality cannot be assessed with $F_{ST}$, because it is a combined measure of allele frequency differences. Of course, across the genome, both positive selection and linked background selection are likely to be operating.  Observational and experimental research shows that adaptation at range edges is a key feature shaping divergence among recently colonised and expanding populations [@Sexton2009; @Hill2011; @Weiss-Lehman2017]. Population-specific regions appeared less likely to be in regions of low recombination than shared regions (Fig. 5), although the small number of regions precluded testing this hypothesis formally. Thus, it is likely that genomic architecture plays a key role in determining how both selection and drift have shaped genomic variation across the recent evolutionary history of European great tits.
+
+To further explore how selection may have shaped variation in $F_{ST}$ outlier regions, we estimated levels of nucleotide and haplotype diversity within these regions. Nucleotide diversity ($\pi_{SNP}$) in outlier regions varied from `r round2(min(outlierhaps$pi))` to `r round2(max(outlierhaps$pi))`, and diversity in these regions was significantly lower than the genome-wide average (Wilcoxon test, $P$ = `r round3(wilcox.test(outlierhaps$pi,dw$pi_pop1)$p.value)`; Fig. S9A). However, there appeared to be little difference in nucleotide diversity between shared and population-specific regions (Fig. S9A). Haplotype diversity varied substantially among regions, with haplotype richness ranging from `r min(outlierhaps$Richness)` to `r max(outlierhaps$Richness)`. Both haplotype richness and marker density in shared regions tended to be lower than those in population-specific regions (Fig. S9B), consistent with lower recombination frequency. A detailed examination of haplotype structure in one shared and one population-specific region is displayed in Figure S10. The population-specific outlier region (to Finland, situated on chromosome 1A) was characterised by a complex structure, with a single haplotype at high frequency in Finland compared to other populations, indicating a population-specific selective sweep and high background diversity (Fig. S10). In contrast, the shared region on chromosome 2 was much less complex, demonstrating high frequency haplotypes that are found across a range of populations. Our data therefore suggest that examining patterns of haplotype diversity in outlier regions may help to separate recent episodes of positive selection from drift and background selection (Figs S9, S10). 
+
+Potential candidate genes found within shared and population-specific outlier regions are displayed in Table S2. Perhaps most notable among these is *COL4A5*, a gene found to be associated with bill length, and under selection between populations in England and the Netherlands, in a recent great tit study [@Bosse2017]. Here we found that the *COL4A5* region is an $F_{ST}$ outlier in England and Scotland, but not in any other European populations (Table S2). UK great tits have been described as a separate subspecies based on beak shape [@Gosler1999], and our results here, combined with previous results, suggest that this divergence is the result of recent natural selection in the UK [@Bosse2017]. Another notable candidate gene potentially involved in beak morphology, and previously found to be under selection in UK great tits is *BMPR1A*, which plays a key role in palate development [@Baek2011] and in this study was found in an outlier region in Scotland. Other candidate morphology and obesity genes in the population-specific outlier regions in the UK included *PPP1CB*, which may play a role in adipogenesis [@Cho2015] and *GHITM*, which appears to have been subject to natural selection in human pygmy populations [@Migliano2013]. Thus, morphological traits may frequently be involved in adaptation in great tits.
+
+In addition to morphological candidates in the UK, we found outlier regions specific to  cold populations in Scotland, Finland and Russia (Table S2), containing at least one candidate gene for thermal stress (*CDKN1B*) [@Logan2011]. Other genomic outlier regions contained potential candidate genes associated with malaria infection (*MRPL33*) [@Videvall2015] and colour variation (*SOX10*) [@Gunnarsson2011]. This is thus far an exploratory analysis, and we are therefore reluctant to speculate whether these candidate genes are genuine targets for natural selection, and more reluctant still to speculate as to how selection might be driving variation at these regions. Regardless, these candidates will provide useful starting points for future genomic and ecological investigation.
+
+HapMap style projects have been hugely informative in shaping our understanding of how natural selection operates in humans and other model species [e.g. @Altshuler2005; Kijas2012; @Kirby2010]. This study is one of the largest to date of genomic variation in a wild vertebrate, which has helped to reveal the evolutionary history of great tits, and to identify candidate genes and traits that may have been involved in adaptation during and/or after postglacial recolonisation. Further, this work will form the foundation of many future analyses. Clearly, we have only touched on haplotype-based methods to infer adaptation here, and this will be the subject of future work. Environmental association approaches are also highly suited to detecting adaptation in widespread continental species [e.g. @Coop2010; @Frichot2013], and further work will test how variation in the  environment has shaped patterns of genomic variation in great tits [e.g. @Salmon2020]. This combination of environmental and genomic data in species such as great tits, in which a wealth of ecological and genomic resources are available, is likely to generate interesting insights into the the genetic and phenotypic basis of natural selection.
+
+\pagebreak
+
+
+```{r Figure 4,fig.width = 8,fig.height = 6}
+labs <- dw %>% 
+  filter(scaffold != 36,
+         pop1 != "Romania/Bulgaria") %>%
+  group_by(pop1) %>%
+  dplyr::summarise(FST = str_c("italic(F)[ST] == ", round3(mean(FST))),
+                   x = Inf,
+                   y = 20)
+
+Fig4 <- dw %>%
+  filter(scaffold != 36,
+         pop1 != "Romania/Bulgaria") %>%
+  mutate(pop1 = fct_drop(pop1)) %>%
+  ggplot(aes(y = zFST,x = order,col = factor(scaffold)))+
+  theme(axis.text.x = element_blank(),
+        legend.position = "none")+
+  geom_line()+
+  geom_vline(data = outlier_lines,aes(xintercept = order,lty = outlier_type),col = "red",
+             alpha = 0.15,lwd = 1.2)+
+  facet_wrap(~factor(pop1,levels = dist_order))+
+  ylab(expression(italic(zF)[ST]))+
+  xlab("Genomic position")+
+  scale_color_manual(values = rep(c("navy","grey"),30))+
+  geom_text(data = labs,aes(x = x,y = y,label = FST,hjust = 1, vjust = 1),col = "black",size = 3,parse = T)
+
+Fig4
+```
+
+**Figure 4** Landscapes of relative genomic differentiation in European great tit populations. $zF_{ST}$ across the genome is averaged in 500kb windows, with each panel displaying a pairwise comparison with the proposed refugial population in Turkey. Red lines represent $F_{ST}$ outliers (windows with mean $F_{ST}$ values at least 10 standard deviations greater than the global mean for that comparison) shared across more than two comparisons (solid red lines), or specific to one or two comparisons (dashed red lines). Mean, untransformed $F_{ST}$ values are given in the top-right of each panel, and are fully displayed in Fig. S7.
+
+
+\pagebreak
+
+
+```{r Figure 5,fig.width = 8,fig.height = 6}
+labs <- dw %>% 
+  filter(scaffold != 36,
+         pop1 != "Romania/Bulgaria",
+         !is.na(MEAN_cM)) %>%
+  group_by(pop1) %>%
+  dplyr::summarise(r = paste("r =", round2(cor(FST,MEAN_cM,method = "spearman"))),
+                   x = 1.5,
+                   y = 19)
+
+fstbin <- dw %>%
+  filter(scaffold != 36,
+         pop1 != "Romania/Bulgaria",
+         !is.na(MEAN_cM)) %>%
+  group_by(pop1,binRR) %>%
+  summarise(
+    med = median(zFST),
+    u99 = quantile(zFST,0.99),
+    l99 = quantile(zFST,0.01)) %>%
+  ungroup() %>%
+  filter(binRR <= 1.5)
+
+Fig5 <- dw %>%   filter(scaffold != 36,
+                        pop1 != "Romania/Bulgaria",
+                        !is.na(MEAN_cM)) %>%
+  ggplot(aes(y = zFST,x = logRR))+
+  theme(legend.position = "none")+
+  geom_point(col = "grey")+
+  geom_point(data = outlier_lines,aes(x = logRR,y = zFST,col = outlier_type))+
+  geom_line(data = fstbin,aes(x = binRR,y = med))+
+  geom_line(data = fstbin,aes(x = binRR,y = u99),lty = 2)+
+  geom_line(data = fstbin,aes(x = binRR,y = l99),lty = 2)+
+  scale_color_manual(values = c("red","navy"))+
+  facet_wrap(~factor(pop1,levels = dist_order))+
+  ylab(expression(italic(zF)[ST]))+
+  xlab("Log recombination rate")+
+  geom_text(data = labs,aes(x = x,y = y,label = r,hjust = 1, vjust = 1),size = 3)
+
+Fig5
+
+```
+
+**Figure 5** Genomic differentiation and recombination rate variation in European great tit populations. Each point is the mean of a 500kb window, with each panel displaying a pairwise comparison with the proposed refugial population in Turkey. Coloured points represent $F_{ST}$ outliers (mean standardized $F_{ST}$ values of $zF_{ST}$ > 10) shared across more than two comparisons (red), or specific to one or two comparisons (dark blue). Solid and dotted lines represent median and 99% quantiles of $F_{ST}$ windows from bins of 0.1 log cM/Mbp.
+
+\pagebreak
+
+
+## Materials and Methods
+
+*Sampling and molecular methods*
+
+Samples were collected from `r nrow(ll)` populations from `r length(unique(pops$Country))` regions across Europe (Fig. 1; Table S1). Samples were pooled into regions either based on geographical proximity (e.g. Cambridge and Wytham woods), or based on sample size (e.g. Romania and Bulgaria). An exploratory analysis considering all sampled populations separately yielded virtually identical results to those shown here, and in no cases did we observe substructure within pooled populations in our Admixture analyses (Fig. S3). 
+
+Birds were trapped from nest boxes, or using mist nets, and ringed with a uniquely numbered aluminium ring. Blood was taken via brachial or tarsal venipuncture, and stored in either 1 ml Cell Lysis Solution (Gentra Puregene Kit, Qiagen, USA), Queen’s buffer, or absolute ethanol. All samples were genotyped using a custom-made Affymetrix® great tit 650K SNP chip at Edinburgh Genomics (Edinburgh, United Kingdom), following the approaches outlined in [@Kim2018]
+
+*Analyses*
+
+Unless stated otherwise, all population genetic statistics were calculated in PLINK version 1.9 [@Purcell2007], and downstream analysis and plotting was carried out in R version 3.3 [@RDevelopmentCoreTeam2011]. For population genetic analyses, we used the filtering approaches outlined in [@Bosse2017]. Briefly, we randomly removed individuals from pairs with relatedness values > 0.4, and for demographic analyses we used a LD pruned dataset (based on VIF > 0.2), with SNPs associated with an inversion on chromosome 1A [@DaSilva2019] removed. After filtering, a total of `r nrow(pops)` samples typed at `r nrow(markers)` SNPs were retained for analysis.
+
+In each population, we estimated LD ($R^2$) for each pair of markers within 50kb on the same chromosome, and compared this to physical distance between marker pairs. We calculated observed heterozygosity for each SNP and population using a reduced SNP dataset, which was pruned based on LD to remove all markers with $R^2$ > 0.1, then thinned with a probability of retaining each variant of 0.25. We calculated genome-wide (mean) $F_{ST}$ between each pair of populations using the pruned and thinned dataset described above. Pairwise $F_{ST}$ was compared to geographic distance between populations using Mantel tests, implemented in the Ecodist package in R [@Goslee2007]. We tested whether genetic structure was related to distance from candidate refugial populations (in Romania/Bulgaria, Turkey, Spain and Italy), using Pearson correlations. We also estimated population structure using Admixture version 1.3, with default settings [@Alexander2009]. We varied values of $K$ from one to ten; by which point increasing values of $K$ provided no informative information about population structure (see results). Model support for each value of $K$ was estimated by calculating 5-fold cross-validation error. Finally, we visualised the evolutionary history among European great tit populations by generating a maximum likelihood tree in TreeMix version 1.13 [@Pickrell2012]. We rooted the tree using a sample of *P. minor* individuals sampled from Amur, Russia [@Kim2018]. We fitted models allowing for range of migration events (0-10), and used a window size of 500 SNPs [@Pickrell2012]. To assess model fit, we calculated the proportion of variance in relatedness between populations explained by each model [equation 30 in @Pickrell2012].
+
+Recombination rates at each locus were estimated by comparing the location of SNPs on the genome assembly (v1.1) with their location on the great tit linkage map [@VanOers2014]. Previous linkage mapping, using a lower density SNP chip, was independently carried out in UK and Netherlands great tit populations and the two maps were almost identical [@VanOers2014]. For the purposes of this analysis, we used SNPs and marker intervals from the UK comprehensive map. A total of 2706 SNPs were located on both the genome assembly and the linkage map. Thus a positon in Mb and cM of each of these SNPs is known. All other SNPs on the HD chip have a physical (Mb) position but no known linkage map position. The great tit genome v1.1 is 1.02 Gb long, so the average physical interval between mapped SNPs is ~376Kb. The linkage map position of each unmapped SNP was estimated by interpolation; by taking the closest mapped SNP in either direction, and assuming a constant recombination rate in the interval between those SNPs. For example, an unmapped SNP with physical position 1.4Mb, flanked by mapped SNPs at 1.0Mb/0.5cM and 2.0Mb/1.0cM, would be estimated to be located at 0.5 + (1.4-1.0)/(2.0-1.0) * (1.0-0.5) = 0.7cM. Having interpolated cM position of every SNP, the local recombination rate was calculated as the cM interval spanned by the nearest neighbouring SNPs, divided by the physical distance (bp) spanned by those same neighbouring SNPs. In other words, for the ith SNP, the recombination rate is estimated as the linkage distance between the i-1th and i+1th SNP, divided by the physical distance between the i-1th and i+1th SNP. For downstream analyses, local recombination rates were estimated by averaging across all SNPs in each 500kb window. We calculated gene density in 10kb and 500kb windows using custom R scripts and the annotated great tit genome  (v 1.1) [@Laine2016].
+
+We examined the genomic landscape of differentiation across European great tit populations by calculating $F_{ST}$ in 10kb and 500kb bins, using python scripts obtained from Github (https://github.com/simonhmartin/genomics_general). We did not estimate $d_{xy}$, as this parameter is difficult to estimate accurately from single SNP loci [@Cruickshank2014]. We also calculated standardised $F_{ST}$ ($zF_{ST}$) by mean-centring windowed values and dividing them by the standard deviation among windows. We defined outlier regions as 500kb bins with $zF_{ST}$ values greater than ten. Finally, $Rsb$ [@Tang2007] was calculated for three pairwise comparisons (in Spain, Finland and the Netherlands), using the R package Rehh [@Gautier2012], and this averaged into 500kb windows. Unlike $F_{ST}$, the $Rsb$ statistic gives an indication of which population an adaptively important haplotype is under positive selection in, and is thought to be less sensitive to local recombination rates [@Tang2007]. $Rsb$ estimation requires phased genotype data, so phasing was performed using shapeIT2 v 2.r837 [@OConnell2014]. The –duohmm argument was used to ensure that family information, where available, was used to improve the accuracy of phasing. The –effective-size parameter was set at 500,000 reflecting the large effective population size of European great tit populations [@Laine2016]. Local recombination rates (measured in cM/Mbp) were used in the map files. Comparisons between $F_{ST}$, $Rsb$, recombination rate and gene density were carried out using Spearman rank correlation (as all statistics were highly skewed). 
+
+## Acknowledgements
+This work was supported by grants from the Natural Environment Research Council (grant NE/J012599/1 to J.S. and B.C.S) and the European Research Council (grant 202487 to J.S. and grant 339092 – E-Response to MEV) L.G.S was supported by fellowships from the Edward Grey Institute for Ornithology and the BBSRC (BB/N011759/1). We thank Claire Bloor, Geoff Scopes and Alessandro Davassi of Affymetrix for their help during the chip design and genotyping calling processes. Richard Talbot and Alison Downing of Edinburgh Genomics provided the genotyping service.
+
+## Data Availability
+All data and code to reproduce the results are available on Github: https://github.com/lgs85/SpurginBosse_Hapmap
+
+
+## References
+
+<div id="refs"></div>
